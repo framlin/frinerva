@@ -3,9 +3,11 @@
     <meta charset="UTF-8">
     <title>PDF-Test</title>
     <link rel="stylesheet" href="../css/pdftest.css">
+    <script type=text/javascript src="../js/display_scan.js"></script>
 </head>
-<body>
+<body  onload="do_the_load();">
 <h1>PDF-Test 2</h1>
+ <button onclick="do_the_load();">view</button>
 <object id="pdf_view" data='/data/tmp/2019/scans/Rechnung%20Mietverträge.pdf'
         type='application/pdf'
         width='100%'
@@ -13,6 +15,5 @@
 
     <h2>Eingabe</h2>
     <input id="input1" type="text">
-
 </body>
 </html>

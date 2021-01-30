@@ -2,17 +2,19 @@
 <head>
     <meta charset="UTF-8">
     <title>PDF-Test</title>
-    <link rel="stylesheet" href={{ url_for('static', filename="css/pdftest.css") }} >
+    <link rel="stylesheet" href={{url_for('static',filename="css/display_scan.css")}} >
+
 </head>
-<body>
-<h1>PDF-Test </h1>
+<body onload="on_load('{{year}}')">
+<h1>Rechnungen zuweisen</h1>
+<label for="file_input">gescante Rechnung auswählen: </label>
+<input id="file_input" type="file" accept=".pdf" onchange="reload();">
 <object id="pdf_view" data='/data/tmp/{{year}}/scans/{{filename}}'
         type='application/pdf'
         width='100%'
         height='700px'></object>
 
-    <h2>Eingabe</h2>
-    <input id="input1" type="text">
 
+<script type=text/javascript src="{{url_for('static',filename='js/display_scan.js')}}"></script>
 </body>
 </html>
