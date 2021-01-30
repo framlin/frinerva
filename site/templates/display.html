@@ -1,0 +1,18 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>PDF-Test</title>
+    <link rel="stylesheet" href={{ url_for('static', filename="css/pdftest.css") }} >
+</head>
+<body>
+<h1>PDF-Test </h1>
+<object id="pdf_view" data='/data/tmp/{{year}}/scans/{{filename}}'
+        type='application/pdf'
+        width='100%'
+        height='700px'></object>
+
+    <h2>Eingabe</h2>
+    <input id="input1" type="text">
+
+</body>
+</html>
