@@ -1,5 +1,8 @@
 from accounting.account import Account
 
+import json
+import os
+
 
 class Balance:
     def __init__(self, booking_period: int):
@@ -14,3 +17,15 @@ class Balance:
 
     def get_booking_period(self) -> int:
         return self._booking_period
+
+    def save(self,path: str):
+        balance_path = os.path.join(path, str(self._booking_period))
+        if not os.path.exists(balance_path):
+            os.mkdir(balance_path)
+
+        balance_path = os.path.join(balance_path, 'accounts')
+        if not os.path.exists(balance_path):
+            os.mkdir(balance_path)
+
+        for account in self._accounts.values():
+            account.save(balance_path)

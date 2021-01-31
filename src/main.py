@@ -1,4 +1,5 @@
-# from utils.utils import create_directories, import_banking_csv_file
+# from utils.utils import import_banking_csv_file
+#
 # import_banking_csv_file('../data/import/2019.csv')
 
 from webserver import server
