@@ -2,3 +2,6 @@
 /src/secret.py
 /uml/frinerva.mdzip.bak
 /data/*
+/venv/*
+/src/accounting/__pycache__/*
+/src/utils/__pycache__/*
