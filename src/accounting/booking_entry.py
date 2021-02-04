@@ -1,4 +1,4 @@
-from json import JSONEncoder
+from json import JSONEncoder, JSONDecoder
 
 
 class BookingEntry:
@@ -10,7 +10,14 @@ class BookingEntry:
         self._name = name
 
     def __str__(self):
-        return 'BookingEntry(Amount:' + str(self._amount) + ', Name:' + self._name + ', Sunbject:' + self._subject + ', Date:' + self._date + ')'
+        return 'BookingEntry(Amount:' + \
+               str(self._amount) + \
+               ', Name:' + \
+               self._name + \
+               ', Sunbject:' + \
+               self._subject + \
+               ', Date:' + \
+               self._date + ')'
 
     def get_amount(self) -> float:
         return self._amount

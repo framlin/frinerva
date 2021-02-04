@@ -53,7 +53,6 @@ def _import_csv_row(accounting, row):
     period_balance = accounting.get_balance(booking_period)
     account = period_balance.get_account(cost_center)
     account.add_booking_entry(booking_entry)
-    # account.save('../data')
     period_balance.save('../data')
 
 
@@ -66,3 +65,20 @@ def create_directories(root):
             print(root+str(year)+'/accounts/'+cc)
             # os.mkdir(root + str(year) + '/accounts/'+cc)
 
+
+def load_account(path):
+    account = Account('PRIVATE')
+    account.load(path)
+    print(account)
+
+
+def load_balance(path, booking_period):
+    balance = Balance(booking_period)
+    balance.load(path)
+    print(balance)
+
+
+def load_accounting(path):
+    accounting = Accounting()
+    accounting.load(path)
+    print(accounting)

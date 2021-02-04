@@ -18,7 +18,7 @@ class Balance:
     def get_booking_period(self) -> int:
         return self._booking_period
 
-    def save(self,path: str):
+    def save(self, path: str):
         balance_path = os.path.join(path, str(self._booking_period))
         if not os.path.exists(balance_path):
             os.mkdir(balance_path)
@@ -29,3 +29,15 @@ class Balance:
 
         for account in self._accounts.values():
             account.save(balance_path)
+
+    def load(self, path: str):
+        balance_path = os.path.join(path, str(self._booking_period))
+        balance_path = os.path.join(balance_path, 'accounts')
+        subfolders = [f.path for f in os.scandir(balance_path) if f.is_dir()]
+
+        for cost_center_path in subfolders:
+            self.add_account(Account(os.path.basename(cost_center_path)))
+
+        for account in self._accounts.values():
+            account.load(balance_path)
+
