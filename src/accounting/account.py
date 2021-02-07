@@ -2,6 +2,7 @@ from json import JSONEncoder
 from hashlib import sha3_256
 import json
 import os
+from typing import Dict, List, Any, Union
 
 from accounting.booking_entry import BookingEntry, BookingEntryJSONEncoder
 
@@ -11,20 +12,20 @@ class Account:
 
     def __init__(self, cost_center: str):
         self._cost_center = cost_center
-        self._booking_entries = dict()
+        self._bookings = dict()
 
     def __str__(self):
         result: str = self._cost_center + ':\n'
-        result += str([be for be in self._booking_entries.values()])
+        result += str([booking for booking in self])
         return result
 
     def add_booking_entry(self, booking_entry: BookingEntry):
         hash_fun = sha3_256()
         hash_fun.update(bytes(str(booking_entry), encoding='utf-8'))
-        self._booking_entries[hash_fun.hexdigest()] = booking_entry
+        self._bookings[hash_fun.hexdigest()] = booking_entry
 
     def get_bookings(self) -> dict:
-        return self._booking_entries
+        return self._bookings
 
     def get_cost_center(self) -> str:
         return self._cost_center
@@ -35,7 +36,7 @@ class Account:
         if not os.path.exists(account_path):
             os.mkdir(account_path)
         with open(out_fn, 'w') as outfile:
-            json.dump(self._booking_entries, outfile, cls=BookingEntryJSONEncoder)
+            json.dump(self._bookings, outfile, cls=BookingEntryJSONEncoder)
 
     def load(self, path: str):
         in_fn = self._get_account_filename(path)
@@ -44,7 +45,7 @@ class Account:
                 booking_entries = json.load(infile, cls=json.JSONDecoder)
                 for hash_key in booking_entries:
                     booking_entry = BookingEntry.from_dict(booking_entries[hash_key])
-                    self._booking_entries[hash_key] = booking_entry
+                    self._bookings[hash_key] = booking_entry
 
         except json.JSONDecodeError:
             pass
@@ -59,23 +60,40 @@ class Account:
         return fn
 
     def get_outgoing_payments(self) -> list:
-        result = [be for be in self._booking_entries.values() if be.get_amount() < 0]
+        result = [booking for booking in self if booking.get_amount() < 0]
         return result
 
     def get_received_payments(self) -> list:
-        result = [be for be in self._booking_entries.values() if be.get_amount() >= 0]
+        result = [booking for booking in self if booking.get_amount() >= 0]
         return result
 
     def get_balance(self):
-        entries = [be for be in self._booking_entries.values()]
+        entries = [booking for booking in self]
         amounts = [entry.get_amount() for entry in entries]
         return sum(amounts)
 
+    def __iter__(self):
+        return AccountIterator(self)
+
+
+class AccountIterator:
+    def __init__(self, account):
+        self._bookings = account.get_bookings()
+        self._keys = list(self._bookings.keys())
+        self._index = 0
+
+    def __next__(self):
+        if self._index < len(self._keys):
+            result = self._bookings[self._keys[self._index]]
+            self._index += 1
+            return result
+
+        raise StopIteration
+
 
 class AccountJSONEncoder(JSONEncoder):
-    def default(self, o):
-        result = dict()
-        result['_cost_center'] = o.get_cost_center()
-        result["_booking_entries"] = [BookingEntryJSONEncoder().default(op)
-                                      for op in o.get_bookings().values()]
+    def default(self, account):
+        result: dict = dict()
+        result['_cost_center'] = account.get_cost_center()
+        result["_bookings"] = [BookingEntryJSONEncoder().default(booking) for booking in account]
         return result

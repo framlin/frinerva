@@ -1,6 +1,5 @@
 from json import JSONEncoder
 from accounting.account import Account, AccountJSONEncoder
-
 import os
 
 
@@ -46,10 +45,10 @@ class Balance:
 
 
 class BalanceJSONEncoder(JSONEncoder):
-    def default(self, o):
+    def default(self, o) -> dict:
         result = dict()
         result['_booking_period'] = o.get_booking_period()
-        accounts = [AccountJSONEncoder().default(acc) for acc in o._accounts.values()]
+        accounts = [AccountJSONEncoder().default(acc) for acc in o.get_accounts().values()]
         result['_accounts'] = accounts
 
         return result
