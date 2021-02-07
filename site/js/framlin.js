@@ -14,8 +14,7 @@ function create_account_table(account) {
         }
     }
 
-    create_payment_rows('_received_payments');
-    create_payment_rows('_outgoing_payments');
+    create_payment_rows('_booking_entries');
 
     table.setAttribute('class', 'account_table');
     return table;
