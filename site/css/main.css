@@ -1,0 +1,23 @@
+#menu{
+    background-color: var(--menu-bg-color);
+    color: var(--color-light-grey);
+    font-size: large;
+    border: hidden;
+    box-shadow: none;
+    margin: 0;
+    padding:3em 10px 10px 10px;
+}
+
+.menu_entry{
+    margin-bottom: 1em;
+}
+
+.sub_menu_entry{
+    margin-left: 20px;
+}
+
+.menu_entry a.active{
+    background-color: var(--color-sixt-orange);
+    color: var(--color-darker-grey);
+}
+

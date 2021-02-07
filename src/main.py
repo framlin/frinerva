@@ -2,10 +2,12 @@
 #
 # import_banking_csv_file('../data/import/2019.csv')
 
-# from webserver import server
-# server.run_server()
-
-
 from utils.utils import load_account, load_balance, load_accounting
+from webserver import server
+from middleware.accounting_controller import AccountingController
 
-load_accounting('../data')
+accounting = load_accounting('../data')
+
+server.run_server(AccountingController(accounting))
+
+

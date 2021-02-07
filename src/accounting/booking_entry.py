@@ -1,4 +1,4 @@
-from json import JSONEncoder, JSONDecoder
+from json import JSONEncoder
 
 
 class BookingEntry:
@@ -21,6 +21,13 @@ class BookingEntry:
 
     def get_amount(self) -> float:
         return self._amount
+
+    @classmethod
+    def from_dict(cls, the_dict: dict):
+        return cls(amount=the_dict['_amount'],
+                   name=the_dict['_name'],
+                   subject=the_dict['_subject'],
+                   date=the_dict['_date'])
 
 
 class BookingEntryJSONEncoder(JSONEncoder):

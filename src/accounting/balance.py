@@ -1,6 +1,6 @@
-from accounting.account import Account
+from json import JSONEncoder
+from accounting.account import Account, AccountJSONEncoder
 
-import json
 import os
 
 
@@ -14,6 +14,9 @@ class Balance:
 
     def get_account(self, cost_center: str) -> Account:
         return self._accounts[cost_center]
+
+    def get_accounts(self) -> dict:
+        return self._accounts
 
     def get_booking_period(self) -> int:
         return self._booking_period
@@ -41,3 +44,12 @@ class Balance:
         for account in self._accounts.values():
             account.load(balance_path)
 
+
+class BalanceJSONEncoder(JSONEncoder):
+    def default(self, o):
+        result = dict()
+        result['_booking_period'] = o.get_booking_period()
+        accounts = [AccountJSONEncoder().default(acc) for acc in o._accounts.values()]
+        result['_accounts'] = accounts
+
+        return result

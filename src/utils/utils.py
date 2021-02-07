@@ -9,7 +9,7 @@ from accounting.accounting import Accounting
 
 
 def init_accounting(accounting: Accounting) -> Accounting:
-    cost_center_set = create_cost_center_set()
+    cost_center_set = create_cost_center_list()
 
     for bp in range(2019, 2022):
         balance = Balance(booking_period=bp)
@@ -22,11 +22,8 @@ def init_accounting(accounting: Accounting) -> Accounting:
     return accounting
 
 
-def create_cost_center_set() -> set:
-    cost_center_set = set()
-    for cc in ccm.values():
-        cost_center_set.add(cc)
-    return cost_center_set
+def create_cost_center_list() -> list:
+    return [cc for cc in ccm.values()]
 
 
 def get_booking_period(date):
@@ -43,7 +40,7 @@ def import_banking_csv_file(fn):
         bookingreader = csv.DictReader(cvsfile, delimiter=';')
         for row in bookingreader:
             _import_csv_row(accounting, row)
-    return "import of " + fn + " successfull"
+    return "import of " + fn + " successful"
 
 
 def _import_csv_row(accounting, row):
@@ -57,7 +54,7 @@ def _import_csv_row(accounting, row):
 
 
 def create_directories(root):
-    cost_center_set = create_cost_center_set()
+    cost_center_set = create_cost_center_list()
     for year in range(2019, 2022):
         print(root+str(year)+'/accounts')
         # os.mkdir(root + str(year) + '/accounts')
@@ -78,7 +75,8 @@ def load_balance(path, booking_period):
     print(balance)
 
 
-def load_accounting(path):
+def load_accounting(path: str) -> Accounting:
     accounting = Accounting()
     accounting.load(path)
     print(accounting)
+    return accounting

@@ -1,0 +1,28 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Frinerva</title>
+    <link rel="stylesheet" href="../css/framlin.css">
+</head>
+<body onload="on_load();">
+<div class="vbox full-height">
+<div class="hbox full-height">
+    <div id="menu" class="vbox menu">
+        <div class="vbox menu_entry">
+            Accounting
+            <a href='/display/balance' target='appframe'><div class="sub_menu_entry">Balance</div></a>
+            <a href='/display/account' target='appframe'><div class="sub_menu_entry">Account</div></a>
+        </div>
+
+        <div class="menu_entry">Management</div>
+        <div class="menu_entry">Partner</div>
+        <div class="menu_entry">Property</div>
+    </div>
+    <div id="main" class="vbox flex-1">
+        <iframe  id="appframe"  name="appframe"  src="start.html"  class="flex-1" ></iframe>
+    </div>
+</div>
+</div>
+<script type=text/javascript src="../js/main.js"></script>
+</body>
+</html>

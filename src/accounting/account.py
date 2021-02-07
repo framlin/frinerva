@@ -1,3 +1,4 @@
+from json import JSONEncoder
 from hashlib import sha3_256
 import json
 import os
@@ -47,13 +48,21 @@ class Account:
         in_fn, out_fn = self._get_account_filenames(path)
         try:
             with open(in_fn, 'r') as infile:
-                self._received_payments = json.load(infile, cls=json.JSONDecoder)
+                received_payments = json.load(infile, cls=json.JSONDecoder)
+                for hash_key in received_payments:
+                    booking_entry = BookingEntry.from_dict(received_payments[hash_key])
+                    self._received_payments[hash_key] = booking_entry
+
         except json.JSONDecodeError:
             pass
 
         try:
             with open(out_fn, 'r') as infile:
-                self._outgoing_payments = json.load(infile, cls=json.JSONDecoder)
+                outgoing_payments = json.load(infile, cls=json.JSONDecoder)
+                for hash_key in outgoing_payments:
+                    booking_entry = BookingEntry.from_dict(outgoing_payments[hash_key])
+                    self._outgoing_payments[hash_key] = booking_entry
+
         except json.JSONDecodeError:
             pass
 
@@ -66,3 +75,31 @@ class Account:
         in_fn = os.path.join(account_path, 'incoming.json')
         out_fn = os.path.join(account_path, 'outgoing.json')
         return in_fn, out_fn
+
+    def get_outgoing_payments(self):
+        return self._outgoing_payments
+
+    def get_received_payments(self):
+        return self._received_payments
+
+    def get_balance(self):
+        amount = 0
+        for booking_entry in self._received_payments.values():
+            amount += booking_entry.get_amount()
+
+        for booking_entry in self._outgoing_payments.values():
+            amount += booking_entry.get_amount()
+        return amount
+
+    def get_payments(self):
+        return {'balance': self.get_balance(), 'in': self._received_payments, 'out': self._outgoing_payments}
+
+
+class AccountJSONEncoder(JSONEncoder):
+    def default(self, o):
+        result = dict()
+        result['_cost_center'] = o.get_cost_center()
+        result["_outgoing_payments"] = [BookingEntryJSONEncoder().default(op) for op in o.get_outgoing_payments().values()]
+        result["_received_payments"] = [BookingEntryJSONEncoder().default(op) for op in o.get_received_payments().values()]
+        return result
+        # return o.__dict__

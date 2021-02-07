@@ -1,0 +1,41 @@
+body {
+    background-color: bisque;
+}
+
+table{
+    border: solid 1pt;
+}
+
+td{
+    padding: 5px;
+}
+td:nth-child(1){
+    text-align: right;
+}
+
+tr:nth-child(odd){
+    background-color: beige;
+}
+tr:nth-child(even){
+    background-color: floralwhite;
+}
+
+#total{
+    margin:10px;
+}
+
+.account_section{
+    padding: 10px;
+}
+
+.account_section:nth-child(odd){
+    background-color: darksalmon;
+}
+
+.account_section:nth-child(even){
+    background-color: khaki;
+}
+
+.account_table{
+    margin: 20px;
+}
