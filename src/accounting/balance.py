@@ -29,7 +29,7 @@ class Balance:
         if not os.path.exists(balance_path):
             os.mkdir(balance_path)
 
-        for account in self._accounts.values():
+        for account in self:
             account.save(balance_path)
 
     def load(self, path: str):
@@ -40,15 +40,32 @@ class Balance:
         for cost_center_path in subfolders:
             self.add_account(Account(os.path.basename(cost_center_path)))
 
-        for account in self._accounts.values():
+        for account in self:
             account.load(balance_path)
+
+    def __iter__(self):
+        return BalanceIterator(self)
+
+
+class BalanceIterator:
+    def __init__(self, balance):
+        self._accounts = balance.get_accounts()
+        self._keys = list(self._accounts.keys())
+        self._index = 0
+
+    def __next__(self):
+        if self._index < len(self._keys):
+            result = self._accounts[self._keys[self._index]]
+            self._index += 1
+            return result
+
+        raise StopIteration
 
 
 class BalanceJSONEncoder(JSONEncoder):
-    def default(self, o) -> dict:
+    def default(self, balance) -> dict:
         result = dict()
-        result['_booking_period'] = o.get_booking_period()
-        accounts = [AccountJSONEncoder().default(acc) for acc in o.get_accounts().values()]
-        result['_accounts'] = accounts
+        result['_booking_period'] = balance.get_booking_period()
+        result['_accounts'] = [AccountJSONEncoder().default(account) for account in balance]
 
         return result

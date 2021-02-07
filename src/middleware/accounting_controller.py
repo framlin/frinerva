@@ -20,9 +20,8 @@ class AccountingController:
 
     def get_balance(self, year: int) -> dict:
         balance = self._accounting.get_balance(year)
-        accounts = balance.get_accounts()
         balance_dict: dict = BalanceJSONEncoder().default(balance)
-        totals = [acc.get_balance() for acc in accounts.values()]
+        totals = [acc.get_balance() for acc in balance]
         i = 0
         total = 0
         for account in balance_dict['_accounts']:

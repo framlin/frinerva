@@ -2,7 +2,6 @@ from json import JSONEncoder
 from hashlib import sha3_256
 import json
 import os
-from typing import Dict, List, Any, Union
 
 from accounting.booking_entry import BookingEntry, BookingEntryJSONEncoder
 
