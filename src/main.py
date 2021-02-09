@@ -4,7 +4,8 @@ ACTION = "SERVER"
 
 if ACTION == 'IMPORT':
     from utils.utils import import_banking_csv_file
-    import_banking_csv_file('../data/import/2020_MANUAL.csv')
+    # import_banking_csv_file('../data/import/2020_MANUAL.csv')
+    import_banking_csv_file('../data/import/2021.csv')
 
 if ACTION == 'SERVER':
     from utils.utils import load_account, load_balance, load_accounting

@@ -36,6 +36,14 @@ class BookingEntry:
                    date=the_dict['_date'])
 
 
+# noinspection PyProtectedMember
 class BookingEntryJSONEncoder(JSONEncoder):
     def default(self, o):
-        return o.__dict__
+        return {
+            '_amount': o._amount,
+            '_subject': o._subject,
+            '_date': o._date,
+            '_name': o._name,
+            '_id': o._id
+        }
+

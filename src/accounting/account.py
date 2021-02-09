@@ -11,7 +11,7 @@ class Account:
 
     def __init__(self, cost_center: str):
         self._cost_center = cost_center
-        self._bookings = dict()
+        self._bookings = []
         self._cents = Decimal('0.01')
 
     def __str__(self):
@@ -20,7 +20,7 @@ class Account:
         return result
 
     def add_booking_entry(self, booking_entry: BookingEntry):
-        self._bookings[booking_entry.get_id()] = booking_entry
+        self._bookings.append(booking_entry)
 
     def get_bookings(self) -> dict:
         return self._bookings
@@ -41,9 +41,7 @@ class Account:
         try:
             with open(in_fn, 'r') as infile:
                 booking_entries = json.load(infile, cls=json.JSONDecoder)
-                for hash_key in booking_entries:
-                    booking_entry = BookingEntry.from_dict(booking_entries[hash_key])
-                    self._bookings[hash_key] = booking_entry
+                self._bookings = [BookingEntry.from_dict(booking_entry) for booking_entry in booking_entries]
 
         except json.JSONDecodeError:
             pass
@@ -82,12 +80,11 @@ class Account:
 class AccountIterator:
     def __init__(self, account):
         self._bookings = account.get_bookings()
-        self._keys = list(self._bookings.keys())
         self._index = 0
 
     def __next__(self):
-        if self._index < len(self._keys):
-            result = self._bookings[self._keys[self._index]]
+        if self._index < len(self._bookings):
+            result = self._bookings[self._index]
             self._index += 1
             return result
 
