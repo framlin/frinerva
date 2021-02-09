@@ -1,6 +1,6 @@
-body {
-    background-color: bisque;
-}
+/*body {*/
+/*    background-color: bisque;*/
+/*}*/
 
 table{
     border: solid 1pt;
@@ -20,7 +20,17 @@ tr:nth-child(even){
     background-color: floralwhite;
 }
 
-#total{
+#total,
+#in,
+#out{
+    margin:10px;
+}
+
+.balances{
+    background-color: var(--color-lighter-grey);
+}
+
+.balances > div {
     margin:10px;
 }
 
@@ -38,4 +48,11 @@ tr:nth-child(even){
 
 .account_table{
     margin: 20px;
+}
+
+h3{
+    margin: 0;
+    padding: 5px;
+    color: var(--color-dark-blue);
+    background-color: var(--color-light-grey);
 }

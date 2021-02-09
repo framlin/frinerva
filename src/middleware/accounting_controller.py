@@ -2,12 +2,15 @@ from accounting.accounting import Accounting
 from accounting.account import AccountJSONEncoder
 from accounting.balance import BalanceJSONEncoder
 
+from decimal import Decimal, ROUND_HALF_UP
+
 from utils.utils import create_cost_center_list
 
 
 class AccountingController:
     def __init__(self, accounting: Accounting):
         self._accounting = accounting
+        self._cents = Decimal('0.01')
 
     def get_account(self, year: int, cost_center: str) -> dict:
         balance = self._accounting.get_balance(year)
@@ -21,14 +24,31 @@ class AccountingController:
     def get_balance(self, year: int) -> dict:
         balance = self._accounting.get_balance(year)
         balance_dict: dict = BalanceJSONEncoder().default(balance)
-        totals = [acc.get_balance() for acc in balance]
+
+        totals = [acc.get_balance()["total"] for acc in balance]
+        outgoing_payments = [acc.get_balance()["outgoing_payments"] for acc in balance]
+        received_payments = [acc.get_balance()["received_payments"] for acc in balance]
+
         i = 0
         total = 0
+        outgoing = 0
+        received = 0
+
         for account in balance_dict['_accounts']:
+
             account['balance'] = totals[i]
+            account['outgoing_payments'] = outgoing_payments[i]
+            account['received_payments'] = received_payments[i]
+
             total += totals[i]
+            outgoing += outgoing_payments[i]
+            received += received_payments[i]
             i += 1
-        balance_dict['total'] = total
+
+        balance_dict['total'] = Decimal(total).quantize(self._cents, ROUND_HALF_UP)
+        balance_dict['outgoing'] = Decimal(outgoing).quantize(self._cents, ROUND_HALF_UP)
+        balance_dict['received'] = Decimal(received).quantize(self._cents, ROUND_HALF_UP)
+
         return balance_dict
 
     @staticmethod

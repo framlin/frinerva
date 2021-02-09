@@ -2,6 +2,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Frinerva</title>
+    <link rel="stylesheet" href={{url_for('static',filename="css/framlin.css")}} >
     <link rel="stylesheet" href={{url_for('static',filename="css/display_balance.css")}} >
 
 </head>
@@ -17,7 +18,11 @@
 
 <button onclick="load();">load</button>
 
-<div id="total"></div>
+<div id="summary" class="hbox">
+    <div id="total"></div>
+    <div id="in"></div>
+    <div id="out"></div>
+</div>
 
 <div id="balance"></div>
 

@@ -22,9 +22,24 @@ function create_account_section(account) {
     account_section.setAttribute('class', 'account_section');
     account_section.append(cost_center);
 
+    let balances = document.createElement('div');
+    balances.classList.add('hbox')
+    balances.classList.add('balances')
+
+
     let saldo = document.createElement('div');
-    saldo.innerHTML = '<b>Saldo: ' + account['balance'] + ' €</b>';
-    account_section.append(saldo);
+    saldo.innerHTML = '<b>Saldo: ' + format_number(account['balance'], 2) + ' €</b>';
+    balances.append(saldo)
+
+    let received = document.createElement('div');
+    received.innerHTML = '<b>In: ' + format_number(account['received_payments'], 2) + ' €</b>';
+    balances.append(received)
+
+    let outgoing = document.createElement('div');
+    outgoing.innerHTML = '<b>Out: ' + format_number(account['outgoing_payments'], 2) + ' €</b>';
+    balances.append(outgoing)
+
+    account_section.append(balances);
 
     let account_table = create_account_table(account);
     account_section.append(account_table);
@@ -43,14 +58,20 @@ function load(){
             account,
             i,
             account_section,
-            total_node = document.getElementById("total");
+            total_node = document.getElementById("total"),
+            in_node = document.getElementById("in"),
+            out_node = document.getElementById("out");
 
-        total_node.innerHTML = '<b> Saldo: ' + balance['total'] + ' €</b>' ;
+        total_node.innerHTML = '<b> Saldo: ' + format_number(balance['total'], 2) + ' €</b>' ;
+        in_node.innerHTML = '<b> In: ' + format_number(balance['received'], 2) + ' €</b>' ;
+        out_node.innerHTML = '<b> Out: ' + format_number(balance['outgoing'], 2) + ' €</b>' ;
 
         for (i = 0; i < accounts.length; i++) {
             account = accounts[i];
-            account_section = create_account_section(account);
-            balance_node.append(account_section);
+            if (account['balance'] !== 0) {
+                account_section = create_account_section(account);
+                balance_node.append(account_section);
+            }
         }
     }
 
