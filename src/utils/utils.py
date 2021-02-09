@@ -44,6 +44,7 @@ def import_banking_csv_file(fn):
 
 
 def _import_csv_row(accounting, row):
+    print(row)
     booking_entry = BookingEntry(float(row['Betrag'].replace(',', '.')), row['Name'], row['Verwendungszweck'], row['Datum'])
     booking_period = get_booking_period(row['Datum'])
     cost_center = get_cost_center(row['Kategorie'])

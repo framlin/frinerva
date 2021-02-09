@@ -6,11 +6,21 @@ table{
     border: solid 1pt;
 }
 
+tr.account_table{
+    cursor: pointer;
+}
+
 td{
+    cursor: pointer;
     padding: 5px;
 }
 td:nth-child(1){
     text-align: right;
+}
+td:nth-child(even){
+    border-left-style: solid;
+    border-left-width: thin;
+    border-left-color: var(--color-fields-grey);
 }
 
 tr:nth-child(odd){
@@ -36,14 +46,16 @@ tr:nth-child(even){
 
 .account_section{
     padding: 10px;
+    margin-bottom: 10px;
+    border: thin solid var(--color-lighter-grey);
 }
 
 .account_section:nth-child(odd){
-    background-color: darksalmon;
+    background-color: #c4b0a1;
 }
 
 .account_section:nth-child(even){
-    background-color: khaki;
+    background-color: #e7e7c6;
 }
 
 .account_table{

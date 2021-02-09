@@ -1,5 +1,4 @@
 from json import JSONEncoder
-from hashlib import sha3_256
 import json
 import os
 from decimal import Decimal, ROUND_HALF_UP
@@ -21,9 +20,7 @@ class Account:
         return result
 
     def add_booking_entry(self, booking_entry: BookingEntry):
-        hash_fun = sha3_256()
-        hash_fun.update(bytes(str(booking_entry), encoding='utf-8'))
-        self._bookings[hash_fun.hexdigest()] = booking_entry
+        self._bookings[booking_entry.get_id()] = booking_entry
 
     def get_bookings(self) -> dict:
         return self._bookings

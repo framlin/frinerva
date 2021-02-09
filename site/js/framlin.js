@@ -5,15 +5,22 @@ function create_account_table(account) {
     function create_payment_rows(type) {
         for (booking_entry in account[type]) {
             tr = document.createElement('tr');
+            tr.addEventListener("click", function tr_click(event){
+                console.log(this.dataset.bookingEntry);
+            })
             table.append(tr);
             for (col in account[type][booking_entry]) {
                 val = account[type][booking_entry][col];
-                if (col === '_amount') {
-                    val = '<b>' + format_number(val, 2) + ' €</b>'
+                if (col === '_id') {
+                    tr.setAttribute("data-booking-entry", val);
+                } else {
+                    if (col === '_amount') {
+                        val = '<b>' + format_number(val, 2) + ' €</b>'
+                    }
+                    td = document.createElement('td');
+                    td.innerHTML = val;
+                    tr.append(td);
                 }
-                td = document.createElement('td');
-                td.innerHTML = val
-                tr.append(td)
             }
         }
     }

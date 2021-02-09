@@ -1,6 +1,7 @@
 html, body {
     color: var(--color-darker-grey);
     background-color: var(--color-background);
+    padding: 5px;
 }
 
 a{
