@@ -4,11 +4,12 @@ from hashlib import sha3_256
 
 class BookingEntry:
 
-    def __init__(self, amount: float, name: str, subject: str, date: str):
+    def __init__(self, amount: float, name: str, subject: str, date: str, booking_code: str):
         self._amount = amount
         self._subject = subject
         self._date = date
         self._name = name
+        self._booking_code = booking_code
         self._id = ''
 
         hash_fun = sha3_256()
@@ -18,8 +19,9 @@ class BookingEntry:
     def __str__(self):
         return 'BookingEntry(Amount:' + str(self._amount) + \
                ', Name:' + self._name + \
-               ', Sunbject:' + self._subject + \
+               ', Subject:' + self._subject + \
                ', Date:' + self._date + \
+               ', BookingCode:' + self._booking_code + \
                ', ID:' + self._id
 
     def get_amount(self) -> float:
@@ -28,22 +30,23 @@ class BookingEntry:
     def get_id(self) -> str:
         return self._id
 
+    def __iter__(self):
+        for attr, value in self.__dict__.items():
+            yield attr, value
+
     @classmethod
     def from_dict(cls, the_dict: dict):
-        return cls(amount=the_dict['_amount'],
-                   name=the_dict['_name'],
-                   subject=the_dict['_subject'],
-                   date=the_dict['_date'])
+        return cls(
+            amount=the_dict['_amount'],
+            name=the_dict['_name'],
+            subject=the_dict['_subject'],
+            date=the_dict['_date'],
+            booking_code=the_dict['_booking_code']
+        )
 
 
 # noinspection PyProtectedMember
 class BookingEntryJSONEncoder(JSONEncoder):
     def default(self, o):
-        return {
-            '_amount': o._amount,
-            '_subject': o._subject,
-            '_date': o._date,
-            '_name': o._name,
-            '_id': o._id
-        }
+        return dict(o)
 

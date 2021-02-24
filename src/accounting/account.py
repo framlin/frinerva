@@ -22,19 +22,25 @@ class Account:
     def add_booking_entry(self, booking_entry: BookingEntry):
         self._bookings.append(booking_entry)
 
-    def get_bookings(self) -> dict:
+    def get_bookings(self) -> list:
         return self._bookings
 
     def get_cost_center(self) -> str:
         return self._cost_center
 
-    def save(self, path: str):
+    def remove(self, entry):
+        self._bookings.remove(entry)
+
+    def _write(self, path: str, json_encoder):
         account_path = self._get_account_path(path)
         out_fn = self._get_account_filename(path)
         if not os.path.exists(account_path):
             os.mkdir(account_path)
         with open(out_fn, 'w') as outfile:
-            json.dump(self._bookings, outfile, cls=BookingEntryJSONEncoder)
+            json.dump(self._bookings, outfile, cls=json_encoder)
+
+    def save(self, path: str):
+        self._write(path, BookingEntryJSONEncoder)
 
     def load(self, path: str):
         in_fn = self._get_account_filename(path)

@@ -9,14 +9,21 @@
 <div class="hbox full-height">
     <div id="menu" class="vbox menu">
         <div class="vbox menu_entry">
-            Accounting
+            <div>Accounting</div>
             <a href='/display/balance' target='appframe'><div class="sub_menu_entry">Balance</div></a>
             <a href='/display/account' target='appframe'><div class="sub_menu_entry">Account</div></a>
         </div>
 
-        <div class="menu_entry">Management</div>
-        <div class="menu_entry">Partner</div>
-        <div class="menu_entry">Property</div>
+        <div class="vbox menu_entry">
+            <div>Management</div>
+            <a href='/display/service-charges' target='appframe'><div class="sub_menu_entry">Service Charges</div></a>
+        </div>
+        <div class="vbox menu_entry">
+            <div>Partner</div>
+        </div>
+        <div class="vbox menu_entry">
+            <div>Property</div>
+        </div>
     </div>
     <div id="main" class="vbox flex-1">
         <iframe  id="appframe"  name="appframe"  src="start.html"  class="flex-1" ></iframe>

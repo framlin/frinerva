@@ -4,6 +4,8 @@ import os
 
 
 class Balance:
+    BALANCE_DIR = 'accounts'
+
     def __init__(self, booking_period: int):
         self._booking_period = booking_period
         self._accounts = dict()
@@ -21,20 +23,23 @@ class Balance:
         return self._booking_period
 
     def save(self, path: str):
-        balance_path = os.path.join(path, str(self._booking_period))
-        if not os.path.exists(balance_path):
-            os.mkdir(balance_path)
-
-        balance_path = os.path.join(balance_path, 'accounts')
-        if not os.path.exists(balance_path):
-            os.mkdir(balance_path)
+        balance_path = self._create_balance_path(path, Balance.BALANCE_DIR)
 
         for account in self:
             account.save(balance_path)
 
+    def _create_balance_path(self, path, balance_dir):
+        balance_path = os.path.join(path, str(self._booking_period))
+        if not os.path.exists(balance_path):
+            os.mkdir(balance_path)
+        balance_path = os.path.join(balance_path, balance_dir)
+        if not os.path.exists(balance_path):
+            os.mkdir(balance_path)
+        return balance_path
+
     def load(self, path: str):
         balance_path = os.path.join(path, str(self._booking_period))
-        balance_path = os.path.join(balance_path, 'accounts')
+        balance_path = os.path.join(balance_path, Balance.BALANCE_DIR)
         subfolders = [f.path for f in os.scandir(balance_path) if f.is_dir()]
 
         for cost_center_path in subfolders:

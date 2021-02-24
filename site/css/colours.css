@@ -1,8 +1,9 @@
 :root {
     /* COLOUR DEFINITIONS */
-    --color-sixt-orange:   #ff5f00; /* rgba(255, 95, 0, 1)    -- hsla(22, 100%, 50%, 1) */
+    --color-orange:   #ff5f00; /* rgba(255, 95, 0, 1)    -- hsla(22, 100%, 50%, 1) */
     --color-light-orange:  #ee7f3d; /* rgba(238, 127, 61, 1)  -- hsla(22, 84%, 59%, 1) */
     --color-primary-color: #ea752f;
+    --color-mustard:       #f3ca03;
 
     --color-darker-blue:   #212d3a; /* rgba(33, 45, 58, 1)    -- hsla(211, 27%, 18%, 1) */
     --color-dark-blue:     #2d3e50; /* rgba(45, 62, 80, 1)    -- hsla(211, 28%, 25%, 1) */
@@ -83,5 +84,7 @@
     --navigation-back-color: #4a4a4a;
     --navigation-font-enabled: var(--color-white);
     --navigation-font-disabled: var(--color-medium-grey);
+
+    --form-color: var(--color-mustard);
 
 }

@@ -1,19 +1,3 @@
-console.log('starting Javascript')
-let __year = ''
-
-function on_load(year){
-    __year = year
-    console.log("DO THE LOAD: " + year)
-}
-
-function clear_node(node) {
-    if (node.hasChildNodes()) {
-        while (node.firstChild) {
-            node.removeChild(node.firstChild);
-        }
-    }
-}
-
 function create_account_section(account) {
     let account_section = document.createElement('div');
     let cost_center = document.createElement('div');
@@ -41,7 +25,10 @@ function create_account_section(account) {
 
     account_section.append(balances);
 
-    let account_table = create_account_table(account);
+    function tr_click(event){
+        console.log(this.dataset.bookingEntry);
+    }
+    let account_table = create_account_table(account, tr_click);
     account_section.append(account_table);
 
     return account_section;

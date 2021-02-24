@@ -17,7 +17,7 @@
 }
 
 .menu_entry a.active{
-    background-color: var(--color-sixt-orange);
+    background-color: var(--color-orange);
     color: var(--color-darker-grey);
 }
 
