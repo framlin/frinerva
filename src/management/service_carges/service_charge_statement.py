@@ -85,18 +85,17 @@ class ServiceChargeStatement:
 
     def _find_entry(self, scs_balance, entry):
         _id = entry['_id']
-        for balance in scs_balance.values():
-            for account in balance:
-                for scs_entry in account:
-                    if scs_entry._id == _id:
-                        return scs_entry
+        # for balance in scs_balance.values():
+        for account in scs_balance:
+            for scs_entry in account:
+                if scs_entry._id == _id:
+                    return scs_entry
 
     def update(self, year, scs):
-        dirty_entries = self._get_dirty_entries(scs)
-        scs_balance = self._balances[year]
-        for entry in dirty_entries:
-            scs_entry = self._find_entry(scs_balance, entry)
-            scs_entry.update(entry)
+        # dirty_entries = self._get_dirty_entries(scs)
+        scs_balance = self._balances[year][scs['_scs_type']]
+        scs_entry = self._find_entry(scs_balance, scs)
+        scs_entry.update(scs)
 
     def _delete_entry_in_balance(self, balance, scs):
         _id = scs['_id']

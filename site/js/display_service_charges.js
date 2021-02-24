@@ -95,8 +95,8 @@ function send_write_request(method, data) {
     xhr.send(json_data);
 }
 
-function save_service_charges(){
-    send_write_request("POST", service_charges)
+function update_scs_booking_entry(scs_booking_entry){
+    send_write_request("POST", scs_booking_entry)
 }
 
 function put_scs_booking_entry(scs_booking_entry) {

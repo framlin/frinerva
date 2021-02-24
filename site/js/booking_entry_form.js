@@ -39,6 +39,8 @@ BookingEntryForm.prototype.update_entry = function update_entry(booking_entry, i
     booking_entry['_end_date'] = end_date;
     booking_entry['_portion'] = portion;
     booking_entry['_billable'] = billable;
+    booking_entry['_scs_type'] = this.scs_type;
+    booking_entry['_cost_center'] = this.cost_center;
     if (is_new) {
         booking_entry['_new'] = true;
     } else {
@@ -50,7 +52,7 @@ BookingEntryForm.prototype.update_entry = function update_entry(booking_entry, i
 BookingEntryForm.prototype.save =  function save(){
     if (!this._is_created) {
         this.update_entry(this.dom_object.booking_entry, false);
-        save_service_charges();
+        update_scs_booking_entry(this.dom_object.booking_entry);
     } else {
         this.update_entry(this._created_entry, true);
         put_scs_booking_entry(this._created_entry)
