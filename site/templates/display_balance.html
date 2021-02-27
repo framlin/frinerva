@@ -3,6 +3,7 @@
     <meta charset="UTF-8">
     <title>Frinerva</title>
     <link rel="stylesheet" href={{url_for('static',filename="css/framlin.css")}} >
+    <link rel="stylesheet" href={{url_for('static',filename="css/booking_entry_form.css")}} >
     <link rel="stylesheet" href={{url_for('static',filename="css/display_balance.css")}} >
 
 </head>
@@ -26,6 +27,7 @@
 
 <div id="balance"></div>
 
+{% include 'booking_entry_form.html' %}
 <script type=text/javascript src="{{url_for('static',filename='js/framlin.js')}}"></script>
 <script type=text/javascript src="{{url_for('static',filename='js/display_balance.js')}}"></script>
 </body>

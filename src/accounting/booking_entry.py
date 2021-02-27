@@ -27,8 +27,25 @@ class BookingEntry:
     def get_amount(self) -> float:
         return self._amount
 
+    def set_amount(self, amount: float):
+        self._amount = amount
+
+    def add_amount(self, value: float):
+        a = self._amount
+        self._amount += value
+
+    def get_name(self):
+        return self._name
+
+    def set_name(self, name):
+        self._name = name
+
     def get_id(self) -> str:
         return self._id
+
+    def get_booking_code(self):
+        return self._booking_code
+
 
     def __iter__(self):
         for attr, value in self.__dict__.items():
@@ -43,6 +60,14 @@ class BookingEntry:
             date=the_dict['_date'],
             booking_code=the_dict['_booking_code']
         )
+
+    def update_from_dict(self, entry_dict: dict):
+        self._amount = float(entry_dict['_amount'])
+        self._name = entry_dict['_name']
+        self._subject = entry_dict['_subject']
+        self._date = entry_dict['_date']
+        self._booking_code = entry_dict['_booking_code']
+        self._id = entry_dict['_id']
 
 
 # noinspection PyProtectedMember

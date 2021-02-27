@@ -28,6 +28,13 @@ class Account:
     def get_cost_center(self) -> str:
         return self._cost_center
 
+    def get_booking_entry_by_booking_code(self, booking_code: str) -> list:
+        result = []
+        for be in self:
+            if be.get_booking_code() == booking_code:
+                result.append(be)
+        return result
+
     def remove(self, entry):
         self._bookings.remove(entry)
 

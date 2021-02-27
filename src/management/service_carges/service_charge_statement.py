@@ -1,4 +1,5 @@
 import json
+import math
 from os import path, scandir
 from config import FILE_CONFIG
 
@@ -7,6 +8,11 @@ from management.service_carges.service_charge_booking_entry import ServiceCharge
 
 
 class ServiceChargeStatement:
+    NO_FORWARD = 0
+    PER_QM = 1
+    PER_DWELLING = 2
+    FULL = 100
+
     def __init__(self):
         self._blueprint = ''
         self._balances = dict()
@@ -116,7 +122,41 @@ class ServiceChargeStatement:
     def add(self, year, scs):
         scs_balance = self._balances[year][scs['_scs_type']]
         self._add_entry_to_balance(scs_balance, scs)
-        pass
+
+    def transfer(self, year, account_dict):
+        dwelling_balance = self._balances[year]['DWELLING']
+        for account in dwelling_balance:
+            for be in account_dict['_bookings']:
+                scs_be_list = account.get_booking_entry_by_booking_code(be['_booking_code'])
+                if len(scs_be_list) == 1:
+                    scs_be_list[0].add_amount(math.fabs(be['_amount']))
+
+    @staticmethod
+    def _forward_entry(from_be, to_be):
+        from_portion = from_be.get_portion()
+        if from_portion != ServiceChargeStatement.NO_FORWARD:
+            from_amount = from_be.get_amount()
+            if from_portion == ServiceChargeStatement.FULL:
+                to_amount = from_amount
+            elif from_portion == ServiceChargeStatement.PER_QM:  # TODO connect to Dwelling-Class and House-Class
+                to_amount = float(from_amount / ServiceChargeBalance.HOUSE_SPACE) * ServiceChargeBalance.DWELLING_SPACE
+            elif from_portion == ServiceChargeStatement.PER_DWELLING:  # TODO connect to Dwelling-Class and House-Class
+                to_amount = float(from_amount/ServiceChargeBalance.DWELLING_COUNT)
+
+            to_be.set_amount(to_amount)
+            from_name = from_be.get_name()
+            to_be.set_name(from_name)
+
+    def forward(self, year, from_to):
+        from_balance = self._balances[year][from_to['from']]
+        to_balance = self._balances[year][from_to['to']]
+        from_account = from_balance.get_accounts()['SERVICE_CHARGES']
+        to_account = to_balance.get_accounts()['SERVICE_CHARGES']
+
+        for from_be in from_account:
+            to_be_list = to_account.get_booking_entry_by_booking_code(from_be.get_booking_code())
+            if len(to_be_list) == 1:
+                ServiceChargeStatement._forward_entry(from_be, to_be_list[0])
 
     def __iter__(self):
         for year in self._balances:

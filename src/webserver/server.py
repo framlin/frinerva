@@ -22,8 +22,20 @@ def favicon():
     return redirect(url_for('static', filename='/html/favicon.ico'))
 
 
+@app.route('/service_charges_forward/<year>', methods=['POST'])
+def forward_service_charges(year):
+    if request.method == 'POST':
+        return _service_charge_controller.forward(year, request.json)
+
+
+@app.route('/service-charges-transfer/<year>', methods=['POST'])
+def transfer_service_charges(year):
+    if request.method == 'POST':
+        return _service_charge_controller.transfer(year, request.json)
+
+
 # noinspection PyUnresolvedReferences
-@app.route('/display/service-charges')
+@app.route('/service-charges.html')
 def display_service_charges():
     booking_periods = _accounting_controller.get_booking_periods()
     return render_template('display_service_charges.html', bookingperiods=booking_periods)
@@ -36,30 +48,45 @@ def service_charges(year):
 
     elif request.method == 'POST':
         print(request.json)
-        return _service_charge_controller.update_service_charge_statment(year, request.json)
+        return _service_charge_controller.update_scs_booking_entry(year, request.json)
 
     elif request.method == 'PUT':
         print(request.json)
         return _service_charge_controller.add_scs_booking_entry(year, request.json)
-        # return _service_charge_controller.get_service_charge_statment(year)
 
     elif request.method == 'DELETE':
         print(request.json)
         return _service_charge_controller.remove_scs_booking_entry(year, request.json)
-        # return _service_charge_controller.get_service_charge_statment(year)
 
 @app.route('/service-charge/blueprint/<sc_type>')
 def service_charge_blueprint(sc_type):
     return _service_charge_controller.get_blueprint(sc_type)
 
 
-@app.route('/balance/<year>')
-def get_balance(year):
-    return _accounting_controller.get_balance(int(year))
+@app.route('/balance/<year>', methods=['POST', 'PUT', 'GET', 'DELETE'])
+def balance(year):
+    if request.method == 'GET':
+        # return _service_charge_controller.get_service_charge_statment(year)
+        return _accounting_controller.get_balance(int(year))
+
+    elif request.method == 'POST':
+        print(request.json)
+        return _accounting_controller.update_booking_entry(int(year), request.json)
+        # return _accounting_controller.update_booking_entry(year, request.json)
+
+    elif request.method == 'PUT':
+        print(request.json)
+        return _accounting_controller.get_balance(int(year))
+        # return _service_charge_controller.add_scs_booking_entry(year, request.json)
+
+    elif request.method == 'DELETE':
+        print(request.json)
+        return _accounting_controller.get_balance(int(year))
+        # return _service_charge_controller.remove_scs_booking_entry(year, request.json)
 
 
 # noinspection PyUnresolvedReferences
-@app.route('/display/balance')
+@app.route('/balance.html')
 def display_balance():
     booking_periods = _accounting_controller.get_booking_periods()
     return render_template('display_balance.html', bookingperiods=booking_periods)
@@ -71,7 +98,7 @@ def get_account(year, costcenter):
 
 
 # noinspection PyUnresolvedReferences
-@app.route('/display/account')
+@app.route('/account.html')
 def display_account():
     cost_centers = _accounting_controller.get_cost_center_list()
     booking_periods = _accounting_controller.get_booking_periods()

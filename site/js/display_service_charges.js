@@ -1,11 +1,39 @@
 let service_charges = null;
 let booking_entry_form = null;
+let field_list = {
+    '_amount':"amount_field",
+    '_name':"name_field",
+    '_subject':"subject_field",
+    '_date':"date_field",
+    '_booking_code':"booking_code_field",
+    '_end_date':"end_date_field",
+    '_portion':"portion_field",
+    '_billable':"billable_field"
+}
+
+function forward_entries(from, to) {
+    let from_balance = service_charges[from];
+    let to_balance = service_charges[to];
+    xhr_write('POST',
+        {from: from, to: to},
+        '/service_charges_forward/'+get_year(),
+        getWriteRequestListener(get_year())
+    );
+}
 
 function create_scs_table(data, data_index, elem_id, callbacks) {
         let scs_data = data[data_index];
         let scs_node = document.getElementById(elem_id)
         clear_node(scs_node)
-        scs_node.append(create_account_table(scs_data['_accounts'][0], callbacks['tr_click']))
+        scs_node.append(create_account_table(scs_data['_accounts'][0], callbacks['tr_click'],
+            {
+                '_booking_code': 1,
+                '_amount':1,
+                '_name':1,
+                '_subject': 1,
+                '_portion': 1,
+                '_billable': 1
+            }))
 }
 
 function get_booking_entry(scs_type, dataset) {
@@ -30,9 +58,8 @@ function get_tr_click_callback(scs_type){
     return function tr_click(){
         let left = this.parentElement.offsetLeft + this.offsetLeft;
         let top = this.parentElement.offsetTop + this.offsetTop;
-        booking_entry_form = new BookingEntryForm(service_charges);
-        booking_entry_form.show(left, top, scs_type, this.dataset);
-        console.log(scs_type, get_booking_entry(scs_type, this.dataset));
+        booking_entry_form = new BookingEntryForm();
+        booking_entry_form.open(left, top, get_booking_entry(scs_type, this.dataset), this.dataset, field_list);
     }
 }
 
@@ -42,68 +69,48 @@ function show_scs_section(service_charges) {
         create_scs_table(service_charges, 'RENTAL', 'scs_rental', {'tr_click': get_tr_click_callback('RENTAL')})
 }
 
-function getLoadReqListener(year) {
+function getReadReqListener(year) {
     return function loadReqListener () {
         service_charges = this.response;
         service_charges['year'] = year;
-        console.log(service_charges)
         show_scs_section(service_charges);
     }
 }
 
-function getSaveRequestListener(year) {
+function getWriteRequestListener(year) {
     return function saveReqListener  () {
         if (this.readyState === 4 && this.status === 200) {
-            // let json = JSON.parse(xhr.responseText);
             service_charges = this.response;
             service_charges['year'] = year;
-            console.log(service_charges);
             show_scs_section(service_charges);
         }
     }
 }
 
 function load(){
-    let booking_periods = document.getElementById("booking_periods_select")
-    let year = booking_periods.value
-
-    let xhr = new XMLHttpRequest();
-    xhr.addEventListener("load", getLoadReqListener(year));
-    xhr.responseType = 'json';
-    xhr.open("GET", "/service-charges/"+ year);
-    xhr.send();
+    let year = get_year();
+    xhr_read("/service-charges/"+ year, getReadReqListener(year));
 }
 
 function get_year() {
     let booking_periods = document.getElementById("booking_periods_select")
-    let year = booking_periods.value
-    return year;
+    return booking_periods.value
 }
-
 
 function send_write_request(method, data) {
-    console.log(data)
     let year = get_year();
-
-    let xhr = new XMLHttpRequest();
-    xhr.responseType = 'json';
-    xhr.addEventListener("load", getSaveRequestListener(year));
-    xhr.open(method, "/service-charges/"+ year);
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    let json_data = JSON.stringify(data);
-    xhr.send(json_data);
+    xhr_write(method, data, "/service-charges/"+ year, getWriteRequestListener(year))
 }
 
-function update_scs_booking_entry(scs_booking_entry){
-    send_write_request("POST", scs_booking_entry)
+function update_booking_entry(booking_entry){
+    send_write_request("POST", booking_entry)
 }
 
-function put_scs_booking_entry(scs_booking_entry) {
-    send_write_request("PUT", scs_booking_entry)
+function put_booking_entry(booking_entry) {
+    send_write_request("PUT", booking_entry)
 }
 
 
-function delete_scs_booking_entry(scs_booking_entry) {
-    send_write_request("DELETE", scs_booking_entry)
+function delete_booking_entry(booking_entry) {
+    send_write_request("DELETE", booking_entry)
 }

@@ -1,9 +1,10 @@
 from accounting.accounting import Accounting
-from accounting.account import AccountJSONEncoder
+from accounting.account import AccountJSONEncoder, Account
 from accounting.balance import BalanceJSONEncoder
 
 from decimal import Decimal, ROUND_HALF_UP
 
+from config import FILE_CONFIG
 from utils.utils import create_cost_center_list
 
 
@@ -58,3 +59,17 @@ class AccountingController:
     @staticmethod
     def get_booking_periods() -> list:
         return [year for year in range(2019, 2022)]
+
+    @staticmethod
+    def _find_booking_entry(account: Account, an_id: str):
+        for entry in account:
+            if entry.get_id() == an_id:
+                return entry
+
+    def update_booking_entry(self, year, entry):
+        balance = self._accounting.get_balance(year)
+        account = balance.get_account(entry['_cost_center'])
+        booking_entry = AccountingController._find_booking_entry(account, entry['_id'])
+        booking_entry.update_from_dict(entry)
+        balance.save(FILE_CONFIG['accounting'])
+        return self.get_balance(year)

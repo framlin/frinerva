@@ -5,12 +5,14 @@ function on_load(year){
     __year = year
     console.log("DO THE LOAD: " + year)
 }
-
+function tr_click() {
+    console.log('CLICK')
+}
 function load(){
     function reqListener () {
         let booking_entries = document.getElementById("booking_entries");
         let account = this.response;
-        let account_table = create_account_table(account);
+        let account_table = create_account_table(account, tr_click, {'_amount':1,'_name':1});
         console.log(account)
         if (booking_entries.hasChildNodes()) {
             while (booking_entries.firstChild) {

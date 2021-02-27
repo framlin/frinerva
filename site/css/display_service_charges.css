@@ -58,3 +58,6 @@ h3{
     background-color: var(--color-light-grey);
 }
 
+#scs_section button{
+    width: 80px;
+}

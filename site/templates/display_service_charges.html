@@ -25,60 +25,15 @@
 
     <div id='scs_section' class="vbox">
         <div id="scs_house"></div>
+        <button onclick="forward_entries('HOUSE','DWELLING');">forward</button>
         <div id="scs_dwelling"></div>
+        <button onclick="forward_entries('DWELLING','RENTAL');">forward</button>
         <div id="scs_rental"></div>
     </div>
 
 </div>
-<div id="booking_entry_form" class="hbox collapsed form">
-    <div class="vbox">
-        <div class="hbox align-center">
-            <label>id</label>
-            <label id="id_label"></label>
-        </div>
-        <div class="hbox align-center">
-            <label for="amount_field">amount</label>
-            <input id="amount_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="name_field">name</label>
-            <input id="name_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="subject_field">subject</label>
-            <input id="subject_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="date_field">date</label>
-            <input id="date_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="booking_code_field">booking-code</label>
-            <input id="booking_code_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="end_date_field">end-date</label>
-            <input id="end_date_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="portion_field">portion</label>
-            <input id="portion_field" type="text" readonly>
-        </div>
-        <div class="hbox align-center">
-            <label for="billable_field">billable</label>
-            <input id="billable_field" type="text" readonly>
-        </div>
-    </div>
-    <div class="vbox">
-        <button id="booking_entry_form_edit" onclick="booking_entry_form.edit();">edit</button>
-        <button id="booking_entry_form_create" onclick="booking_entry_form.create();">create</button>
-        <button id="booking_entry_form_save" onclick="booking_entry_form.save();">save</button>
-        <button id="booking_entry_form_del" onclick="booking_entry_form.del();">delete</button>
-        <button id="booking_entry_form_cancel" onclick="booking_entry_form.cancel();">cancel</button>
-    </div>
-</div>
+{% include 'booking_entry_form.html' %}
 <script type=text/javascript src="{{url_for('static',filename='js/framlin.js')}}"></script>
-<script type=text/javascript src="{{url_for('static',filename='js/booking_entry_form.js')}}"></script>
 <script type=text/javascript src="{{url_for('static',filename='js/display_service_charges.js')}}"></script>
 </body>
 </html>

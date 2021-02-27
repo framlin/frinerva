@@ -31,27 +31,33 @@ class ServiceChargeBookingEntry(BookingEntry):
                ', Billable: ' + str(self._billable) + \
                ', ID:' + self._id
 
+    def get_portion(self):
+        return self._portion
+
+    def is_billable(self):
+        return self._billable
+
     @classmethod
     def from_dict(cls, the_dict: dict):
         return cls(
-            amount=the_dict['_amount'],
+            amount=float(the_dict['_amount']),
             name=the_dict['_name'],
             subject=the_dict['_subject'],
             date=the_dict['_date'],
             booking_code=the_dict['_booking_code'],
             end_date=the_dict['_end_date'],
-            portion=the_dict['_portion'],
+            portion=float(the_dict['_portion']),
             billable=the_dict['_billable']
         )
 
     def update(self, entry_dict: dict):
-        self._amount = entry_dict['_amount']
+        self._amount = float(entry_dict['_amount'])
         self._name = entry_dict['_name']
         self._subject = entry_dict['_subject']
         self._date = entry_dict['_date']
         self._booking_code = entry_dict['_booking_code']
         self._end_date = entry_dict['_end_date']
-        self._portion = entry_dict['_portion']
+        self._portion = float(entry_dict['_portion'])
         self._billable = entry_dict['_billable']
 
 

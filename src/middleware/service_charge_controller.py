@@ -19,17 +19,23 @@ class ServiceChargeController:
         self._service_charge_statment.save(FILE_CONFIG['accounting'], year)
         return self.get_service_charge_statment(year)
 
-    def update_service_charge_statment(self, year, scs):
+    def update_scs_booking_entry(self, year, scs):
         self._service_charge_statment.update(year, scs)
         return self.save_service_charge_statment(year)
-        # return self.get_service_charge_statment(year)
 
     def remove_scs_booking_entry(self, year, scs):
         self._service_charge_statment.remove(year, scs)
         return self.save_service_charge_statment(year)
-        # return self.get_service_charge_statment(year)
 
     def add_scs_booking_entry(self, year, scs):
         self._service_charge_statment.add(year, scs)
         return self.save_service_charge_statment(year)
-        # return self.get_service_charge_statment(year)
+
+    def transfer(self, year, booking_entries):
+        self._service_charge_statment.transfer(year, booking_entries)
+        return self.save_service_charge_statment(year)
+
+    def forward(self, year, from_to):
+        self._service_charge_statment.forward(year, from_to)
+        return self.save_service_charge_statment(year)
+

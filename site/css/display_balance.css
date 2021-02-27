@@ -57,3 +57,9 @@ h3{
     color: var(--color-dark-blue);
     background-color: var(--color-light-grey);
 }
+
+#b_transfer{
+    margin: 5px;
+}
+
+

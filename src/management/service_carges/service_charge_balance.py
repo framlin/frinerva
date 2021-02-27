@@ -7,6 +7,9 @@ from management.service_carges.service_charge_account import ServiceChargeAccoun
 
 class ServiceChargeBalance(Balance):
     BALANCE_DIR = 'service_charges'
+    HOUSE_SPACE = 275
+    DWELLING_SPACE = 65
+    DWELLING_COUNT = 3
 
     def __init__(self, service_charge_type: str, booking_period: int):
         super().__init__(booking_period)
