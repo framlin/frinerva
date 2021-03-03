@@ -5,12 +5,9 @@ from accounting.booking_entry import BookingEntry
 
 
 class ServiceChargeBookingEntry(BookingEntry):
-    def __init__(self, amount: float, name: str, subject: str, date: str, booking_code: str, end_date: str, portion: float, billable: bool):
-        self._amount = amount
-        self._subject = subject
-        self._date = date
-        self._name = name
-        self._booking_code = booking_code
+    def __init__(self, amount: float, name: str, subject: str, date: str, booking_code: str, end_date: str,
+                 portion: float, billable: bool):
+        super().__init__(amount, name, subject, date, booking_code)
         self._id = ''
         self._end_date = end_date
         self._portion = portion

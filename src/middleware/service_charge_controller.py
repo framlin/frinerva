@@ -7,7 +7,7 @@ class ServiceChargeController:
         self._service_charge_statment = service_charge_statment
 
     def get_service_charge_statment(self, year):
-        scs = self._service_charge_statment.get_service_charge_balances_for_booking_period(year)
+        scs = self._service_charge_statment.get_service_charge_balances(year)
         result = dict()
         for scs_type, scs_balance in scs.items():
             account_dict = ServiceChargeBalanceJSONEncoder().default(scs_balance)

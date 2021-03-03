@@ -13,7 +13,7 @@ class BookingEntry:
         self._id = ''
 
         hash_fun = sha3_256()
-        hash_fun.update(bytes(str(self), encoding='utf-8'))
+        hash_fun.update(bytes(BookingEntry.__str__(self), encoding='utf-8'))
         self._id = hash_fun.hexdigest()
 
     def __str__(self):

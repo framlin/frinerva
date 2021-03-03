@@ -33,8 +33,7 @@ class ServiceChargeStatement:
                     balance.load(a_path)
 
     def save(self, a_path, year):
-        balances = self.get_service_charge_balances_for_booking_period(year)
-        balances_path = path.join(a_path, str(year))
+        balances = self.get_service_charge_balances(year)
         for balance in balances.values():
             balance.save(a_path)
         pass
@@ -49,11 +48,11 @@ class ServiceChargeStatement:
     def get_service_charge_balance(self, booking_period: int, scs_type: str) -> ServiceChargeBalance:
         return self._balances[str(booking_period)][scs_type]
 
-    def get_service_charge_balances_for_booking_period(self, booking_period: int) -> dict:
-        return self._balances[str(booking_period)]
-
-    def get_service_charge_balances(self) -> dict:
-        return self._balances
+    def get_service_charge_balances(self, booking_period: int = 0) -> dict:
+        result = self._balances
+        if booking_period != 0:
+            result = self._balances[str(booking_period)]
+        return result
 
     def load_blueprint(self):
         in_fn = path.join(FILE_CONFIG['blueprints'], 'service_charge_statement.json')
@@ -78,74 +77,26 @@ class ServiceChargeStatement:
 
         return result
 
-    def _get_dirty_entries(self, scs):
-        result = list()
-        for balance in scs.values():
-            if type(balance) == dict:
-                for account in balance['_accounts']:
-                    for booking in account['_bookings']:
-                        if '_dirty' in booking:
-                            result.append(booking)
-
-        return result
-
-    def _find_entry(self, scs_balance, entry):
-        _id = entry['_id']
-        # for balance in scs_balance.values():
-        for account in scs_balance:
-            for scs_entry in account:
-                if scs_entry._id == _id:
-                    return scs_entry
-
     def update(self, year, scs):
-        # dirty_entries = self._get_dirty_entries(scs)
         scs_balance = self._balances[year][scs['_scs_type']]
-        scs_entry = self._find_entry(scs_balance, scs)
+        scs_entry = _find_entry(scs_balance, scs)
         scs_entry.update(scs)
-
-    def _delete_entry_in_balance(self, balance, scs):
-        _id = scs['_id']
-        for account in balance:
-            for scs_entry in account:
-                if scs_entry._id == _id:
-                    account.remove(scs_entry)
-
-    def _add_entry_to_balance(self, balance, scs):
-        account = balance.get_account(scs['_cost_center'])
-        booking_entry = ServiceChargeBookingEntry.from_dict(scs)
-        account.add_booking_entry(booking_entry)
 
     def remove(self, year, scs):
         scs_balance = self._balances[year][scs['_scs_type']]
-        self._delete_entry_in_balance(scs_balance, scs)
+        _delete_entry_in_balance(scs_balance, scs)
 
     def add(self, year, scs):
         scs_balance = self._balances[year][scs['_scs_type']]
-        self._add_entry_to_balance(scs_balance, scs)
+        _add_entry_to_balance(scs_balance, scs)
 
     def transfer(self, year, account_dict):
-        dwelling_balance = self._balances[year]['DWELLING']
-        for account in dwelling_balance:
+        scs_balance = self._balances[year]['DWELLING']
+        for account in scs_balance:
             for be in account_dict['_bookings']:
                 scs_be_list = account.get_booking_entry_by_booking_code(be['_booking_code'])
                 if len(scs_be_list) == 1:
                     scs_be_list[0].add_amount(math.fabs(be['_amount']))
-
-    @staticmethod
-    def _forward_entry(from_be, to_be):
-        from_portion = from_be.get_portion()
-        if from_portion != ServiceChargeStatement.NO_FORWARD:
-            from_amount = from_be.get_amount()
-            if from_portion == ServiceChargeStatement.FULL:
-                to_amount = from_amount
-            elif from_portion == ServiceChargeStatement.PER_QM:  # TODO connect to Dwelling-Class and House-Class
-                to_amount = float(from_amount / ServiceChargeBalance.HOUSE_SPACE) * ServiceChargeBalance.DWELLING_SPACE
-            elif from_portion == ServiceChargeStatement.PER_DWELLING:  # TODO connect to Dwelling-Class and House-Class
-                to_amount = float(from_amount/ServiceChargeBalance.DWELLING_COUNT)
-
-            to_be.set_amount(to_amount)
-            from_name = from_be.get_name()
-            to_be.set_name(from_name)
 
     def forward(self, year, from_to):
         from_balance = self._balances[year][from_to['from']]
@@ -156,7 +107,7 @@ class ServiceChargeStatement:
         for from_be in from_account:
             to_be_list = to_account.get_booking_entry_by_booking_code(from_be.get_booking_code())
             if len(to_be_list) == 1:
-                ServiceChargeStatement._forward_entry(from_be, to_be_list[0])
+                _forward_entry(from_be, to_be_list[0])
 
     def __iter__(self):
         for year in self._balances:
@@ -165,3 +116,42 @@ class ServiceChargeStatement:
 
         return
 
+
+def _forward_entry(from_be, to_be):
+    from_portion = from_be.get_portion()
+    to_amount = 0
+    if from_portion != ServiceChargeStatement.NO_FORWARD:
+        from_amount = from_be.get_amount()
+        if from_portion == ServiceChargeStatement.FULL:
+            to_amount = from_amount
+        elif from_portion == ServiceChargeStatement.PER_QM:  # TODO connect to Dwelling-Class and House-Class
+            to_amount = float(from_amount / ServiceChargeBalance.HOUSE_SPACE) * ServiceChargeBalance.DWELLING_SPACE
+        elif from_portion == ServiceChargeStatement.PER_DWELLING:  # TODO connect to Dwelling-Class and House-Class
+            to_amount = float(from_amount/ServiceChargeBalance.DWELLING_COUNT)
+
+        to_be.set_amount(to_amount)
+        from_name = from_be.get_name()
+        to_be.set_name(from_name)
+
+
+def _find_entry(scs_balance, entry):
+    _id = entry['_id']
+    # for balance in scs_balance.values():
+    for account in scs_balance:
+        for scs_entry in account:
+            if scs_entry.get_id() == _id:
+                return scs_entry
+
+
+def _delete_entry_in_balance(balance, scs):
+    _id = scs['_id']
+    for account in balance:
+        for scs_entry in account:
+            if scs_entry.get_id() == _id:
+                account.remove(scs_entry)
+
+
+def _add_entry_to_balance(balance, scs):
+    account = balance.get_account(scs['_cost_center'])
+    booking_entry = ServiceChargeBookingEntry.from_dict(scs)
+    account.add_booking_entry(booking_entry)

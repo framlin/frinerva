@@ -22,7 +22,7 @@ function create_account_section(account) {
     let cost_center = document.createElement('div');
     cost_center.innerHTML = '<h3>' + account['_cost_center'] + '</h3>';
 
-    if (account['_cost_center'] == 'SERVICE_CHARGES'){
+    if ((account['_cost_center'] == 'SERVICE_CHARGES') || (account['_cost_center'] == 'HOUSE')){
         let cost_center_button = document.createElement('button')
         cost_center_button.innerHTML = 'transfer';
         cost_center_button.setAttribute("id", "b_transfer");
