@@ -5,6 +5,8 @@ from accounting.booking_entry import BookingEntry
 
 
 class ServiceChargeBookingEntry(BookingEntry):
+    ADVANCE_PAYMENT_BOOKING_CODES = ['SC15', 'HC01']
+
     def __init__(self, amount: float, name: str, subject: str, date: str, booking_code: str, end_date: str,
                  portion: float, billable: bool):
         super().__init__(amount, name, subject, date, booking_code)
@@ -47,16 +49,14 @@ class ServiceChargeBookingEntry(BookingEntry):
             billable=the_dict['_billable']
         )
 
-    def update(self, entry_dict: dict):
-        self._amount = float(entry_dict['_amount'])
-        self._name = entry_dict['_name']
-        self._subject = entry_dict['_subject']
-        self._date = entry_dict['_date']
-        self._booking_code = entry_dict['_booking_code']
+    def update_from_dict(self, entry_dict: dict):
+        super().update_from_dict(entry_dict)
         self._end_date = entry_dict['_end_date']
         self._portion = float(entry_dict['_portion'])
         self._billable = entry_dict['_billable']
 
+    def has_advance_payment_booking_code(self):
+        return self._booking_code in ServiceChargeBookingEntry.ADVANCE_PAYMENT_BOOKING_CODES
 
 # noinspection PyProtectedMember
 class ServiceChargeBookingEntryJSONEncoder(JSONEncoder):

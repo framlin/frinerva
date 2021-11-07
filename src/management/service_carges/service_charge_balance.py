@@ -1,5 +1,4 @@
 from accounting.balance import Balance, BalanceJSONEncoder
-from accounting.account import Account
 import os
 
 from management.service_carges.service_charge_account import ServiceChargeAccount
@@ -38,7 +37,6 @@ class ServiceChargeBalance(Balance):
         for account in self:
             account.load(balance_path)
 
-        pass
 
 class ServiceChargeBalanceJSONEncoder(BalanceJSONEncoder):
     pass

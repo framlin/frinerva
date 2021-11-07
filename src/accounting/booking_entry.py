@@ -1,6 +1,8 @@
 from json import JSONEncoder
 from hashlib import sha3_256
 
+from utils import utils
+
 
 class BookingEntry:
 
@@ -25,7 +27,7 @@ class BookingEntry:
                ', ID:' + self._id
 
     def get_amount(self) -> float:
-        return self._amount
+        return utils.round_money(self._amount)
 
     def set_amount(self, amount: float):
         self._amount = amount

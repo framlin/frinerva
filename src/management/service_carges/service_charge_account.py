@@ -20,3 +20,10 @@ class ServiceChargeAccount(Account):
 
         except json.JSONDecodeError:
             pass
+
+    def get_advance_payment_booking_entries(self):
+        result = list()
+        for scbe in self:
+            if scbe.has_advance_payment_booking_code():
+                result.append(scbe)
+        return result

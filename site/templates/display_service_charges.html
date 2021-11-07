@@ -11,7 +11,7 @@
 <div class="vbox full-height">
     <h1>Service Charges</h1>
 
-    <div class="hbox">
+    <div id="topbar" class="hbox">
         <label id="lbl_booking_periods" for="booking_periods_select">Jahr </label>
         <select id="booking_periods_select">
             {% for bp in bookingperiods %}
@@ -20,6 +20,7 @@
         </select>
 
         <button onclick="load();">load</button>
+        <button onclick="print();">print</button>
 
     </div>
 

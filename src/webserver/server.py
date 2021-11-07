@@ -1,6 +1,6 @@
 from flask import Flask, send_from_directory, redirect, url_for, render_template, request
-from utils.utils import import_banking_csv_file
 
+from accounting.importer import import_banking_csv_file
 from middleware.accounting_controller import AccountingController
 from middleware.service_charge_controller import ServiceChargeController
 
@@ -34,6 +34,12 @@ def transfer_service_charges(year):
         return _service_charge_controller.transfer(year, request.json)
 
 
+@app.route('/service-charges-print/<year>', methods=['GET'])
+def print_service_charge_statement(year: str):
+    if request.method == 'GET':
+        return _service_charge_controller.print(year)
+
+
 # noinspection PyUnresolvedReferences
 @app.route('/service-charges.html')
 def display_service_charges():
@@ -57,10 +63,6 @@ def service_charges(year):
     elif request.method == 'DELETE':
         print(request.json)
         return _service_charge_controller.remove_scs_booking_entry(year, request.json)
-
-@app.route('/service-charge/blueprint/<sc_type>')
-def service_charge_blueprint(sc_type):
-    return _service_charge_controller.get_blueprint(sc_type)
 
 
 @app.route('/balance/<year>', methods=['POST', 'PUT', 'GET', 'DELETE'])

@@ -61,3 +61,8 @@ h3{
 #scs_section button{
     width: 80px;
 }
+
+#topbar button,
+#topbar select{
+    margin: 0 5px;
+}

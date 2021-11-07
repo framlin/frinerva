@@ -11,6 +11,12 @@ let field_list = {
     '_billable':"billable_field"
 }
 
+function print() {
+    xhr_read('/service-charges-print/'+get_year(), function(){
+        //NOP
+    })
+}
+
 function forward_entries(from, to) {
     let from_balance = service_charges[from];
     let to_balance = service_charges[to];

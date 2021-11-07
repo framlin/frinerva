@@ -1,8 +1,7 @@
 from json import JSONEncoder
 import json
 import os
-from decimal import Decimal, ROUND_HALF_UP
-
+from utils import utils
 from accounting.booking_entry import BookingEntry, BookingEntryJSONEncoder
 
 
@@ -12,7 +11,6 @@ class Account:
     def __init__(self, cost_center: str):
         self._cost_center = cost_center
         self._bookings = []
-        self._cents = Decimal('0.01')
 
     def __str__(self):
         result: str = self._cost_center + ':\n'
@@ -76,15 +74,10 @@ class Account:
         result = [booking for booking in self if booking.get_amount() >= 0]
         return result
 
-    def _sum(self, bookings):
-        entries = [booking for booking in bookings]
-        amounts = [entry.get_amount() for entry in entries]
-        return Decimal(sum(amounts)).quantize(self._cents, ROUND_HALF_UP)
-
     def get_balance(self):
-        return {"total": self._sum(self),
-                "outgoing_payments": self._sum(self.get_outgoing_payments()),
-                "received_payments": self._sum(self.get_received_payments())}
+        return {"total": _sum(self),
+                "outgoing_payments": _sum(self.get_outgoing_payments()),
+                "received_payments": _sum(self.get_received_payments())}
 
     def __iter__(self):
         return AccountIterator(self)
@@ -110,3 +103,9 @@ class AccountJSONEncoder(JSONEncoder):
         result['_cost_center'] = account.get_cost_center()
         result["_bookings"] = [BookingEntryJSONEncoder().default(booking) for booking in account]
         return result
+
+
+def _sum(bookings):
+    entries = [booking for booking in bookings]
+    amounts = [entry.get_amount() for entry in entries]
+    return utils.round_money(sum(amounts))
