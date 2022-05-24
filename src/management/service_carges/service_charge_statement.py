@@ -14,6 +14,7 @@ class ServiceChargeStatement:
     NO_FORWARD = 0
     PER_QM = 1
     PER_DWELLING = 2
+    PER_OWNER_SHARE = 3
     FULL = 100
 
     def __init__(self):
@@ -161,6 +162,8 @@ def _forward_entry(from_be: ServiceChargeBookingEntry, to_be: ServiceChargeBooki
             to_amount = float(from_amount / ServiceChargeBalance.HOUSE_SPACE) * ServiceChargeBalance.DWELLING_SPACE
         elif from_portion == ServiceChargeStatement.PER_DWELLING:  # TODO connect to Dwelling-Class and House-Class
             to_amount = float(from_amount/ServiceChargeBalance.DWELLING_COUNT)
+        elif from_portion == ServiceChargeStatement.PER_OWNER_SHARE:  #TODO connect to Dwelling-Class and House-Class
+            to_amount = float(from_amount * ServiceChargeBalance.OWNER_SHARE)
 
         to_be.set_amount(utils.round_money(to_amount))
         from_name = from_be.get_name()

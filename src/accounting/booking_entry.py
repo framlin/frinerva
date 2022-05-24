@@ -27,7 +27,7 @@ class BookingEntry:
                ', ID:' + self._id
 
     def get_amount(self) -> float:
-        return utils.round_money(self._amount)
+        return float(utils.round_money(self._amount))
 
     def set_amount(self, amount: float):
         self._amount = amount

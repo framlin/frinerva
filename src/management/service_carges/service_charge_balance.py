@@ -9,6 +9,7 @@ class ServiceChargeBalance(Balance):
     HOUSE_SPACE = 275
     DWELLING_SPACE = 65
     DWELLING_COUNT = 3
+    OWNER_SHARE = 0.25
 
     def __init__(self, service_charge_type: str, booking_period: int):
         super().__init__(booking_period)

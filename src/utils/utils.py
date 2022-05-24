@@ -4,7 +4,7 @@ from accounting.cost_center_mapping import cost_center_mapping as ccm
 
 def round_money(value):
     _cents = Decimal('0.01')
-    return Decimal(value).quantize(_cents, ROUND_HALF_UP)
+    return float(Decimal(value).quantize(_cents, ROUND_HALF_UP))
 
 
 def create_cost_center_list() -> list:

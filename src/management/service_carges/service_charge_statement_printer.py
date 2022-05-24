@@ -45,6 +45,10 @@ def print_service_charge_statement(scs: ServiceChargeStatement, year: int):
 
     scs_costs, advance, saldo = scs.compute_scs_saldo(year, 'RENTAL')
     scs_list = scs.get_non_advance_payment_entries(year, "RENTAL")
+
+    dwelling_list = scs.get_non_advance_payment_entries(year, "DWELLING")
+
+
     aktuelles_datum = date.today().strftime("%d.%m.%Y")
 
     doc = opendocument.load(path.join(FILE_CONFIG['reports'], 'scs_template.odt'))
@@ -59,6 +63,7 @@ def print_service_charge_statement(scs: ServiceChargeStatement, year: int):
         _replace(item, s, '[[saldo]]', str(saldo))
 
         _replace_table(item, s, '[[scs_list]]', scs_list)
+        _replace_table(item, s, '[[dwelling_list]]', dwelling_list)
 
     doc.save(path.join(FILE_CONFIG['reports'], 'result.odt'))
 
