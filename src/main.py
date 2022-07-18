@@ -1,4 +1,4 @@
-from accounting.accounting import Accounting
+from _oldaccounting.accounting import Accounting
 from config import FILE_CONFIG
 
 from management.service_carges.service_charge_statement import ServiceChargeStatement
@@ -19,7 +19,7 @@ def load_service_charge_statment(path: str) -> ServiceChargeStatement:
     return result
 
 
-accounting = load_accounting(FILE_CONFIG['accounting'])
-service_charge_statement = load_service_charge_statment(FILE_CONFIG['accounting'])
+accounting = load_accounting(FILE_CONFIG['_oldaccounting'])
+service_charge_statement = load_service_charge_statment(FILE_CONFIG['_oldaccounting'])
 
 server.run_server(AccountingController(accounting), ServiceChargeController(service_charge_statement))

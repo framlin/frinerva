@@ -1,4 +1,4 @@
-from accounting.account import Account
+from _oldaccounting.account import Account
 from config import FILE_CONFIG
 from management.service_carges.service_charge_balance import ServiceChargeBalance
 from management.service_carges.service_charge_booking_entry import ServiceChargeBookingEntry
@@ -19,4 +19,4 @@ def import_scs_blueprint(year):
                 scs_booking = ServiceChargeBookingEntry.from_dict(booking_bp)
                 scs_account.add_booking_entry(scs_booking)
             scs_balance.add_account(scs_account)
-        scs_balance.save(FILE_CONFIG['accounting'])
+        scs_balance.save(FILE_CONFIG['_oldaccounting'])

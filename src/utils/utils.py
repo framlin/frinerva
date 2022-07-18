@@ -1,5 +1,5 @@
 from decimal import Decimal, ROUND_HALF_UP
-from accounting.cost_center_mapping import cost_center_mapping as ccm
+from _oldaccounting.cost_center_mapping import cost_center_mapping as ccm
 
 
 def round_money(value):

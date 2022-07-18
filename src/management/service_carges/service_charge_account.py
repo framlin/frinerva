@@ -1,4 +1,4 @@
-from accounting.account import Account
+from _oldaccounting.account import Account
 import json
 
 from management.service_carges.service_charge_booking_entry import ServiceChargeBookingEntryJSONEncoder, \

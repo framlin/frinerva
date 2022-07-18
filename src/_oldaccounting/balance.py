@@ -1,5 +1,5 @@
 from json import JSONEncoder
-from accounting.account import Account, AccountJSONEncoder
+from _oldaccounting.account import Account, AccountJSONEncoder
 import os
 
 

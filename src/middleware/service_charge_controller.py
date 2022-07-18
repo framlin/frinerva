@@ -18,7 +18,7 @@ class ServiceChargeController:
         return result
 
     def save_service_charge_statment(self, year: str):
-        self._service_charge_statment.save(FILE_CONFIG['accounting'], int(year))
+        self._service_charge_statment.save(FILE_CONFIG['_oldaccounting'], int(year))
         return self.get_service_charge_statment(year)
 
     def update_scs_booking_entry(self, year: str, scs: dict):

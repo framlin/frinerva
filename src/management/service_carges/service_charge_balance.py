@@ -1,4 +1,4 @@
-from accounting.balance import Balance, BalanceJSONEncoder
+from _oldaccounting.balance import Balance, BalanceJSONEncoder
 import os
 
 from management.service_carges.service_charge_account import ServiceChargeAccount

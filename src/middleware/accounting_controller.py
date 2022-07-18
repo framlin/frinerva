@@ -1,6 +1,6 @@
-from accounting.accounting import Accounting
-from accounting.account import AccountJSONEncoder, Account
-from accounting.balance import BalanceJSONEncoder
+from _oldaccounting.accounting import Accounting
+from _oldaccounting.account import AccountJSONEncoder, Account
+from _oldaccounting.balance import BalanceJSONEncoder
 
 from decimal import Decimal, ROUND_HALF_UP
 
@@ -71,5 +71,5 @@ class AccountingController:
         account = balance.get_account(entry['_cost_center'])
         booking_entry = AccountingController._find_booking_entry(account, entry['_id'])
         booking_entry.update_from_dict(entry)
-        balance.save(FILE_CONFIG['accounting'])
+        balance.save(FILE_CONFIG['_oldaccounting'])
         return self.get_balance(year)

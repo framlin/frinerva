@@ -3,7 +3,7 @@
 /uml/frinerva.mdzip.bak
 /data/*
 /venv/*
-/src/accounting/__pycache__/*
+/src/_oldaccounting/__pycache__/*
 /src/utils/__pycache__/*
 /.ipynb_checkpoints/
 /jupyter/.ipynb_checkpoints/
