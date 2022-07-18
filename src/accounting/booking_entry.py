@@ -5,7 +5,6 @@ from hashlib import sha3_256
 #
 # from utils import utils
 
-# TODO testCase Equality
 class BookingEntry:
 
     def __init__(self, dict, booking_code):
