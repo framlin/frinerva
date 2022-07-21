@@ -14,7 +14,7 @@ class TestBookingEntry(TestCase):
         }
         booking_entry_A = BookingEntry(booking_entry_values, "BC01")
         booking_entry_B = BookingEntry(booking_entry_values, "BC01")
-        self.assertEqual(booking_entry_A, booking_entry_B)
+        self.assertEqual(booking_entry_A, booking_entry_B, 'the booking-entries are NOT equal')
 
     def test_different_booking_codes(self):
         booking_entry_values = {
@@ -26,7 +26,7 @@ class TestBookingEntry(TestCase):
         }
         booking_entry_A = BookingEntry(booking_entry_values, "BC01")
         booking_entry_B = BookingEntry(booking_entry_values, "BC012")
-        self.assertNotEqual(booking_entry_A, booking_entry_B)
+        self.assertNotEqual(booking_entry_A, booking_entry_B, 'the booking-entries are NOT different')
 
     def test_different_data(self):
         booking_entry_values = {
@@ -46,4 +46,8 @@ class TestBookingEntry(TestCase):
 
         booking_entry_A = BookingEntry(booking_entry_values, "BC01")
         booking_entry_B = BookingEntry(booking_entry_values_2, "BC01")
-        self.assertNotEqual(booking_entry_A, booking_entry_B)
+        self.assertNotEqual(booking_entry_A, booking_entry_B, 'the booking-entries are NOT different')
+
+
+if __name__ == '__main__':
+    unittest.main()

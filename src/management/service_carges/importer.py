@@ -1,4 +1,4 @@
-from _oldaccounting.account import Account
+from accounting.account import Account
 from config import FILE_CONFIG
 from management.service_carges.service_charge_balance import ServiceChargeBalance
 from management.service_carges.service_charge_booking_entry import ServiceChargeBookingEntry

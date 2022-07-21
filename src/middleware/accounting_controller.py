@@ -1,5 +1,5 @@
 from _oldaccounting.accounting import Accounting
-from _oldaccounting.account import AccountJSONEncoder, Account
+from accounting.account import AccountJSONEncoder, Account
 from _oldaccounting.balance import BalanceJSONEncoder
 
 from decimal import Decimal, ROUND_HALF_UP

@@ -2,9 +2,21 @@ from accounting.booking_entry import BookingEntry
 
 
 class BankingCSVFileImporter:
-
-    def import_bookings(self, file, csv_file_reader, delimiter):
-        reader = csv_file_reader(file, delimiter=';')
+    COST_CENTER_MAPPING = {
+        'HausKosten': 'HOUSE',
+        'VerwaltungsKosten': 'ADMINISTRATION',
+        'Nebenkosten_Vorauszahlungen': 'SERVICE_CHARGES',
+        'WohnungsKosten': 'DWELLING',
+        'Stw_Bank': 'BANKING',
+        'Stw_Priv_Ausgaben': 'PRIVATE',
+        'Nachlass': 'ESTATE',
+        'Kaution': 'DEPOSITE',
+        'Miete': 'RENT',
+        'NebenKosten': 'SERVICE_CHARGES'
+    }
+    @classmethod
+    def import_bookings (cls, csv_filefile, csv_file_reader, delimiter):
+        reader = csv_file_reader(csv_filefile, delimiter=';')
         result = []
         for row in reader:
             entry = BookingEntry({'Datum': row['Datum'],
@@ -16,6 +28,9 @@ class BankingCSVFileImporter:
             result.append(entry)
         return result
 
+    @classmethod
+    def add_booking_entries_to_account(cls, booking_entries, account):
+        account.add_booking_entries(booking_entries)
 
 
 
