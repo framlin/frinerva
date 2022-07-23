@@ -1,6 +1,8 @@
 const BankingDataCVSReader  =  require("../../src/accounting/banking_data_csv_reader");
 const Readable = require('stream').Readable
 
+// add a meaningless comment, to test github
+
 function create_one_line_stream() {
     return new Readable.from(
         "Datum;Wertstellung;Kategorie;Name;Verwendungszweck;Konto;Bank;Betrag;Währung\n" +
