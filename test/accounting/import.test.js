@@ -1,27 +1,38 @@
-const BankingDataCVSReader  =  require("../../src/accounting/banking_data_csv_reader");
+const BankingDataCVSReader  =  require("../../src/accounting/banking/banking_data_csv_reader");
 const Readable = require('stream').Readable
-
-// add a meaningless comment, to test github
 
 function create_one_line_stream() {
     return new Readable.from(
         "Datum;Wertstellung;Kategorie;Name;Verwendungszweck;Konto;Bank;Betrag;Währung\n" +
         "31.12.2020;31.12.2020;Stöttwang - Ausgang - Stw_Bank;Saldo der Abschlussposten QM - Support;04082 Leipzig Kontoabschluss 4. Quartal 20 AktivKonto (Kontofuhrung) 20,70 13 kostenfreie Poste;;;-30,70;EUR\n");
 }
-test('reading empty file has empty data as result', ()=>{
+
+function create_two_line_stream() {
+    return new Readable.from(
+        "Datum;Wertstellung;Kategorie;Name;Verwendungszweck;Konto;Bank;Betrag;Währung\n" +
+        "31.12.2020;31.12.2020;Stöttwang - Ausgang - Stw_Bank;Saldo der Abschlussposten QM - Support;04082 Leipzig Kontoabschluss 4. Quartal 20 AktivKonto (Kontofuhrung) 20,70 13 kostenfreie Poste;;;-30,70;EUR\n" +
+        "28.12.2020;26.12.2020;Stöttwang - Eingang - Kaution;Christian Doll;Kaution dritte Ratte;DE52700520600022627087;BYLADEM1LLD;500,00;EUR"
+    )
+}
+
+it('returns an empty result for an empty file', async ()=>{
     let s = new Readable.from("");
     let banking_data_cvs_reader = new BankingDataCVSReader();
 
-    banking_data_cvs_reader.read_file(s).then(booking_entries => {
-        expect(booking_entries.length).toBe(0);
-    });
+    let booking_entries = await banking_data_cvs_reader.read_file(s);
+    expect(booking_entries.length).toBe(0);
 });
 
-test('reading one data line with headers has one booking entry as result', () => {
+it('returns one booking entries if reading one data lines and headers', async () => {
     let s = create_one_line_stream();
     let banking_data_cvs_reader = new BankingDataCVSReader();
+    let booking_entries = await banking_data_cvs_reader.read_file(s);
+    expect(booking_entries.length).toBe(1);
+});
 
-    banking_data_cvs_reader.read_file(s).then(booking_entries => {
-        expect(booking_entries.length).toBe(1);
-    });
+it('returns two booking entries if reading two data lines and headers', async () => {
+    let s = create_two_line_stream();
+    let banking_data_cvs_reader = new BankingDataCVSReader();
+    let booking_entries = await banking_data_cvs_reader.read_file(s);
+    expect(booking_entries.length).toBe(2);
 });
