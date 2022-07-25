@@ -1,10 +1,12 @@
+const PaymentCSVReader = require("./payment_csv_reader");
+
 const CsvReadableStream = require('csv-reader');
 
-class BankingDataCVSReader {
+class MoneyMoneyCSVReader extends PaymentCSVReader {
 
-    read_file(file_stream) {
+    static create_payments(file_stream) {
         return new Promise(resolve => {
-            let booking_entries = [];
+            let payment_entries = [];
             file_stream.pipe(new CsvReadableStream({
                 delimiter: ";",
                 parseNumbers: true,
@@ -13,11 +15,10 @@ class BankingDataCVSReader {
                 skipHeader: true,
                 asObject: true
             })).on('data', row => {
-                booking_entries.push(row);
-            }).on('end', () => resolve(booking_entries));
+                payment_entries.push(row);
+            }).on('end', () => resolve(payment_entries));
         });
     }
-
 }
 
-module.exports = BankingDataCVSReader;
+module.exports = MoneyMoneyCSVReader;
