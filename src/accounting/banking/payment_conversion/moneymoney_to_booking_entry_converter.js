@@ -1,24 +1,5 @@
-const BookingEntry = require("../account_management/booking_entry");
+const BookingEntry = require("../../account_management/booking_entry");
 const PaymentToBookingEntryConverter = require("./payment_to_booking_entry_converter");
-
-// const cost_center_mapping = {
-//     'HausKosten': 'HOUSE',
-//     'VerwaltungsKosten': 'ADMINISTRATION',
-//     'Nebenkosten_Vorauszahlungen': 'SERVICE_CHARGES',
-//     'WohnungsKosten': 'DWELLING',
-//     'Stw_Bank': 'BANKING',
-//     'Stw_Priv_Ausgaben': 'PRIVATE',
-//     'Nachlass': 'ESTATE',
-//     'Kaution': 'DEPOSITE',
-//     'Miete': 'RENT',
-//     'NebenKosten': 'SERVICE_CHARGES'
-// };
-
-// _extract_cost_center_part(category) {
-//     let category_str = this._strip_whitespaces(category);
-//     let categories = category_str.split('-');
-//     return categories[categories.length-1];
-// }
 
 
 class MoneyMoneyToBookingEntryConverter extends PaymentToBookingEntryConverter {
