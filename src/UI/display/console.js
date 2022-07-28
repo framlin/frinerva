@@ -1,7 +1,7 @@
-class Console {
+class ConsoleUI {
     show(presentation) {
         console.log(presentation);
     }
 }
 
-module.exports = Console;
+module.exports = ConsoleUI;
