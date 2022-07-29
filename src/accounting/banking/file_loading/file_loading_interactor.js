@@ -1,29 +1,36 @@
 const FileLoadingRequestBoundary = require("./file_loading_request_boundary");
+const Fs = require("fs");
 
 class FileLoadingInteractor extends FileLoadingRequestBoundary{
-    _file_selection_presenter = null;
-    _resolver = () => null;
+    _file_loading_response_boundary = null;
 
-    constructor(file_selection_presenter) {
+    constructor(file_loading_response_boundary) {
         super();
-        this._file_selection_presenter = file_selection_presenter;
+        this._file_loading_response_boundary = file_loading_response_boundary;
     }
 
-    execute_use_case() {
+    execute_use_case(file_name) {
         return new Promise(resolve => {
             this._resolver = resolve;
-            this.file_selection_presenter.prompt_for_filename();
+            if (file_name) {
+                resolve(this.load_file(file_name));
+            } else {
+                this.file_loading_response_boundary.prompt_for_filename()
+                    .then(file_name => {
+                        resolve(this.load_file(file_name));
+                    });
+            }
         });
     }
 
     load_file(file_name) {
         console.log(`loading ${file_name} .....`);
         const Fs = require('fs');
-        this._resolver(Fs.createReadStream(file_name, 'utf8'));
+        return Fs.createReadStream(file_name, 'utf8');
     }
 
-    get file_selection_presenter() {
-        return this._file_selection_presenter;
+    get file_loading_response_boundary() {
+        return this._file_loading_response_boundary;
     }
 }
 
