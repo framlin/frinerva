@@ -1,11 +1,11 @@
 
 class PaymentConversionInteractor{
 
-    _payment_conversion_response_boundary = null;
+    _response_boundary = null;
     _converter = null;
 
     constructor(payment_conversion_response_boundary, converter) {
-        this._payment_conversion_response_boundary = payment_conversion_response_boundary;
+        this._response_boundary = payment_conversion_response_boundary;
         this._converter = converter;
     }
 
@@ -15,13 +15,13 @@ class PaymentConversionInteractor{
             for (let payment of payments) {
                 booking_entries.push(this._converter.convert(payment));
             }
-            this._payment_conversion_response_boundary.show(booking_entries);
+            this._response_boundary.show(booking_entries);
             resolve(booking_entries);
         });
     }
 
-    get payment_conversion_response_boundary() {
-        return this._payment_conversion_response_boundary;
+    get response_boundary() {
+        return this._response_boundary;
     }
 }
 

@@ -20,7 +20,7 @@ beforeAll(() => {
 
 test('creation', () => {
     expect(payment_creation_interactor).toBeDefined();
-    expect(payment_creation_interactor.payment_creation_response_boundary).not.toBeNull();
+    expect(payment_creation_interactor.response_boundary).not.toBeNull();
 });
 
 test('execute_use_case with empty file should return empty payments', () => {
