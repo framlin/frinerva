@@ -14,7 +14,7 @@ const CLIPaymentCreationPresenter = require("./cli_payment_creation_presenter");
         payment_creation_response_boundary
     });
     cli_file_loading_controller.file_loading_request_boundary = import_csv_banking_statement_interactor.file_loading_request_boundary;
-    import_csv_banking_statement_interactor.execute_use_case("/home/framlin/js-dev/frinerva/data/imports/2019.csv").then( payments => {
+    import_csv_banking_statement_interactor.execute_use_case(/*"/home/framlin/js-dev/frinerva/data/imports/2019.csv"*/).then( payments => {
         console.log("done");
     });
 })();

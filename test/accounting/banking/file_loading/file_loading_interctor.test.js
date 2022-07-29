@@ -16,8 +16,9 @@ test('creation', () => {
 
 test('execute should prompt for filename', () => {
     let prompted = false;
-    file_loading_presenter.prompt_for_filename = () => {
+    file_loading_presenter.file_name_missing = () => {
         prompted = true;
+
         return new Promise(resolve => {})
     }
     file_loading_interactor.execute_use_case();

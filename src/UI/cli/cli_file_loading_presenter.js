@@ -4,6 +4,9 @@ const os = require('os');
 const FileLoadingResponseBoundary = require("../../accounting/banking/file_loading/file_loading_response_boundary");
 
 class CLIFileLoadingPresenter extends FileLoadingResponseBoundary{
+    get file_loading_controller() {
+        return this._file_loading_controller;
+    }
 
     _file_loading_controller = null;
 
@@ -12,8 +15,8 @@ class CLIFileLoadingPresenter extends FileLoadingResponseBoundary{
         this._file_loading_controller = file_loading_controller;
     }
 
-    prompt_for_filename() {
-        return new Promise(resolve => {
+    file_name_missing() {
+        // return new Promise(resolve => {
             inquirer.registerPrompt('file-tree-selection', inquirerFileTreeSelection)
             inquirer
                 .prompt([
@@ -26,9 +29,9 @@ class CLIFileLoadingPresenter extends FileLoadingResponseBoundary{
                 .then(answers => {
                     let file_name = answers.file;
                     console.log(`you chose: ${file_name}`);
-                    resolve(file_name);
+                    this.file_loading_controller.file_name = (file_name);
                 });
-        })
+        // })
     }
 
 }
