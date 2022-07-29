@@ -4,17 +4,30 @@ const os = require('os');
 
 class CLIFileSelectionPresenter {
 
-    async prompt_for_filename() {
+    _controller = null;
+
+    constructor(controller) {
+        this._controller = controller;
+    }
+
+    set_request_boundary(request_boundary) {
+        this._controller.request_boundary = request_boundary;
+    }
+
+    prompt_for_filename() {
         inquirer.registerPrompt('file-tree-selection', inquirerFileTreeSelection)
-        let filename = await inquirer
+        inquirer
             .prompt([
                 {
                     type: 'file-tree-selection',
                     name: 'file',
                     root: os.homedir()
                 }
-            ]);
-        return filename;
+            ])
+            .then(answers => {
+                console.log(JSON.stringify(answers))
+                this._controller.file_name = answers.file;
+            });
     }
 
     prompt_for_payment_creation(filename) {

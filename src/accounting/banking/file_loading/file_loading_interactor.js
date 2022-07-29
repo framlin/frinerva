@@ -1,18 +1,22 @@
 class FileSelectionInteractor {
     _file_selection_presenter = null;
+    _resolver = () => null;
 
     constructor(file_selection_presenter) {
         this._file_selection_presenter = file_selection_presenter;
     }
 
     execute_use_case() {
-        this.file_selection_presenter.prompt_for_filename().then((filename) => {
-            console.log(filename)
-            if (this.file_selection_presenter.prompt_for_payment_creation(filename)) {
-                console.log("UseCase: payment creation starting .....");
-            }
-
+        return new Promise(resolve => {
+            this._resolver = resolve;
+            this.file_selection_presenter.prompt_for_filename();
         });
+    }
+
+    load_file(file_name) {
+        console.log(`loading ${file_name} .....`);
+        const Fs = require('fs');
+        this._resolver(Fs.createReadStream('file_name', 'utf8'));
     }
 
     get file_selection_presenter() {

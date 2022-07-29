@@ -1,4 +1,4 @@
-const FileSelectionInteractor = require("../../../../src/accounting/banking/file_selection/file_selection_interactor");
+const FileSelectionInteractor = require("../../../../src/accounting/banking/file_loading/file_loading_interactor");
 const CLIFileSelectionPresenter = require("../../../../src/accounting/banking/cli/cli_file_selection_presenter");
 
 let file_selection_interactor;
@@ -18,7 +18,6 @@ test('execute should prompt for filename', () => {
     let prompted = false;
     file_selection_presenter.prompt_for_filename = () => {
         prompted = true;
-        return new Promise(resolve => "");
     }
     file_selection_interactor.execute_use_case();
     expect(prompted).toBe(true);
