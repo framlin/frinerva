@@ -1,10 +1,8 @@
 const FileLoadingRequestBoundary = require("./file_loading_request_boundary");
-const Fs = require("fs");
 
 class FileLoadingInteractor extends FileLoadingRequestBoundary{
     _file_loading_response_boundary = null;
-
-    _RESOLVER = () => undefined;
+    _RESOLVER;
 
     constructor(file_loading_response_boundary) {
         super();
@@ -23,7 +21,6 @@ class FileLoadingInteractor extends FileLoadingRequestBoundary{
     }
 
     load_file(file_name) {
-        console.log(`now loading ${file_name} .....`);
         const Fs = require('fs');
         this._RESOLVER(Fs.createReadStream(file_name, 'utf8'));
     }

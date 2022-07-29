@@ -4,10 +4,8 @@ class CLIPaymentCreationPresenter{
         this._payment_creation_controller = payment_creation_controller
     }
 
-    take_payments(payments) {
-        for(let payment of payments) {
-            console.log(`${payment.Datum}, ${payment.Kategorie}, ${payment.Name}, ${payment.Betrag} `)
-        }
+    show(payments) {
+        console.log(`${payments.length} payments created`)
     }
 
 }

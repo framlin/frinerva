@@ -14,14 +14,22 @@ test('creation', () => {
     expect(file_loading_interactor.file_loading_response_boundary).not.toBeNull();
 });
 
-test('execute should prompt for filename', () => {
+test('execute without filename should prompt for filename', () => {
     let prompted = false;
     file_loading_presenter.file_name_missing = () => {
         prompted = true;
-
-        return new Promise(resolve => {})
     }
     file_loading_interactor.execute_use_case();
     expect(prompted).toBe(true);
 });
 
+test('execute with filename should return a Promise', () => {
+
+    file_loading_interactor.load_file = () => new Promise(() => {});
+
+    async function call_execute() {
+        return await file_loading_interactor.execute_use_case("file_name");
+    }
+
+    expect(call_execute()).toBeInstanceOf(Promise);
+});
