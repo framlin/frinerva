@@ -1,5 +1,5 @@
 const FileSelectionInteractor = require("../../../../src/accounting/banking/file_loading/file_loading_interactor");
-const CLIFileSelectionPresenter = require("../../../../src/accounting/banking/cli/cli_file_selection_presenter");
+const CLIFileSelectionPresenter = require("../../../../src/UI/cli/cli_file_selection_presenter");
 
 let file_selection_interactor;
 let file_selection_presenter = new CLIFileSelectionPresenter;

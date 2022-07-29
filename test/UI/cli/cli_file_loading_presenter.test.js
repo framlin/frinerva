@@ -1,4 +1,4 @@
-const CLIFileSelectionPresenter = require("../../../../src/accounting/banking/cli/cli_file_selection_presenter");
+const CLIFileSelectionPresenter = require("../../../src/UI/cli/cli_file_selection_presenter");
 let cli_file_selection_presenter
 
 beforeAll(() => {

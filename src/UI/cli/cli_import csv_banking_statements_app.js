@@ -1,5 +1,5 @@
 const CLIController = require('./cli_controller');
-const ImportCSVBankingStatementsInteractor = require("../import_csv_banking_statements_interactor");
+const ImportCSVBankingStatementsInteractor = require("../../accounting/banking/import_csv_banking_statements_interactor");
 const CLIFileSelectionPresenter = require("./cli_file_selection_presenter");
 
 (function main() {
@@ -10,4 +10,5 @@ const CLIFileSelectionPresenter = require("./cli_file_selection_presenter");
         console.log("done");
     });
 })();
+
 
