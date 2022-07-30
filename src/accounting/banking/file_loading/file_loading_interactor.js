@@ -10,20 +10,18 @@ class FileLoadingInteractor extends FileLoadingRequestBoundary{
     }
 
     async execute_use_case(file_name) {
-        return new Promise(resolve => {
-            this._RESOLVER = resolve;
+        return new Promise((resolve, reject) => {
             if (file_name) {
-                this.load_file(file_name);
+                resolve(this._load_file(file_name));
             } else {
-                this._response_boundary.file_name_missing();
+                reject(new Error("FileName missing"));
             }
         });
     }
 
-
-    load_file(file_name) {
+    _load_file(file_name) {
         const Fs = require('fs');
-        this._RESOLVER(Fs.createReadStream(file_name, 'utf8'));
+        return Fs.createReadStream(file_name, 'utf8');
     }
 
 }

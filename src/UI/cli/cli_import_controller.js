@@ -6,8 +6,10 @@ class CLIImportController{
     }
 
     import_file(file_name) {
-
+        this._request_boundary.execute_use_case(file_name);
     }
 }
+
+module.exports = CLIImportController;
 
 
