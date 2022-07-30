@@ -44,7 +44,8 @@
   "dependencies": {
     "csv-reader": "^1.0.9",
     "electron-squirrel-startup": "^1.0.0",
-    "inquirer-file-tree-selection-prompt": "^1.0.19"
+    "inquirer-file-tree-selection-prompt": "^1.0.19",
+    "minimist": "^1.2.6"
   },
   "config": {
     "forge": {

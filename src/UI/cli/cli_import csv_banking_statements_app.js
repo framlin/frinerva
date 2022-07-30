@@ -22,7 +22,6 @@ async function prompt_for_file_name() {
         ]);
 }
 
-
 (function main() {
     const file_loading_response_boundary = new CLIFileLoadingPresenter();
     const payment_creation_response_boundary = new CLIPaymentCreationPresenter();
@@ -38,9 +37,16 @@ async function prompt_for_file_name() {
 
     const cli_import_controller = new CLIImportController(import_csv_banking_statement_interactor);
 
-    prompt_for_file_name().then((selection) => {
-        cli_import_controller.import_file(selection.file);
-    })
+    let argv = require('minimist')(process.argv.slice(2));
+    
+    if (argv.name) {
+        cli_import_controller.import_file(argv.name)
+    } else {
+        prompt_for_file_name().then((selection) => {
+            cli_import_controller.import_file(selection.file);
+        })
+    }
+
 })();
 
 
