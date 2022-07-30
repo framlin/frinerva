@@ -1,6 +1,5 @@
 const inquirer = require('inquirer');
 const inquirerFileTreeSelection = require('inquirer-file-tree-selection-prompt');
-const os = require('os');
 const FileLoadingResponseBoundary = require("../../accounting/banking/file_loading/file_loading_response_boundary");
 
 class CLIFileLoadingPresenter extends FileLoadingResponseBoundary {
@@ -28,7 +27,7 @@ class CLIFileLoadingPresenter extends FileLoadingResponseBoundary {
             .then(answers => {
                 let file_name = answers.file;
                 console.log(`you chose: ${file_name}`);
-                this.file_loading_controller.file_name = (file_name);
+                this.file_loading_controller.load_file(file_name);
             });
     }
 }

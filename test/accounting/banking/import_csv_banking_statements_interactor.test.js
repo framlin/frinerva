@@ -1,21 +1,27 @@
 const ImportCSVBankingStatementsInteractor = require("../../../src/accounting/banking/import_csv_banking_statements_interactor");
 
+let interactor;
 
-let import_csv_banking_statements_interactor;
 
-const response_boundaries = {
-    response_boundary: {},
-    payment_creation_response_boundary: {}
-}
+describe('the integration of all use-cases', () => {
+    beforeEach(() => {
+        interactor = new ImportCSVBankingStatementsInteractor({});
+    })
+    function dummy_use_case() {
+        return Promise.resolve([]);
+    }
 
-beforeAll(() => {
+    test('creation', () => {
+        expect(interactor).toBeDefined();
+        expect(interactor.file_loading_request_boundary).not.toBeNull();
+    });
 
-    import_csv_banking_statements_interactor = new ImportCSVBankingStatementsInteractor(response_boundaries);
+    test('if the algorithm dor run through', async () => {
+        interactor._file_loading_interactor.execute_use_case = dummy_use_case;
+        interactor._payment_creation_interactor.execute_use_case = dummy_use_case;
+        interactor._payment_display_interactor.execute_use_case = dummy_use_case;
+        interactor._payment_conversion_interactor.execute_use_case =  dummy_use_case;
+        const result = await interactor.execute_use_case();
+        expect(result).toBeInstanceOf(Array);
+    })
 })
-
-
-test('creation', () => {
-    expect(import_csv_banking_statements_interactor).toBeDefined();
-    expect(import_csv_banking_statements_interactor.response_boundary).toStrictEqual(response_boundaries.file_loading_response_boundary);
-    expect(import_csv_banking_statements_interactor.file_loading_request_boundary).not.toBeNull();
-});

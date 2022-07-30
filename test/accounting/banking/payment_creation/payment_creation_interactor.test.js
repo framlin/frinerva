@@ -1,69 +1,59 @@
 const PaymentCreationInteractor = require("../../../../src/accounting/banking/payment_creation/payment_creation_interactor");
 
-let payment_creation_response_boundary = {
+// noinspection JSUnusedGlobalSymbols
+let presenter = {
     show: () => {
     }
 };
-
 let payment_creation_interactor;
-
-let CSVReaderDummy = class dummy {
+let CSVReaderDummy = class {
     static create_payments(payments) {
         return new Promise(resolve => {
             resolve(payments);
         });
     }
+};
+
+async function call_execute(interactor, payments) {
+    return await interactor.execute_use_case(payments);
 }
-beforeAll(() => {
-    payment_creation_interactor = new PaymentCreationInteractor(payment_creation_response_boundary, CSVReaderDummy);
+
+beforeEach(() => {
+    payment_creation_interactor = new PaymentCreationInteractor(presenter, CSVReaderDummy);
 });
 
 test('creation', () => {
     expect(payment_creation_interactor).toBeDefined();
-    expect(payment_creation_interactor.response_boundary).not.toBeNull();
 });
 
 test('execute_use_case with empty file should return empty payments', () => {
-
-    async function call_execute(payments) {
-        return await payment_creation_interactor.execute_use_case(payments);
-    }
-
-    call_execute([]).then(payments => {
+    call_execute(payment_creation_interactor, []).then(payments => {
         expect(payments).toBeInstanceOf(Array);
         expect(payments.length).toBe(0);
     });
-
 });
 
+
 test('execute_use_case with filled file should return some payments', () => {
-
-    async function call_execute(payments) {
-        return await payment_creation_interactor.execute_use_case(payments);
-    }
-
-    payment_creation_interactor = new PaymentCreationInteractor(payment_creation_response_boundary, CSVReaderDummy);
-    call_execute([1]).then(payments => {
+    let interactor = new PaymentCreationInteractor(presenter, CSVReaderDummy);
+    call_execute(interactor, [1]).then(payments => {
         expect(payments).toBeInstanceOf(Array);
         expect(payments.length).toBe(1);
     });
-
 });
 
 it('should call response boundary', () => {
-    async function call_execute(payments) {
-        return await payment_creation_interactor.execute_use_case(payments);
-    }
 
     let called = false
-    let payment_creation_response_boundary = {
+    // noinspection JSUnusedGlobalSymbols
+    let presenter = {
         show: () => {
             called = true;
         }
     };
+    let interactor = new PaymentCreationInteractor(presenter, CSVReaderDummy);
 
-    payment_creation_interactor = new PaymentCreationInteractor(payment_creation_response_boundary, CSVReaderDummy);
-    call_execute([]).then(() => {
+    call_execute(interactor, []).then(() => {
         expect(called).toBe(true);
     });
 })

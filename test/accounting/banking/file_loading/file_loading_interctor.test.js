@@ -10,8 +10,6 @@ beforeAll(() => {
 
 test('creation', () => {
     expect(file_loading_interactor).toBeDefined();
-    expect(file_loading_interactor.response_boundary).toBeDefined();
-    expect(file_loading_interactor.response_boundary).not.toBeNull();
 });
 
 test('execute without filename should prompt for filename', () => {

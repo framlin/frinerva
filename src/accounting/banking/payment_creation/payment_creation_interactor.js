@@ -1,5 +1,4 @@
-
-class PaymentCreationInteractor{
+class PaymentCreationInteractor {
 
     _response_boundary = null;
     _CVS_Reader = null;
@@ -9,16 +8,10 @@ class PaymentCreationInteractor{
         this._CVS_Reader = CVS_Reader;
     }
 
-    execute_use_case(file) {
-        return new Promise( resolve => {
-            this._CVS_Reader.create_payments(file).then(payments => {
-                this.response_boundary.show(payments);
-                resolve(payments);
-            });
-        });
-    }
-    get response_boundary() {
-        return this._response_boundary;
+    async execute_use_case(file) {
+        let payments = await this._CVS_Reader.create_payments(file);
+        this._response_boundary.show(payments);
+        return payments;
     }
 }
 

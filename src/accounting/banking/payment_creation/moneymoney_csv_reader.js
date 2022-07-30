@@ -4,7 +4,7 @@ const CsvReadableStream = require('csv-reader');
 
 class MoneyMoneyCSVReader extends PaymentCSVReader {
 
-    static create_payments(file_stream) {
+     static create_payments(file_stream) {
         return new Promise(resolve => {
             let payment_entries = [];
             file_stream.pipe(new CsvReadableStream({

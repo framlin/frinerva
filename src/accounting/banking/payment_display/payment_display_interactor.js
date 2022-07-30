@@ -5,12 +5,9 @@ class PaymentDisplayInteractor{
         this._response_boundary = payment_display_response_boundary;
     }
 
-    execute_use_case(payments) {
-        return new Promise(resolve => {
-            this._response_boundary.show(payments);
-            resolve(payments);
-        });
-
+    async execute_use_case(payments) {
+        this._response_boundary.show(payments);
+        return payments;
     }
 }
 

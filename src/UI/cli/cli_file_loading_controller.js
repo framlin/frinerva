@@ -5,10 +5,9 @@ class CLIFileLoadingController {
         this._file_loading_request_boundary = file_loading_request_boundary;
     }
 
-    set file_name(file_name) {
+    set load_file(file_name) {
         this._file_loading_request_boundary.load_file(file_name);
     }
-
 }
 
 module.exports = CLIFileLoadingController;

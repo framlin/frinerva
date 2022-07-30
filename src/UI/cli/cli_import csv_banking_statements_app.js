@@ -34,7 +34,7 @@ const CLIPaymentConversionPresenter = require("./cli_payment_conversion_presente
     cli_payment_conversion_controller.payment_conversion_response_boundary = import_csv_banking_statement_interactor.payment_conversion_response_boundary;
     cli_payment_display_controller.payment_display_response_boundary = import_csv_banking_statement_interactor.payment_display_response_boundary;
 
-    import_csv_banking_statement_interactor.execute_use_case(/*"/home/framlin/js-dev/frinerva/data/imports/2019.csv"*/).then( payments => {
+    import_csv_banking_statement_interactor.execute_use_case("/Users/framlin/js-dev/frinerva/data/imports/2019.csv").then( booking_entries => {
         console.log("done");
     });
 })();
