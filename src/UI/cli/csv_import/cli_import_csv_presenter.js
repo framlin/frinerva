@@ -1,4 +1,4 @@
-const BookingEntryPresenter = require("../../../accounting/account_presentation/booking_entry_presenter");
+const BookingEntryPresenter = require("./booking_entry_presenter");
 
 class CLIImportCSVPresenter {
 

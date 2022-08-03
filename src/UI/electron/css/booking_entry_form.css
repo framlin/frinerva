@@ -1,0 +1,28 @@
+#booking_entry_form{
+    background-color: var(--form-color);
+    position: absolute;
+    border: solid thin;
+    margin: 10px;
+    padding: 10px;
+}
+
+#booking_entry_form div.hbox{
+    align: center;
+}
+#booking_entry_form label{
+    width: 100px;
+    text-align: right;
+    margin-right: 5px;
+}
+
+#booking_entry_form input{
+    margin: 5px;
+}
+
+#booking_entry_form button{
+    margin: 10px;
+}
+
+#id_label {
+    margin: 5px;
+}

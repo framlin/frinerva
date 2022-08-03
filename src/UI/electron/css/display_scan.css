@@ -1,0 +1,11 @@
+body {
+    background-color: bisque;
+}
+
+#file_input{
+    margin-bottom: 1em;
+}
+
+input[type='file'] {
+  color: transparent;
+}

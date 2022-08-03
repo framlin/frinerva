@@ -2,7 +2,7 @@
   "name": "frinerva",
   "version": "20220721",
   "description": "property mangement",
-  "main": "main.js",
+  "main": "src/UI/electron/main.js",
   "scripts": {
     "start": "electron-forge start",
     "test": "jest --watch",

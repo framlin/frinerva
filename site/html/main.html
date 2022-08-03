@@ -2,9 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Frinerva</title>
+    <meta charset="UTF-8">
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'">
     <link rel="stylesheet" href="../css/framlin.css">
 </head>
-<body onload="on_load();">
+<body onLoad="on_load();">
 <div class="vbox full-height">
 <div class="hbox full-height">
     <div id="menu" class="vbox menu">
@@ -26,7 +29,7 @@
         </div>
     </div>
     <div id="main" class="vbox flex-1">
-        <iframe  id="appframe"  name="appframe"  src="start.html"  class="flex-1" ></iframe>
+        <iframe id="appframe" name="appframe" src="start.html" class="flex-1" ></iframe>
     </div>
 </div>
 </div>

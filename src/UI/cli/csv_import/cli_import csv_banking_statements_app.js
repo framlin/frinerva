@@ -1,8 +1,7 @@
-const ImportCSVBankingStatementsInteractor = require("../../../accounting/banking/csv_import/import_csv_banking_statements_interactor");
-
 const inquirer = require('inquirer');
 const inquirerFileTreeSelection = require("inquirer-file-tree-selection-prompt");
 
+const ImportCSVBankingStatementsInteractor = require("../../../accounting/banking/csv_import/import_csv_banking_statements_interactor");
 const CLIImportController = require("./cli_import_controller");
 const CLICSVImportPresenter = require("./cli_import_csv_presenter");
 

@@ -1,4 +1,4 @@
-const BookingEntryPresenter = require( "../../../src/accounting/account_presentation/booking_entry_presenter");
+const BookingEntryPresenter = require( "../../../src/UI/cli/csv_import/booking_entry_presenter");
 const BookingEntry = require("../../../src/accounting/account_management/booking_entry");
 const BOOKING_CODE = require("../../../src/accounting/account_management/booking_code");
 
@@ -11,7 +11,7 @@ it ('should present an empty BookingEntry', () => {
     let booking_entry = new BookingEntry();
     let presentation = BookingEntryPresenter.present(booking_entry);
 
-    expect(presentation).toBe("0, , , 0.00, n.a.");
+    expect(presentation).toBe("0; ; ; 0.00; n.a.");
 });
 
 it ('should present a filled BookingEntry', () => {
@@ -23,7 +23,7 @@ it ('should present a filled BookingEntry', () => {
         BOOKING_CODE.BANKING_FEE
         );
     let presentation = BookingEntryPresenter.present(booking_entry);
-    expect(presentation).toBe("24.7.2022, 00:00:00, banking fee, fee, 0.00, BANKING_FEE")
+    expect(presentation).toBe("24.7.2022, 00:00:00; banking fee; fee; 0.00; BANKING_FEE")
 });
 
 it ('should present a list of 1 filled BookingEntries', () => {
@@ -35,7 +35,7 @@ it ('should present a list of 1 filled BookingEntries', () => {
         BOOKING_CODE.BANKING_FEE
     )]
     let presentation = BookingEntryPresenter.present(booking_entries);
-    expect(presentation).toBe("24.7.2022, 00:00:00, banking fee, fee, 0.00, BANKING_FEE\n")
+    expect(presentation).toBe("24.7.2022, 00:00:00; banking fee; fee; 0.00; BANKING_FEE\n")
 
 });
 
@@ -54,8 +54,8 @@ it ('should present a list of 2 filled BookingEntries', () => {
         BOOKING_CODE.BANKING_FEE
     )];
     let presentation = BookingEntryPresenter.present(booking_entries);
-    let expected = "24.7.2022, 00:00:00, booking fee, fee, 0.00, BANKING_FEE\n"+
-        "24.7.2022, 00:00:00, booking fee, fee, 0.00, BANKING_FEE\n";
+    let expected = "24.7.2022, 00:00:00; booking fee; fee; 0.00; BANKING_FEE\n"+
+        "24.7.2022, 00:00:00; booking fee; fee; 0.00; BANKING_FEE\n";
     expect(presentation).toBe(expected);
 
 });

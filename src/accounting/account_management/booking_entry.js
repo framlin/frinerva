@@ -28,5 +28,9 @@ class BookingEntry {
     get booking_code() {
         return this._booking_code;
     }
+
+    toString() {
+        return `${this.date.toLocaleString('de-DE').split(',')[0]}; ${this.subject}; ${this.name}; ${this.amount}; ${this.booking_code}`;
+    }
 }
 module.exports = BookingEntry;
