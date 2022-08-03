@@ -1,132 +1,31 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, dialog, Menu} = require('electron')
-const path = require('path')
-let mainWindow;
-const isMac = process.platform === 'darwin';
+const {app, BrowserWindow, Menu} = require('electron')
+const MainWindow = require("./main_window");
+const ImportWindow = require("./import/import_window");
 
-const manuTemplate = [
-  ...(isMac ? [{
-    label: app.name,
-    submenu: [
-      { role: 'about' },
-      { type: 'separator' },
-      { role: 'services' },
-      { type: 'separator' },
-      { role: 'hide' },
-      { role: 'hideOthers' },
-      { role: 'unhide' },
-      { type: 'separator' },
-      { role: 'quit' }
-    ]
-  }] : []),
-  // { role: 'fileMenu' }
-  {
-    label: 'File',
-    submenu: [
-      {
-        label: 'Import',
-        click: () => {
-          open_import_window();
-        }
-      },
-      isMac ? { role: 'close' } : { role: 'quit' }]},
-      {
-        label: 'View',
-        submenu: [
-          { role: 'reload' },
-          { role: 'forceReload' },
-          { role: 'toggleDevTools' },
-          { type: 'separator' },
-          { role: 'resetZoom' },
-          { role: 'zoomIn' },
-          { role: 'zoomOut' },
-          { type: 'separator' },
-          { role: 'togglefullscreen' }
-        ]
-      },
-      // { role: 'windowMenu' }
-      {
-        label: 'Window',
-        submenu: [
-          { role: 'minimize' },
-          { role: 'zoom' },
-          ...(isMac ? [
-            { type: 'separator' },
-            { role: 'front' },
-            { type: 'separator' },
-            { role: 'window' }
-          ] : [
-            { role: 'close' }
-          ])
-        ]
-      },
-      {
-        role: 'help',
-        submenu: [
-          {
-            label: 'Learn More',
-            click: async () => {
-              const { shell } = require('electron')
-              await shell.openExternal('https://electronjs.org')
-            }
-          }
-        ]
-      }
+const menuTemplate = require('./main_menu').createMenuTemplate(open_import_window);
 
-];
-
-const menu = Menu.buildFromTemplate(manuTemplate)
-Menu.setApplicationMenu(menu)
+let mainWindow, importWindow ;
 
 function open_import_window() {
-  let importWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'js/preload_import.js')
-    }
-  });
-
-  // and load the index.html of the app.
-  importWindow.loadFile(path.join(__dirname, 'html/import.html'))
-
-  // Open the DevTools.
-  importWindow.webContents.openDevTools()
-
-  dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] }).then(result => {
-    console.log(result.filePaths)
-  })
-
+  importWindow = new ImportWindow();
 }
 
-function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      preload: path.join(__dirname, 'js/preload_main.js')
-    }
-  });
+Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
-  // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'index.html'))
 
-  // Open the DevTools.
-  mainWindow.webContents.openDevTools()
-}
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  mainWindow = new MainWindow();
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) createWindow()
-  })
+    if (BrowserWindow.getAllWindows().length === 0) mainWindow = new MainWindow();
+  });
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common
