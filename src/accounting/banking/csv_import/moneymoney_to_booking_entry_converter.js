@@ -19,7 +19,11 @@ class MoneyMoneyToBookingEntryConverter extends PaymentToBookingEntryConverter {
     }
 
     _convert_to_amount(amount_string){
-        return parseFloat(this._strip_whitespaces(amount_string).replace(",", "."));
+        if (typeof amount_string !== "string") {
+            return amount_string;
+        } else {
+            return parseFloat(this._strip_whitespaces(amount_string).replace(",", "."));
+        }
     }
 
     _strip_whitespaces(str) {
