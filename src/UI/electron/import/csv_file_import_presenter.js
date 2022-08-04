@@ -3,16 +3,27 @@ const BookingEntry = require("../../../accounting/account_management/booking_ent
 
 class CSVFileImportPresenter {
 
-
     show_payments(payments) {
-        let table = document.getElementById("payments");
-        for (let payment of payments) {
-            let values = [payment.Datum, payment.Kategorie, payment.Name, payment.Betrag]
-            this.add_payments_row(table, values);
+        let payments_div = document.getElementById("payments");
+        if (payments_div.firstChild) {
+            while (payments_div.firstChild) {
+                try {
+                    payments_div.removeChild(payments_div.firstChild);
+                } catch (e) {}
+            }
+
+        } else {
+            let table = document.createElement("table");
+            payments_div.appendChild(table);
+            for (let payment of payments) {
+                let values = [payment.Datum, payment.Kategorie, payment.Name, payment.Betrag]
+                this._add_payments_row(table, values);
+            }
+
         }
     }
 
-    add_payments_row(table, payments) {
+    _add_payments_row(table, payments) {
         let row = table.insertRow(-1);
         payments.forEach((payment, i) => {
             let cell = row.insertCell(i);
