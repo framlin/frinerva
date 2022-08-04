@@ -1,14 +1,19 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu} = require('electron')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const MainWindow = require("./main_window");
 const ImportWindow = require("./import/import_window");
+const AccountWindow = require("./acoount_management/account_window");
 
 const menuTemplate = require('./main_menu').createMenuTemplate(open_import_window);
 
-let mainWindow, importWindow ;
+let mainWindow, importWindow, accountWindow ;
 
 function open_import_window() {
-  importWindow = new ImportWindow();
+  importWindow = new ImportWindow(mainWindow);
+}
+
+function open_account_window() {
+  accountWindow = new AccountWindow(mainWindow);
 }
 
 Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
@@ -26,6 +31,10 @@ app.whenReady().then(() => {
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) mainWindow = new MainWindow();
   });
+
+  ipcMain.on('import:commited', (event, booking_entries) => {
+    open_account_window();
+  })
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

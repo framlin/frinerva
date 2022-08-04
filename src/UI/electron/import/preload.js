@@ -18,6 +18,12 @@ window.addEventListener('DOMContentLoaded', () => {
     let payments_link = document.getElementById('payments_link');
     payments_link.addEventListener('click', (_event) => {
         csv_file_import_presenter.show_payments(import_controller.payments);
+    });
+
+    let commit_button = document.getElementById("commit");
+    commit_button.addEventListener('click', () => {
+        ipcRenderer.send('import:commited', import_controller.booking_entries);
+        window.close();
     })
 
 });

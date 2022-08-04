@@ -7,6 +7,7 @@ class ImportCSVBankingStatementsInteractor {
     constructor(response_boundary) {
         this._csv_file_import_response_boundary = response_boundary;
         this._payments = null;
+        this._booking_records = null;
     }
 
     load_file(file_name) {
@@ -22,29 +23,32 @@ class ImportCSVBankingStatementsInteractor {
     }
 
     convert_payments_to_booking_entries(payments) {
-        let booking_entries = [];
+        let booking_records = [];
         let converter = new MoneyMoneyToBookingEntryConverter();
 
         for (let payment of payments) {
-            let booking_entry = converter.convert(payment);
-            booking_entries.push(booking_entry);
+            let booking_record = converter.convert(payment);
+            booking_records.push(booking_record);
 
         }
-        return booking_entries;
+        return booking_records;
     }
 
     get payments() {
         return this._payments;
     }
 
+    get booking_entries() {
+        return this._booking_records;
+    }
+
     async execute_use_case(file_name) {
         let file = this.load_file(file_name);
         this._payments = await this.create_payments(file);
         this._csv_file_import_response_boundary.show_payments_created(this.payments);
-        // this._csv_file_import_response_boundary.show_payments(this.payments);
-        let booking_entries = this.convert_payments_to_booking_entries(this.payments);
-        this._csv_file_import_response_boundary.show_booking_entries(booking_entries);
-        return booking_entries;
+        this._booking_records = this.convert_payments_to_booking_entries(this.payments);
+        this._csv_file_import_response_boundary.show_booking_entries(this.booking_entries);
+        return this.booking_entries;
     }
 
 

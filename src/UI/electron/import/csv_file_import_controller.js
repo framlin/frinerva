@@ -12,6 +12,10 @@ class CSVFileImportController{
     get payments() {
         return this._request_boundary.payments;
     }
+
+    get booking_entries() {
+        return this._request_boundary.booking_entries;
+    }
 }
 
 module.exports = CSVFileImportController;

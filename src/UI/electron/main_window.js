@@ -4,8 +4,8 @@ const path = require("path");
 class MainWindow extends BrowserWindow{
     constructor() {
         super({
-            width: 800,
-            height: 600,
+            width: 1024,
+            height: 768,
             webPreferences: {
                 preload: path.join(__dirname, 'preload.js')
             }

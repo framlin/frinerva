@@ -7,3 +7,11 @@
 #payments > table{
     margin-bottom: 30px;
 }
+
+.align-right {
+    justify-content: flex-end;
+}
+
+#commit {
+    margin-top: 10px;
+}
