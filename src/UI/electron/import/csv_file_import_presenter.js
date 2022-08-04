@@ -1,5 +1,3 @@
-const BookingEntryPresenter = require("../../cli/csv_import/booking_entry_presenter");
-
 class CSVFileImportPresenter {
 
 

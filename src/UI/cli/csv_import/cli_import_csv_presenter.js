@@ -14,7 +14,12 @@ class CLIImportCSVPresenter {
 
     show_booking_entries(booking_entries) {
         console.log(`${booking_entries.length} booking_entries created`);
-        console.log(BookingEntryPresenter.present(booking_entries));
+        let b_entries = [];
+        for (let entry of booking_entries) {
+            let {booking_entry} = entry;
+            b_entries.push(booking_entry);
+        }
+        console.log(BookingEntryPresenter.present(b_entries));
     }
 
 
