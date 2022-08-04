@@ -5,7 +5,7 @@ html, body {
 }
 
 a{
-    color: var(--color-light-grey);
+    color: var(--color-darkest-green);
 }
 
 iframe{
