@@ -17,8 +17,8 @@ class CSVFileImportPresenter {
 
     show_booking_entries(booking_entries) {
         let table = document.getElementById("booking_entries");
-        for (let entry of booking_entries) {
-            let entry_string = entry.toString();
+        for (let {booking_entry} of booking_entries) {
+            let entry_string = booking_entry.toString();
             let fields = entry_string.split(";");
             this.add_row(table, fields);
         }
