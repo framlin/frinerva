@@ -4,12 +4,9 @@ const ImportCSVBankingStatementsInteractor = require("../../../accounting/bankin
 const CSVFileImportPresenter = require("./csv_file_import_presenter");
 const CSVFileImportController = require("./csv_file_import_controller");
 
-
-const import_controller = new CSVFileImportController(
-    new ImportCSVBankingStatementsInteractor(
-        new CSVFileImportPresenter()
-    )
-);
+const csv_file_import_presenter = new CSVFileImportPresenter();
+const import_csv_banking_statement_interactor =  new ImportCSVBankingStatementsInteractor(csv_file_import_presenter);
+const import_controller = new CSVFileImportController(import_csv_banking_statement_interactor);
 
 
 window.addEventListener('DOMContentLoaded', () => {
@@ -18,5 +15,9 @@ window.addEventListener('DOMContentLoaded', () => {
         import_controller.import_file(path);
     });
 
+    let payments_link = document.getElementById('payments_link');
+    payments_link.addEventListener('click', (_event) => {
+        csv_file_import_presenter.show_payments(import_controller.payments);
+    })
 
 });

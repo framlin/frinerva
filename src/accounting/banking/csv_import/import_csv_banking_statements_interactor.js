@@ -6,6 +6,7 @@ class ImportCSVBankingStatementsInteractor {
 
     constructor(response_boundary) {
         this._csv_file_import_response_boundary = response_boundary;
+        this._payments = null;
     }
 
     load_file(file_name) {
@@ -32,12 +33,16 @@ class ImportCSVBankingStatementsInteractor {
         return booking_entries;
     }
 
+    get payments() {
+        return this._payments;
+    }
+
     async execute_use_case(file_name) {
         let file = this.load_file(file_name);
-        let payments = await this.create_payments(file);
-        this._csv_file_import_response_boundary.show_payments_created(payments);
-        this._csv_file_import_response_boundary.show_payments(payments);
-        let booking_entries = this.convert_payments_to_booking_entries(payments);
+        this._payments = await this.create_payments(file);
+        this._csv_file_import_response_boundary.show_payments_created(this.payments);
+        // this._csv_file_import_response_boundary.show_payments(this.payments);
+        let booking_entries = this.convert_payments_to_booking_entries(this.payments);
         this._csv_file_import_response_boundary.show_booking_entries(booking_entries);
         return booking_entries;
     }

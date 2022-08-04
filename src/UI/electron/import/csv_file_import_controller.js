@@ -8,6 +8,10 @@ class CSVFileImportController{
     import_file(file_name) {
         this._request_boundary.execute_use_case(file_name);
     }
+
+    get payments() {
+        return this._request_boundary.payments;
+    }
 }
 
 module.exports = CSVFileImportController;
