@@ -1,19 +1,35 @@
 const BookingEntry = require("../../account_management/booking_entry");
 const PaymentToBookingEntryConverter = require("./payment_to_booking_entry_converter");
 
+const COST_CENTER_MAP = new Map(Object.entries({
+    'HausKosten': 'HOUSE',
+    'VerwaltungsKosten': 'ADMINISTRATION',
+    'Nebenkosten_Vorauszahlungen': 'SERVICE_CHARGES',
+    'WohnungsKosten': 'DWELLING',
+    'Stw_Bank': 'BANKING',
+    'Stw_Priv_Ausgaben': 'PRIVATE',
+    'Nachlass': 'ESTATE',
+    'Kaution': 'DEPOSIT',
+    'Miete': 'RENT',
+    'NebenKosten': 'SERVICE_CHARGES'
+}));
 
 class MoneyMoneyToBookingEntryConverter extends PaymentToBookingEntryConverter {
     convert(payment_entry) {
-        return new BookingEntry (
-            this.__convert_to_date(payment_entry.Datum),
+        let booking_entry = new BookingEntry (
+            this._convert_to_date(payment_entry.Datum),
             payment_entry.Verwendungszweck,
             payment_entry.Name,
             this._convert_to_amount(payment_entry.Betrag).toFixed(2),
             "BC??"
             );
+
+        let year = booking_entry.date.getFullYear();
+        let cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
+        return {booking_entry, cost_center, year};
     }
 
-    __convert_to_date(date_str) {
+    _convert_to_date(date_str) {
         let [day, month, year] = date_str.split(".");
         return new Date(year, month -1, day);
     }
@@ -29,6 +45,18 @@ class MoneyMoneyToBookingEntryConverter extends PaymentToBookingEntryConverter {
     _strip_whitespaces(str) {
         return str.replace(/\s/g, "");
     }
+
+    _extract_cost_center_key(category) {
+        let elems = category.split('-');
+        let cost_center_key = elems[elems.length -1]
+        return this._strip_whitespaces(cost_center_key);
+    }
+
+    _convert_category_to_cost_center(category) {
+        let cost_center_key = this._extract_cost_center_key(category);
+        return COST_CENTER_MAP.get(cost_center_key);
+    }
+
 
 }
 

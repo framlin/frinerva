@@ -24,7 +24,7 @@ it('should be possible to convert a payment entry to a booking entry', () => {
         "Währung": "EUR"
     };
 
-    let booking_entry = payment_to_booking_entry_converter.convert(payment_entry);
+    let {booking_entry, cost_center, year} = payment_to_booking_entry_converter.convert(payment_entry);
     let date = new Date(2020, 11, 31);
     let expected_booking_entry = new BookingEntry(
         date,
@@ -35,6 +35,8 @@ it('should be possible to convert a payment entry to a booking entry', () => {
         );
 
     expect(booking_entry).toStrictEqual(expected_booking_entry);
+    expect(year).toBe(2020);
+    expect(cost_center).toBe('BANKING');
 
 })
 
