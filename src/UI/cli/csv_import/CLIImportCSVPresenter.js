@@ -1,4 +1,4 @@
-const BookingEntryPresenter = require("./booking_entry_presenter");
+const BookingEntryPresenter = require("./BookingEntryPresenter");
 
 class CLIImportCSVPresenter {
 

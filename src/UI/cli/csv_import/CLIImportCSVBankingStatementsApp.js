@@ -1,9 +1,9 @@
 const inquirer = require('inquirer');
 const inquirerFileTreeSelection = require("inquirer-file-tree-selection-prompt");
 
-const ImportCSVBankingStatementsInteractor = require("../../../accounting/banking/csv_import/import_csv_banking_statements_interactor");
-const CLIImportController = require("./cli_import_controller");
-const CLICSVImportPresenter = require("./cli_import_csv_presenter");
+const ImportCSVBankingStatementsInteractor = require("../../../accounting/banking/csv_import/ImportCSVBankingStatementsInteractor");
+const CLIImportController = require("./CLIImportController");
+const CLICSVImportPresenter = require("./CLIImportCSVPresenter");
 
 async function prompt_for_file_name() {
     inquirer.registerPrompt('file-tree-selection', inquirerFileTreeSelection)

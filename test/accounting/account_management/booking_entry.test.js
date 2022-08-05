@@ -1,5 +1,5 @@
-const BookingEntry = require("../../../src/accounting/account_management/booking_entry");
-const BOOKING_CODE = require("../../../src/accounting/account_management/booking_code");
+const BookingEntry = require("../../../src/accounting/account_management/BookingEntry");
+const BOOKING_CODE = require("../../../src/accounting/account_management/BOOKING_CODE");
 
 let booking_entry;
 beforeEach(() => {

@@ -1,20 +1,17 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu, ipcMain} = require('electron')
-const MainWindow = require("./main_window");
-const ImportWindow = require("./import/import_window");
-const AccountWindow = require("./acoount_management/account_window");
+const MainWindow = require("./MainWindow");
+const ImportWindow = require("./import/ImportWindow");
 
-const menuTemplate = require('./main_menu').createMenuTemplate(open_import_window);
+const menuTemplate = require('./MainMenu').createMenuTemplate(open_import_window);
 
-let mainWindow, importWindow, accountWindow ;
+let mainWindow, importWindow;
 
 function open_import_window() {
   importWindow = new ImportWindow(mainWindow);
 }
 
-function open_account_window() {
-  accountWindow = new AccountWindow(mainWindow);
-}
+app.name = "Frinerva";
 
 Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
@@ -32,10 +29,12 @@ app.whenReady().then(() => {
     if (BrowserWindow.getAllWindows().length === 0) mainWindow = new MainWindow();
   });
 
-  ipcMain.on('import:commited', (event, booking_entries) => {
-    open_account_window();
-  })
-})
+  ipcMain.on('import:commited', (event, booking_records) => {
+    importWindow.loadURL(`file://${__dirname}/import/dispatch.html`).then(() => {
+      importWindow.webContents.send('import:dispatch', booking_records);
+    });
+  });
+});
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

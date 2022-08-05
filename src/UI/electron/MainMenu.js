@@ -6,7 +6,7 @@ class MainMenu {
     static createMenuTemplate(open_import_window) {
         return  [
             ...(isMac ? [{
-                label: app.name,
+                label: "Frinerva",
                 submenu: [
                     { role: 'about' },
                     { type: 'separator' },

@@ -1,7 +1,7 @@
 // noinspection JSNonASCIINames
 
-const MoneyMoneyToBookingEntryConverter = require("../../../../src/accounting/banking/csv_import/moneymoney_to_booking_entry_converter");
-const BookingEntry = require("../../../../src/accounting/account_management/booking_entry");
+const MoneyMoneyToBookingEntryConverter = require("../../../../src/accounting/banking/csv_import/MoneyMoneyToBookingEntryConverter");
+const BookingEntry = require("../../../../src/accounting/account_management/BookingEntry");
 
 it('should be possible, to create a payment_to_booking_entry_converter', () => {
     let payment_to_booking_entry_converter = new MoneyMoneyToBookingEntryConverter();

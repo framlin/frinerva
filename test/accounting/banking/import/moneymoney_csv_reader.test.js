@@ -1,4 +1,4 @@
-const MoneyMoneyCSVReader =  require("../../../../src/accounting/banking/csv_import/moneymoney_csv_reader");
+const MoneyMoneyCSVReader =  require("../../../../src/accounting/banking/csv_import/MoneyMoneyCSVReader");
 const Readable = require('stream').Readable
 //###########################################
 //

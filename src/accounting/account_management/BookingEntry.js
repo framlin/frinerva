@@ -1,4 +1,4 @@
-const BOOKING_CODE = require("./booking_code");
+const BOOKING_CODE = require("./BOOKING_CODE");
 
 class BookingEntry {
     static property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code'];

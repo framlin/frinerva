@@ -1,5 +1,5 @@
-const MoneyMoneyCSVReader = require("./moneymoney_csv_reader");
-const MoneyMoneyToBookingEntryConverter = require("./moneymoney_to_booking_entry_converter");
+const MoneyMoneyCSVReader = require("./MoneyMoneyCSVReader");
+const MoneyMoneyToBookingEntryConverter = require("./MoneyMoneyToBookingEntryConverter");
 const Fs = require("fs");
 
 class ImportCSVBankingStatementsInteractor {
