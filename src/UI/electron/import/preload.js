@@ -19,6 +19,7 @@ const dispatch_controller = new BockingEntryDispatchController(booking_entry_dis
 
 window.addEventListener('DOMContentLoaded', (event) => {
     if (event.target.URL.indexOf('import.html') !== -1) {
+
         ipcRenderer.on('file:selected', (_event, path) => {
             import_controller.import_file(path);
         });
@@ -31,14 +32,21 @@ window.addEventListener('DOMContentLoaded', (event) => {
         let commit_button = document.getElementById("commit");
         commit_button.addEventListener('click', () => {
             ipcRenderer.send('import:commited', import_controller.booking_entries);
-            // window.close();
-            window.load()
         });
+
     } else if (event.target.URL.indexOf('dispatch.html') !== -1) {
+
         ipcRenderer.on('import:dispatch', (_event, booking_records) => {
             dispatch_controller.dispatch(booking_records);
         });
 
     }
-
 });
+
+window.show_virtual_accounts = (cost_center, booking_period) => {
+    booking_entry_dispatch_presenter.show_virtual_accounts(
+        dispatch_controller.virtual_accounts,
+        cost_center,
+        booking_period
+    );
+};

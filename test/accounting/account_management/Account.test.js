@@ -46,6 +46,7 @@ test('un-serialization', () => {
     let serialized_account = account.serialize();
     let un_serialized_account = Account.create_from_JSON(serialized_account);
 
+    expect(un_serialized_account).toBeInstanceOf(Account);
     expect(un_serialized_account.name).toBe('name');
     expect(un_serialized_account.cost_center).toBe('cost_center');
     expect(un_serialized_account.booking_entries.length).toBe(2);

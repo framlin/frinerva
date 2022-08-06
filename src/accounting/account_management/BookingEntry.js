@@ -51,6 +51,12 @@ class BookingEntry {
         this._booking_code = booking_code;
     }
 
+    static create_from_JSON(serialized_booking_entry) {
+        let booking_entry_data = JSON.parse(serialized_booking_entry);
+        return new BookingEntry(new Date(booking_entry_data._date), booking_entry_data._subject,
+            booking_entry_data._name, booking_entry_data._amount, booking_entry_data._booking_code);
+    }
+
     toString() {
         return `${this.date.toLocaleString('de-DE').split(',')[0]}; ${this.subject}; ${this.name}; ${this.amount}; ${this.booking_code}`;
     }

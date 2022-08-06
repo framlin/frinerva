@@ -29,7 +29,6 @@ function on_menu_selection(event) {
 }
 
 function on_load(){
-    debugger
     document.querySelector("body").onclick = function on_click(event) {
         if (event.target.className === 'sub_menu_entry') {
             on_menu_selection(event);

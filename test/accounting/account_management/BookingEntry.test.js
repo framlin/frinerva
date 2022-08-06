@@ -28,4 +28,17 @@ it('should be possible, to create an booking_entry with values', () => {
     expect(booking_entry.amount).toBe(42.0.toFixed(2));
     expect(booking_entry.booking_code).toBe(BOOKING_CODE.RENTAL_FEE);
 
+});
+
+it('should be possible, to creat it from an un-serialized object', () => {
+    let un_serialized_object = {
+        _date: "2019-12-30T23:00:00.000Z",
+        _subject: "04082 Leipzig Kontoabschluss 4. Quartal 19 14,9 % Uberziehungszinsen 0,04 AktivKonto (Kontofuhrung)",
+        _name: "Saldo der Abschlussposten QM - Support",
+        _amount: "-27.74",
+        _booking_code: "BC??"
+    };
+     let booking_entry = BookingEntry.create_from_JSON(JSON.stringify(un_serialized_object));
+
+     expect(booking_entry.name).toBe("Saldo der Abschlussposten QM - Support");
 })
