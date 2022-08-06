@@ -1,4 +1,5 @@
 const BookingEntry = require("../../../accounting/account_management/BookingEntry");
+const TablePresenter = require("../presenter/TablePresenter");
 
 
 class CSVFileImportPresenter {
@@ -37,8 +38,8 @@ class CSVFileImportPresenter {
         payment_div.innerHTML = `${payments.length} payments created`;
     }
 
-    show_booking_entries(booking_entries) {
-        this._active_booking_entries = booking_entries;
+
+    show_booking_records(booking_records) {
 
         let table = document.getElementById("booking_entries");
         while (table.firstChild) {
@@ -46,80 +47,28 @@ class CSVFileImportPresenter {
                 table.removeChild(table.firstChild);
             } catch (e) {}
         }
-        booking_entries.forEach((entry) => {
-            this._add_booking_entries_row(table, entry);
+        booking_records.forEach((booking_record) => {
+            this._add_booking_records_row(table, booking_record, () => {
+                this.show_booking_records(booking_records)
+            });
         });
     }
 
-    _add_booking_entries_row(table, booking_entry_with_cc_and_year) {
+    _add_booking_records_row(table, booking_record, redraw) {
         let row = table.insertRow(-1);
-        let {booking_entry} = booking_entry_with_cc_and_year;
+        let {booking_entry} = booking_record;
         row.booking_entry = booking_entry;
 
         BookingEntry.property_mapping.forEach((prop, i) => {
-            this._insert_editable_cell(row, i, prop, booking_entry);
+            TablePresenter.insert_editable_cell(row, i, prop, booking_entry, redraw);
         });
 
         let i= 5;
-        let {cost_center, year} = booking_entry_with_cc_and_year;
+        let {cost_center, year} = booking_record;
         let metadata = {cost_center, year};
         for (let prop in metadata) {
-            this._insert_editable_cell(row, i++, prop, booking_entry_with_cc_and_year);
+            TablePresenter.insert_editable_cell(row, i++, prop, booking_record, redraw);
         }
-    }
-
-    _insert_editable_cell(row, i, prop, buffer) {
-        let {cell, text} = this._add_cell(row, i, prop, buffer);
-        cell.appendChild(text);
-        cell.addEventListener('click', (event) => {
-            let input_elem = this._make_cell_editable(cell, row);
-            this._add_event_listener(input_elem, buffer, cell);
-        });
-    }
-
-    _add_cell(row, i, prop, buffer) {
-        let cell = row.insertCell(i);
-        cell.prop = prop;
-        let content = (prop === 'date') ?
-            buffer[prop].toLocaleString('de-DE').split(',')[0] :
-            buffer[prop];
-
-        let text = document.createTextNode(content);
-        return {cell, text};
-    }
-
-    _add_event_listener(input_elem, buffer, cell) {
-        input_elem.addEventListener('blur', () => {
-            buffer[cell.prop] = input_elem.value;
-            this.show_booking_entries(this._active_booking_entries)
-        });
-
-        input_elem.addEventListener('keypress', ({key}) => {
-            if (key === "Enter") {
-                buffer[cell.prop] = input_elem.value;
-                this.show_booking_entries(this._active_booking_entries);
-            }
-        });
-    }
-
-    _make_cell_editable(cell, row) {
-        let elem_replaced = false;
-        let input_elem = document.createElement("input");
-        input_elem.setAttribute('type', 'text');
-        cell.style.padding = "0px";
-        cell.style.margin = "0px";
-        cell.style.border = "0px";
-        input_elem.style.position = "relative";
-        input_elem.style.height = cell.offsetHeight + "px";
-        input_elem.style.width = cell.offsetWidth + "px";
-        input_elem.style.background = "white";
-        input_elem.style.padding = '0px';
-        input_elem.style.margin = "0px";
-        input_elem.style.border = "0px";
-
-        row.replaceChild(input_elem, cell);
-        input_elem.focus();
-        return input_elem;
     }
 }
 

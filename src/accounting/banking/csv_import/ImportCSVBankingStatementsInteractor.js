@@ -22,7 +22,7 @@ class ImportCSVBankingStatementsInteractor {
         return await MoneyMoneyCSVReader.create_payments(file);
     }
 
-    convert_payments_to_booking_entries(payments) {
+    convert_payments_to_booking_records(payments) {
         let booking_records = [];
         let converter = new MoneyMoneyToBookingEntryConverter();
 
@@ -38,7 +38,7 @@ class ImportCSVBankingStatementsInteractor {
         return this._payments;
     }
 
-    get booking_entries() {
+    get booking_records() {
         return this._booking_records;
     }
 
@@ -46,9 +46,9 @@ class ImportCSVBankingStatementsInteractor {
         let file = this.load_file(file_name);
         this._payments = await this.create_payments(file);
         this._csv_file_import_response_boundary.show_payments_created(this.payments);
-        this._booking_records = this.convert_payments_to_booking_entries(this.payments);
-        this._csv_file_import_response_boundary.show_booking_entries(this.booking_entries);
-        return this.booking_entries;
+        this._booking_records = this.convert_payments_to_booking_records(this.payments);
+        this._csv_file_import_response_boundary.show_booking_records(this.booking_records);
+        return this.booking_records;
     }
 
 

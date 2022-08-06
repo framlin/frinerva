@@ -49,5 +49,5 @@ test('un-serialization', () => {
     expect(un_serialized_account).toBeInstanceOf(Account);
     expect(un_serialized_account.name).toBe('name');
     expect(un_serialized_account.cost_center).toBe('cost_center');
-    expect(un_serialized_account.booking_entries.length).toBe(2);
+    expect(un_serialized_account.booking_records.length).toBe(2);
 })

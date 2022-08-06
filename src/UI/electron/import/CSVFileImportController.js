@@ -14,7 +14,7 @@ class CSVFileImportController{
     }
 
     get booking_entries() {
-        return this._request_boundary.booking_entries;
+        return this._request_boundary.booking_records;
     }
 }
 
