@@ -1,11 +1,7 @@
+const TablePresenter = require("../presenter/TablePresenter");
 const BookingEntry = require("../../../accounting/account_management/BookingEntry");
-const AccountPresenter = require("../presenter/AccountPresenter");
 
 class BookingEntryDispatchPresenter {
-
-    constructor() {
-        this._active_accounts = null;
-    }
 
     show_cost_center_list(cost_center_maps) {
         let cost_center_list = document.getElementById("cost-center-list");
@@ -21,25 +17,25 @@ class BookingEntryDispatchPresenter {
     }
 
     show_virtual_accounts(virtual_accounts, cost_center, booking_period) {
-        let presentation = {
-            virtual_accounts,
-            cost_center,
-            booking_period,
-            present: this.show_virtual_accounts.bind(this)
-        };
 
-        this._active_accounts = {virtual_accounts, cost_center, booking_period};
         let account_list_elem = document.getElementById("account-list");
         while (account_list_elem.firstChild) {
             try {
                 account_list_elem.removeChild(account_list_elem.firstChild);
-            } catch (e) {}
+            } catch (e) {
+            }
         }
         let account_list = virtual_accounts[booking_period][cost_center];
 
-        for (let account of account_list ) {
-            // let account_div = this._create_editable_table(account, presentation);
-            let account_div = AccountPresenter.create_editable_table(account, presentation)
+        for (let account of account_list) {
+            let rows = account.booking_entries;
+            let account_div = TablePresenter.create_editable_table(
+                `${account.name} - ${account.cost_center}`,
+                rows,
+                BookingEntry.property_mapping,
+                () => {
+                    this.show_virtual_accounts(virtual_accounts, cost_center, booking_period)
+                });
             account_list_elem.appendChild(account_div);
         }
     }
