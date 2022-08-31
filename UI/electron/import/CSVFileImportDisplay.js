@@ -1,8 +1,8 @@
-const BookingEntry = require("../../../accounting/account_management/BookingEntry");
-const TablePresenter = require("../presenter/TablePresenter");
+const BookingEntry = require("../../../account/BookingEntry");
+const Display = require("../display/TableDisplay");
 
 
-class CSVFileImportPresenter {
+class CSVFileImportDisplay {
 
     show_payments(payments) {
         let payments_div = document.getElementById("payments");
@@ -60,16 +60,16 @@ class CSVFileImportPresenter {
         row.booking_entry = booking_entry;
 
         BookingEntry.property_mapping.forEach((prop, i) => {
-            TablePresenter.insert_editable_cell(row, i, prop, booking_entry, redraw);
+            Display.insert_editable_cell(row, i, prop, booking_entry, redraw);
         });
 
         let i= 5;
         let {cost_center, year} = booking_record;
         let metadata = {cost_center, year};
         for (let prop in metadata) {
-            TablePresenter.insert_editable_cell(row, i++, prop, booking_record, redraw);
+            Display.insert_editable_cell(row, i++, prop, booking_record, redraw);
         }
     }
 }
 
-module.exports = CSVFileImportPresenter;
+module.exports = CSVFileImportDisplay;

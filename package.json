@@ -2,12 +2,13 @@
   "name": "frinerva",
   "version": "20220721",
   "description": "property mangement",
-  "main": "src/UI/electron/main.js",
+  "main": "UI/electron/main.js",
   "scripts": {
     "start": "electron-forge start",
-    "test": "jest --watch",
+    "test": "jest --watchAll",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "watch": "nodemon --ignore 'data/*'  --exec electron-forge start"
   },
   "jest": {
     "modulePathIgnorePatterns": [
@@ -25,7 +26,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "Wolfgang Egger",
   "license": "CC0-1.0",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.64",

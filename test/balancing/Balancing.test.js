@@ -1,6 +1,6 @@
-const Balancing = require("../../src/balancing/Balancing");
-const Account = require("../../src/accounting/account_management/Account");
-const Balance = require("../../src/balancing/Balance");
+const Balancing = require("../../balancing/Balancing");
+const Account = require("../../account/Account");
+const Balance = require("../../balancing/Balance");
 test('creation', () => {
     let balancing = new Balancing();
 

@@ -1,4 +1,4 @@
-const BookingEntry = require("../../../accounting/account_management/BookingEntry");
+const BookingEntry = require("../../../account/BookingEntry");
 
 class BookingEntryPresenter {
     static present(booking_entries) {

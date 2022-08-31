@@ -78,5 +78,5 @@ function _make_cell_editable(cell, row) {
 }
 
 
-const TablePresenter = {create_editable_table, insert_editable_cell}
-module.exports = TablePresenter;
+const TableDisplay = {create_editable_table, insert_editable_cell}
+module.exports = TableDisplay;

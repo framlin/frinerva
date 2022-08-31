@@ -1,8 +1,8 @@
-const BookingEntryPresenter = require( "../../../../src/UI/cli/csv_import/BookingEntryPresenter");
-const BookingEntry = require("../../../../src/accounting/account_management/BookingEntry");
-const BOOKING_CODE = require("../../../../src/accounting/account_management/BOOKING_CODE");
+const BookingEntryPresenter = require( "../../../../UI/cli/csv_import/BookingEntryPresenter");
+const BookingEntry = require("../../../../account/BookingEntry");
+const BOOKING_CODE = require("../../../../account/BOOKING_CODE");
 
-it ('should be possible to create a presenter', () => {
+it ('should be possible to create a display', () => {
     let presenter = new BookingEntryPresenter();
     expect(presenter).toBeDefined();
 });

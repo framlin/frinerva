@@ -1,4 +1,4 @@
-const BookingEntry = require("../../account_management/BookingEntry");
+const BookingEntry = require("../../account/BookingEntry");
 const PaymentToBookingEntryConverter = require("./PaymentToBookingEntryConverter");
 
 const COST_CENTER_MAP = new Map(Object.entries({

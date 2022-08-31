@@ -1,12 +1,12 @@
 const { ipcRenderer } = require('electron')
 
-const ImportCSVBankingStatementsInteractor = require("../../../accounting/banking/csv_import/ImportCSVBankingStatementsInteractor");
-const CSVFileImportPresenter = require("./CSVFileImportPresenter");
-const CSVFileImportController = require("./CSVFileImportController");
+const ImportCSVBankingStatementsInteractor = require("../../../use_cases/import/ImportCSVBankingStatementsInteractor");
+const CSVFileImportPresenter = require("./CSVFileImportDisplay");
+const CSVFileImportController = require("../../../use_cases/import/CSVFileImportController");
 
-const BookingEntryDispatchPresenter = require("./BookingEntryDispatchPresenter");
-const BookingEntryDispatchInteractor = require("../../../accounting/banking/csv_import/BookingEntryDispatchInteractor");
-const BockingEntryDispatchController = require("./BookingEntryDispatchController");
+const BookingEntryDispatchPresenter = require("./BookingEntryDispatchDisplay");
+const BookingEntryDispatchInteractor = require("../../../use_cases/import/BookingEntryDispatchInteractor");
+const BockingEntryDispatchController = require("../../../use_cases/import/BookingEntryDispatchController");
 
 const csv_file_import_presenter = new CSVFileImportPresenter();
 const import_csv_banking_statement_interactor =  new ImportCSVBankingStatementsInteractor(csv_file_import_presenter);

@@ -1,5 +1,5 @@
-const Account = require("../../../src/accounting/account_management/Account");
-const BookingEntry = require("../../../src/accounting/account_management/BookingEntry");
+const Account = require("../../../account/Account");
+const BookingEntry = require("../../../account/BookingEntry");
 
 function account_with_two_entries() {
     let account = new Account('name', 'cost_center');

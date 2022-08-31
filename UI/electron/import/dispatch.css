@@ -7,3 +7,7 @@
     border-left-width: 2px;
     padding:5px;
 }
+
+.active {
+    background-color: orange;
+}

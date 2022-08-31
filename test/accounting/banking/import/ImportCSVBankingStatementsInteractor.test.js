@@ -1,4 +1,4 @@
-const ImportCSVBankingStatementsInteractor = require("../../../../src/accounting/banking/csv_import/ImportCSVBankingStatementsInteractor");
+const ImportCSVBankingStatementsInteractor = require("../../../../use_cases/import/ImportCSVBankingStatementsInteractor");
 
 let interactor;
 

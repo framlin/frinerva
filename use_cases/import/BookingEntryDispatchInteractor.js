@@ -1,6 +1,6 @@
-const Account = require("../../account_management/Account");
-const Balancing = require("../../../balancing/Balancing");
-const BookingEntry = require("../../account_management/BookingEntry");
+const Account = require("../../account/Account");
+const Balancing = require("../../balancing/Balancing");
+const BookingEntry = require("../../account/BookingEntry");
 
 class BookingEntryDispatchInteractor {
     constructor(response_boundary){

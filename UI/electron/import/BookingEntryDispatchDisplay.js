@@ -1,7 +1,7 @@
-const TablePresenter = require("../presenter/TablePresenter");
-const BookingEntry = require("../../../accounting/account_management/BookingEntry");
+const TableDisplay = require("../display/TableDisplay");
+const BookingEntry = require("../../../account/BookingEntry");
 
-class BookingEntryDispatchPresenter {
+class BookingEntryDispatchDisplay {
 
     show_cost_center_list(cost_center_maps) {
         let cost_center_list = document.getElementById("cost-center-list");
@@ -29,7 +29,7 @@ class BookingEntryDispatchPresenter {
 
         for (let account of account_list) {
             let rows = account.booking_entries;
-            let account_div = TablePresenter.create_editable_table(
+            let account_div = TableDisplay.create_editable_table(
                 `${account.name} - ${account.cost_center}`,
                 rows,
                 BookingEntry.property_mapping,
@@ -61,10 +61,12 @@ class BookingEntryDispatchPresenter {
         link_elem.appendChild(div_elem);
 
         link_elem.addEventListener('click', (e) => {
+
+            // e.target.classList.add("active");
             window.show_virtual_accounts(e.target.dataset.costCenter, e.target.dataset.bookingPeriod);
         });
         return link_elem;
     }
 }
 
-module.exports = BookingEntryDispatchPresenter;
+module.exports = BookingEntryDispatchDisplay;
