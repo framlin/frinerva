@@ -1,11 +1,12 @@
 const MoneyMoneyCSVReader = require("./MoneyMoneyCSVReader");
 const MoneyMoneyToBookingEntryConverter = require("./MoneyMoneyToBookingEntryConverter");
 const Fs = require("fs");
+const BookingEntry = require("../../account/BookingEntry");
 
-class ImportCSVBankingStatementsInteractor {
+class CSVFileImportInteractor {
 
-    constructor(response_boundary) {
-        this._csv_file_import_response_boundary = response_boundary;
+    constructor(presenter) {
+        this._presenter = presenter;
         this._payments = null;
         this._booking_records = null;
     }
@@ -45,13 +46,13 @@ class ImportCSVBankingStatementsInteractor {
     async execute_use_case(file_name) {
         let file = this.load_file(file_name);
         this._payments = await this.create_payments(file);
-        this._csv_file_import_response_boundary.show_payments_created(this.payments);
+        this._presenter.show_payments_created(this.payments);
         this._booking_records = this.convert_payments_to_booking_records(this.payments);
-        this._csv_file_import_response_boundary.show_booking_records(this.booking_records);
+        this._presenter.show_booking_records(this.booking_records, BookingEntry.property_mapping);
         return this.booking_records;
     }
 
 
 }
 
-module.exports = ImportCSVBankingStatementsInteractor;
+module.exports = CSVFileImportInteractor;

@@ -1,5 +1,4 @@
-const BookingEntry = require("../../../account/BookingEntry");
-const Display = require("../display/TableDisplay");
+const TableDisplay = require("../display/TableDisplay");
 
 
 class CSVFileImportDisplay {
@@ -10,7 +9,8 @@ class CSVFileImportDisplay {
             while (payments_div.firstChild) {
                 try {
                     payments_div.removeChild(payments_div.firstChild);
-                } catch (e) {}
+                } catch (e) {
+                }
             }
 
         } else {
@@ -39,35 +39,36 @@ class CSVFileImportDisplay {
     }
 
 
-    show_booking_records(booking_records) {
+    show_booking_records(booking_records, booking_entry_property_mapping) {
 
         let table = document.getElementById("booking_entries");
         while (table.firstChild) {
             try {
                 table.removeChild(table.firstChild);
-            } catch (e) {}
+            } catch (e) {
+            }
         }
         booking_records.forEach((booking_record) => {
-            this._add_booking_records_row(table, booking_record, () => {
-                this.show_booking_records(booking_records)
+            this._add_booking_records_row(table, booking_record, booking_entry_property_mapping, () => {
+                this.show_booking_records(booking_records, booking_entry_property_mapping)
             });
         });
     }
 
-    _add_booking_records_row(table, booking_record, redraw) {
+    _add_booking_records_row(table, booking_record, booking_entry_property_mapping, redraw) {
         let row = table.insertRow(-1);
         let {booking_entry} = booking_record;
         row.booking_entry = booking_entry;
 
-        BookingEntry.property_mapping.forEach((prop, i) => {
-            Display.insert_editable_cell(row, i, prop, booking_entry, redraw);
+        booking_entry_property_mapping.forEach((prop, i) => {
+            TableDisplay.insert_editable_cell(row, i, prop, booking_entry, redraw);
         });
 
-        let i= 5;
+        let i = 5;
         let {cost_center, year} = booking_record;
         let metadata = {cost_center, year};
         for (let prop in metadata) {
-            Display.insert_editable_cell(row, i++, prop, booking_record, redraw);
+            TableDisplay.insert_editable_cell(row, i++, prop, booking_record, redraw);
         }
     }
 }

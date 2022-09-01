@@ -1,5 +1,4 @@
 const PaymentCSVReader = require("./PaymentCSVReader");
-
 const CsvReadableStream = require('csv-reader');
 
 class MoneyMoneyCSVReader extends PaymentCSVReader {

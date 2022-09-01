@@ -1,20 +1,20 @@
 class CSVFileImportController{
-    _request_boundary = null;
+    _interactor = null;
 
-    constructor(request_boundary) {
-        this._request_boundary = request_boundary;
+    constructor(interactor) {
+        this._interactor = interactor;
     }
 
     import_file(file_name) {
-        this._request_boundary.execute_use_case(file_name);
+        this._interactor.execute_use_case(file_name);
     }
 
     get payments() {
-        return this._request_boundary.payments;
+        return this._interactor.payments;
     }
 
     get booking_entries() {
-        return this._request_boundary.booking_records;
+        return this._interactor.booking_records;
     }
 }
 

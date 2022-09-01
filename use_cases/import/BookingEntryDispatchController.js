@@ -1,14 +1,14 @@
 class BookingEntryDispatchController {
-    constructor(request_boundary) {
-        this._request_boundary = request_boundary;
+    constructor(interactor) {
+        this._interactor = interactor;
     }
 
     dispatch(booking_records) {
-        this._request_boundary.execute_use_case(booking_records);
+        this._interactor.execute_use_case(booking_records);
     }
 
     get virtual_accounts() {
-        return this._request_boundary.virtual_accounts;
+        return this._interactor.virtual_accounts;
     }
 }
 

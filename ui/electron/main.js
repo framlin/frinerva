@@ -3,12 +3,17 @@ const {app, BrowserWindow, Menu, ipcMain} = require('electron')
 const MainWindow = require("./MainWindow");
 const ImportWindow = require("./import/ImportWindow");
 
+const UseCaseFactory = require("../../factories/UseCaseFactory");
+const csv_file_import = UseCaseFactory.create('cvs_file_import');
+const booking_entry_dispatch = UseCaseFactory.create('booking_entry_dispatch');
+
+
 const menuTemplate = require('./MainMenu').createMenuTemplate(open_import_window);
 
 let mainWindow, importWindow;
 
 function open_import_window() {
-  importWindow = new ImportWindow(mainWindow);
+  importWindow = new ImportWindow(mainWindow, csv_file_import, booking_entry_dispatch);
 }
 
 app.name = "Frinerva";
@@ -27,12 +32,6 @@ app.whenReady().then(() => {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) mainWindow = new MainWindow();
-  });
-
-  ipcMain.on('import:commited', (event, booking_records) => {
-    importWindow.loadURL(`file://${__dirname}/import/dispatch.html`).then(() => {
-      importWindow.webContents.send('import:dispatch', booking_records);
-    });
   });
 });
 

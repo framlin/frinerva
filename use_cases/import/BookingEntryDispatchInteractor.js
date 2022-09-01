@@ -3,8 +3,8 @@ const Balancing = require("../../balancing/Balancing");
 const BookingEntry = require("../../account/BookingEntry");
 
 class BookingEntryDispatchInteractor {
-    constructor(response_boundary){
-        this._response_boundary = response_boundary;
+    constructor(presenter){
+        this._presenter = presenter;
         this._balancing = new Balancing();
         this._virtual_accounts = null;
     }
@@ -28,7 +28,7 @@ class BookingEntryDispatchInteractor {
 
     async execute_use_case(booking_records) {
         let cost_center_set = this._extract_cost_center(booking_records);
-        this._response_boundary.show_cost_center_list(cost_center_set);
+        this._presenter.show_cost_center_list(cost_center_set, BookingEntry.property_mapping);
         this._virtual_accounts = this._merge(booking_records, cost_center_set);
     }
 
