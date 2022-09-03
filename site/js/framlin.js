@@ -16,7 +16,7 @@ function create_account_table(account, tr_click_handler, columns) {
         tr.setAttribute("data-id", account['_bookings'][booking_entry]['_id'])
         tr.setAttribute("data-cost-center", account["_cost_center"])
         table.append(tr);
-        // for (col in account['_bookings'][booking_entry]) {
+        // for (col in accounting['_bookings'][booking_entry]) {
             for (col in columns) {
                 val = account['_bookings'][booking_entry][col];
                 if (col !== '_id') {
