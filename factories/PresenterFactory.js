@@ -1,4 +1,4 @@
-const ReadCSVFilePresenter = require("../use_cases/import/read_csv_file/ReadCSVFilePresenter");
+const ReadCSVFilePresenter = require("../business/accounting/import/read_csv_file/ReadCSVFilePresenter");
 const presenters = {
     read_csv_file: ReadCSVFilePresenter,
 }

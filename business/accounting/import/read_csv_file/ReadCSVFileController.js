@@ -1,4 +1,4 @@
-const UseCaseController = require("../../UseCaseController");
+const UseCaseController = require("../../../use_case/UseCaseController");
 
 class ReadCSVFileController extends UseCaseController {
 

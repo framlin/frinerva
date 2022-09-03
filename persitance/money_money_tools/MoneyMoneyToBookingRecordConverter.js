@@ -1,5 +1,5 @@
-const BookingEntry = require("../../../accounting/BookingEntry");
-const PaymentToBookingRecordConverter = require("./PaymentToBookingRecordConverter");
+const BookingEntry = require("../../business/accounting/account/BookingEntry");
+const PaymentToBookingRecordConverter = require("../../business/accounting/import/read_csv_file/PaymentToBookingRecordConverter");
 
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',

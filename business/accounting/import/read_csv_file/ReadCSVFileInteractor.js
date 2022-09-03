@@ -1,4 +1,4 @@
-const UseCaseInteractor = require("../../UseCaseInteractor");
+const UseCaseInteractor = require("../../../use_case/UseCaseInteractor");
 
 class ReadCSVFileInteractor extends UseCaseInteractor{
 

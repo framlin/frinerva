@@ -1,5 +1,12 @@
 class UseCase{
 
+    execute() {
+        //this.view.open();
+        // ==> vie.presenter.ready
+        // ==> presenter.controller.execute()
+        // ==> controller.interactor.execute()
+    }
+
     get view() {
         return this._view;
     }
@@ -32,9 +39,18 @@ class UseCase{
         this._presenter = value;
     }
 
+    get helper() {
+        return this._helper;
+    }
+
+    set helper(value) {
+        this._helper = value;
+    }
+
 
     _interactor;
     _controller;
+    _helper;
     _presenter;
     _view;
 

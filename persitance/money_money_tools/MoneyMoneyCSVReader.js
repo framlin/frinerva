@@ -1,4 +1,4 @@
-const PaymentCSVReader = require("./PaymentCSVReader");
+const PaymentCSVReader = require("../../business/accounting/import/read_csv_file/PaymentCSVReader");
 
 const CsvReadableStream = require('csv-reader');
 

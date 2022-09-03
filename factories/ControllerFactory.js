@@ -1,4 +1,4 @@
-const ReadCSVFileController = require("../use_cases/import/read_csv_file/ReadCSVFileController");
+const ReadCSVFileController = require("../business/accounting/import/read_csv_file/ReadCSVFileController");
 const controllers = {
     read_csv_file: ReadCSVFileController,
 }

@@ -1,4 +1,4 @@
-const ReadCSVFileInteractor = require("../use_cases/import/read_csv_file/ReadCSVFileInteractor");
+const ReadCSVFileInteractor = require("../business/accounting/import/read_csv_file/ReadCSVFileInteractor");
 const interactors = {
     read_csv_file: ReadCSVFileInteractor,
 }

@@ -1,4 +1,4 @@
-const UseCasePresenter = require("../../UseCasePresenter");
+const UseCasePresenter = require("../../../use_case/UseCasePresenter");
 
 class ReadCSVFilePresenter extends UseCasePresenter{
 
