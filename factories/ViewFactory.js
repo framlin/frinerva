@@ -1,10 +1,14 @@
-const ReadCSVFileView = require("../ui/electron/use_cases/import/read_csv_file/ReadCSVFileView");
+const ReadCSVFileView = require("../ui/electron/import/read_csv_file/ReadCSVFileView");
 const views = {
-    read_csv_file: ReadCSVFileView,
+    read_csv_file: () => {
+        let view = new ReadCSVFileView();
+        view.loadFile('ui/electron/import/read_csv_file/read_csv_file.html').then();
+        return view;
+    },
 }
 class ViewFactory {
     static create(use_case_name){
-        return new views[use_case_name]();
+        return views[use_case_name]();
     }
 }
 

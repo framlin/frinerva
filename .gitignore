@@ -1,7 +1,7 @@
 .idea/*
 /src/secret.py
-/uml/frinerva.mdzip.bak
-/data/*
+/engineering/uml/frinerva.mdzip.bak
+/persitance/data/*
 /venv/*
 /business/accounting/__pycache__/*
 /src/utils/__pycache__/*

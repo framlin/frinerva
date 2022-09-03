@@ -32,12 +32,13 @@ function create_view(use_case, use_case_name) {
 }
 
 function wire_use_case(interactor, presenter, view, controller, helper) {
+    //order MATTERS
     interactor.presenter = presenter;
     interactor.helper = helper;
-    presenter.view = view;
-    presenter.controller = controller;
-    view.presenter = presenter;
     controller.interactor = interactor;
+    presenter.controller = controller;
+    presenter.view = view;
+    view.presenter = presenter;
 }
 
 function create_use_case(use_case_name) {
