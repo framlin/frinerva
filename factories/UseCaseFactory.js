@@ -31,24 +31,25 @@ function create_view(use_case, use_case_name) {
     return view;
 }
 
-function wire_use_case(interactor, presenter, view, controller, helper) {
+function wire_use_case(use_case, interactor, presenter, view, controller, helper) {
     //order MATTERS
     interactor.presenter = presenter;
     interactor.helper = helper;
     controller.interactor = interactor;
+    controller.use_case = use_case;
     presenter.controller = controller;
     presenter.view = view;
     view.presenter = presenter;
 }
 
 function create_use_case(use_case_name) {
-    let use_case = new UseCases[use_case_name]();
+    let use_case = new UseCases[use_case_name](UseCaseFactory);
     let interactor = create_interactor(use_case, use_case_name);
     let presenter = create_presenter(use_case, use_case_name);
     let controller = create_controller(use_case, use_case_name);
     let helper = create_helper(use_case, use_case_name);
     let view = create_view(use_case, use_case_name);
-    wire_use_case(interactor, presenter, view, controller, helper);
+    wire_use_case(use_case, interactor, presenter, view, controller, helper);
     return use_case;
 }
 
@@ -74,7 +75,12 @@ class UseCaseFactory {
 
 
     static create(use_case_name) {
-        return create_use_case(use_case_name);
+        if (use_case_name in UseCases) {
+            return create_use_case(use_case_name);
+        } else {
+            throw Error(`NO USE_CASE ${use_case_name}`);
+        }
+
     }
 }
 

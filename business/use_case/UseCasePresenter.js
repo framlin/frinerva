@@ -10,6 +10,10 @@ class UseCasePresenter{
         this._controller.execute();
     }
 
+    forward(use_case_name) {
+        this._controller.forward(use_case_name);
+    }
+
 
     _view;
     _controller;

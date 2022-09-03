@@ -1,5 +1,7 @@
-// All of the Node.js APIs are available in the preload process.
-// It has the same sandbox as a Chrome extension.
-
-
-
+const {ipcRenderer} = require('electron');
+window.addEventListener('DOMContentLoaded', () => {
+    let import_button = document.querySelector("#import");
+    import_button.addEventListener('click', (e) => {
+        ipcRenderer.send('main:import');
+    });
+});

@@ -1,10 +1,18 @@
 class UseCase{
 
+    constructor(UseCaseFactory) {
+        this._UseCaseFactory = UseCaseFactory;
+    }
+
     execute() {
         this.view.show();
         // ==> vie.presenter.ready
         // ==> presenter.controller.execute()
         // ==> controller.interactor.execute()
+    }
+
+    forward(use_case_name) {
+        this._UseCaseFactory.create(use_case_name).execute();
     }
 
     get view() {
@@ -53,6 +61,7 @@ class UseCase{
     _helper;
     _presenter;
     _view;
+    _UseCaseFactory;
 
 
 }

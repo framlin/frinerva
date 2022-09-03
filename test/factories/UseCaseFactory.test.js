@@ -12,7 +12,9 @@ const ReadCSVFileHelper = require("../../business/accounting/import/read_csv_fil
 //we need a View-Fake-Factory, because BrowserWindows are not testable
 class ViewFactoryStub{
     static create() {
-        return {}
+        return {
+            once: () => null
+        }
     }
 }
 

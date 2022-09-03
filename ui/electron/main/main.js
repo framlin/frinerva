@@ -11,8 +11,7 @@ const ViewFactory = require("../../../factories/ViewFactory")
 UseCaseFactory.config(ViewFactory, PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory);
 const menuTemplate = require('./MainMenu').createMenuTemplate(UseCaseFactory);
 
-let mainWindow, importWindow;
-
+let mainWindow;
 
 app.name = "Frinerva";
 
@@ -25,17 +24,12 @@ Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
   mainWindow = new MainWindow();
+  mainWindow.UseCaseFactory = UseCaseFactory;
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) mainWindow = new MainWindow();
-  });
-
-  ipcMain.on('import:commited', (event, booking_records) => {
-    importWindow.loadURL(`file://${__dirname}/import/dispatch.html`).then(() => {
-      importWindow.webContents.send('import:dispatch', booking_records);
-    });
   });
 });
 
