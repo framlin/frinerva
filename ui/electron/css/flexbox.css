@@ -1,7 +1,7 @@
 @import 'reset.css';
 @import 'layout.css';
 
-.hbox, .vbox, .groupbox, .window, .flex {
+.hbox, .vbox, .groupbox, .flex {
     display: flex;
 }
 
@@ -9,8 +9,7 @@
     flex-direction: row;
 }
 
-.vbox,
-.window {
+.vbox {
     flex-direction: column;
 }
 
@@ -28,4 +27,9 @@
 
 .flex-4 {
     flex: 4;
+}
+
+
+.align-right {
+    justify-content: flex-end;
 }

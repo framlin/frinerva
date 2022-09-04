@@ -11,9 +11,6 @@ class MainWindow extends BrowserWindow{
                 preload: path.join(__dirname, 'preload.js')
             }
         });
-        this.loadFile(path.join(__dirname, 'main.html')).then(() => {
-            this.webContents.openDevTools();
-        });
         main_window = this;
     }
 

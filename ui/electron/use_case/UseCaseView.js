@@ -3,16 +3,24 @@ const path = require("path");
 
 class UseCaseView extends BrowserWindow{
 
-    constructor(preloader_path) {
+    constructor(preloader_path, config) {
         console.log(preloader_path);
-        super({
+        let win_config = {
             width: 1024,
             height: 786,
             show: false,
             webPreferences: {
                 preload: preloader_path
             }
-        });
+        }
+        UseCaseView._merge_config(win_config, config)
+        super(win_config);
+    }
+
+   static  _merge_config(win_config, config) {
+        for (let param in config) {
+            win_config[param] = config[param];
+        }
     }
 
     forward(use_case_name) {
