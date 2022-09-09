@@ -1,9 +1,9 @@
 .idea/*
 /src/secret.py
 /engineering/uml/frinerva.mdzip.bak
-/persitance/data/*
+/app/persitance/data/*
 /venv/*
-/business/accounting/__pycache__/*
+/app/business/accounting/__pycache__/*
 /src/utils/__pycache__/*
 /.ipynb_checkpoints/
 /jupyter/.ipynb_checkpoints/

@@ -2,13 +2,13 @@
   "name": "frinerva",
   "version": "20220721",
   "description": "property mangement",
-  "main": "ui/electron/main/main.js",
+  "main": "app/ui/electron/main/main.js",
   "scripts": {
     "start": "electron-forge start",
     "test": "jest --watchAll",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "watch": "nodemon --ignore 'persitance/data/*'  --exec electron-forge start"
+    "watch": "nodemon --ignore 'app/persitance/data/*'  --exec electron-forge start"
   },
   "jest": {
     "modulePathIgnorePatterns": [

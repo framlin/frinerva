@@ -1,7 +1,7 @@
 // noinspection JSNonASCIINames
 
-const MoneyMoneyToBookingRecordConverter = require("../../../persitance/money_money_tools/MoneyMoneyToBookingRecordConverter");
-const BookingEntry = require("../../../business/accounting/account/BookingEntry");
+const MoneyMoneyToBookingRecordConverter = require("../../../app/persitance/money_money_tools/MoneyMoneyToBookingRecordConverter");
+const BookingEntry = require("../../../app/business/accounting/account/BookingEntry");
 
 it('should be possible, to create a payment_to_booking_entry_converter', () => {
     let payment_to_booking_entry_converter = new MoneyMoneyToBookingRecordConverter();

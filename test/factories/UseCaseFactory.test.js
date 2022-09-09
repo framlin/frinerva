@@ -1,13 +1,13 @@
-const UseCaseFactory = require('../../factories/UseCaseFactory');
-const PresenterFactory = require("../../factories/PresenterFactory");
-const InteractorFactory = require("../../factories/InteractorFactory");
-const ControllerFactory = require("../../factories/ControllerFactory");
-const ReadCSVFile = require("../../business/accounting/import/read_csv_file/ReadCSVFile");
-const ReadCSVFileInteractor = require("../../business/accounting/import/read_csv_file/ReadCSVFileInteractor");
-const ReadCSVFilePresenter = require("../../business/accounting/import/read_csv_file/ReadCSVFilePresenter");
-const ReadCSVFileController = require("../../business/accounting/import/read_csv_file/ReadCSVFileController");
-const HelperFactory = require("../../factories/HelperFactory");
-const ReadCSVFileHelper = require("../../business/accounting/import/read_csv_file/ReadCSVFileHelper");
+const UseCaseFactory = require('../../app/factories/UseCaseFactory');
+const PresenterFactory = require("../../app/factories/PresenterFactory");
+const InteractorFactory = require("../../app/factories/InteractorFactory");
+const ControllerFactory = require("../../app/factories/ControllerFactory");
+const ReadCSVFile = require("../../app/business/accounting/import/read_csv_file/ReadCSVFile");
+const ReadCSVFileInteractor = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileInteractor");
+const ReadCSVFilePresenter = require("../../app/business/accounting/import/read_csv_file/ReadCSVFilePresenter");
+const ReadCSVFileController = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileController");
+const HelperFactory = require("../../app/factories/HelperFactory");
+const ReadCSVFileHelper = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileHelper");
 
 //we need a View-Fake-Factory, because BrowserWindows are not testable
 class ViewFactoryStub{

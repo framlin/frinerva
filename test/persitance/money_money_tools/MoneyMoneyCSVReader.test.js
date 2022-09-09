@@ -1,4 +1,4 @@
-const MoneyMoneyCSVReader =  require("../../../persitance/money_money_tools/MoneyMoneyCSVReader");
+const MoneyMoneyCSVReader =  require("../../../app/persitance/money_money_tools/MoneyMoneyCSVReader");
 const Readable = require('stream').Readable
 //###########################################
 //

@@ -1,5 +1,5 @@
-const Balance = require("../../business/balancing/balance/Balance");
-const Account = require("../../business/accounting/account/Account");
+const Balance = require("../../app/business/balancing/balance/Balance");
+const Account = require("../../app/business/accounting/account/Account");
 test('creation', () => {
     let balance = new Balance("name", 2022);
 
