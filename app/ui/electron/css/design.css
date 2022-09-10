@@ -1,0 +1,74 @@
+:root {
+    --main-bg-color: var(--color-dark-gray);
+    --main-header-color: var(--color-light-beige);
+    --main-footer-color: var(--color-dark-gray);
+    --main-footer-text-color: var(--color-light-beige);
+    --main-footer-border-color: black;
+    --main-workspace-color: var(--color-leight-yellow);
+
+    --side-board-border-color: black;
+
+    --dialog-header-color: var(--color-light-beige);
+    --dialog-footer-color: var(--color-light-beige);
+
+    --select-accounting-color: var(--color-dark-blue);
+    --select-accounting-hover-color: var(--color-darker-blue);
+    --select-accounting-font-color: var(--color-white-blue);
+
+    --splitter-bg-color: var(--color-lighter-gray);
+}
+
+html, body {
+    background-color: var(--main-bg-color);
+}
+#tool-bar-panel {
+    background-color: var(--main-header-color);
+}
+
+#ws-switch-panel {
+    background-color: var(--main-header-color);
+}
+
+#ws-switch-panel  div {
+}
+
+#side-bar-panel {
+}
+
+#side-board-panel {
+    border-right-style: solid;
+    border-right-color: var(--side-board-border-color);
+}
+
+#splitter-panel{
+    background-color: var(--splitter-bg-color);
+}
+
+#splitter-panel:hover{
+    cursor:  ew-resize;
+}
+
+#work-bench-panel {
+}
+
+
+footer {
+    background-color: var(--main-footer-color);
+    color: var(--main-footer-text-color);
+    border-top-style: solid;
+    border-top-color: var(--main-footer-border-color);
+}
+
+#accounting-switch{
+    cursor: default;
+    background-color: var(--select-accounting-color);
+    color: var(--select-accounting-font-color);
+}
+
+#accounting-switch:hover {
+    background-color: var(--select-accounting-hover-color);
+    color: var(--select-accounting-font-color);
+}
+
+
+

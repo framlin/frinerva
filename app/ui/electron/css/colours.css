@@ -2,8 +2,17 @@
     /* COLOUR DEFINITIONS */
     /*--color-orange:   #ff5f00; !* rgba(255, 95, 0, 1)    -- hsla(22, 100%, 50%, 1) *!*/
     --color-light-beige: #fcf6e9;
-    /*ELEMENT COLORS*/
-    /*--form-color: var(--color-mustard);*/
-    --dialog-header-color: var(--color-light-beige);
-    --dialog-footer-color: var(--color-light-beige);
+    --color-leight-yellow: #FAECD1FF;
+
+    --color-dark-gray: #414040FF;
+    --color-lighter-gray: #c4c2c2;
+
+
+    --color-darker-blue: #202079;
+    --color-dark-blue: #3c3c96;
+    --color-blue: #5c5cb0;
+    --color-light-blue: #7f7fc9;
+    --color-lighter-blue: #afafe8;
+    --color-white-blue: #d9d9f5;
+
 }

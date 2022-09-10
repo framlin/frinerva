@@ -1,4 +1,4 @@
-const UseCaseView = require("../../use_case/UseCaseView");
+const UseCaseView = require("../../../use_case/UseCaseView");
 const path = require("path");
 const {ipcMain} = require("electron");
 
