@@ -10,7 +10,7 @@ body {
     grid-column-end: span 2;
 }
 
-.ws-switch-panel {
+.switch-panel {
     grid-column-start: work-bench;
     grid-row-start: 1;
 }

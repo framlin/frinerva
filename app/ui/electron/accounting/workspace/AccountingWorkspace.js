@@ -1,4 +1,6 @@
-const HTMLReader = require('../../../util/HTMLReader');
+const HTMLReader = require('../../../../util/HTMLReader');
+const path = require("path");
+
 
 function replace_partial(markup, overlay) {
     let overlay_div = document.querySelector(overlay);
@@ -7,6 +9,7 @@ function replace_partial(markup, overlay) {
     overlay_div.replaceWith(partial_frame_div.firstChild);
 
 }
+
 async function create_workbench(markup_file) {
     let workbench_markup = await HTMLReader.read_html_file(markup_file);
     replace_partial(workbench_markup, '.work-bench-panel');
@@ -28,4 +31,13 @@ async function create_tool_bar(markup_file) {
 }
 
 
-module.exports = {create_workbench, create_side_board, create_side_bar, create_tool_bar};
+class AccountingWorkspace {
+    static async create_workspace() {
+        await create_workbench(path.join(__dirname, 'work_bench.html'));
+        await create_side_board(path.join(__dirname, 'side_board.html'));
+        await create_side_bar(path.join(__dirname, 'side_bar.html'));
+        await create_tool_bar(path.join(__dirname, 'tool_bar.html'));
+    }
+}
+
+module.exports = AccountingWorkspace;

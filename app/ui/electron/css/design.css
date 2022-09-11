@@ -30,12 +30,10 @@ html, body {
     border-bottom-color: black;
 }
 
-.ws-switch-panel {
+.switch-panel {
     background-color: var(--main-header-color);
 }
 
-.ws-switch-panel  div {
-}
 
 .side-bar-panel {
     border-right-style: solid;

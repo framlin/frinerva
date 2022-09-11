@@ -1,25 +1,19 @@
 const {ipcRenderer} = require('electron');
 const path = require('path')
-const {create_workbench, create_side_board, create_side_bar, create_tool_bar} = require('../accounting/AccountingPreloader');
+const WorkspaceViewFactory = require ('../workspace/WorkspaceViewFactory');
+const AccountingWorkspace = require('../accounting/workspace/AccountingWorkspace');
+
+WorkspaceViewFactory.config(AccountingWorkspace);
 
 window.addEventListener('DOMContentLoaded', () => {
     splitter();
     register_accounting_switch_click();
-
 });
 
 function register_accounting_switch_click() {
     let accounting_switch = document.querySelector('#accounting-switch');
     accounting_switch.addEventListener('click', (e) => {
-        create_workbench(path.join(__dirname, '../accounting/work_bench.html')).then(() => {
-            create_side_board(path.join(__dirname, '../accounting/side_board.html')).then(() => {
-                create_side_bar(path.join(__dirname, '../accounting/side_bar.html')).then(() => {
-                    create_tool_bar(path.join(__dirname, '../accounting/tool_bar.html')).then(() => {
-                        splitter();
-                    })
-                })
-            });
-        });
+        WorkspaceViewFactory.create('accounting').then(() => splitter());
     });
 }
 
