@@ -4,8 +4,11 @@
     --color-light-beige: #fcf6e9;
     --color-leight-yellow: #FAECD1FF;
 
-    --color-dark-gray: #414040FF;
-    --color-lighter-gray: #c4c2c2;
+    --color-darker-gray: #1d1d1d;
+    --color-dark-gray: #444444;
+    --color-gray: #777777;
+    --color-light-gray: #999999;
+    --color-lighter-gray: #c1c1c1;
 
 
     --color-darker-blue: #202079;

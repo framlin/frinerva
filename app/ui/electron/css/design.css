@@ -1,12 +1,16 @@
 :root {
     --main-bg-color: var(--color-dark-gray);
     --main-header-color: var(--color-light-beige);
-    --main-footer-color: var(--color-dark-gray);
+    --main-footer-bg-color: var(--color-gray);
     --main-footer-text-color: var(--color-light-beige);
-    --main-footer-border-color: black;
+    --main-footer-border-color: var(--color-dark-gray);
+    --status-bar-border-color: var(--color-dark-gray);
     --main-workspace-color: var(--color-leight-yellow);
 
-    --side-board-border-color: black;
+    --side-bar-border-color: var(--color-dark-gray);
+    --side-board-border-color: var(--color-dark-gray);
+
+    --work-bench-border-color: var(--color-dark-gray);
 
     --dialog-header-color: var(--color-light-beige);
     --dialog-footer-color: var(--color-light-beige);
@@ -15,45 +19,53 @@
     --select-accounting-hover-color: var(--color-darker-blue);
     --select-accounting-font-color: var(--color-white-blue);
 
-    --splitter-bg-color: var(--color-lighter-gray);
+    --splitter-bg-color: var(--color-gray);
 }
 
 html, body {
     background-color: var(--main-bg-color);
 }
-#tool-bar-panel {
+.tool-bar-panel {
+    border-bottom-style: solid;
+    border-bottom-color: black;
+}
+
+.ws-switch-panel {
     background-color: var(--main-header-color);
 }
 
-#ws-switch-panel {
-    background-color: var(--main-header-color);
+.ws-switch-panel  div {
 }
 
-#ws-switch-panel  div {
+.side-bar-panel {
+    border-right-style: solid;
+    border-right-color: var(--side-bar-border-color);
 }
 
-#side-bar-panel {
-}
-
-#side-board-panel {
+.side-board-panel {
     border-right-style: solid;
     border-right-color: var(--side-board-border-color);
 }
 
 #splitter-panel{
     background-color: var(--splitter-bg-color);
+    border-right-style: solid;
+    border-right-color: var(--side-board-border-color);
 }
 
 #splitter-panel:hover{
     cursor:  ew-resize;
 }
 
-#work-bench-panel {
+.work-bench-panel {
+    border-top-style: solid;
+    border-top-color: var(--work-bench-border-color);
+
 }
 
 
 footer {
-    background-color: var(--main-footer-color);
+    background-color: var(--main-footer-bg-color);
     color: var(--main-footer-text-color);
     border-top-style: solid;
     border-top-color: var(--main-footer-border-color);
@@ -68,6 +80,11 @@ footer {
 #accounting-switch:hover {
     background-color: var(--select-accounting-hover-color);
     color: var(--select-accounting-font-color);
+}
+
+.status-bar-top{
+    border-bottom-style: solid;
+    border-bottom-color: var(--status-bar-border-color);
 }
 
 

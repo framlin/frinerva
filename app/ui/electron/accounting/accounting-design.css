@@ -1,0 +1,48 @@
+#accounting-work-bench {
+    background-color: var(--color-blue);
+}
+
+#account-selection-bar {
+    background-color: var(--color-blue);
+    border-bottom-style: solid;
+    border-bottom-color: var(--color-darker-blue);
+}
+
+#account-selection-bar {
+}
+
+#accounting-side-board {
+    background-color: var(--color-blue);
+}
+
+.account-list-header, .account-entry {
+}
+
+.account-list-header {
+    background-color: var(--color-dark-blue);
+    color: var(--color-lighter-blue);
+}
+
+.account-entry {
+    background-color: var(--color-light-blue);
+}
+
+.account-entry:nth-child(2) {
+}
+
+#accounting-side-bar {
+    background-color: var(--color-blue);
+}
+
+#accounting-side-bar .side-board-entry-toggle{
+    background-color: var(--color-darker-blue);
+    color: var(--color-lighter-blue);
+}
+
+#accounting-tool-bar {
+    background-color: var(--color-blue);
+}
+
+#accounting-tool-bar button {
+    background-color: var(--color-light-blue);
+}

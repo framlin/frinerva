@@ -4,58 +4,13 @@ html, body {
     height: 100vh;
 }
 
-body {
-    display: grid;
-    grid-template-rows: 25px [work-bench] 1fr [footer] 25px [status] 25px;
-    grid-template-columns: 25px [side-board] 250px [splitter] 3px  [work-bench];
-}
-
-#tool-bar-panel {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    grid-column-end: span 2;
-}
-
-#ws-switch-panel {
-    grid-column-start: work-bench;
-    grid-row-start: 1;
-}
-
-#ws-switch-panel  div {
+.ws-switch-panel  div {
     padding:5px 10px;
-}
-#side-bar-panel {
-    grid-column-start: 1;
-}
-
-#side-board-panel {
-    grid-column-start: side-board;
-}
-#splitter-panel{
-    grid-column-start: splitter;
-    grid-column-end: span 1;
-}
-
-
-#work-bench-panel {
-    grid-column-start: work-bench;
-    grid-column-end: span 1;
-}
-
-
-footer {
-    height: 50px;
-    grid-column-start: 1;
-    grid-column-end: span end;
 }
 
 #accounting-switch{
     cursor: default;
 }
-
-#accounting-switch:hover {
-}
-
 
 .full-height {
     height: 100%;
