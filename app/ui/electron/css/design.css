@@ -23,21 +23,23 @@
     --select-accounting-font-color: var(--color-white-blue);
 
     --splitter-bg-color: var(--color-gray);
+
+    --selectable-hover-color: var(--color-lighter-gray);
 }
 
 html, body {
     background-color: var(--main-bg-color);
 }
-.tool-bar-panel {
+
+.toolbar {
     border-bottom-style: solid;
     border-bottom-color: var(--main-border-color);
 
     border-right-style: solid;
     border-right-color: var(--main-border-color);
-
 }
 
-.switch-panel {
+.switchbar {
     background-color: var(--main-header-color);
     border-bottom-style: solid;
     border-bottom-color: var(--work-bench-border-color);
@@ -45,12 +47,12 @@ html, body {
 }
 
 
-.side-bar-panel {
+.sidebar {
     border-right-style: solid;
     border-right-color: var(--side-bar-border-color);
 }
 
-.side-board-panel {
+.sideboard {
     border-right-style: solid;
     border-right-color: var(--side-board-border-color);
 }
@@ -79,5 +81,8 @@ footer {
     border-bottom-color: var(--status-bar-border-color);
 }
 
+.selectable:hover {
+    background-color: var(--selectable-hover-color);
+}
 
 

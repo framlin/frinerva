@@ -20,14 +20,14 @@ function register_accounting_switch_click() {
 function splitter() {
     let pointer_down;
     let splitter = document.querySelector('#splitter-panel');
-    let side_board = document.querySelector('.side-board-panel');
-    let work_bench = document.querySelector('.work-bench-panel');
+    let side_board = document.querySelector('.sideboard');
+    let work_bench = document.querySelector('.workbench');
 
     function move_splitter(e) {
         if (pointer_down) {
             let x = e.layerX - 25;
-            let body_elem = document.querySelector('body');
-            body_elem.style.gridTemplateColumns = `25px [side-board] ${x}px [splitter] 3px  [work-bench]`;
+            let grid = document.querySelector('#workspace');
+            grid.style.gridTemplateColumns = `25px [side-board] ${x}px [splitter] 3px  [work-bench]`;
         }
     }
 

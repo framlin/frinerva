@@ -1,40 +1,40 @@
-body {
+#workspace {
+    width: 100vw;
+    height: 100vh;
+
     display: grid;
-    grid-template-rows: 25px [work-bench] 1fr [footer] 25px;
-    grid-template-columns: 25px [side-board] 250px [splitter] 3px  [work-bench];
+    grid-template-areas:
+        'toolbar toolbar splitter switchbar'
+        'sidebar sideboard splitter workbench'
+        'footer footer footer footer';
+    grid-template-rows: 25px 1fr  25px;
+    grid-template-columns: 25px 250px 3px 1fr;
 }
 
-.tool-bar-panel {
-    grid-row-start: 1;
-    grid-column-start: 1;
-    grid-column-end: span 2;
+.toolbar {
+    grid-area: toolbar;
 }
 
-.switch-panel {
-    grid-column-start: work-bench;
-    grid-row-start: 1;
+.switchbar {
+    grid-area: switchbar;
 }
 
-.side-bar-panel {
-    grid-column-start: 1;
+.sidebar {
+    grid-area: sidebar;
 }
 
-.side-board-panel {
-    grid-column-start: side-board;
+.sideboard {
+    grid-area: sideboard;
 }
 
 #splitter-panel {
-    grid-column-start: splitter;
-    grid-column-end: span 1;
+    grid-area: splitter;
 }
 
-.work-bench-panel {
-    grid-column-start: work-bench;
-    grid-column-end: span 1;
+.workbench {
+    grid-area: workbench;
 }
 
 footer {
-    height: 25px;
-    grid-column-start: 1;
-    grid-column-end: span end;
+    grid-area: footer;
 }
