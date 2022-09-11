@@ -8,14 +8,8 @@
     border-bottom-color: var(--color-darker-blue);
 }
 
-#account-selection-bar {
-}
-
 #accounting-side-board {
     background-color: var(--color-blue);
-}
-
-.account-list-header, .account-entry {
 }
 
 .account-list-header {
@@ -24,10 +18,7 @@
 }
 
 .account-entry {
-    background-color: var(--color-light-blue);
-}
-
-.account-entry:nth-child(2) {
+    background-color: var(--color-white-blue);
 }
 
 #accounting-side-bar {
@@ -45,4 +36,15 @@
 
 #accounting-tool-bar button {
     background-color: var(--color-light-blue);
+}
+
+#accounting-switch{
+    cursor: default;
+    background-color: var(--select-accounting-color);
+    color: var(--select-accounting-font-color);
+}
+
+#accounting-switch:hover {
+    background-color: var(--select-accounting-hover-color);
+    color: var(--select-accounting-font-color);
 }
