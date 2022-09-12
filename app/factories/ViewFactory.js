@@ -5,9 +5,7 @@ const MainWindow = require("../ui/electron/main/MainWindow");
 
 const views = {
     read_csv_file: () => {
-        let view = new ReadCSVFileView({parent: ViewFactory.MainWindow});
-        view.loadFile('app/ui/electron/accounting/import/read_csv_file/read_csv_file.html').then();
-        return view;
+        return new ReadCSVFileView();
     },
     main: () => {
         if (!ViewFactory.MainWindow) {
