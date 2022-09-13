@@ -8,7 +8,6 @@ const ControllerFactory = require("../../../factories/ControllerFactory");
 const HelperFactory = require("../../../factories/HelperFactory");
 const ViewFactory = require("../../../factories/ViewFactory")
 
-UseCaseFactory.config(ViewFactory, PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory);
 const menuTemplate = require('./MainMenu').createMenuTemplate(UseCaseFactory);
 
 let mainWindow;
@@ -23,15 +22,29 @@ Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  ViewFactory.MainWindow = ViewFactory.create('main');
-  ViewFactory.MainWindow.UseCaseFactory = UseCaseFactory;
+  mainWindow = new MainWindow();
+
+  mainWindow.UseCaseFactory = UseCaseFactory;
+  mainWindow.loadFile('app/ui/electron/main/main.html').then();
+
+  mainWindow.once('ready-to-show', () => {
+    UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, mainWindow.webContents);
+    mainWindow.show();
+  })
+  // ViewFactory.MainWindow = ViewFactory.create('main');
+  // ViewFactory.MainWindow.UseCaseFactory = UseCaseFactory;
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
-    if (BrowserWindow.getAllWindows().length === 0) mainWindow =ViewFactory.MainWindow = ViewFactory.create('main');
+    if (BrowserWindow.getAllWindows().length === 0) {
+      mainWindow = new MainWindow();
+      mainWindow.UseCaseFactory = UseCaseFactory;
+      mainWindow.loadFile('app/ui/electron/main/main.html').then();
+    }
   });
 });
+
 
 // Quit when all windows are closed, except on macOS. There, it's common
 // for applications and their menu bar to stay active until the user quits

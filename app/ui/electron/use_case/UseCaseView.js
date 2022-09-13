@@ -1,16 +1,16 @@
+const {ipcRenderer} = require("electron");
+
 class UseCaseView{
 
     forward(use_case_name) {
-        this._presenter.forward(use_case_name);
     }
 
-    _presenter;
-    get presenter() {
-        return this._presenter;
+    put_view_into_dom() {
+        this.send_view_ready();
     }
 
-    set presenter(value) {
-        this._presenter = value;
+    send_view_ready() {
+        ipcRenderer.send('use_case:view_ready');
     }
 }
 

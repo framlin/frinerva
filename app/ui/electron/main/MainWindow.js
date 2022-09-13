@@ -9,29 +9,26 @@ class MainWindow extends BrowserWindow{
             height: 768,
             webPreferences: {
                 preload: path.join(__dirname, 'preload.js')
-            }
+            },
+            show: false
         });
         main_window = this;
     }
 
     execute_use_case(use_case_name) {
-        this._UseCaseFactory.create(use_case_name).execute();
+        let use_case = this._UseCaseFactory.create(use_case_name);
+        use_case.execute();
     }
 
     _UseCaseFactory;
-
-
-    get UseCaseFactory() {
-        return this._UseCaseFactory;
-    }
 
     set UseCaseFactory(value) {
         this._UseCaseFactory = value;
     }
 }
 
-ipcMain.on('main:import', () => {
-    main_window.execute_use_case('read_csv_file');
-})
+ipcMain.on('use_case:create', (e, use_case_name) => {
+    main_window.execute_use_case(use_case_name);
+});
 
 module.exports = MainWindow;

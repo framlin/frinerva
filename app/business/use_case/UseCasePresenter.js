@@ -1,13 +1,15 @@
+const {ipcMain} = require('electron');
 class UseCasePresenter{
-    constructor() {
+    constructor(ipc_chanel) {
+        this._ipc_channel = ipc_chanel;
     }
 
-    on_view_ready_to_show() {
-        this.execute();
-    }
 
-    execute() {
-        this._controller.execute();
+    execute(use_case_name) {
+        this._ipc_channel.send('use_case:created', use_case_name);
+        ipcMain.on('use_case:view_ready', () => {
+            this._controller.execute();
+        })
     }
 
     forward(use_case_name) {
@@ -15,7 +17,7 @@ class UseCasePresenter{
     }
 
 
-    _view;
+    _ipc_channel;
     _controller;
 
     get controller() {
@@ -26,16 +28,6 @@ class UseCasePresenter{
         this._controller = value;
     }
 
-    get view() {
-        return this._view;
-    }
-
-    set view(value) {
-        this._view = value;
-        this._view.once('ready-to-show', () => {
-            this.on_view_ready_to_show();
-        });
-    }
 }
 
 module.exports = UseCasePresenter;

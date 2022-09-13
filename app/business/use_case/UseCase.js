@@ -1,26 +1,20 @@
 class UseCase{
 
-    constructor(UseCaseFactory) {
+    constructor(UseCaseFactory, use_case_name) {
         this._UseCaseFactory = UseCaseFactory;
+        this._use_case_name = use_case_name
     }
 
     execute() {
-        this.view.show();
-        // ==> vie.presenter.ready
+        this._presenter.execute(this._use_case_name);
+        // this.view.show();
+        // ==> view.presenter.ready
         // ==> presenter.controller.execute()
         // ==> controller.interactor.execute()
     }
 
     forward(use_case_name) {
         this._UseCaseFactory.create(use_case_name).execute();
-    }
-
-    get view() {
-        return this._view;
-    }
-
-    set view(value) {
-        this._view = value;
     }
 
     get interactor() {
@@ -56,11 +50,11 @@ class UseCase{
     }
 
 
+    _use_case_name;
     _interactor;
     _controller;
     _helper;
     _presenter;
-    _view;
     _UseCaseFactory;
 
 

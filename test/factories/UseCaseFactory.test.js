@@ -9,17 +9,8 @@ const ReadCSVFileController = require("../../app/business/accounting/import/read
 const HelperFactory = require("../../app/factories/HelperFactory");
 const ReadCSVFileHelper = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileHelper");
 
-//we need a View-Fake-Factory, because BrowserWindows are not testable
-class ViewFactoryStub{
-    static create() {
-        return {
-            once: () => null
-        }
-    }
-}
-
 beforeAll(() => {
-    UseCaseFactory.config(ViewFactoryStub, PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory);
+    UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory);
 })
 
 function expect_use_case_creation(use_case_name, use_case_class, use_case_interactor, use_case_presenter, use_case_controller, use_case_helper) {
@@ -31,15 +22,12 @@ function expect_use_case_creation(use_case_name, use_case_class, use_case_intera
 
     expect(use_case.presenter).toBeInstanceOf(use_case_presenter);
     expect(use_case.presenter.controller).toBeInstanceOf(use_case_controller);
-    expect(use_case.presenter.view).not.toBeUndefined();
 
     expect(use_case.controller).toBeInstanceOf(use_case_controller);
     expect(use_case.controller.interactor).toBeInstanceOf(use_case_interactor);
 
     expect(use_case.helper).toBeInstanceOf(use_case_helper);
 
-    expect(use_case.view).not.toBeUndefined();
-    expect(use_case.view.presenter).toBeInstanceOf(use_case_presenter);
 }
 
 test('create read_csv_file', () => {

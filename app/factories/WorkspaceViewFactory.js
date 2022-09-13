@@ -1,7 +1,8 @@
 
 const workspace_views = {
-    accounting: async (partials_path) => {
+    accounting: async () => {
         await WorkspaceViewFactory.AccountingWorkspace.create_workspace();
+        return new WorkspaceViewFactory.AccountingWorkspace();
     }
 }
 
@@ -11,7 +12,7 @@ class WorkspaceViewFactory {
         WorkspaceViewFactory.AccountingWorkspace = accountingWS;
     };
     static async create(business_case_name, partials_path) {
-        await workspace_views[business_case_name](partials_path);
+        return await workspace_views[business_case_name]();
     }
 }
 

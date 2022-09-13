@@ -1,5 +1,5 @@
 const UseCaseView = require("../../../use_case/UseCaseView");
-const {ipcMain, ipcRenderer} = require("electron");
+const {ipcRenderer} = require("electron");
 
 let read_csv_file_view;
 
@@ -7,18 +7,17 @@ class ReadCSVFileView extends UseCaseView {
     constructor() {
         super();
         read_csv_file_view = this;
-
-        window.addEventListener('DOMContentLoaded', () => {
-            let next_button = document.querySelector("#read-csv-file-next");
-            next_button.addEventListener('click', (e) => {
-                ipcRenderer.send('read-csv-file:next');
-            });
-        });
     }
-}
 
-ipcMain.on('read-csv-file:import', () => {
-    read_csv_file_view.forward('read_csv_file');
-});
+    put_view_into_dom() {
+        let account_panel = document.querySelector('#account-panel');
+        let message = document.createElement('div');
+        message.innerHTML = '<h1>HALLO WELT</h1>'
+        account_panel.appendChild(message);
+        this.send_view_ready();
+    }
+
+
+}
 
 module.exports = ReadCSVFileView;

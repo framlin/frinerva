@@ -7,7 +7,7 @@ function create_interactor(use_case, use_case_name) {
 }
 
 function create_presenter(use_case, use_case_name) {
-    let presenter = UseCaseFactory.PresenterFactory.create(use_case_name);
+    let presenter = UseCaseFactory.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     use_case.presenter = presenter;
     return presenter;
 }
@@ -24,32 +24,22 @@ function create_helper(use_case, use_case_name) {
     return helper;
 }
 
-
-function create_view(use_case, use_case_name) {
-    let view = UseCaseFactory.ViewFactory.create(use_case_name);
-    use_case.view = view;
-    return view;
-}
-
-function wire_use_case(use_case, interactor, presenter, view, controller, helper) {
+function wire_use_case(use_case, interactor, presenter, controller, helper) {
     //order MATTERS
     interactor.presenter = presenter;
     interactor.helper = helper;
     controller.interactor = interactor;
     controller.use_case = use_case;
     presenter.controller = controller;
-    presenter.view = view;
-    view.presenter = presenter;
 }
 
 function create_use_case(use_case_name) {
-    let use_case = new UseCases[use_case_name](UseCaseFactory);
+    let use_case = new UseCases[use_case_name](UseCaseFactory, use_case_name);
     let interactor = create_interactor(use_case, use_case_name);
     let presenter = create_presenter(use_case, use_case_name);
     let controller = create_controller(use_case, use_case_name);
     let helper = create_helper(use_case, use_case_name);
-    let view = create_view(use_case, use_case_name);
-    wire_use_case(use_case, interactor, presenter, view, controller, helper);
+    wire_use_case(use_case, interactor, presenter, controller, helper);
     return use_case;
 }
 
@@ -59,18 +49,18 @@ const UseCases = {
 
 
 class UseCaseFactory {
-    static ViewFactory;
     static PresenterFactory;
     static InteractorFactory;
     static ControllerFactory;
     static HelperFactory;
+    static IPCChannel;
 
-    static config(ViewFactory, PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory) {
-        this.ViewFactory = ViewFactory;
+    static config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, IPCChannel) {
         this.PresenterFactory = PresenterFactory;
         this.InteractorFactory = InteractorFactory;
         this.ControllerFactory = ControllerFactory;
         this.HelperFactory = HelperFactory;
+        this.IPCChannel = IPCChannel;
     }
 
 
@@ -80,7 +70,6 @@ class UseCaseFactory {
         } else {
             throw Error(`NO USE_CASE ${use_case_name}`);
         }
-
     }
 }
 
