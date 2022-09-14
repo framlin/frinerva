@@ -1,16 +1,24 @@
 const UseCaseFactory = require('../../app/factories/UseCaseFactory');
-const PresenterFactory = require("../../app/factories/PresenterFactory");
+// const PresenterFactory = require("../../app/factories/PresenterFactory");
 const InteractorFactory = require("../../app/factories/InteractorFactory");
 const ControllerFactory = require("../../app/factories/ControllerFactory");
 const ReadCSVFile = require("../../app/business/accounting/import/read_csv_file/ReadCSVFile");
 const ReadCSVFileInteractor = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileInteractor");
-const ReadCSVFilePresenter = require("../../app/business/accounting/import/read_csv_file/ReadCSVFilePresenter");
+// const ReadCSVFilePresenter = require("../../app/business/accounting/import/read_csv_file/ReadCSVFilePresenter");
 const ReadCSVFileController = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileController");
 const HelperFactory = require("../../app/factories/HelperFactory");
 const ReadCSVFileHelper = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileHelper");
 
+class ReadCSVFilePresenterStub{
+
+}
+class PresenterFactoryStub {
+    static create() {
+        return new ReadCSVFilePresenterStub()
+    };
+}
 beforeAll(() => {
-    UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory);
+    UseCaseFactory.config(PresenterFactoryStub, InteractorFactory, ControllerFactory, HelperFactory);
 })
 
 function expect_use_case_creation(use_case_name, use_case_class, use_case_interactor, use_case_presenter, use_case_controller, use_case_helper) {
@@ -35,7 +43,7 @@ test('create read_csv_file', () => {
         'read_csv_file',
         ReadCSVFile,
         ReadCSVFileInteractor,
-        ReadCSVFilePresenter,
+        ReadCSVFilePresenterStub,
         ReadCSVFileController,
         ReadCSVFileHelper
     );

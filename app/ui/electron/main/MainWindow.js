@@ -1,4 +1,4 @@
-const {BrowserWindow, ipcMain} = require('electron')
+const {BrowserWindow, ipcMain, dialog} = require('electron')
 const path = require("path");
 
 let main_window;
@@ -12,6 +12,8 @@ class MainWindow extends BrowserWindow{
             },
             show: false
         });
+
+
         main_window = this;
     }
 
@@ -26,6 +28,18 @@ class MainWindow extends BrowserWindow{
         this._UseCaseFactory = value;
     }
 }
+
+
+// async function handleFileOpen() {
+//     const { canceled, filePaths } = await dialog.showOpenDialog({ properties: ['openFile', 'multiSelections'] })
+//     if (canceled) {
+//         return
+//     } else {
+//         return filePaths[0]
+//     }
+// }
+//
+// ipcMain.handle('dialog:openFile', handleFileOpen);
 
 ipcMain.on('use_case:create', (e, use_case_name) => {
     main_window.execute_use_case(use_case_name);

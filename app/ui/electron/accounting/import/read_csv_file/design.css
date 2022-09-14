@@ -1,0 +1,18 @@
+#payment-entries{
+    border-top-style: solid;
+    border-top-color: var(--main-border-color);
+    border-bottom-style: solid;
+    border-bottom-color: var(--main-border-color);
+}
+
+#import-panel table {
+    background-color: var(--account-table-bg-color);
+}
+.dialog-header{
+    background-color: var(--dialog-header-color);
+    padding: 5px 10px;
+}
+.dialog-footer{
+    background-color: var(--dialog-footer-color);
+}
+

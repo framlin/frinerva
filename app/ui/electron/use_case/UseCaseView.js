@@ -1,12 +1,52 @@
 const {ipcRenderer} = require("electron");
+const HTMLReader = require("../../../util/HTMLReader");
+const path = require("path");
 
-class UseCaseView{
+
+class UseCaseView {
+
+    _use_case_name;
+
+    constructor(use_case_name) {
+        this._use_case_name = use_case_name;
+    }
+
+    link_style(stylesheet_filename) {
+        let head = document.getElementsByTagName('HEAD')[0];
+        let link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = stylesheet_filename;
+        head.appendChild(link);
+    }
+
+    insert_partial(markup, frame) {
+        let frame_div = document.querySelector(frame);
+        frame_div.innerHTML = markup;
+    }
+
+    async insert_markup_at(user_case_dir, target) {
+        let markup = await HTMLReader.read_html_file(path.join(user_case_dir, this._use_case_name + '.html'));
+        this.insert_partial(markup, target);
+        this.link_style(path.join(user_case_dir, 'design.css'));
+        this.link_style(path.join(user_case_dir, 'layout.css'));
+
+    }
+
+    async create_view(markup_file_name, style_file_name) {
+        //abstract
+    }
 
     forward(use_case_name) {
     }
 
-    put_view_into_dom() {
+    async put_view_into_dom() {
+        await this.create_view();
         this.send_view_ready();
+    }
+
+    receive_ipc_message(channel, callback) {
+        ipcRenderer.on(channel, callback);
     }
 
     send_view_ready() {
@@ -15,3 +55,4 @@ class UseCaseView{
 }
 
 module.exports = UseCaseView;
+

@@ -1,4 +1,4 @@
-const {ipcMain} = require('electron');
+const {ipcMain, dialog} = require('electron');
 class UseCasePresenter{
     constructor(ipc_chanel) {
         this._ipc_channel = ipc_chanel;
@@ -28,6 +28,18 @@ class UseCasePresenter{
         this._controller = value;
     }
 
+    static async handleFileOpen() {
+        const {canceled, filePaths} = await dialog.showOpenDialog({properties: ['openFile', 'multiSelections']})
+        if (canceled) {
+            return;
+        } else {
+            return filePaths[0];
+        }
+    }
+
+
+
 }
+ipcMain.handle('dialog:openFile', UseCasePresenter.handleFileOpen);
 
 module.exports = UseCasePresenter;

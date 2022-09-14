@@ -22,8 +22,8 @@ class AccountingWorkspaceView extends WorkspaceView{
 }
 
 
-ipcRenderer.on('use_case:created', (e, use_case_name) => {
-    ViewFactory.create(use_case_name).put_view_into_dom();
+ipcRenderer.on('use_case:created', async (e, use_case_name) => {
+    await ViewFactory.create(use_case_name).put_view_into_dom();
 });
 
 module.exports = AccountingWorkspaceView;

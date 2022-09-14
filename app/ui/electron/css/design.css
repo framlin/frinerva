@@ -25,6 +25,8 @@
     --splitter-bg-color: var(--color-gray);
 
     --selectable-hover-color: var(--color-lighter-gray);
+
+    --account-table-bg-color: var(--color-white-blue);
 }
 
 html, body {
