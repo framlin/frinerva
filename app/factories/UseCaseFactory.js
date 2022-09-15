@@ -1,4 +1,5 @@
 const ReadCSVFile = require("../business/accounting/import/read_csv_file/ReadCSVFile");
+const CreateAccount = require("../business/accounting/create/CreateAccount");
 
 function create_interactor(use_case, use_case_name) {
     let interactor = UseCaseFactory.InteractorFactory.create(use_case_name);
@@ -44,7 +45,8 @@ function create_use_case(use_case_name) {
 }
 
 const UseCases = {
-    read_csv_file: ReadCSVFile
+    read_csv_file: ReadCSVFile,
+    create_account: CreateAccount,
 }
 
 

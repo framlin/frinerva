@@ -1,22 +1,33 @@
 const UseCaseFactory = require('../../app/factories/UseCaseFactory');
-// const PresenterFactory = require("../../app/factories/PresenterFactory");
 const InteractorFactory = require("../../app/factories/InteractorFactory");
 const ControllerFactory = require("../../app/factories/ControllerFactory");
+const HelperFactory = require("../../app/factories/HelperFactory");
+
 const ReadCSVFile = require("../../app/business/accounting/import/read_csv_file/ReadCSVFile");
 const ReadCSVFileInteractor = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileInteractor");
-// const ReadCSVFilePresenter = require("../../app/business/accounting/import/read_csv_file/ReadCSVFilePresenter");
 const ReadCSVFileController = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileController");
-const HelperFactory = require("../../app/factories/HelperFactory");
 const ReadCSVFileHelper = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileHelper");
 
-class ReadCSVFilePresenterStub{
+const CreateAccount = require("../../app/business/accounting/create/CreateAccount");
+const CreateAccountInteractor = require("../../app/business/accounting/create/CreateAccountInteractor");
+const CreateAccountController = require("../../app/business/accounting/create/CreateAccountController");
+const CreateAccountHelper = require("../../app/business/accounting/create/CreateAccountHelper");
 
-}
+class ReadCSVFilePresenterStub {}
+
+class CreateAccountPresenterStub {}
+
 class PresenterFactoryStub {
-    static create() {
-        return new ReadCSVFilePresenterStub()
+    static presenters = {
+        read_csv_file: ReadCSVFilePresenterStub,
+        create_account: CreateAccountPresenterStub,
+    }
+
+    static create(use_case_name) {
+        return new this.presenters[use_case_name]()
     };
 }
+
 beforeAll(() => {
     UseCaseFactory.config(PresenterFactoryStub, InteractorFactory, ControllerFactory, HelperFactory);
 })
@@ -49,3 +60,14 @@ test('create read_csv_file', () => {
     );
 
 })
+
+test('create createAccount', () => {
+    expect_use_case_creation(
+        'create_account',
+        CreateAccount,
+        CreateAccountInteractor,
+        CreateAccountPresenterStub,
+        CreateAccountController,
+        CreateAccountHelper
+    );
+});

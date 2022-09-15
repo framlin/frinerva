@@ -7,12 +7,20 @@ class AccountingWorkspaceView extends WorkspaceView{
     constructor() {
         super();
         this.register_read_csv_file_use_case();
+        this.register_create_account_use_case();
     }
 
     register_read_csv_file_use_case () {
         let read_csv_button = document.querySelector('#read-csv-file');
         read_csv_button.addEventListener('click', (e) => {
             ipcRenderer.send('use_case:create', 'read_csv_file');
+        });
+    };
+
+    register_create_account_use_case () {
+        let read_csv_button = document.querySelector('#create-account');
+        read_csv_button.addEventListener('click', (e) => {
+            ipcRenderer.send('use_case:create', 'create_account');
         });
     };
 
