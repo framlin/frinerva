@@ -22,11 +22,6 @@
     color: var(--select-accounting-font-color);
 }
 
-#account-selection-bar {
-    border-bottom-style: solid;
-    border-bottom-color: var(--color-darker-blue);
-}
-
 .account-list-header {
     background-color: var(--color-dark-blue);
     color: var(--color-white-blue);

@@ -6,7 +6,6 @@ const PresenterFactory = require("../../../factories/PresenterFactory");
 const InteractorFactory = require("../../../factories/InteractorFactory");
 const ControllerFactory = require("../../../factories/ControllerFactory");
 const HelperFactory = require("../../../factories/HelperFactory");
-const ViewFactory = require("../../../factories/ViewFactory")
 
 const menuTemplate = require('./MainMenu').createMenuTemplate(UseCaseFactory);
 

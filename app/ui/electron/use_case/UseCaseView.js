@@ -45,10 +45,6 @@ class UseCaseView {
         this.send_view_ready();
     }
 
-    receive_ipc_message(channel, callback) {
-        ipcRenderer.on(channel, callback);
-    }
-
     send_view_ready() {
         ipcRenderer.send('use_case:view_ready');
     }

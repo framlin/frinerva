@@ -8,6 +8,14 @@
 #import-panel table {
     background-color: var(--account-table-bg-color);
 }
+#import-panel table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+    border-color: var(--main-border-color);
+}
+#import-panel tr:nth-child(even) {
+    background-color: var(--account-table-hilight-bg-color);
+}
 .dialog-header{
     background-color: var(--dialog-header-color);
     padding: 5px 10px;

@@ -27,6 +27,7 @@
     --selectable-hover-color: var(--color-lighter-gray);
 
     --account-table-bg-color: var(--color-white-blue);
+    --account-table-hilight-bg-color: white;
 }
 
 html, body {

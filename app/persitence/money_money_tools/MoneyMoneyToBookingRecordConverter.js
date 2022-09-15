@@ -1,5 +1,4 @@
 const BookingEntry = require("../../business/accounting/account/BookingEntry");
-const PaymentToBookingRecordConverter = require("../../business/accounting/import/read_csv_file/PaymentToBookingRecordConverter");
 
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',
@@ -14,7 +13,7 @@ const COST_CENTER_MAP = new Map(Object.entries({
     'NebenKosten': 'SERVICE_CHARGES'
 }));
 
-class MoneyMoneyToBookingRecordConverter extends PaymentToBookingRecordConverter {
+class MoneyMoneyToBookingRecordConverter{
     convert(payment_entry) {
         let booking_entry = new BookingEntry (
             this._convert_to_date(payment_entry.Datum),

@@ -6,3 +6,11 @@
     margin:  20px auto;
     padding: 10px;
 }
+#import-panel th, td {
+    padding: 2px 4px;
+}
+
+#payment-entries{
+    overflow-y: scroll;
+}
+

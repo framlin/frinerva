@@ -1,20 +1,30 @@
 const UseCasePresenter = require("../../../use_case/UseCasePresenter");
-const {dialog, ipcMain} = require("electron");
+const {ipcMain} = require("electron");
+
+let presenter;
 
 class ReadCSVFilePresenter extends UseCasePresenter {
-
-    async execute(use_case_name) {
-        this._ipc_channel.send('use_case:created', use_case_name);
-        ipcMain.on('use_case:view_ready', async () => {
-            let file_name = await UseCasePresenter.handleFileOpen();
-            this._controller.execute(file_name);
-        });
+    constructor(ipc_chanel) {
+        super(ipc_chanel);
+        presenter = this;
     }
 
     show_payments(payments) {
-        console.log("PRESNETER SHOW PAYMENTS")
         this._ipc_channel.send('read_csv_file:show_payments', payments);
     }
+
+    on_next() {
+        this._controller.next();
+    }
+
+    show_booking_records(booking_records) {
+        this._ipc_channel.send('read_csv_file:show_booking_records', booking_records);
+    }
 }
+
+
+ipcMain.on('read_csv_file:next', () => {
+    presenter.on_next()
+});
 
 module.exports = ReadCSVFilePresenter;
