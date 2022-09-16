@@ -46,6 +46,7 @@
     "csv-reader": "^1.0.9",
     "electron-squirrel-startup": "^1.0.0",
     "inquirer-file-tree-selection-prompt": "^1.0.19",
+    "jsonpath": "^1.1.1",
     "minimist": "^1.2.6"
   },
   "config": {

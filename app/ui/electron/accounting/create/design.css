@@ -1,0 +1,11 @@
+#account-creation-area {
+    background-color: var(--color-lighter-blue);
+}
+
+#account-creation-area .account-list{
+    background-color: var(--color-white-blue);
+}
+
+#account-creation-area .account-entry.selected{
+    background-color: red;
+}

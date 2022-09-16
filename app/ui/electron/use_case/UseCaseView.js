@@ -25,12 +25,14 @@ class UseCaseView {
         frame_div.innerHTML = markup;
     }
 
-    async insert_markup_at(user_case_dir, target) {
-        let markup = await HTMLReader.read_html_file(path.join(user_case_dir, this._use_case_name + '.html'));
+    async insert_markup_at(use_case_dir, target) {
+        let markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
         this.insert_partial(markup, target);
-        this.link_style(path.join(user_case_dir, 'design.css'));
-        this.link_style(path.join(user_case_dir, 'layout.css'));
+    }
 
+    link_styles(use_case_dir) {
+        this.link_style(path.join(use_case_dir, 'design.css'));
+        this.link_style(path.join(use_case_dir, 'layout.css'));
     }
 
     async create_view(markup_file_name, style_file_name) {
@@ -40,8 +42,12 @@ class UseCaseView {
     forward(use_case_name) {
     }
 
+    register_event_listener(){
+
+    }
     async put_view_into_dom() {
         await this.create_view();
+        this.register_event_listener();
         this.send_view_ready();
     }
 

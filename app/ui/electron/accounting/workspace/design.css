@@ -29,3 +29,11 @@
 .account-entry {
     background-color: var(--color-white-blue);
 }
+
+.dialog-header{
+    background-color: var(--dialog-header-color);
+    padding: 5px 10px;
+}
+.dialog-footer{
+    background-color: var(--dialog-footer-color);
+}

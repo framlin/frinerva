@@ -16,11 +16,4 @@
 #import-panel tr:nth-child(even) {
     background-color: var(--account-table-hilight-bg-color);
 }
-.dialog-header{
-    background-color: var(--dialog-header-color);
-    padding: 5px 10px;
-}
-.dialog-footer{
-    background-color: var(--dialog-footer-color);
-}
 

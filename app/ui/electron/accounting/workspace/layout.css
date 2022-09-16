@@ -1,3 +1,6 @@
+.next-btn {
+    margin:5px 10px;
+}
 
 .account-list {
     margin: 5px;
@@ -14,13 +17,14 @@
 .account-entry {
     padding-left: 25px;
     padding-top: 2px;
+    padding-right: 25px;
 }
 
 .account-entry:nth-child(2) {
     padding-top: 5px;
 }
 
-.accounting .sidebar  .side-board-entry-toggle{
+.accounting .sidebar .side-board-entry-toggle{
     writing-mode: vertical-lr;
     text-orientation: upright;
 }
