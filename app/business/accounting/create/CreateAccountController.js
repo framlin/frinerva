@@ -6,7 +6,7 @@ class CreateAccountController extends UseCaseController {
     }
 
     create(new_accounts_list) {
-        this._interactor.create(new_accounts_list);
+        this._interactor.create(new_accounts_list).then();
     }
 }
 

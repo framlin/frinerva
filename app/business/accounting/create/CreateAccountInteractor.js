@@ -26,10 +26,7 @@ class CreateAccountInteractor extends UseCaseInteractor {
         this._presenter.show_new_accounts_list(new_entry_list);
     }
 
-    create(new_accounts_list) {
-        console.log("CreateAccountInteractor:: create")
-        console.log(new_accounts_list);
-
+    async create(new_accounts_list) {
     }
 }
 
