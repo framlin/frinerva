@@ -1,5 +1,7 @@
 const HTMLReader = require("../../../util/HTMLReader");
 const path = require("path");
+const {ipcRenderer} = require("electron");
+const ViewFactory = require("../../../factories/ViewFactory");
 
 class WorkspaceView {
     static replace_partial(markup, overlay) {
@@ -15,6 +17,7 @@ class WorkspaceView {
         this.replace_partial(markup, target);
 
     }
+
     static mark_workspace(workspace_name) {
         let workspace = document.querySelector('#workspace');
         for(let cls of workspace.classList.values()) {
@@ -86,4 +89,7 @@ class WorkspaceView {
     }
 }
 
+ipcRenderer.on('use_case:created', async (e, use_case_name) => {
+    await ViewFactory.create(use_case_name).put_view_into_dom();
+});
 module.exports = WorkspaceView;

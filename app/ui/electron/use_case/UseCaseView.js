@@ -20,6 +20,7 @@ class UseCaseView {
         head.appendChild(link);
     }
 
+
     insert_partial(markup, frame) {
         let frame_div = document.querySelector(frame);
         frame_div.innerHTML = markup;
@@ -35,7 +36,7 @@ class UseCaseView {
         this.link_style(path.join(use_case_dir, 'layout.css'));
     }
 
-    async create_view(markup_file_name, style_file_name) {
+    async create_view() {
         //abstract
     }
 
@@ -43,7 +44,7 @@ class UseCaseView {
     }
 
     register_event_listener(){
-
+        //abstract
     }
     async put_view_into_dom() {
         await this.create_view();

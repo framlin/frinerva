@@ -6,8 +6,7 @@ class AccountingWorkspaceView extends WorkspaceView{
 
     constructor() {
         super();
-        this.register_read_csv_file_use_case();
-        this.register_create_account_use_case();
+        this.register_event_handler();
     }
 
     register_read_csv_file_use_case () {
@@ -24,14 +23,18 @@ class AccountingWorkspaceView extends WorkspaceView{
         });
     };
 
+    register_event_handler() {
+        console.log("AccountingWorkspaceView::register_event_handler")
+        this.register_read_csv_file_use_case();
+        this.register_create_account_use_case();
+    }
+
     static async create_workspace() {
         await WorkspaceView.create_workspace('accounting', __dirname);
     }
 }
 
 
-ipcRenderer.on('use_case:created', async (e, use_case_name) => {
-    await ViewFactory.create(use_case_name).put_view_into_dom();
-});
+
 
 module.exports = AccountingWorkspaceView;
