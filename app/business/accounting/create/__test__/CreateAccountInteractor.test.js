@@ -6,9 +6,17 @@ class PresenterSpy {
     show_cost_center_list_called;
     show_cost_center_list_params;
 
+    show_booking_period_list_called;
+    show_booking_period_list_params;
+
     show_cost_center_list(cs_list) {
         this.show_cost_center_list_called = true;
         this.show_cost_center_list_params = cs_list;
+    }
+
+    show_booking_period_list(bp_list) {
+        this.show_booking_period_list_called = true;
+        this.show_booking_period_list_params = bp_list;
     }
 }
 let presenter = new PresenterSpy();
@@ -36,5 +44,7 @@ test('execute', async () => {
     create_account_interactor.execute().then(() => {
         expect(presenter.show_cost_center_list_called).toBe(true);
         expect(presenter.show_cost_center_list_params).toStrictEqual({"TEST": "test"});
+        expect(presenter.show_booking_period_list_called).toBe(true);
+        expect(presenter.show_booking_period_list_params).toStrictEqual({"TEST": "test"});
     });
 })
