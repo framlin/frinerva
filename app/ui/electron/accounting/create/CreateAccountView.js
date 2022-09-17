@@ -12,13 +12,25 @@ class CreateAccountView extends UseCaseView {
     register_create_button() {
         let create_button = document.querySelector('.next-btn');
         create_button.addEventListener('click', () => {
-            ipcRenderer.send('create_account:create')
+            let new_accounts_list = this.get_new_accounts_list()
+            ipcRenderer.send('create_account:create', new_accounts_list);
         });
     };
 
+    get_new_accounts_list() {
+        let new_accounts_list = [];
+        let result_column_entries = document.querySelectorAll('#result-column .account-entry');
+        result_column_entries.forEach((entry) => {
+            new_accounts_list.push({
+                period:  entry.dataset.period,
+                cost_center: entry.dataset.costCenter,
+            });
+        });
+        return new_accounts_list;
+    }
+
     add_selection_listener(list_entry) {
         list_entry.addEventListener('click', (e) => {
-            console.log("CLICK ENTRY")
             list_entry.classList.toggle('selected');
         });
 
@@ -46,18 +58,7 @@ class CreateAccountView extends UseCaseView {
                 periods.push(list_entry.innerHTML);
             })
 
-            let result_column = document.querySelector('#result-column');
-            for (let account of accounts) {
-                for (let period of periods) {
-                    let new_entry = document.createElement('div');
-                    new_entry.innerHTML = `${period} - ${account.label}`
-                    new_entry.setAttribute('data-cost-center', account.key);
-                    new_entry.setAttribute('data-booking-period', period);
-                    new_entry.classList.add("account-entry", "clickable", "selectable");
-                    result_column.appendChild(new_entry);
-                }
-            }
-
+            ipcRenderer.send('create_account:period_cost_center-selected', {periods, accounts});
         });
     };
 
@@ -100,6 +101,19 @@ class CreateAccountView extends UseCaseView {
         }
     }
 
+    show_new_accounts_list(new_accounts_list) {
+        let result_column = document.querySelector('#result-column');
+
+        for (let new_account of new_accounts_list) {
+            let new_entry = document.createElement('div');
+            new_entry.innerHTML = `${new_account.period} -${new_account.label}`
+            new_entry.setAttribute('data-cost-center', new_account.cost_center);
+            new_entry.setAttribute('data-booking-period', new_account.period);
+            new_entry.classList.add("account-entry", "clickable", "selectable");
+            this.add_selection_listener(new_entry)
+            result_column.appendChild(new_entry);
+        }
+    }
 }
 
 ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
@@ -108,6 +122,10 @@ ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => 
 
 ipcRenderer.on('create_account:show_booking_period_list', (e, booking_period_list) => {
     create_account_view.show_booking_period_list(booking_period_list);
+});
+
+ipcRenderer.on('create_account:show_new_accounts_list', (e, new_accounts_list) => {
+    create_account_view.show_new_accounts_list(new_accounts_list);
 });
 
 module.exports = CreateAccountView;
