@@ -22,11 +22,13 @@
     color: var(--select-accounting-font-color);
 }
 
-.account-list-header {
+.sideboard-entry-list-header, .account-list-header {
     background-color: var(--color-dark-blue);
     color: var(--color-white-blue);
 }
-.account-entry {
+
+
+.sideboard-entry-list-entry, .account-entry {
     background-color: var(--color-white-blue);
 }
 

@@ -2,19 +2,23 @@
     margin:5px 10px;
 }
 
-.account-list {
+.sideboard .sideboard-entry:not(.active) {
+    display: none;
+}
+
+.sideboard-entry, .account-list {
     margin: 5px;
 }
 
-.account-list-header, .account-entry {
+.sideboard-entry-list-header,.sideboard-entry-list-entry, .account-list-header, .account-entry {
     height: 25px;
 }
 
-.account-list-header {
+.sideboard-entry-list-header, .account-list-header {
     padding: 5px 5px 2px 5px;
 }
 
-.account-entry {
+.sideboard-entry-list-entry, .account-entry {
     padding-left: 25px;
     padding-top: 2px;
     padding-right: 25px;
@@ -27,6 +31,6 @@
 .accounting .sidebar .side-board-entry-toggle{
     writing-mode: vertical-lr;
     text-orientation: upright;
-    padding: 3px 0px;
-    margin: 2px 0px;
+    padding: 3px 0;
+    margin: 2px 0;
 }

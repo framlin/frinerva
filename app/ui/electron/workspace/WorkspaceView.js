@@ -4,6 +4,57 @@ const {ipcRenderer} = require("electron");
 const ViewFactory = require("../../../factories/ViewFactory");
 
 class WorkspaceView {
+
+    switch_sideboard_to(sideboard_entry_selector) {
+        this.clear_sideboard_entries();
+        this.activate_sideboard_entry(sideboard_entry_selector);
+    }
+
+    clear_sideboard_entries() {
+        let sideboard_entries = document.querySelectorAll('.sideboard-entry');
+        sideboard_entries.forEach((entry) => {
+            entry.classList.remove('active');
+        });
+    }
+
+    activate_sideboard_entry(entry_selector) {
+        let element = document.querySelector(entry_selector);
+        element.classList.add('active');
+    }
+
+    register_sideboard_switches(side_board_switch_selector_list) {
+        for (let selector of side_board_switch_selector_list) {
+            this.register_sideboard_switch(selector) ;
+        }
+    }
+
+    register_sideboard_switch(sidebar_switch_selector) {
+        let sidebar_switch = document.querySelector(sidebar_switch_selector);
+        sidebar_switch.addEventListener('click', (e) => {
+            let switch_to_selector = sidebar_switch.getAttribute('switch_to');
+            this.switch_sideboard_to(switch_to_selector);
+        });
+    }
+
+    register_use_case_starter(use_case_starter_selector_list) {
+        for (let selector of use_case_starter_selector_list) {
+            this.register_use_case_starter_btn(selector)
+        }
+    }
+
+    register_use_case_starter_btn(btn_selector) {
+        let use_case_starter = document.querySelector(btn_selector);
+        let use_case_name = use_case_starter.getAttribute('use_case_name')
+        use_case_starter.addEventListener('click', (e) => {
+            ipcRenderer.send('use_case:create', use_case_name);
+        });
+    }
+
+
+
+
+
+
     static replace_partial(markup, overlay) {
         let overlay_div = document.querySelector(overlay);
         let partial_frame_div = document.createElement('div');

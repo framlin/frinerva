@@ -1,8 +1,6 @@
-const PaymentCSVReader = require("../../business/accounting/import/read_csv_file/PaymentCSVReader");
-
 const CsvReadableStream = require('csv-reader');
 
-class MoneyMoneyCSVReader extends PaymentCSVReader {
+class MoneyMoneyCSVReader{
 
      static create_payments(file_stream) {
         return new Promise(resolve => {

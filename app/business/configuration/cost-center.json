@@ -1,0 +1,11 @@
+{
+  "NONE": "",
+  "HOUSE": "Haus",
+  "ADMINISTRATION": "Verwaltung",
+  "SERVICE_CHARGES": "Nebenkosten",
+  "DWELLING": "Wohnung",
+  "BANKING": "Bank",
+  "PRIVATE": "Privat",
+  "DEPOSIT": "Kaution",
+  "RENT": "Miete"
+}

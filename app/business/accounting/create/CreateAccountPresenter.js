@@ -9,6 +9,10 @@ class CreateAccountPresenter extends UseCasePresenter {
         presenter = this;
     }
 
+    show_cost_center_list(cost_center_list) {
+        this._ipc_channel.send('create_account:show_cost_center_list', cost_center_list);
+    }
+
     on_create() {
         console.log("CreateAccountPresenter ON CREATE")
     }

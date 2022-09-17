@@ -56,6 +56,26 @@ class CreateAccountView extends UseCaseView {
         this.register_move_button();
     };
 
+    static show_cost_center_list(cost_center_list) {
+        console.log(cost_center_list);
+        let account_list = document.querySelector('#account-column');
+        for(let cost_center in cost_center_list) {
+            //<div className="account-entry clickable selectable">Bank</div>
+            if (cost_center !== 'NONE') {
+                let account_entry = document.createElement('div');
+                account_entry.classList.add("account-entry", "clickable", "selectable");
+                account_entry.innerHTML=cost_center_list[cost_center];
+                account_list.appendChild(account_entry);
+            }
+        }
+    }
+
 }
+
+
+ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
+    CreateAccountView.show_cost_center_list(cost_center_list);
+});
+
 
 module.exports = CreateAccountView;
