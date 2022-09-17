@@ -20,9 +20,13 @@ class ReadCSVFileView extends UseCaseView {
         });
     }
 
+    register_event_listener() {
+        this.register_next_button();
+    }
+
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
-        this.register_next_button();
+        this.link_styles(__dirname);
     }
 
     static show_booking_records(booking_records) {

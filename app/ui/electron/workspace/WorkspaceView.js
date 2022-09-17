@@ -64,14 +64,23 @@ class WorkspaceView {
         work_bench.addEventListener('pointerup', release)
     }
 
-    static async create_workspace(workspace_name, workspace_directory) {
-        this.mark_workspace(workspace_name);
-        this.link_style(path.join(workspace_directory, 'design.css'));
-        this.link_style(path.join(workspace_directory, 'layout.css'));
+    static async create_segments(workspace_directory) {
         await this.create_segment(path.join(workspace_directory, 'workbench.html'), '.workbench');
         await this.create_segment(path.join(workspace_directory, 'sideboard.html'), '.sideboard');
         await this.create_segment(path.join(workspace_directory, 'sidebar.html'), '.sidebar');
         await this.create_segment(path.join(workspace_directory, 'toolbar.html'), '.toolbar');
+    }
+
+    static link_styles(workspace_directory) {
+        this.link_style(path.join(workspace_directory, 'design.css'));
+        this.link_style(path.join(workspace_directory, 'layout.css'));
+
+    }
+
+    static async create_workspace(workspace_name, workspace_directory) {
+        this.mark_workspace(workspace_name);
+        await this.create_segments(workspace_directory);
+        this.link_styles(workspace_directory);
         this.splitter();
         return new WorkspaceView();
     }

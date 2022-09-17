@@ -1,4 +1,4 @@
-const BookingRecord = require("../../../app/business/accounting/account/BookingRecord");
+const BookingRecord = require("../BookingRecord");
 test('creation', () => {
     let cost_center = "BANKING";
     let booking_period = '2022';

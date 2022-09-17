@@ -27,4 +27,6 @@
 .accounting .sidebar .side-board-entry-toggle{
     writing-mode: vertical-lr;
     text-orientation: upright;
+    padding: 3px 0px;
+    margin: 2px 0px;
 }

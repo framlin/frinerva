@@ -1,17 +1,17 @@
-const UseCaseFactory = require('../../app/factories/UseCaseFactory');
-const InteractorFactory = require("../../app/factories/InteractorFactory");
-const ControllerFactory = require("../../app/factories/ControllerFactory");
-const HelperFactory = require("../../app/factories/HelperFactory");
+const UseCaseFactory = require('../UseCaseFactory');
+const InteractorFactory = require("../InteractorFactory");
+const ControllerFactory = require("../ControllerFactory");
+const HelperFactory = require("../HelperFactory");
 
-const ReadCSVFile = require("../../app/business/accounting/import/read_csv_file/ReadCSVFile");
-const ReadCSVFileInteractor = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileInteractor");
-const ReadCSVFileController = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileController");
-const ReadCSVFileHelper = require("../../app/business/accounting/import/read_csv_file/ReadCSVFileHelper");
+const ReadCSVFile = require("../../business/accounting/import/read_csv_file/ReadCSVFile");
+const ReadCSVFileInteractor = require("../../business/accounting/import/read_csv_file/ReadCSVFileInteractor");
+const ReadCSVFileController = require("../../business/accounting/import/read_csv_file/ReadCSVFileController");
+const ReadCSVFileHelper = require("../../business/accounting/import/read_csv_file/ReadCSVFileHelper");
 
-const CreateAccount = require("../../app/business/accounting/create/CreateAccount");
-const CreateAccountInteractor = require("../../app/business/accounting/create/CreateAccountInteractor");
-const CreateAccountController = require("../../app/business/accounting/create/CreateAccountController");
-const CreateAccountHelper = require("../../app/business/accounting/create/CreateAccountHelper");
+const CreateAccount = require("../../business/accounting/create/CreateAccount");
+const CreateAccountInteractor = require("../../business/accounting/create/CreateAccountInteractor");
+const CreateAccountController = require("../../business/accounting/create/CreateAccountController");
+const CreateAccountHelper = require("../../business/accounting/create/CreateAccountHelper");
 
 class ReadCSVFilePresenterStub {}
 
