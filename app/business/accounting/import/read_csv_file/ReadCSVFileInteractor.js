@@ -1,7 +1,7 @@
 const UseCaseInteractor = require("../../../use_case/UseCaseInteractor");
 const Fs = require("fs");
-const MoneyMoneyCSVReader = require("../../../../persitence/money_money_tools/MoneyMoneyCSVReader");
-const MoneyMoneyToBookingRecordConverter = require("../../../../persitence/money_money_tools/MoneyMoneyToBookingRecordConverter");
+const MoneyMoneyCSVReader = require("../../../../persistence/money_money_tools/MoneyMoneyCSVReader");
+const MoneyMoneyToBookingRecordConverter = require("../../../../persistence/money_money_tools/MoneyMoneyToBookingRecordConverter");
 
 class ReadCSVFileInteractor extends UseCaseInteractor {
     async execute(file_name) {

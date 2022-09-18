@@ -74,7 +74,6 @@ class CreateAccountView extends UseCaseView {
     };
 
     show_cost_center_list(cost_center_list) {
-        console.log(cost_center_list);
         let account_list = document.querySelector('#account-column');
         for (let cost_center in cost_center_list) {
             if (cost_center !== 'NONE') {
@@ -89,7 +88,6 @@ class CreateAccountView extends UseCaseView {
     }
 
     show_booking_period_list(booking_period_list) {
-        console.log(booking_period_list);
         let period_column = document.querySelector('#period-column');
         for (let booking_period of booking_period_list) {
             let account_entry = document.createElement('div');
