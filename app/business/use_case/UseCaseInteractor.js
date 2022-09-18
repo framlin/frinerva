@@ -1,4 +1,11 @@
 class UseCaseInteractor{
+    get helper() {
+        return this._helper;
+    }
+
+    set helper(value) {
+        this._helper = value;
+    }
     execute() {}
 
     get presenter() {
@@ -10,6 +17,7 @@ class UseCaseInteractor{
     }
 
     _presenter;
+    _helper;
 }
 
 module.exports = UseCaseInteractor;

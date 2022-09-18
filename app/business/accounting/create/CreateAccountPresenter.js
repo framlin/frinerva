@@ -21,6 +21,10 @@ class CreateAccountPresenter extends UseCasePresenter {
         this._ipc_channel.send('create_account:show_new_accounts_list', new_entry_list);
     }
 
+    show_error(error_message) {
+        this._ipc_channel.send('create_account:show_error', error_message);
+    }
+
     on_period_cost_center_selection(period_cost_center) {
         this._controller.period_cost_center_selection(period_cost_center);
     }

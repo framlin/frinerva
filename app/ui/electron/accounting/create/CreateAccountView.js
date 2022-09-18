@@ -22,7 +22,7 @@ class CreateAccountView extends UseCaseView {
         let result_column_entries = document.querySelectorAll('#result-column .account-entry');
         result_column_entries.forEach((entry) => {
             new_accounts_list.push({
-                period:  entry.dataset.period,
+                booking_period:  entry.dataset.bookingPeriod,
                 cost_center: entry.dataset.costCenter,
             });
         });
@@ -106,9 +106,9 @@ class CreateAccountView extends UseCaseView {
 
         for (let new_account of new_accounts_list) {
             let new_entry = document.createElement('div');
-            new_entry.innerHTML = `${new_account.period} -${new_account.label}`
+            new_entry.innerHTML = `${new_account.booking_period} -${new_account.label}`
             new_entry.setAttribute('data-cost-center', new_account.cost_center);
-            new_entry.setAttribute('data-booking-period', new_account.period);
+            new_entry.setAttribute('data-booking-period', new_account.booking_period);
             new_entry.classList.add("account-entry", "clickable", "selectable");
             this.add_selection_listener(new_entry)
             result_column.appendChild(new_entry);

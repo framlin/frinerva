@@ -46,7 +46,7 @@ test('serialization', () => {
     balance.add(account2);
 
     let serialized_balance = balance.serialize();
-    expect(serialized_balance).toBe("{\"_name\":\"name\",\"_booking_period\":2022,\"_accounts\":[{\"_name\":\"account1\",\"_cost_center\":\"CC\",\"_booking_entries\":[]},{\"_name\":\"account2\",\"_cost_center\":\"C2\",\"_booking_entries\":[]}]}");
+    expect(serialized_balance).toBe("{\"_name\":\"name\",\"_booking_period\":2022,\"_accounts\":[{\"_booking_period\":\"account1\",\"_cost_center\":\"CC\",\"_booking_entries\":[]},{\"_booking_period\":\"account2\",\"_cost_center\":\"C2\",\"_booking_entries\":[]}]}");
 
 })
 

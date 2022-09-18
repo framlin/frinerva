@@ -1,6 +1,6 @@
 class Account {
-    constructor(name, cost_center) {
-        this._name = name;
+    constructor(booking_period, cost_center) {
+        this._booking_period = booking_period;
         this._cost_center = cost_center;
         this._booking_entries = [];
     }
@@ -9,8 +9,8 @@ class Account {
         return this._cost_center;
     }
 
-    get name() {
-        return this._name;
+    get booking_period() {
+        return this._booking_period;
     }
 
     get booking_entries() {
@@ -31,11 +31,14 @@ class Account {
 
     static create_from_JSON(json_string) {
         let account_data = JSON.parse(json_string);
-        let account = new Account(account_data._name, account_data._cost_center);
+        let account = new Account(account_data._booking_period, account_data._cost_center);
         account.booking_entries = account_data._booking_entries;
         return account;
     }
 
+    _booking_period;
+    _cost_center;
+    _booking_entries;
 }
 
 module.exports = Account;
