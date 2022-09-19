@@ -33,12 +33,13 @@ class CreateAccountInteractor extends UseCaseInteractor {
             let cost_center = new_account.cost_center;
             let account_exists = this._helper.account_exists(booking_period, cost_center);
             if (account_exists) {
-                this._presenter.show_error(`Das Konto ${cost_center} für ${booking_period} existiert bereits.\nEs wurde kein neues Konto angelegt`);
+                this._presenter.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
             } else {
                 let account = new Account(booking_period, cost_center);
                 await this._helper.save_account(account);
             }
         }
+        this._presenter.account_creation_done();
     }
 }
 

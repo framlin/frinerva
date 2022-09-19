@@ -4,6 +4,7 @@ const {ipcRenderer} = require("electron");
 let create_account_view;
 
 class CreateAccountView extends UseCaseView {
+
     constructor(use_case_name) {
         super(use_case_name);
         create_account_view = this;
@@ -22,7 +23,7 @@ class CreateAccountView extends UseCaseView {
         let result_column_entries = document.querySelectorAll('#result-column .account-entry');
         result_column_entries.forEach((entry) => {
             new_accounts_list.push({
-                booking_period:  entry.dataset.bookingPeriod,
+                booking_period: entry.dataset.bookingPeriod,
                 cost_center: entry.dataset.costCenter,
             });
         });
@@ -112,6 +113,33 @@ class CreateAccountView extends UseCaseView {
             result_column.appendChild(new_entry);
         }
     }
+
+    show_error(error_message) {
+        alert(error_message);
+    }
+
+    reset_list(selector) {
+        let list = document.querySelector(selector);
+        for (let child of list.children) {
+            child.classList.remove('selected');
+        }
+    }
+
+
+    clear_list(selector) {
+        let list = document.querySelector(selector);
+        for (let child of list.children) {
+            if (!child.classList.contains('account-list-header')) {
+                child.firstChild.remove();
+            }
+        }
+    }
+
+    account_creation_finished() {
+        this.reset_list('#account-column');
+        this.reset_list('#period-column');
+        this.clear_list('#result-column');
+    }
 }
 
 ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
@@ -125,5 +153,14 @@ ipcRenderer.on('create_account:show_booking_period_list', (e, booking_period_lis
 ipcRenderer.on('create_account:show_new_accounts_list', (e, new_accounts_list) => {
     create_account_view.show_new_accounts_list(new_accounts_list);
 });
+
+ipcRenderer.on('create_account:show_error', (e, error_message) => {
+    create_account_view.show_error(error_message);
+});
+
+ipcRenderer.on('create_account:done', (e) => {
+    create_account_view.account_creation_finished();
+});
+
 
 module.exports = CreateAccountView;

@@ -16,6 +16,8 @@ class PresenterSpy {
     show_new_accounts_list_called;
     show_new_accounts_list_params;
 
+    account_creation_done_called;
+
     show_cost_center_list(cs_list) {
         this.show_cost_center_list_called = true;
         this.show_cost_center_list_params = cs_list;
@@ -36,6 +38,11 @@ class PresenterSpy {
         this.show_error_called = true;
         this.show_error_params = error_msg;
     }
+
+    account_creation_done() {
+        this.account_creation_done_called = true;
+    }
+
 }
 
 let presenter = new PresenterSpy();
@@ -225,7 +232,7 @@ describe('create', () => {
         expect(create_account_interactor.helper.account_exists_called).toBe(true);
         expect(create_account_interactor.helper.account_exists_params[0]).toStrictEqual(params);
         expect(create_account_interactor.presenter.show_error_called).toBe(true);
-        expect(create_account_interactor.presenter.show_error_params).toBe("Das Konto A für 1 existiert bereits.\nEs wurde kein neues Konto angelegt");
+        expect(create_account_interactor.presenter.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "A", "error": "ACCOUNT_EXIST"});
     });
 
     test('one new account will be stored', async () => {
@@ -239,6 +246,7 @@ describe('create', () => {
         expect(create_account_interactor.helper.save_account_params[0]).toBeInstanceOf(Account);
         expect(create_account_interactor.helper.save_account_params[0].booking_period).toBe(params.booking_period);
         expect(create_account_interactor.helper.save_account_params[0].cost_center).toBe(params.cost_center);
+        expect(create_account_interactor.presenter.account_creation_done_called).toBe(true);
     });
 
     test('one new account will be stored, one existing gets error', async () => {
@@ -248,7 +256,7 @@ describe('create', () => {
         expect(create_account_interactor.helper.account_exists_ctr).toBe(2);
         expect(create_account_interactor.helper.save_account_ctr).toBe(1);
         expect(create_account_interactor.presenter.show_error_called).toBe(true);
-        expect(create_account_interactor.presenter.show_error_params).toBe("Das Konto X für 1 existiert bereits.\nEs wurde kein neues Konto angelegt");
+        expect(create_account_interactor.presenter.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "X", "error": "ACCOUNT_EXIST"});
     });
 
 });
