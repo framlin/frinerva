@@ -13,7 +13,7 @@ class CreateAccountView extends UseCaseView {
     register_create_button() {
         let create_button = document.querySelector('.next-btn');
         create_button.addEventListener('click', () => {
-            let new_accounts_list = this.get_new_accounts_list()
+            let new_accounts_list = this.get_new_accounts_list();
             ipcRenderer.send('create_account:create', new_accounts_list);
         });
     };
@@ -130,7 +130,7 @@ class CreateAccountView extends UseCaseView {
         let list = document.querySelector(selector);
         for (let child of list.children) {
             if (!child.classList.contains('account-list-header')) {
-                child.firstChild.remove();
+                child.remove();
             }
         }
     }

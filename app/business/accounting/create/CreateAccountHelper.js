@@ -2,16 +2,14 @@ const UseCaseHelper = require("../../use_case/UseCaseHelper");
 const JSONStorage = require("../../../persistence/json/JSONStorage");
 const path = require("path");
 
-const STORAGE_ROOT_DIR = path.join(__dirname, "../../../persistence/data")
-const CONFIGURATION_ROOT_DIR = path.join(__dirname, "../../configuration");
-
+const STORAGE_ROOT_DIR = path.join(__dirname,"../../../persistence/data") ;
 class CreateAccountHelper extends UseCaseHelper{
     async load_cost_center_configuration() {
-        return await JSONStorage.load(path.join(CONFIGURATION_ROOT_DIR, "cost-center.json"));
+        return await JSONStorage.load(path.join(__dirname, "../../configuration/cost-center.json"));
     }
 
     async load_booking_period_configuration() {
-        return await JSONStorage.load(path.join(CONFIGURATION_ROOT_DIR, "booking-period.json"));
+        return await JSONStorage.load(path.join(__dirname, "../../configuration/booking-period.json"));
     }
 
     async load_account(booking_period, cost_center) {
