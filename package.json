@@ -1,5 +1,6 @@
 {
   "name": "frinerva",
+  "productName": "Frinerva",
   "version": "20220721",
   "description": "property mangement",
   "main": "app/ui/electron/main/main.js",
