@@ -258,5 +258,4 @@ describe('create', () => {
         expect(create_account_interactor.presenter.show_error_called).toBe(true);
         expect(create_account_interactor.presenter.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "X", "error": "ACCOUNT_EXIST"});
     });
-
 });

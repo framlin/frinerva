@@ -1,5 +1,6 @@
 const UseCaseInteractor = require("../../use_case/UseCaseInteractor");
 const Account = require("../account/Account");
+const Accounting = require("../account/Accounting");
 
 class CreateAccountInteractor extends UseCaseInteractor {
     async execute() {
@@ -28,15 +29,13 @@ class CreateAccountInteractor extends UseCaseInteractor {
     }
 
     async create(new_accounts_list) {
+        let accounting = new Accounting(this._helper);
         for (let new_account of new_accounts_list) {
             let booking_period = new_account.booking_period;
             let cost_center = new_account.cost_center;
-            let account_exists = this._helper.account_exists(booking_period, cost_center);
-            if (account_exists) {
+            let account = await accounting.create_account(booking_period, cost_center);
+            if (!account) {
                 this._presenter.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
-            } else {
-                let account = new Account(booking_period, cost_center);
-                await this._helper.save_account(account);
             }
         }
         this._presenter.account_creation_done();
