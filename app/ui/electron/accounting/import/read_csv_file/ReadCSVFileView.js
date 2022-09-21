@@ -2,8 +2,6 @@ const {ipcRenderer} = require("electron");
 const UseCaseView = require("../../../use_case/UseCaseView");
 const CSVFileImportRenderer = require("../../renderer/CSVFileImportRenderer");
 
-const path = require("path");
-
 class ReadCSVFileView extends UseCaseView {
 
     static _csv_file_import_renderer = new CSVFileImportRenderer();

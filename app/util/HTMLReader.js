@@ -1,5 +1,4 @@
-const {writeFile, readFile, access, mkdir} = require('fs/promises');
-const path = require('path');
+const {readFile} = require('fs/promises');
 
 class HTMLReader {
     static async read_html_file(full_file_name) {

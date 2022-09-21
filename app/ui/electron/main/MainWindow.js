@@ -1,4 +1,4 @@
-const {BrowserWindow, ipcMain, dialog} = require('electron')
+const {BrowserWindow, ipcMain} = require('electron')
 const path = require("path");
 
 let main_window;

@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu, ipcMain} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const MainWindow = require("./MainWindow");
 const UseCaseFactory = require('../../../factories/UseCaseFactory');
 const PresenterFactory = require("../../../factories/PresenterFactory");
@@ -8,6 +8,8 @@ const ControllerFactory = require("../../../factories/ControllerFactory");
 const HelperFactory = require("../../../factories/HelperFactory");
 
 const menuTemplate = require('./MainMenu').createMenuTemplate(UseCaseFactory);
+
+const METHODS = require('./__test__/electron_tests');
 
 let mainWindow;
 
@@ -20,20 +22,20 @@ function create_main_window() {
     mainWindow.UseCaseFactory = UseCaseFactory;
     if (!process.env.APP_TEST_DRIVER) {
         mainWindow.loadFile('app/ui/electron/main/main.html').then().catch();
-        mainWindow.once('ready-to-show', () => {
-            UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, mainWindow.webContents);
-            mainWindow.show();
-        });
-    }else {
-        UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, mainWindow.webContents);
+    } else {
+        mainWindow.loadFile('main.html').then().catch();
     }
+
+    mainWindow.once('ready-to-show', () => {
+        UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, mainWindow.webContents);
+        mainWindow.show();
+    });
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-
     create_main_window();
     app.on('activate', function () {
         // On macOS it's common to re-create a window in the app when the
@@ -60,7 +62,6 @@ app.on('window-all-closed', function () {
 // code. You can also put them in separate files and require them here.
 
 //================================    TEST     ==================================
-const METHODS = require('./__test__/electron_tests');
 
 const onMessage = async ({msgId, cmd, args}) => {
     let method = METHODS[cmd];

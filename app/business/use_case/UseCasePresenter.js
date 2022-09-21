@@ -1,4 +1,4 @@
-const {ipcMain, dialog} = require('electron');
+const {ipcMain} = require('electron');
 let presenter;
 
 class UseCasePresenter{
@@ -24,12 +24,16 @@ class UseCasePresenter{
         this._controller = value;
     }
 
+    on_use_case_view_ready() {
+        this._controller.execute();
+    }
+
     _ipc_channel;
     _controller;
 }
 
 ipcMain.on('use_case:view_ready', (e) => {
-    presenter._controller.execute();
+    presenter.on_use_case_view_ready()
 })
 
 module.exports = UseCasePresenter;

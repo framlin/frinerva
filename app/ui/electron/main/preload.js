@@ -14,6 +14,5 @@ function register_accounting_switch_click() {
     accounting_switch.addEventListener('click', async (e) => {
         await WorkspaceViewFactory.create('accounting');
     });
-};
-
+}
 

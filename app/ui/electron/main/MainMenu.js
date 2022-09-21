@@ -1,5 +1,3 @@
-const {app, shell} = require('electron')
-
 const isMac = process.platform === 'darwin';
 
 class MainMenu {
