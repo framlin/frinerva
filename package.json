@@ -3,7 +3,7 @@
   "productName": "Frinerva",
   "version": "20220721",
   "description": "property mangement",
-  "main": "app/ui/electron/main/main.js",
+  "main": "app/main/main.js",
   "scripts": {
     "start": "electron-forge start",
     "test": "jest --watchAll",
