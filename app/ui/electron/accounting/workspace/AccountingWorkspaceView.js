@@ -5,6 +5,21 @@ class AccountingWorkspaceView extends WorkspaceView {
     constructor() {
         super();
         this.register_event_handler();
+        this.show_initial_state();
+    }
+
+    show_initial_state() {
+        this.show_account_board();
+    }
+
+    show_account_board() {
+        this.activate_sideboard_entry(".account-list");
+        this.fill_account_list();
+    }
+
+    fill_account_list(){
+        let account_list = document.querySelector('.sideboard-entry.account-list');
+
     }
 
     static async create_workspace() {

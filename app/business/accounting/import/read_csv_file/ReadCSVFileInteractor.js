@@ -1,26 +1,18 @@
 const UseCaseInteractor = require("../../../use_case/UseCaseInteractor");
-const Fs = require("fs");
-const MoneyMoneyCSVReader = require("../../../../persistence/money_money_tools/MoneyMoneyCSVReader");
 const MoneyMoneyToBookingRecordConverter = require("../../../../persistence/money_money_tools/MoneyMoneyToBookingRecordConverter");
 
 class ReadCSVFileInteractor extends UseCaseInteractor {
     async execute(file_name) {
         if (file_name) {
-            let file = this.load_file(file_name);
-            this._payments = await this.create_payments(file);
+            let file = this._helper.load_file(file_name);
+            this._payments = await this._helper.create_payments(file);
             this._presenter.show_payments(this._payments);
         } else {
             console.log("ReadCSVFileInteractor: FILENAME MISSING");
         }
     }
 
-    load_file(file_name) {
-        if (file_name) {
-            return Fs.createReadStream(file_name, 'utf8');
-        } else {
-            return new Error("FILENAME MISSING");
-        }
-    }
+
 
     create_booking_entries() {
         this._booking_records = this.convert_payments_to_booking_records(this._payments);
@@ -39,9 +31,6 @@ class ReadCSVFileInteractor extends UseCaseInteractor {
     }
 
 
-    async create_payments(file) {
-        return await MoneyMoneyCSVReader.create_payments(file);
-    }
 
     _payments;
     _booking_records;

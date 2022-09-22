@@ -1,16 +1,10 @@
 const UseCaseController = require("../../../use_case/UseCaseController");
-const {dialog} = require("electron");
 
 class ReadCSVFileController extends UseCaseController {
     _current_state;
 
-    async execute() {
-        const {canceled, filePaths} = await dialog.showOpenDialog({properties: ['openFile', 'multiSelections']});
-        if (canceled) {
-            this._interactor.execute(null);
-        } else {
-            this._interactor.execute(filePaths[0]);
-        }
+    async execute(file_path) {
+        this._interactor.execute(file_path);
         this._current_state = "START"
     }
 

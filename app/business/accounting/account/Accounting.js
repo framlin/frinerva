@@ -1,7 +1,5 @@
 const path = require("path");
-const JSONStorage = require("../../../persistence/json/JSONStorage");
 const Account = require("./Account");
-const STORAGE_ROOT_DIR = path.join(__dirname, "../../../persistence");
 
 class Accounting{
 
