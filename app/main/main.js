@@ -1,15 +1,13 @@
 // Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu} = require('electron')
 const MainWindow = require("./MainWindow");
-const UseCaseFactory = require('./factories/UseCaseFactory');
-const PresenterFactory = require("./factories/PresenterFactory");
-const InteractorFactory = require("./factories/InteractorFactory");
-const ControllerFactory = require("./factories/ControllerFactory");
-const HelperFactory = require("./factories/HelperFactory");
+const UseCaseFactory = require('../accounting/factories/UseCaseFactory');
 
-const menuTemplate = require('./MainMenu').createMenuTemplate(UseCaseFactory);
+const DomainFactory = require('./DomainFactory');
+const DOMAINS = ['accounting'];
 
-const METHODS = require('./__test__/electron_tests');
+const menuTemplate = require('./MainMenu').createMenuTemplate(DomainFactory);
+
 
 let mainWindow;
 
@@ -19,7 +17,11 @@ Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 function create_main_window() {
     mainWindow = new MainWindow();
+
     mainWindow.UseCaseFactory = UseCaseFactory;
+    DomainFactory.main_window = mainWindow;
+    let domain = DomainFactory.create(DOMAINS[0]);
+    mainWindow.add_domain(domain);
     if (!process.env.APP_TEST_DRIVER) {
         mainWindow.loadFile('app/main/main.html').then().catch();
     } else {
@@ -27,7 +29,8 @@ function create_main_window() {
     }
 
     mainWindow.once('ready-to-show', () => {
-        UseCaseFactory.config(PresenterFactory, InteractorFactory, ControllerFactory, HelperFactory, mainWindow.webContents);
+        let domain = DomainFactory.create(DOMAINS[0]);
+        mainWindow.add_domain(domain);
         mainWindow.show();
     });
 }
@@ -62,6 +65,7 @@ app.on('window-all-closed', function () {
 // code. You can also put them in separate files and require them here.
 
 //================================    TEST     ==================================
+const METHODS = require('./__test__/electron_tests');
 
 const onMessage = async ({msgId, cmd, args}) => {
     let method = METHODS[cmd];

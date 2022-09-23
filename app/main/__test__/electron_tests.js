@@ -1,6 +1,3 @@
-const {ipcRenderer} = require("electron");
-const WorkspaceViewFactory = require("../factories/WorkspaceViewFactory");
-
 let is_ready = false;
 
 const METHODS = {

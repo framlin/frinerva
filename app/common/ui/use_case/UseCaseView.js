@@ -6,9 +6,11 @@ const path = require("path");
 class UseCaseView {
 
     _use_case_name;
+    _domain_name;
 
-    constructor(use_case_name) {
+    constructor(domain_name, use_case_name) {
         this._use_case_name = use_case_name;
+        this._domain_name = domain_name;
     }
 
     link_style(stylesheet_filename) {
@@ -53,7 +55,7 @@ class UseCaseView {
     }
 
     send_view_ready() {
-        ipcRenderer.send('use_case:view_ready');
+        ipcRenderer.send('use_case:view_ready', this._domain_name, this._use_case_name);
     }
 }
 

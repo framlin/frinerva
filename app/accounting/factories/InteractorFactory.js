@@ -1,5 +1,5 @@
-const ReadCSVFileInteractor = require("../../accounting/import/read_csv_file/ReadCSVFileInteractor");
-const CreateAccountInteractor = require("../../accounting/create/CreateAccountInteractor");
+const ReadCSVFileInteractor = require("../import/read_csv_file/ReadCSVFileInteractor");
+const CreateAccountInteractor = require("../create/CreateAccountInteractor");
 
 const interactors = {
     read_csv_file: ReadCSVFileInteractor,

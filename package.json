@@ -9,7 +9,7 @@
     "test": "jest --watchAll",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "watch": "nodemon --ignore 'app/persitance/data/*'  --exec electron-forge start"
+    "watch": "nodemon --ignore 'app/common/persitence/data/*'  --exec electron-forge start"
   },
   "jest": {
     "modulePathIgnorePatterns": [

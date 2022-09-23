@@ -1,5 +1,5 @@
-const ReadCSVFileView = require("../../accounting/import/read_csv_file/ui/ReadCSVFileView");
-const CreateAccountView = require("../../accounting/create/ui/CreateAccountView");
+const ReadCSVFileView = require("../import/read_csv_file/ui/ReadCSVFileView");
+const CreateAccountView = require("../create/ui/CreateAccountView");
 
 const views = {
     read_csv_file: (use_case_name) => {

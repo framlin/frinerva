@@ -2,7 +2,10 @@ const {BrowserWindow, ipcMain} = require('electron')
 const path = require("path");
 
 let main_window;
-class MainWindow extends BrowserWindow{
+
+class MainWindow extends BrowserWindow {
+    _domains = {};
+
     constructor() {
         super({
             width: 1024,
@@ -17,20 +20,24 @@ class MainWindow extends BrowserWindow{
         main_window = this;
     }
 
-    execute_use_case(use_case_name) {
-        let use_case = this._UseCaseFactory.create(use_case_name);
-        use_case.execute();
-    }
-
     _UseCaseFactory;
 
     set UseCaseFactory(value) {
         this._UseCaseFactory = value;
     }
+
+    execute_use_case(domain_name, use_case_name) {
+        let use_case = this._domains[domain_name].create_use_case(use_case_name);
+        use_case.execute();
+    }
+
+    add_domain(domain) {
+        this._domains[domain.domain_name] = domain;
+    }
 }
 
-ipcMain.on('use_case:create', (e, use_case_name) => {
-    main_window.execute_use_case(use_case_name);
+ipcMain.on('use_case:create', (e, domain_name, use_case_name) => {
+    main_window.execute_use_case(domain_name, use_case_name);
 });
 
 module.exports = MainWindow;

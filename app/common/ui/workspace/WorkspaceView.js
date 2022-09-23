@@ -1,7 +1,7 @@
 const HTMLReader = require("../../util/HTMLReader");
 const path = require("path");
 const {ipcRenderer} = require("electron");
-const ViewFactory = require("../../../main/factories/ViewFactory");
+const ViewFactory = require("../../../accounting/factories/ViewFactory");
 
 class WorkspaceView {
 
@@ -30,7 +30,7 @@ class WorkspaceView {
 
     register_sideboard_switch(sidebar_switch_selector) {
         let sidebar_switch = document.querySelector(sidebar_switch_selector);
-        sidebar_switch.addEventListener('click', (e) => {
+        sidebar_switch.addEventListener('click', () => {
             let switch_to_selector = sidebar_switch.getAttribute('switch_to');
             this.switch_sideboard_to(switch_to_selector);
         });
@@ -44,17 +44,12 @@ class WorkspaceView {
 
     register_use_case_starter_btn(btn_selector) {
         let use_case_starter = document.querySelector(btn_selector);
-        let use_case_name = use_case_starter.getAttribute('use_case_name')
-        use_case_starter.addEventListener('click', (e) => {
-            ipcRenderer.send('use_case:create', use_case_name);
+        let use_case_name = use_case_starter.dataset.use_case_name;
+        let domain_name = use_case_starter.dataset.domain_name;
+        use_case_starter.addEventListener('click', () => {
+            ipcRenderer.send('use_case:create', domain_name, use_case_name);
         });
     }
-
-
-
-
-
-
     static replace_partial(markup, overlay) {
         let overlay_div = document.querySelector(overlay);
         let partial_frame_div = document.createElement('div');
@@ -105,7 +100,7 @@ class WorkspaceView {
             pointer_down = false;
         }
 
-        splitter.addEventListener('pointerdown', (e) => {
+        splitter.addEventListener('pointerdown', () => {
             pointer_down = true;
         });
 

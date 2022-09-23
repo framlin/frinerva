@@ -1,8 +1,9 @@
 class UseCase{
 
-    constructor(UseCaseFactory, use_case_name) {
+    constructor(UseCaseFactory, domain_name, use_case_name) {
         this._UseCaseFactory = UseCaseFactory;
-        this._use_case_name = use_case_name
+        this._use_case_name = use_case_name;
+        this._domain_name = domain_name;
     }
 
     execute() {
@@ -51,6 +52,7 @@ class UseCase{
 
 
     _use_case_name;
+    _domain_name;
     _interactor;
     _controller;
     _helper;

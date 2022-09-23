@@ -1,7 +1,7 @@
 const isMac = process.platform === 'darwin';
 
 class MainMenu {
-    static createMenuTemplate(UseCaseFactory) {
+    static createMenuTemplate(DomainFactory) {
         return  [
             ...(isMac ? [{
                 label: "Frinerva",
@@ -25,7 +25,7 @@ class MainMenu {
                         label: 'Import',
                         click: () => {
                             console.log("CLICK IMPORT")
-                            UseCaseFactory.create('read_csv_file').execute()
+                            DomainFactory.create('accounting').create_use_case('read_csv_file').execute()
                         }
                     },
                     isMac ? { role: 'close' } : { role: 'quit' }]},

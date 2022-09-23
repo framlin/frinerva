@@ -7,7 +7,7 @@ class ReadCSVFileView extends UseCaseView {
     static _csv_file_import_renderer = new CSVFileImportRenderer();
 
     constructor(use_case_name) {
-        super(use_case_name)
+        super('accounting', use_case_name)
     }
 
     register_next_button() {

@@ -1,5 +1,5 @@
-const ReadCSVFilePresenter = require("../../accounting/import/read_csv_file/ReadCSVFilePresenter");
-const CreateAccountPresenter = require("../../accounting/create/CreateAccountPresenter");
+const ReadCSVFilePresenter = require("../import/read_csv_file/ReadCSVFilePresenter");
+const CreateAccountPresenter = require("../create/CreateAccountPresenter");
 
 const presenters = {
     read_csv_file: ReadCSVFilePresenter,

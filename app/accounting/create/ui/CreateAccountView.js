@@ -6,7 +6,7 @@ let create_account_view;
 class CreateAccountView extends UseCaseView {
 
     constructor(use_case_name) {
-        super(use_case_name);
+        super('accounting', use_case_name);
         create_account_view = this;
     }
 
@@ -31,7 +31,7 @@ class CreateAccountView extends UseCaseView {
     }
 
     add_selection_listener(list_entry) {
-        list_entry.addEventListener('click', (e) => {
+        list_entry.addEventListener('click', () => {
             list_entry.classList.toggle('selected');
         });
 
@@ -158,7 +158,7 @@ ipcRenderer.on('create_account:show_error', (e, error_message) => {
     create_account_view.show_error(error_message);
 });
 
-ipcRenderer.on('create_account:done', (e) => {
+ipcRenderer.on('create_account:done', () => {
     create_account_view.account_creation_finished();
 });
 

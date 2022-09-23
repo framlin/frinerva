@@ -12,8 +12,8 @@ class UseCasePresenter{
         this._ipc_channel.send('use_case:created', use_case_name);
     }
 
-    forward(use_case_name) {
-        this._controller.forward(use_case_name);
+    forward(domain_name, use_case_name) {
+        this._controller.forward(domain_name, use_case_name);
     }
 
     get controller() {
@@ -32,7 +32,7 @@ class UseCasePresenter{
     _controller;
 }
 
-ipcMain.on('use_case:view_ready', (e) => {
+ipcMain.on('use_case:view_ready', () => {
     presenter.on_use_case_view_ready()
 })
 

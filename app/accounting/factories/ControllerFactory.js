@@ -1,5 +1,5 @@
-const ReadCSVFileController = require("../../accounting/import/read_csv_file/ReadCSVFileController");
-const CreateAccountController = require("../../accounting/create/CreateAccountController");
+const ReadCSVFileController = require("../import/read_csv_file/ReadCSVFileController");
+const CreateAccountController = require("../create/CreateAccountController");
 
 const controllers = {
     read_csv_file: ReadCSVFileController,
