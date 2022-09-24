@@ -1,21 +1,32 @@
-const path = require("path");
 const Account = require("./Account");
 
 class Accounting{
 
-    account_storage;
+    _account_storage;
 
     constructor(account_storage) {
-        this.account_storage = account_storage;
+        this._account_storage = account_storage;
     }
 
     async create_account(booking_period, cost_center) {
         let account = null;
-        if (!this.account_storage.account_exists(booking_period, cost_center)) {
+        if (!this._account_storage.account_exists(booking_period, cost_center)) {
             account = new Account(booking_period, cost_center);
-            await this.account_storage.save_account(account);
+            await this._account_storage.save_account(account);
         }
         return account;
+    }
+
+    async get_account_names() {
+        let account_storage_names =  await this._account_storage.get_account_name_list();
+        let cost_center_configuration = await this._account_storage.load_cost_center_configuration();
+        let cost_center_mapping = JSON.parse(cost_center_configuration);
+        let result = [];
+        for (let {booking_period, cost_center} of account_storage_names) {
+            let account_name = cost_center_mapping[cost_center];
+            result.push(`${booking_period} - ${account_name}`);
+        }
+        return result;
     }
 
 }

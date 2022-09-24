@@ -33,6 +33,18 @@ class UseCaseView {
         this.insert_partial(markup, target);
     }
 
+    append_partial(markup, frame) {
+        let frame_div = document.querySelector(frame);
+        let partial_div = document.createElement('div');
+        partial_div.innerHTML = markup;
+        frame_div.appendChild(partial_div);
+    }
+
+    async append_markup_at(use_case_dir, target) {
+        let markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
+        this.append_partial(markup, target);
+    }
+
     link_styles(use_case_dir) {
         this.link_style(path.join(use_case_dir, 'design.css'));
         this.link_style(path.join(use_case_dir, 'layout.css'));

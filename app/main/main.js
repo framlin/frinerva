@@ -1,27 +1,27 @@
-// Modules to control application life and create native browser window
 const {app, BrowserWindow, Menu} = require('electron')
 const MainWindow = require("./MainWindow");
 const UseCaseFactory = require('../accounting/factories/UseCaseFactory');
 
 const DomainFactory = require('./DomainFactory');
-const DOMAINS = ['accounting'];
+const DOMAINS = DomainFactory.get_domains();
 
 const menuTemplate = require('./MainMenu').createMenuTemplate(DomainFactory);
 
-
 let mainWindow;
-
 app.name = "Frinerva";
 
 Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 function create_main_window() {
     mainWindow = new MainWindow();
-
     mainWindow.UseCaseFactory = UseCaseFactory;
     DomainFactory.main_window = mainWindow;
-    let domain = DomainFactory.create(DOMAINS[0]);
-    mainWindow.add_domain(domain);
+
+    for(let i = 0; i < DOMAINS.length; i++) {
+        let domain = DomainFactory.create(DOMAINS[i]);
+        mainWindow.add_domain(domain);
+    }
+
     if (!process.env.APP_TEST_DRIVER) {
         mainWindow.loadFile('app/main/main.html').then().catch();
     } else {
@@ -29,8 +29,10 @@ function create_main_window() {
     }
 
     mainWindow.once('ready-to-show', () => {
-        let domain = DomainFactory.create(DOMAINS[0]);
-        mainWindow.add_domain(domain);
+        for(let i = 0; i < DOMAINS.length; i++) {
+            let domain = DomainFactory.create(DOMAINS[i]);
+            mainWindow.add_domain(domain);
+        }
         mainWindow.show();
     });
 }

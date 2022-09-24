@@ -1,4 +1,5 @@
 const WorkspaceView = require("../../common/ui/workspace/WorkspaceView");
+const {ipcRenderer} = require("electron");
 
 class AccountingWorkspaceView extends WorkspaceView {
 
@@ -8,8 +9,10 @@ class AccountingWorkspaceView extends WorkspaceView {
     }
 
 
+
     static async create_workspace() {
         await WorkspaceView.create_workspace('accounting', __dirname);
+        ipcRenderer.send('use_case:create', 'accounting', 'show_list');
     }
 
     register_event_handler() {

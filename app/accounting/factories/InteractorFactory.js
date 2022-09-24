@@ -1,13 +1,8 @@
-const ReadCSVFileInteractor = require("../import/read_csv_file/ReadCSVFileInteractor");
-const CreateAccountInteractor = require("../create/CreateAccountInteractor");
+const Interactors = require('./interactors');
 
-const interactors = {
-    read_csv_file: ReadCSVFileInteractor,
-    create_account: CreateAccountInteractor,
-}
 class InteractorFactory{
     static create(use_case_name) {
-        return new interactors[use_case_name]();
+        return new Interactors[use_case_name]();
     }
 }
 

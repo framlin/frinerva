@@ -1,18 +1,12 @@
-
-const workspace_views = {
-    accounting: async () => {
-        await WorkspaceViewFactory.AccountingWorkspace.create_workspace();
-        return new WorkspaceViewFactory.AccountingWorkspace();
-    }
-}
-
 class WorkspaceViewFactory {
     static AccountingWorkspace
     static config(accountingWS) {
         WorkspaceViewFactory.AccountingWorkspace = accountingWS;
+        return WorkspaceViewFactory;
     };
-    static async create(business_case_name) {
-        return await workspace_views[business_case_name]();
+    static async create() {
+        await WorkspaceViewFactory.AccountingWorkspace.create_workspace();
+        return new WorkspaceViewFactory.AccountingWorkspace();
     }
 }
 
