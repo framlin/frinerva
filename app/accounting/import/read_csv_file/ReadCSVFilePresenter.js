@@ -13,8 +13,8 @@ class ReadCSVFilePresenter extends UseCasePresenter {
         this._ipc_channel.send('read_csv_file:show_payments', payments);
     }
 
-    on_next() {
-        this._controller.next();
+    on_next(...data) {
+        this._controller.next(...data);
     }
 
     show_booking_records(booking_records) {
@@ -32,8 +32,9 @@ class ReadCSVFilePresenter extends UseCasePresenter {
 }
 
 
-ipcMain.on('read_csv_file:next', () => {
-    presenter.on_next()
+ipcMain.on('read_csv_file:next', (e, ...data) => {
+    console.log("PRESENTER", ...data);
+    presenter.on_next(...data)
 });
 
 module.exports = ReadCSVFilePresenter;

@@ -6,16 +6,17 @@ class UseCase{
         this._domain_name = domain_name;
     }
 
-    execute() {
-        this._presenter.execute(this._use_case_name);
+    execute(...data) {
+        this._presenter.execute(this._use_case_name, ...data);
         // this.view.show();
         // ==> view.presenter.ready
         // ==> presenter.controller.execute()
         // ==> controller.interactor.execute()
     }
 
-    forward(use_case_name) {
-        this._UseCaseFactory.create(use_case_name).execute();
+    forward(use_case_name,...data) {
+        console.log("USE_CASE-FORWARD", use_case_name, ...data)
+        this._UseCaseFactory.create(use_case_name).execute(...data);
     }
 
     get interactor() {

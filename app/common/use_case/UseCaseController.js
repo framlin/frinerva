@@ -1,10 +1,10 @@
 class UseCaseController{
-    execute() {
-        this._interactor.execute()
+    execute(...data) {
+        this._interactor.execute(...data)
     }
 
-    forward(use_case_name){
-        this._use_case.forward(use_case_name);
+    forward(use_case_name, ... data){
+        this._use_case.forward(use_case_name, ... data);
     }
 
     get interactor() {

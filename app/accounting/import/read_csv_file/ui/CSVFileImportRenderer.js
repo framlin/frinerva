@@ -1,5 +1,4 @@
-const BookingEntry = require("../../../account/BookingEntry");
-
+const PropertyMapping = window.accounting__read_csv_file.get_property_mapping();
 
 class CSVFileImportRenderer {
 
@@ -33,11 +32,6 @@ class CSVFileImportRenderer {
         });
     }
 
-    show_payments_created(payments) {
-        let payment_div = document.getElementById("payments_link");
-        payment_div.innerHTML = `${payments.length} payments created`;
-    }
-
     show_booking_entries(booking_entries) {
         this._active_booking_entries = booking_entries;
 
@@ -62,7 +56,7 @@ class CSVFileImportRenderer {
         let {booking_entry} = booking_entry_with_cc_and_year;
         row.booking_entry = booking_entry;
 
-        BookingEntry.property_mapping.forEach((prop, i) => {
+        PropertyMapping.forEach((prop, i) => {
             this._insert_editable_cell(row, i, '_'+prop, booking_entry);
         });
 
@@ -77,7 +71,7 @@ class CSVFileImportRenderer {
     _insert_editable_cell(row, i, prop, buffer) {
         let {cell, text} = this._add_cell(row, i, prop, buffer);
         cell.appendChild(text);
-        cell.addEventListener('click', (event) => {
+        cell.addEventListener('click', () => {
             let input_elem = this._make_cell_editable(cell, row);
             this._add_event_listener(input_elem, buffer, cell);
         });
@@ -109,7 +103,6 @@ class CSVFileImportRenderer {
     }
 
     _make_cell_editable(cell, row) {
-        let elem_replaced = false;
         let input_elem = document.createElement("input");
         input_elem.setAttribute('type', 'text');
         cell.style.padding = "0px";
@@ -129,4 +122,9 @@ class CSVFileImportRenderer {
     }
 }
 
-module.exports = CSVFileImportRenderer;
+
+window.accounting__read_csv_file.show_booking_records((event, booking_records) => {
+    let csv_file_import_renderer = new CSVFileImportRenderer();
+    csv_file_import_renderer.show_booking_entries(booking_records);
+});
+

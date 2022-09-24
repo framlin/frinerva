@@ -8,8 +8,6 @@ class AccountingWorkspaceView extends WorkspaceView {
         this.register_event_handler();
     }
 
-
-
     static async create_workspace() {
         await WorkspaceView.create_workspace('accounting', __dirname);
         ipcRenderer.send('use_case:create', 'accounting', 'show_list');

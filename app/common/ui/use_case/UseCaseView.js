@@ -50,6 +50,18 @@ class UseCaseView {
         this.link_style(path.join(use_case_dir, 'layout.css'));
     }
 
+    add_script(src) {
+        return new Promise((resolve, reject) => {
+            const s = document.createElement('script');
+
+            s.setAttribute('src', src);
+            s.addEventListener('load', resolve);
+            s.addEventListener('error', reject);
+
+            document.body.appendChild(s);
+        });
+    }
+
     async create_view() {
         //abstract
     }
@@ -60,14 +72,14 @@ class UseCaseView {
     register_event_listener(){
         //abstract
     }
-    async put_view_into_dom() {
+    async put_view_into_dom(...data) {
         await this.create_view();
         this.register_event_listener();
-        this.send_view_ready();
+        this.send_view_ready(...data);
     }
 
-    send_view_ready() {
-        ipcRenderer.send('use_case:view_ready', this._domain_name, this._use_case_name);
+    send_view_ready(...data) {
+        ipcRenderer.send('use_case:view_ready', this._domain_name, this._use_case_name, ...data);
     }
 }
 
