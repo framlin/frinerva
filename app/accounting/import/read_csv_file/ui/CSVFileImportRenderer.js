@@ -1,4 +1,4 @@
-const PropertyMapping = window.accounting__read_csv_file.get_property_mapping();
+let PropertyMapping = window.accounting__read_csv_file.get_property_mapping();
 
 class CSVFileImportRenderer {
 
@@ -25,11 +25,13 @@ class CSVFileImportRenderer {
 
     _add_payments_row(table, payments) {
         let row = table.insertRow(-1);
+
         payments.forEach((payment, i) => {
             let cell = row.insertCell(i);
             let text = document.createTextNode(payment);
             cell.appendChild(text);
         });
+
     }
 
     show_booking_entries(booking_entries) {
@@ -54,7 +56,7 @@ class CSVFileImportRenderer {
     _add_booking_entries_row(table, booking_entry_with_cc_and_year) {
         let row = table.insertRow(-1);
         let {booking_entry} = booking_entry_with_cc_and_year;
-        row.booking_entry = booking_entry;
+        row.booking_record = booking_entry_with_cc_and_year;
 
         PropertyMapping.forEach((prop, i) => {
             this._insert_editable_cell(row, i, '_'+prop, booking_entry);

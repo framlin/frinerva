@@ -12,20 +12,7 @@ class Domain {
         return this._factories.use_case.create(use_case_name);
     }
 
-    /*
-        const workspaces = {
-        accounting:  require("../accounting/workspace/AccountingWorkspaceView"),
-    }
-    // factories.workspace.config(workspaces[domain_name]);
-    // let workspace = await factories.workspace.create(domain_name);
-
-     */
-    // get workspace() {
-    //     return this._workspace;
-    // }
-
     _factories;
-    _workspace;
     _domain_name;
 }
 

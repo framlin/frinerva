@@ -9,7 +9,6 @@ class ReadCSVFileController extends UseCaseController {
     }
 
     next(booking_entries) {
-        console.log("CONTROLLER", booking_entries);
         switch (this._current_state) {
             case "START":
                 this._interactor.create_booking_entries();

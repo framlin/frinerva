@@ -24,7 +24,6 @@ class MainMenu {
                     {
                         label: 'Import',
                         click: () => {
-                            console.log("CLICK IMPORT")
                             DomainFactory.create('accounting').create_use_case('read_csv_file').execute()
                         }
                     },

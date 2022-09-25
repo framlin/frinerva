@@ -6,14 +6,18 @@ window['accounting__read_csv_file'].register_event_listener(() => {
 function register_next_button() {
     let next_button = document.querySelector('.next-btn');
     next_button.addEventListener('click', () => {
-        console.log("NEXT-BUTTON CLICKED")
-        let booking_entries = get_booking_entries();
+        let booking_entries = get_booking_records();
         window['accounting__read_csv_file'].send_next(booking_entries);
     });
 }
 
-function get_booking_entries() {
-    return [1,2,3,4,5,6,7,8,9,0];
+function get_booking_records() {
+    let booking_records = [];
+    let rows = document.querySelectorAll('#payment-entries > table tr');
+    rows.forEach((row) => {
+        booking_records.push(row.booking_record);
+    })
+    return booking_records;
 }
 
 window["accounting__read_csv_file"].show_payments((event, payments) => {
@@ -27,7 +31,6 @@ window["accounting__read_csv_file"].show_payments((event, payments) => {
             let values = [payment.Datum, payment.Kategorie, payment.Name, payment.Betrag]
             _add_payments_row(table, values);
         }
-
     }
 });
 

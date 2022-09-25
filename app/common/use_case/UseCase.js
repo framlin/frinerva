@@ -15,7 +15,6 @@ class UseCase{
     }
 
     forward(use_case_name,...data) {
-        console.log("USE_CASE-FORWARD", use_case_name, ...data)
         this._UseCaseFactory.create(use_case_name).execute(...data);
     }
 

@@ -18,7 +18,7 @@ test('creation', () => {
     expect(account.booking_period).toBe('1');
 });
 
-test('adding booking-entries', () => {
+test('adding one booking entry', () => {
     let account = new Account('name', 'cost_center');
     let booking_entry = new BookingEntry(Date.now(), 'subject', 'name', 1.0, 'BC??');
 

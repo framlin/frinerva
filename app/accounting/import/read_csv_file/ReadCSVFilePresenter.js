@@ -33,7 +33,6 @@ class ReadCSVFilePresenter extends UseCasePresenter {
 
 
 ipcMain.on('read_csv_file:next', (e, ...data) => {
-    console.log("PRESENTER", ...data);
     presenter.on_next(...data)
 });
 

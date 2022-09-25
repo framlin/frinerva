@@ -32,7 +32,7 @@ class UseCasePresenter{
     _controller;
 }
 
-ipcMain.on('use_case:view_ready', (e, ...data) => {
+ipcMain.on('use_case:view_ready', (e, domain_name, use_case_name, ...data) => {
     presenter.on_use_case_view_ready(...data)
 })
 
