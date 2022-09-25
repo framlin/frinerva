@@ -1,4 +1,4 @@
-const BookingEntry = require("../../../account/BookingEntry");
+const Accounting = require("../../../account/Accounting");
 
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',
@@ -13,15 +13,15 @@ const COST_CENTER_MAP = new Map(Object.entries({
     'NebenKosten': 'SERVICE_CHARGES'
 }));
 
-class MoneyMoneyToBookingRecordConverter{
+class MoneyMoneyToBookingRecordConverter {
     convert(payment_entry) {
-        let booking_entry = new BookingEntry (
+        let booking_entry = Accounting.create_booking_entry(
             this._convert_to_date(payment_entry.Datum),
             payment_entry.Verwendungszweck,
             payment_entry.Name,
             this._convert_to_amount(payment_entry.Betrag).toFixed(2),
             "BC??"
-            );
+        );
 
         let year = booking_entry.date.getFullYear();
         let cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
@@ -30,10 +30,10 @@ class MoneyMoneyToBookingRecordConverter{
 
     _convert_to_date(date_str) {
         let [day, month, year] = date_str.split(".");
-        return new Date(year, month -1, day);
+        return new Date(year, month - 1, day);
     }
 
-    _convert_to_amount(amount_string){
+    _convert_to_amount(amount_string) {
         if (typeof amount_string !== "string") {
             return amount_string;
         } else {
@@ -47,7 +47,7 @@ class MoneyMoneyToBookingRecordConverter{
 
     _extract_cost_center_key(category) {
         let elems = category.split('-');
-        let cost_center_key = elems[elems.length -1]
+        let cost_center_key = elems[elems.length - 1]
         return this._strip_whitespaces(cost_center_key);
     }
 

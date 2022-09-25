@@ -1,4 +1,5 @@
 const Account = require("./Account");
+const BookingEntry = require("./BookingEntry");
 
 class Accounting{
 
@@ -8,6 +9,10 @@ class Accounting{
         this._account_storage = account_storage;
     }
 
+    static create_booking_entry(date, subject, name, amount, booking_code) {
+        return new BookingEntry(date, subject, name, amount, booking_code);
+    }
+
     async create_account(booking_period, cost_center) {
         let account = null;
         if (!this._account_storage.account_exists(booking_period, cost_center)) {
@@ -15,6 +20,16 @@ class Accounting{
             await this._account_storage.save_account(account);
         }
         return account;
+    }
+
+    async create_virtual_account(booking_period, cost_center) {
+        let result;
+        if (this._account_storage.account_exists(booking_period, cost_center)) {
+            result = await this._account_storage.load_account(booking_period, cost_center);
+        } else {
+            result = new Account(booking_period, cost_center);
+        }
+        return result;
     }
 
     async get_account_names() {

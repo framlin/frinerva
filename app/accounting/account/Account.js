@@ -9,6 +9,7 @@ class Account {
         return this._cost_center;
     }
 
+
     get booking_period() {
         return this._booking_period;
     }

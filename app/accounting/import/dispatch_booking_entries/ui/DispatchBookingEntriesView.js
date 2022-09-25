@@ -29,7 +29,7 @@ class DispatchBookingEntriesView extends UseCaseView {
 
 contextBridge.exposeInMainWorld('accounting__dispatch_booking_entries', {
     // show_payments: (callback) => ipcRenderer.on('read_csv_file:show_payments', callback),
-    // show_booking_records: (callback) => ipcRenderer.on('read_csv_file:show_booking_records', callback),
+    show_virtual_accounts: (callback) => ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', callback),
     // get_property_mapping : () => BookingEntry.property_mapping,
 });
 module.exports = DispatchBookingEntriesView;
