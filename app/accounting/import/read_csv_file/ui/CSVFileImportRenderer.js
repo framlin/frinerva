@@ -1,42 +1,4 @@
-
-// class CSVFileImportRenderer {
-//
-
-var _active_booking_entries;
-// function show_payments(payments) {
-//     let payments_div = document.getElementById("payments");
-//     if (payments_div.firstChild) {
-//         while (payments_div.firstChild) {
-//             try {
-//                 payments_div.removeChild(payments_div.firstChild);
-//             } catch (e) {
-//             }
-//         }
-//
-//     } else {
-//         let table = document.createElement("table");
-//         payments_div.appendChild(table);
-//         for (let payment of payments) {
-//             let values = [payment.Datum, payment.Kategorie, payment.Name, payment.Betrag]
-//             _add_payments_row(table, values);
-//         }
-//
-//     }
-// }
-
-// function _add_payments_row(table, payments) {
-//     let row = table.insertRow(-1);
-//
-//     payments.forEach((payment, i) => {
-//         let cell = row.insertCell(i);
-//         let text = document.createTextNode(payment);
-//         cell.appendChild(text);
-//     });
-//
-// }
-
 function show_booking_entries(booking_entries) {
-    _active_booking_entries = booking_entries;
 
     let payments_div = document.querySelector("#payment-entries");
     if (payments_div.firstChild) {
@@ -58,7 +20,7 @@ function _add_booking_entries_row(table, booking_entry_with_cc_and_year) {
     let row = table.insertRow(-1);
     let {booking_entry} = booking_entry_with_cc_and_year;
     row.booking_record = booking_entry_with_cc_and_year;
-    let PropertyMapping = window.accounting__read_csv_file.get_property_mapping();
+    let PropertyMapping = window["accounting__read_csv_file"].get_property_mapping();
 
     PropertyMapping.forEach((prop, i) => {
         _insert_editable_cell(row, i, '_' + prop, booking_entry);
@@ -93,15 +55,16 @@ function _add_cell(row, i, prop, buffer) {
 }
 
 function _add_event_listener(input_elem, buffer, cell) {
+    let booking_records = window["accounting__read_csv_file"].get_booking_records()
     input_elem.addEventListener('blur', () => {
         buffer[cell.prop] = input_elem.value;
-        show_booking_entries(_active_booking_entries)
+        show_booking_entries(booking_records)
     });
 
     input_elem.addEventListener('keypress', ({key}) => {
         if (key === "Enter") {
             buffer[cell.prop] = input_elem.value;
-            show_booking_entries(_active_booking_entries);
+            show_booking_entries(booking_records);
         }
     });
 }
@@ -125,10 +88,7 @@ function _make_cell_editable(cell, row) {
     return input_elem;
 }
 
-// }
-
-
-window.accounting__read_csv_file.show_booking_records((event, booking_records) => {
+window["accounting__read_csv_file"].show_booking_records((booking_records) => {
     show_booking_entries(booking_records);
 });
 

@@ -29,10 +29,25 @@ class ReadCSVFileView extends UseCaseView {
 }
 
 contextBridge.exposeInMainWorld('accounting__read_csv_file', {
-    show_payments: (callback) => ipcRenderer.on('read_csv_file:show_payments', callback),
-    show_booking_records: (callback) => ipcRenderer.on('read_csv_file:show_booking_records', callback),
+    show_payments: (callback) => {show_payments = callback},
+    show_booking_records: (callback) => {show_booking_records = callback},
+    get_booking_records: () => booking_records,
     get_property_mapping : () => BookingEntry.property_mapping,
     register_event_listener: (callback) => {read_cvs_file_view.on_register_callback = callback},
     send_next: (booking_entries) => ipcRenderer.send('read_csv_file:next', booking_entries),
 });
+
+let show_payments;
+ipcRenderer.on('read_csv_file:show_payments', (e, payments) => {
+    show_payments(payments);
+});
+
+let show_booking_records;
+let booking_records;
+ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records) => {
+    booking_records = _booking_records
+    show_booking_records(_booking_records);
+});
+
+
 module.exports = ReadCSVFileView;

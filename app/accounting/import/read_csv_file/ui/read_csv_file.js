@@ -20,7 +20,7 @@ function get_booking_records() {
     return booking_records;
 }
 
-window["accounting__read_csv_file"].show_payments((event, payments) => {
+window["accounting__read_csv_file"].show_payments((payments) => {
     let payments_div = document.querySelector("#payment-entries");
     if (payments_div.firstChild) {
         _clear_payment_entries(payments_div);
