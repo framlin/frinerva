@@ -7,6 +7,7 @@ class UseCase{
     }
 
     execute(...data) {
+        console.log("USE_CASE::execute");
         this._presenter.execute(this._use_case_name, ...data);
         // this.view.show();
         // ==> view.presenter.ready

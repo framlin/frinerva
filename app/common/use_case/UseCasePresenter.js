@@ -9,6 +9,7 @@ class UseCasePresenter{
     }
 
     execute(use_case_name, ...data) {
+        console.log("USE_CASE_PRESENTER.execute")
         this._ipc_channel.send('use_case:created', use_case_name, ...data);
     }
 
@@ -33,6 +34,7 @@ class UseCasePresenter{
 }
 
 ipcMain.on('use_case:view_ready', (e, domain_name, use_case_name, ...data) => {
+    console.log("USE_CASE_PRESNTER.use_case:view_ready")
     presenter.on_use_case_view_ready(...data)
 })
 

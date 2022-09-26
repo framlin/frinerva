@@ -1,10 +1,9 @@
+console.log("PARSE CREATE ACCOUNT")
 window['accounting__create_account'].register_event_listener(() => {
     register_create_button();
     register_account_list_entry_selection();
     register_move_button();
 });
-
-
 
 window['accounting__create_account'].account_creation_finished(() => {
     reset_list('#account-column');
@@ -12,11 +11,11 @@ window['accounting__create_account'].account_creation_finished(() => {
     clear_list('#result-column');
 });
 
-window['accounting__create_account'].show_error((event, error_message) => {
+window['accounting__create_account'].show_error((error_message) => {
     alert(error_message);
 });
 
-window['accounting__create_account'].show_new_accounts_list((event, new_accounts_list) => {
+window['accounting__create_account'].show_new_accounts_list((new_accounts_list) => {
     let result_column = document.querySelector('#result-column');
     for (let new_account of new_accounts_list) {
         let new_entry = document.createElement('div');
@@ -29,7 +28,8 @@ window['accounting__create_account'].show_new_accounts_list((event, new_accounts
     }
 });
 
-window['accounting__create_account'].show_booking_period_list((event, booking_period_list) => {
+window['accounting__create_account'].show_booking_period_list((booking_period_list) => {
+    clear_list('#period-column')
     let period_column = document.querySelector('#period-column');
     for (let booking_period of booking_period_list) {
         let account_entry = document.createElement('div');
@@ -42,7 +42,8 @@ window['accounting__create_account'].show_booking_period_list((event, booking_pe
 });
 
 
-window['accounting__create_account'].show_cost_center_list((event, cost_center_list) => {
+window['accounting__create_account'].show_cost_center_list((cost_center_list) => {
+    clear_list('#account-column')
     let account_list = document.querySelector('#account-column');
     for (let cost_center in cost_center_list) {
         if (cost_center !== 'NONE') {
@@ -68,7 +69,6 @@ function reset_list(selector) {
         child.classList.remove('selected');
     }
 }
-
 
 function clear_list(selector) {
     let list = document.querySelector(selector);

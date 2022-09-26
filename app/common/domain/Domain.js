@@ -1,3 +1,4 @@
+
 class Domain {
     get domain_name() {
         return this._domain_name;
@@ -9,6 +10,7 @@ class Domain {
     }
 
     create_use_case(use_case_name) {
+
         return this._factories.use_case.create(use_case_name);
     }
 

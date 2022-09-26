@@ -136,6 +136,7 @@ class WorkspaceView {
 }
 
 ipcRenderer.on('use_case:created', async (e, use_case_name, ...data) => {
+    console.log("IPC_RENDERER.on.use_case:created", use_case_name, ...data)
     await ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
 module.exports = WorkspaceView;

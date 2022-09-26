@@ -7,6 +7,7 @@ class ShowListPresenter extends UseCasePresenter{
     }
 
     show(account_name_list) {
+        console.log("PRESENTER-SEND->show_list:show_account_name_list")
         this._ipc_channel.send('show_list:show_account_name_list', account_name_list);
     }
 }

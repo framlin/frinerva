@@ -16,6 +16,7 @@ class ReadCSVFileController extends UseCaseController {
                 break;
             case "BOOKING_ENTRY_CREATION":
                 this.forward('dispatch_booking_entries', booking_entries);
+                this._current_state = "START"
         }
 
     }

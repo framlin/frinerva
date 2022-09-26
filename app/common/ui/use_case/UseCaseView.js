@@ -52,13 +52,20 @@ class UseCaseView {
 
     add_script(src) {
         return new Promise((resolve, reject) => {
-            const s = document.createElement('script');
+            let script = document.querySelector(`script[src="${src}"]`);
+            if (script) {
+                script.remove()
+            }
 
-            s.setAttribute('src', src);
-            s.addEventListener('load', resolve);
-            s.addEventListener('error', reject);
+                console.log('add script ' + src)
+                const s = document.createElement('script');
 
-            document.body.appendChild(s);
+                s.setAttribute('src', src);
+                s.addEventListener('load', resolve);
+                s.addEventListener('error', reject);
+
+                document.body.appendChild(s);
+
         });
     }
 
