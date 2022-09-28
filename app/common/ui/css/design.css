@@ -68,6 +68,7 @@ html, body {
 
 #splitter-panel:hover{
     cursor:  ew-resize;
+    background-color: orangered;
 }
 
 

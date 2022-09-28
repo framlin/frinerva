@@ -56,7 +56,9 @@ function _add_booking_entries_row_(table, values, properties, redraw) {
     row.values = values;
 
     properties.forEach((prop, i) => {
-        _insert_editable_cell_(row, i, prop, values, redraw);
+        if (prop !== "id") {
+            _insert_editable_cell_(row, i, prop, values, redraw);
+        }
     });
 }
 

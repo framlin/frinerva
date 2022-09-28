@@ -3,7 +3,28 @@
 }
 #virtual-account-list table{
     margin: 0;
+    width:100%;
 }
+#virtual-account-list table td:nth-child(1){
+    width: 7%;
+}
+
+#virtual-account-list table td:nth-child(2){
+    width: 53%;
+}
+
+#virtual-account-list table td:nth-child(3){
+    width: 25%;
+}
+
+#virtual-account-list table td:nth-child(4){
+    width: 7%;
+}
+
+#virtual-account-list table td:nth-child(5){
+    width: 8%;
+}
+
 #virtual-account-list .editable-table{
     margin: 3px;
 }

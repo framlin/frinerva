@@ -25,7 +25,9 @@ function _add_booking_entries_row(table, booking_entry_with_cc_and_year) {
     row.booking_record = booking_entry_with_cc_and_year;
     let PropertyMapping = window["accounting__read_csv_file"].get_property_mapping();
     PropertyMapping.forEach((prop, i) => {
-        _insert_editable_cell(row, i, '_' + prop, booking_entry);
+        if (prop !== 'id') {
+            _insert_editable_cell(row, i, '_' + prop, booking_entry);
+        }
     });
 
     let i = 5;
