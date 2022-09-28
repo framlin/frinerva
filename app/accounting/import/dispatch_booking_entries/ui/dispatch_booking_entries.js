@@ -1,4 +1,12 @@
 window["accounting__dispatch_booking_entries"].show_virtual_accounts((virtual_accounts) => {
+    let virtual_account_list_elem = document.getElementById("virtual-account-list");
+    while (virtual_account_list_elem.firstChild) {
+        try {
+            virtual_account_list_elem.removeChild(virtual_account_list_elem.firstChild);
+        } catch (e) {
+        }
+    }
+
     for (let virtual_account of virtual_accounts) {
         show_virtual_account(virtual_account);
     }
@@ -11,15 +19,9 @@ window["accounting__dispatch_booking_entries"].register_event_listener((virtual_
 
 
 function show_virtual_account(virtual_account){
-    let virtual_account_list_elem = document.getElementById("virtual-account-list");
-    while (virtual_account_list_elem.firstChild) {
-        try {
-            virtual_account_list_elem.removeChild(virtual_account_list_elem.firstChild);
-        } catch (e) {
-        }
-    }
 
    // let create_editable_table = window["accounting__dispatch_booking_entries"].create_editable_table;
+    let virtual_account_list_elem = document.getElementById("virtual-account-list");
     let property_mapping = window["accounting__dispatch_booking_entries"].get_property_mapping();
     let account_div = _create_editable_table_(
         `${virtual_account.booking_period} - ${virtual_account.cost_center}`,

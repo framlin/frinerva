@@ -1,6 +1,6 @@
 let _active_booking_entries;
 
-function show_booking_entries(booking_entries) {
+function show_booking_records(booking_entries) {
     _active_booking_entries = booking_entries;
 
     let payments_div = document.querySelector("#payment-entries");
@@ -59,13 +59,13 @@ function _add_cell(row, i, prop, buffer) {
 function _add_event_listener(input_elem, buffer, cell) {
     input_elem.addEventListener('blur', () => {
         buffer[cell.prop] = input_elem.value;
-        show_booking_entries(_active_booking_entries)
+        show_booking_records(_active_booking_entries)
     });
 
     input_elem.addEventListener('keypress', ({key}) => {
         if (key === "Enter") {
             buffer[cell.prop] = input_elem.value;
-            show_booking_entries(_active_booking_entries);
+            show_booking_records(_active_booking_entries);
         }
     });
 }
@@ -90,6 +90,6 @@ function _make_cell_editable(cell, row) {
 }
 
 window["accounting__read_csv_file"].show_booking_records((booking_records) => {
-    show_booking_entries(booking_records);
+    show_booking_records(booking_records);
 });
 

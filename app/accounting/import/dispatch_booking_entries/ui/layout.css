@@ -1,0 +1,14 @@
+#virtual-account-list{
+    overflow-y: scroll;
+}
+#virtual-account-list table{
+    margin: 0;
+}
+#virtual-account-list .editable-table{
+    margin: 3px;
+}
+
+
+.editable-table-header {
+    padding:10px;
+}
