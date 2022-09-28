@@ -14,12 +14,15 @@ class UseCaseView {
     }
 
     link_style(stylesheet_filename) {
-        let head = document.getElementsByTagName('HEAD')[0];
-        let link = document.createElement('link');
-        link.rel = 'stylesheet';
-        link.type = 'text/css';
-        link.href = stylesheet_filename;
-        head.appendChild(link);
+        let existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
+        if(!existing_link) {
+            let head = document.getElementsByTagName('HEAD')[0];
+            let link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = stylesheet_filename;
+            head.appendChild(link);
+        }
     }
 
 
@@ -53,11 +56,20 @@ class UseCaseView {
     add_script(src) {
         return new Promise((resolve, reject) => {
             let script = document.querySelector(`script[src="${src}"]`);
-            if (script) {
-                script.remove()
-            }
+            // if (script) {
+            //     script.remove()
+            // }
+            //
+            // const s = document.createElement('script');
+            //
+            // s.setAttribute('src', src);
+            // s.addEventListener('load', resolve);
+            // s.addEventListener('error', reject);
+            //
+            // document.body.appendChild(s);
 
-                console.log('add script ' + src)
+
+            if (!script) {
                 const s = document.createElement('script');
 
                 s.setAttribute('src', src);
@@ -65,6 +77,11 @@ class UseCaseView {
                 s.addEventListener('error', reject);
 
                 document.body.appendChild(s);
+            } else {
+                resolve();
+            }
+
+
 
         });
     }
@@ -76,9 +93,10 @@ class UseCaseView {
     forward(use_case_name) {
     }
 
-    register_event_listener(){
+    register_event_listener() {
         //abstract
     }
+
     async put_view_into_dom(...data) {
         await this.create_view();
         this.register_event_listener();

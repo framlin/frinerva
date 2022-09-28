@@ -4,9 +4,8 @@ const BookingEntry = require("../../../account/BookingEntry");
 
 const path = require("path");
 let read_cvs_file_view;
-class ReadCSVFileView extends UseCaseView {
 
-    // static _csv_file_import_renderer = new CSVFileImportRenderer();
+class ReadCSVFileView extends UseCaseView {
 
     constructor(use_case_name) {
         super('accounting', use_case_name);
@@ -31,7 +30,6 @@ class ReadCSVFileView extends UseCaseView {
 contextBridge.exposeInMainWorld('accounting__read_csv_file', {
     show_payments: (callback) => {show_payments = callback},
     show_booking_records: (callback) => {show_booking_records = callback},
-    get_booking_records: () => booking_records,
     get_property_mapping : () => BookingEntry.property_mapping,
     register_event_listener: (callback) => {read_cvs_file_view.on_register_callback = callback},
     send_next: (booking_entries) => ipcRenderer.send('read_csv_file:next', booking_entries),

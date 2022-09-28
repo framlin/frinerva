@@ -1,4 +1,3 @@
-console.log("PARSE CREATE ACCOUNT")
 window['accounting__create_account'].register_event_listener(() => {
     register_create_button();
     register_account_list_entry_selection();

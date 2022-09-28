@@ -5,7 +5,6 @@ class WorkspaceViewFactory {
         return WorkspaceViewFactory;
     };
     static async create() {
-        console.log("FACTORY: CREATE WORKSPACE")
         await WorkspaceViewFactory.AccountingWorkspace.create_workspace();
         return new WorkspaceViewFactory.AccountingWorkspace();
     }

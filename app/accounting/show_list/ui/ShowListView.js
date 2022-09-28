@@ -24,7 +24,6 @@ contextBridge.exposeInMainWorld('accounting__show_list', {
 });
 
 ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list) => {
-    console.log("IPC_RENDERER.on:show_list:show_account_name_list")
     show_account_name_list(account_name_list);
 })
 

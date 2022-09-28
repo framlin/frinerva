@@ -1,5 +1,6 @@
 const {ipcRenderer, contextBridge} = require("electron");
 const UseCaseView = require("../../../../common/ui/use_case/UseCaseView");
+const BookingEntry = require("../../../account/BookingEntry");
 
 const path = require("path");
 
@@ -9,15 +10,8 @@ class DispatchBookingEntriesView extends UseCaseView {
         super('accounting', use_case_name)
     }
 
-    register_next_button() {
-        let next_button = document.querySelector('.next-btn');
-        next_button.addEventListener('click', () => {
-            // ipcRenderer.send('read_csv_file:next')
-        });
-    }
-
     register_event_listener() {
-        this.register_next_button();
+        on_register_event_listener();
     }
 
     async create_view() {
@@ -26,11 +20,13 @@ class DispatchBookingEntriesView extends UseCaseView {
         this.link_styles(__dirname);
     }
 }
+
 let show_virtual_accounts;
+let on_register_event_listener;
 contextBridge.exposeInMainWorld('accounting__dispatch_booking_entries', {
-    // show_payments: (callback) => ipcRenderer.on('read_csv_file:show_payments', callback),
     show_virtual_accounts: (callback) => {show_virtual_accounts = callback},
-    // get_property_mapping : () => BookingEntry.property_mapping,
+    register_event_listener: (callback) => {on_register_event_listener = callback},
+    get_property_mapping: () => BookingEntry.property_mapping,
 });
 
 ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts) => {

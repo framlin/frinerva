@@ -55,7 +55,7 @@ class TableRenderer {
         input_elem.addEventListener('keypress', ({key}) => {
             if (key === "Enter") {
                 buffer[cell.prop] = input_elem.value;
-                redraw()
+                redraw();
             }
         });
     }

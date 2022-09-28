@@ -27,7 +27,6 @@ class MainWindow extends BrowserWindow {
     }
 
     execute_use_case(domain_name, use_case_name) {
-        console.log("MIN_WINDOW execute_use_case ", use_case_name);
         let use_case = this._domains[domain_name].create_use_case(use_case_name);
         use_case.execute();
     }

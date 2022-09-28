@@ -9,7 +9,6 @@ class AccountingWorkspaceView extends WorkspaceView {
     }
 
     static async create_workspace() {
-        console.log('AccountingWorkspaceView::create_workspace')
         await WorkspaceView.create_workspace('accounting', __dirname);
         ipcRenderer.send('use_case:create', 'accounting', 'show_list');
     }

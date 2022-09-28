@@ -1,5 +1,5 @@
-const TablePresenter = require("app/ui/electron/renderer/TableRenderer");
-const BookingEntry = require("../../../../business/accounting/account/BookingEntry");
+const TablePresenter = require("../../../../common/ui/renderer/TableRenderer");
+const BookingEntry = require("../../../account/BookingEntry");
 
 class BookingEntryDispatchRenderer {
 
