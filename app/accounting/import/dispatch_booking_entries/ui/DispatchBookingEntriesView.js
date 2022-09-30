@@ -15,6 +15,7 @@ class DispatchBookingEntriesView extends UseCaseView {
     }
 
     async create_view() {
+        await this.add_script(path.join(__dirname, '../../../../common/ui/renderer/TableRenderer.js'));
         await this.add_script(path.join(__dirname, 'dispatch_booking_entries.js'));
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);

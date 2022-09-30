@@ -17,6 +17,7 @@ class BookingEntry {
     get id () {
         return this._id;
     }
+
     get date () {
         return this._date;
     }

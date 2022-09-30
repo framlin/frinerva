@@ -29,8 +29,8 @@ class TableRenderer {
         let {cell, text} = TableRenderer._add_cell(row, i, prop, buffer);
         cell.appendChild(text);
         cell.addEventListener('click', (event) => {
-            let input_elem = TableRenderer._make_cell_editable(cell, row);
-            TableRenderer._add_event_listener(input_elem, buffer, cell, redraw);
+            let input_elem = TableRenderer._make_cell_editable(text, cell, row);
+            TableRenderer._add_event_listener(input_elem, buffer, cell, text, redraw);
         });
     }
 
@@ -38,17 +38,18 @@ class TableRenderer {
         let cell = row.insertCell(i);
         cell.className="editable-table-cell";
         cell.prop = prop;
-        let content = (prop === 'date') ?
-            buffer[prop].toLocaleString('de-DE').split(',')[0] :
-            buffer[prop];
-
+        let content = buffer[prop];
         let text = document.createTextNode(content);
         return {cell, text};
     }
 
-    static _add_event_listener(input_elem, buffer, cell, redraw) {
-        input_elem.addEventListener('blur', () => {
-            buffer[cell.prop] = input_elem.value;
+    static _add_event_listener(input_elem, buffer, cell, text, redraw) {
+        input_elem.addEventListener('blur', (event) => {
+            if (input_elem.value !== "") {
+                buffer[cell.prop] = input_elem.value;
+            } else {
+                buffer[cell.prop] = text.wholeText;
+            }
             redraw();
         });
 
@@ -60,9 +61,10 @@ class TableRenderer {
         });
     }
 
-    static _make_cell_editable(cell, row) {
+    static _make_cell_editable(text, cell, row) {
         let input_elem = document.createElement("input");
         input_elem.setAttribute('type', 'text');
+        input_elem.value = text.wholeText;
         cell.style.padding = "0px";
         cell.style.margin = "0px";
         cell.style.border = "0px";
@@ -80,5 +82,3 @@ class TableRenderer {
     }
 
 }
-
-module.exports = TableRenderer;
