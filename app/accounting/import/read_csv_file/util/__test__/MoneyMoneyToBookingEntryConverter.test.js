@@ -31,7 +31,7 @@ it('should be possible to convert a payment entry to a booking entry', () => {
         date,
         "04082 Leipzig Kontoabschluss 4. Quartal 20 AktivKonto (Kontofuhrung) 20,70 13 kostenfreie Poste",
         "Saldo der Abschlussposten QM - Support",
-        -30.7,
+        -30.70,
         "BC??",
         "0"
     );

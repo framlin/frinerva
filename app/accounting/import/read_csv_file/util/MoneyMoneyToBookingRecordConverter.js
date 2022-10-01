@@ -19,7 +19,7 @@ class MoneyMoneyToBookingRecordConverter {
             this._convert_to_date(payment_entry.Datum),
             payment_entry.Verwendungszweck,
             payment_entry.Name,
-            this._convert_to_amount(payment_entry.Betrag).toFixed(2),
+            this._convert_to_amount(payment_entry.Betrag),
             "BC??"
         );
 

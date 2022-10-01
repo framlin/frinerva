@@ -15,7 +15,7 @@ test('if an empty booking_entry has a bunch of properties', () => {
     expect(booking_entry.date).toBe(0)
     expect(booking_entry.subject).toBe("");
     expect(booking_entry.name).toBe("");
-    expect(booking_entry.amount).toBe(0.00.toFixed(2));
+    expect(booking_entry.amount).toBe(0);
     expect(booking_entry.booking_code).toBe(BOOKING_CODE.NONE);
     expect(booking_entry.id.indexOf('-')).toBeGreaterThan(0);
 });
@@ -26,7 +26,7 @@ it('should be possible, to create an booking_entry with values', () => {
     expect(booking_entry.date).toBe(date);
     expect(booking_entry.subject).toBe("Vermietung");
     expect(booking_entry.name).toBe("Miete");
-    expect(booking_entry.amount).toBe(42.0.toFixed(2));
+    expect(booking_entry.amount).toBe(42);
     expect(booking_entry.booking_code).toBe(BOOKING_CODE.RENTAL_FEE);
     expect(booking_entry.id).toBe("1-1-1");
 

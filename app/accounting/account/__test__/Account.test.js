@@ -38,7 +38,7 @@ test('adding two booking entries', () => {
 test('serialization', () => {
     let account = account_with_two_entries();
 
-    expect(account.serialize()).toBe("{\"_booking_period\":\"1\",\"_cost_center\":\"cost_center\",\"_booking_entries\":[{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":\"1.00\",\"_booking_code\":\"BC??\",\"_id\":\"1\"},{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":\"1.00\",\"_booking_code\":\"BC??\",\"_id\":\"2\"}]}");
+    expect(account.serialize()).toBe("{\"_booking_period\":\"1\",\"_cost_center\":\"cost_center\",\"_booking_entries\":[{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":1,\"_booking_code\":\"BC??\",\"_id\":\"1\"},{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":1,\"_booking_code\":\"BC??\",\"_id\":\"2\"}]}");
 
 });
 

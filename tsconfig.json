@@ -1,8 +1,10 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2022",
-    "sourceMap": true
+//    "module": "commonjs",
+    "target": "ES2022",
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
   },
   "extends": "@tsconfig/node16/tsconfig.json",
   "exclude": [
