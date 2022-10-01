@@ -2,7 +2,7 @@
   "name": "frinerva",
   "productName": "Frinerva",
   "version": "20220721",
-  "description": "property mangement",
+  "description": "property management",
   "main": "app/main/main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -55,7 +55,9 @@
   },
   "config": {
     "forge": {
-      "packagerConfig": {},
+      "packagerConfig": {
+        "executableName": "frinerva"
+      },
       "makers": [
         {
           "name": "@electron-forge/maker-squirrel",

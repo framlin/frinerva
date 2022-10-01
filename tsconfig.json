@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-//    "module": "commonjs",
+    "module": "commonjs",
     "target": "ES2022",
     "sourceMap": true,
     "esModuleInterop": true,
@@ -8,6 +8,7 @@
   },
   "extends": "@tsconfig/node16/tsconfig.json",
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "out"
   ]
 }
