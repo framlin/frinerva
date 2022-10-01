@@ -1,6 +1,15 @@
 const BOOKING_CODE = require("./BOOKING_CODE");
 const { v4: uuidv4 } = require('uuid');
 
+interface BookingEntryData {
+    date: Date;
+    subject: string;
+    name:string;
+    amount: number;
+    booking_code: string;
+    id: string;
+}
+
 class BookingEntry {
     static property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
 
@@ -86,4 +95,4 @@ class BookingEntry {
 }
 module.exports = BookingEntry;
 
-export {BookingEntry}
+export {BookingEntry, BookingEntryData}

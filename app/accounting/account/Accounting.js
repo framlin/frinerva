@@ -1,8 +1,9 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Accounting = void 0;
 const Account = require("./Account");
 const BookingEntry = require("./BookingEntry");
 class Accounting {
-    _account_storage;
     constructor(account_storage) {
         this._account_storage = account_storage;
     }
@@ -39,5 +40,6 @@ class Accounting {
         return result;
     }
 }
+exports.Accounting = Accounting;
 module.exports = Accounting;
 //# sourceMappingURL=Accounting.js.map

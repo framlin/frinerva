@@ -1,14 +1,19 @@
+import {BookingEntry, BookingEntryData} from "./BookingEntry";
+
+interface AccountData {
+    booking_period: string;
+    cost_center: string;
+    booking_entries: BookingEntryData[];
+}
+
 class Account {
-    constructor(booking_period: string, cost_center: string) {
-        this._booking_period = booking_period;
-        this._cost_center = cost_center;
+    constructor(private _booking_period: string, private _cost_center: string) {
         this._booking_entries = [];
     }
 
     get cost_center() {
         return this._cost_center;
     }
-
 
     get booking_period() {
         return this._booking_period;
@@ -37,11 +42,9 @@ class Account {
         return account;
     }
 
-    _booking_period: string;
-    _cost_center: string;
-    _booking_entries: any[];
+    private _booking_entries: BookingEntry[];
 }
 
 module.exports = Account;
 
-export {Account}
+export {Account, AccountData}

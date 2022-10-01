@@ -4,13 +4,6 @@ exports.BookingEntry = void 0;
 const BOOKING_CODE = require("./BOOKING_CODE");
 const { v4: uuidv4 } = require('uuid');
 class BookingEntry {
-    static property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
-    _date;
-    _subject;
-    _name;
-    _amount;
-    _booking_code;
-    _id;
     constructor(date, subject, name, amount, booking_code, id) {
         this._date = date || 0;
         this._subject = subject || "";
@@ -68,5 +61,6 @@ class BookingEntry {
     }
 }
 exports.BookingEntry = BookingEntry;
+BookingEntry.property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
 module.exports = BookingEntry;
 //# sourceMappingURL=BookingEntry.js.map

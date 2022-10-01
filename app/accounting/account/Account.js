@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Account = void 0;
 class Account {
-    constructor(booking_period, cost_center) {
-        this._booking_period = booking_period;
-        this._cost_center = cost_center;
+    constructor(_booking_period, _cost_center) {
+        this._booking_period = _booking_period;
+        this._cost_center = _cost_center;
         this._booking_entries = [];
     }
     get cost_center() {
@@ -31,9 +31,6 @@ class Account {
         account.booking_entries = account_data._booking_entries;
         return account;
     }
-    _booking_period;
-    _cost_center;
-    _booking_entries;
 }
 exports.Account = Account;
 module.exports = Account;
