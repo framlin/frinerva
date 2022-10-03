@@ -13,5 +13,5 @@ class ShowListPresenter extends UseCasePresenter {
     }
 }
 exports.ShowListPresenter = ShowListPresenter;
-module.exports = ShowListPresenter;
+module.exports = { ShowListPresenter };
 //# sourceMappingURL=ShowListPresenter.js.map

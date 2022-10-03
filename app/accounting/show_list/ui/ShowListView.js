@@ -27,5 +27,5 @@ contextBridge.exposeInMainWorld('accounting__show_list', {
 ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list) => {
     show_account_name_list(account_name_list);
 });
-module.exports = ShowListView;
+module.exports = { ShowListView };
 //# sourceMappingURL=ShowListView.js.map

@@ -1,7 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MoneyMoneyToBookingRecordConverter = void 0;
-const Accounting_1 = require("../../../account/Accounting");
+import {Accounting} from "../../../account/Accounting";
+
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',
     'VerwaltungsKosten': 'ADMINISTRATION',
@@ -14,38 +12,52 @@ const COST_CENTER_MAP = new Map(Object.entries({
     'Miete': 'RENT',
     'NebenKosten': 'SERVICE_CHARGES'
 }));
+
 class MoneyMoneyToBookingRecordConverter {
-    convert(payment_entry) {
-        let booking_entry = Accounting_1.Accounting.create_booking_entry(this._convert_to_date(payment_entry.Datum), payment_entry.Verwendungszweck, payment_entry.Name, this._convert_to_amount(payment_entry.Betrag), "BC??");
+    convert(payment_entry: any) {
+        let booking_entry = Accounting.create_booking_entry(
+            this._convert_to_date(payment_entry.Datum),
+            payment_entry.Verwendungszweck,
+            payment_entry.Name,
+            this._convert_to_amount(payment_entry.Betrag),
+            "BC??"
+        );
+
         let year = booking_entry.date.getFullYear();
         let cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
-        return { booking_entry, cost_center, year };
+        return {booking_entry, cost_center, year};
     }
-    _convert_to_date(date_str) {
+
+    _convert_to_date(date_str: string) {
         let [day, month, year] = date_str.split(".");
         return new Date(+year, +month - 1, +day);
     }
-    _convert_to_amount(amount_string) {
+
+    _convert_to_amount(amount_string: string) {
         if (typeof amount_string !== "string") {
             return amount_string;
-        }
-        else {
+        } else {
             return parseFloat(this._strip_whitespaces(amount_string).replace(",", "."));
         }
     }
-    _strip_whitespaces(str) {
+
+    _strip_whitespaces(str: string) {
         return str.replace(/\s/g, "");
     }
-    _extract_cost_center_key(category) {
+
+    _extract_cost_center_key(category: string) {
         let elems = category.split('-');
-        let cost_center_key = elems[elems.length - 1];
+        let cost_center_key = elems[elems.length - 1]
         return this._strip_whitespaces(cost_center_key);
     }
-    _convert_category_to_cost_center(category) {
+
+    _convert_category_to_cost_center(category: string) {
         let cost_center_key = this._extract_cost_center_key(category);
         return COST_CENTER_MAP.get(cost_center_key);
     }
+
+
 }
-exports.MoneyMoneyToBookingRecordConverter = MoneyMoneyToBookingRecordConverter;
-module.exports = { MoneyMoneyToBookingRecordConverter };
-//# sourceMappingURL=MoneyMoneyToBookingRecordConverter.js.map
+
+module.exports = {MoneyMoneyToBookingRecordConverter};
+export {MoneyMoneyToBookingRecordConverter}

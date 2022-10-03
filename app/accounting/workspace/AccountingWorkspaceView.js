@@ -1,18 +1,17 @@
-const WorkspaceView = require("../../common/ui/workspace/WorkspaceView");
-const {ipcRenderer} = require("electron");
-
-class AccountingWorkspaceView extends WorkspaceView {
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const WorkspaceView_1 = require("../../common/ui/workspace/WorkspaceView");
+const { ipcRenderer } = require("electron");
+class AccountingWorkspaceView extends WorkspaceView_1.WorkspaceView {
     constructor() {
         super();
         this.register_event_handler();
     }
-
     static async create_workspace() {
-        await WorkspaceView.create_workspace('accounting', __dirname);
+        let wsv = await WorkspaceView_1.WorkspaceView.create_workspace('accounting', __dirname);
         ipcRenderer.send('use_case:create', 'accounting', 'show_list');
+        return wsv;
     }
-
     register_event_handler() {
         this.register_use_case_starter([
             '#read-csv-file',
@@ -24,6 +23,5 @@ class AccountingWorkspaceView extends WorkspaceView {
         ]);
     }
 }
-
-
 module.exports = AccountingWorkspaceView;
+//# sourceMappingURL=AccountingWorkspaceView.js.map

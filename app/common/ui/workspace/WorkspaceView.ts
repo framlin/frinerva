@@ -155,5 +155,5 @@ class WorkspaceView {
 ipcRenderer.on('use_case:created', async (e, use_case_name: string, ...data: any[]) => {
     await ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
-module.exports = WorkspaceView;
+module.exports = {WorkspaceView};
 export {WorkspaceView}

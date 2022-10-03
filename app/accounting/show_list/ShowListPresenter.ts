@@ -12,5 +12,5 @@ class ShowListPresenter extends UseCasePresenter{
     }
 }
 
-module.exports = ShowListPresenter;
+module.exports = {ShowListPresenter};
 export {ShowListPresenter}

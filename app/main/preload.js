@@ -1,5 +1,5 @@
-const WorkspaceView = require('../common/ui/workspace/WorkspaceView');
-const DomainViewFactory = require('./DomainViewFactory');
+const { WorkspaceView }= require('../common/ui/workspace/WorkspaceView');
+const {DomainViewFactory} = require('./DomainViewFactory');
 
 window.addEventListener('DOMContentLoaded', () => {
     WorkspaceView.splitter();
