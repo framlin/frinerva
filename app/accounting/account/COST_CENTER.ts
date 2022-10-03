@@ -1,6 +1,3 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.COST_CENTER = void 0;
 const COST_CENTER = {
     NONE: "",
     HOUSE: "HOUSE",
@@ -12,6 +9,7 @@ const COST_CENTER = {
     DEPOSIT: "DEPOSIT",
     RENT: "RENT"
 };
-exports.COST_CENTER = COST_CENTER;
-module.exports = { COST_CENTER };
-//# sourceMappingURL=COST_CENTER.js.map
+
+
+module.exports = {COST_CENTER};
+export {COST_CENTER}
