@@ -1,5 +1,5 @@
 const {ReadCSVFileController} = require("../import/read_csv_file/ReadCSVFileController");
-const CreateAccountController = require("../create/CreateAccountController");
+const {CreateAccountController} = require("../create/CreateAccountController");
 const {ShowListController} = require("../show_list/ShowListController");
 const {DispatchBookingEntriesController} = require("../import/dispatch_booking_entries/DispatchBookingEntriesController");
 const Controller = {
