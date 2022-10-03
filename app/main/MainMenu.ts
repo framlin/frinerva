@@ -1,24 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MainMenu = void 0;
+import {shell} from "electron";
+
 const isMac = process.platform === 'darwin';
+
 class MainMenu {
-    static createMenuTemplate(DomainFactory) {
-        return [
+    static createMenuTemplate(DomainFactory: any) {
+        return  [
             ...(isMac ? [{
-                    label: "Frinerva",
-                    submenu: [
-                        { role: 'about' },
-                        { type: 'separator' },
-                        { role: 'services' },
-                        { type: 'separator' },
-                        { role: 'hide' },
-                        { role: 'hideOthers' },
-                        { role: 'unhide' },
-                        { type: 'separator' },
-                        { role: 'quit' }
-                    ]
-                }] : []),
+                label: "Frinerva",
+                submenu: [
+                    { role: 'about' },
+                    { type: 'separator' },
+                    { role: 'services' },
+                    { type: 'separator' },
+                    { role: 'hide' },
+                    { role: 'hideOthers' },
+                    { role: 'unhide' },
+                    { type: 'separator' },
+                    { role: 'quit' }
+                ]
+            }] : []),
             // { role: 'fileMenu' }
             {
                 label: 'File',
@@ -26,12 +26,10 @@ class MainMenu {
                     {
                         label: 'Import',
                         click: () => {
-                            DomainFactory.create('accounting').create_use_case('read_csv_file').execute();
+                            DomainFactory.create('accounting').create_use_case('read_csv_file').execute()
                         }
                     },
-                    isMac ? { role: 'close' } : { role: 'quit' }
-                ]
-            },
+                    isMac ? { role: 'close' } : { role: 'quit' }]},
             {
                 label: 'View',
                 submenu: [
@@ -68,15 +66,16 @@ class MainMenu {
                     {
                         label: 'Learn More',
                         click: async () => {
-                            const { shell } = require('electron');
-                            await shell.openExternal('https://electronjs.org');
+                            const { shell } = require('electron')
+                            await shell.openExternal('https://electronjs.org')
                         }
                     }
                 ]
             }
+
         ];
+
     }
 }
-exports.MainMenu = MainMenu;
 module.exports = MainMenu;
-//# sourceMappingURL=MainMenu.js.map
+export {MainMenu}

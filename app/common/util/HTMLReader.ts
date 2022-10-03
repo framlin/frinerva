@@ -7,3 +7,4 @@ class HTMLReader {
 }
 
 module.exports = HTMLReader;
+export {HTMLReader}
