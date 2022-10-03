@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShowListPresenter = void 0;
-const UseCasePresenter = require("../../common/use_case/UseCasePresenter");
+const UseCasePresenter_1 = require("../../common/use_case/UseCasePresenter");
 let presenter;
-class ShowListPresenter extends UseCasePresenter {
+class ShowListPresenter extends UseCasePresenter_1.UseCasePresenter {
     constructor(ipc_chanel) {
         super(ipc_chanel);
         presenter = this;

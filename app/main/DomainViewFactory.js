@@ -1,11 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomainViewFactory = void 0;
+const WorkspaceViewFactory_1 = require("../accounting/factories/WorkspaceViewFactory");
+const AccountingWorkspaceView_1 = require("../accounting/workspace/AccountingWorkspaceView");
 const workspaces = {
-    accounting: require('../accounting/workspace/AccountingWorkspaceView'),
+    accounting: AccountingWorkspaceView_1.AccountingWorkspaceView,
 };
 const factories = {
-    accounting: require('../accounting/factories/WorkspaceViewFactory'),
+    accounting: WorkspaceViewFactory_1.WorkspaceViewFactory,
 };
 class DomainViewFactory {
     static async create_workspace(domain_name) {

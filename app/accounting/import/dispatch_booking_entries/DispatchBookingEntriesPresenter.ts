@@ -2,7 +2,7 @@ import {Account, AccountData} from "../../account/Account";
 import {WebContents} from 'electron';
 import {BookingEntryData} from "../../account/BookingEntry";
 
-const UseCasePresenter = require("../../../common/use_case/UseCasePresenter");
+const {UseCasePresenter} = require("../../../common/use_case/UseCasePresenter");
 let presenter: DispatchBookingEntriesPresenter;
 
 

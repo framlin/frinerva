@@ -69,5 +69,5 @@ class UseCase{
 
 }
 
-module.exports = UseCase;
+module.exports = {UseCase};
 export {UseCase}

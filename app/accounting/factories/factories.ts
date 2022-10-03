@@ -12,4 +12,4 @@ const factories = {
     use_case: UseCaseFactory,
 }
 
-module.exports = factories;
+module.exports = {factories};

@@ -1,4 +1,4 @@
-const BOOKING_CODE = require("./BOOKING_CODE");
+const {BOOKING_CODE} = require("./BOOKING_CODE");
 const { v4: uuidv4 } = require('uuid');
 
 interface BookingEntryData {
@@ -93,6 +93,6 @@ class BookingEntry {
         return `${this.date.toLocaleString('de-DE').split(',')[0]}; ${this.subject}; ${this.name}; ${this.amount}; ${this.booking_code}`;
     }
 }
-module.exports = BookingEntry;
+module.exports = {BookingEntry};
 
 export {BookingEntry, BookingEntryData}

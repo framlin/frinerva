@@ -1,5 +1,5 @@
 import {Account} from "./Account";
-const BookingEntry = require("./BookingEntry");
+const {BookingEntry} = require("./BookingEntry");
 
 
 class Accounting{

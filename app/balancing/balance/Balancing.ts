@@ -30,5 +30,5 @@ class Balancing {
     }
 }
 
-module.exports = Balancing;
+module.exports = {Balancing};
 export {Balancing}

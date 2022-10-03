@@ -38,5 +38,5 @@ class AccountingHelper {
 
 }
 
-module.exports = AccountingHelper;
+module.exports = {AccountingHelper};
 export {AccountingHelper}

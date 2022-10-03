@@ -45,5 +45,5 @@ class UseCase {
     }
 }
 exports.UseCase = UseCase;
-module.exports = UseCase;
+module.exports = { UseCase };
 //# sourceMappingURL=UseCase.js.map

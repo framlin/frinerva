@@ -1,6 +1,6 @@
-const Accounting = require('../Accounting');
-const Account = require("../Account");
-const BookingEntry = require("../BookingEntry");
+const {Accounting} = require('../Accounting');
+const {Account} = require("../Account");
+const {BookingEntry} = require("../BookingEntry");
 
 let accounting,
     account_storage;

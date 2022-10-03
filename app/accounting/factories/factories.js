@@ -12,5 +12,5 @@ const factories = {
     presenter: PresenterFactory_1.PresenterFactory,
     use_case: UseCaseFactory_1.UseCaseFactory,
 };
-module.exports = factories;
+module.exports = { factories };
 //# sourceMappingURL=factories.js.map

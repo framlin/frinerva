@@ -1,5 +1,5 @@
 const {ipcRenderer, contextBridge} = require("electron");
-const UseCaseView = require("../../../common/ui/use_case/UseCaseView");
+const {UseCaseView} = require("../../../common/ui/use_case/UseCaseView");
 const path = require('path');
 
 let show_list_view;

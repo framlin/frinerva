@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorkspaceView = void 0;
 // @ts-ignore
-const HTMLReader = require("../../util/HTMLReader");
+const { HTMLReader } = require("../../util/HTMLReader");
 // @ts-ignore
 const path = require("path");
 // @ts-ignore

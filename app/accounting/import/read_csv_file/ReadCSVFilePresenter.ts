@@ -1,6 +1,6 @@
 import {BookingRecord} from "../../account/BookingRecord";
 
-const UseCasePresenter = require("../../../common/use_case/UseCasePresenter");
+const {UseCasePresenter} = require("../../../common/use_case/UseCasePresenter");
 const {ipcMain, dialog} = require("electron");
 
 let presenter: ReadCSVFilePresenter;

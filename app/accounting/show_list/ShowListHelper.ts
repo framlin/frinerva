@@ -2,8 +2,7 @@ import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
 
 const JSONStorage = require("../../common/persistence/json/JSONStorage");
 const path = require("path");
-const AccountingStorageHelper = require("../../common/persistence/helper/AccountingHelper");
-
+import {AccountingHelper}  from "../../common/persistence/helper/AccountingHelper";
 const STORAGE_ROOT_DIR = path.join(__dirname,"../../common/persistence/data") ;
 
 class ShowListHelper extends UseCaseHelper{
@@ -20,7 +19,7 @@ class ShowListHelper extends UseCaseHelper{
     }
 
     async load_cost_center_configuration() {
-        return await AccountingStorageHelper.load_cost_center_configuration();
+        return await AccountingHelper.load_cost_center_configuration();
     }
 
 }

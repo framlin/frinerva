@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accounting = void 0;
 const Account_1 = require("./Account");
-const BookingEntry = require("./BookingEntry");
+const { BookingEntry } = require("./BookingEntry");
 class Accounting {
     constructor(account_storage) {
         this._account_storage = account_storage;

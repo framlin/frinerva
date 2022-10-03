@@ -8,6 +8,7 @@ class UseCasePresenter {
         this._ipc_channel = ipc_chanel;
         presenter = this;
     }
+    show(...data) { }
     execute(use_case_name, ...data) {
         this._ipc_channel.send('use_case:created', use_case_name, ...data);
     }
@@ -30,5 +31,5 @@ exports.UseCasePresenter = UseCasePresenter;
 ipcMain.on('use_case:view_ready', (e, domain_name, use_case_name, ...data) => {
     presenter.on_use_case_view_ready(...data);
 });
-module.exports = UseCasePresenter;
+module.exports = { UseCasePresenter };
 //# sourceMappingURL=UseCasePresenter.js.map

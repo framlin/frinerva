@@ -13,5 +13,5 @@ class WorkspaceViewFactory {
     }
 }
 exports.WorkspaceViewFactory = WorkspaceViewFactory;
-module.exports = WorkspaceViewFactory;
+module.exports = { WorkspaceViewFactory };
 //# sourceMappingURL=WorkspaceViewFactory.js.map

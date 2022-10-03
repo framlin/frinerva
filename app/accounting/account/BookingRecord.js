@@ -20,5 +20,5 @@ class BookingRecord {
     }
 }
 exports.BookingRecord = BookingRecord;
-module.exports = BookingRecord;
+module.exports = { BookingRecord };
 //# sourceMappingURL=BookingRecord.js.map

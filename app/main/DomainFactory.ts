@@ -1,9 +1,10 @@
 import {MainWindow} from "./MainWindow";
 
-const Domain = require('../common/domain/Domain');
+const {Domain} = require('../common/domain/Domain');
+const {factories} = require('../accounting/factories/factories');
 
 const domain_factories = {
-    accounting: require('../accounting/factories/factories'),
+    accounting: factories,
 }
 
 

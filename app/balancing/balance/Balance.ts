@@ -43,5 +43,5 @@ class Balance{
     }
 }
 
-module.exports = Balance;
+module.exports = {Balance};
 export {Balance}

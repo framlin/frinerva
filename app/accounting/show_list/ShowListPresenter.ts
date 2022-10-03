@@ -1,4 +1,4 @@
-const UseCasePresenter = require("../../common/use_case/UseCasePresenter");
+import {UseCasePresenter}  from "../../common/use_case/UseCasePresenter";
 
 let presenter: ShowListPresenter;
 class ShowListPresenter extends UseCasePresenter{

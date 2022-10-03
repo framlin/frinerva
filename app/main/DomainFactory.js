@@ -1,9 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomainFactory = void 0;
-const Domain = require('../common/domain/Domain');
+const { Domain } = require('../common/domain/Domain');
+const { factories } = require('../accounting/factories/factories');
 const domain_factories = {
-    accounting: require('../accounting/factories/factories'),
+    accounting: factories,
 };
 function create_domain(domain_name, main_window) {
     // @ts-ignore

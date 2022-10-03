@@ -24,5 +24,5 @@ class BookingRecord{
     }
 }
 
-module.exports = BookingRecord;
+module.exports = {BookingRecord};
 export {BookingRecord}

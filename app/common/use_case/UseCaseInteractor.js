@@ -17,5 +17,5 @@ class UseCaseInteractor {
     }
 }
 exports.UseCaseInteractor = UseCaseInteractor;
-module.exports = UseCaseInteractor;
+module.exports = { UseCaseInteractor };
 //# sourceMappingURL=UseCaseInteractor.js.map

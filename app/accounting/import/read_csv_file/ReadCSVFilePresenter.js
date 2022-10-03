@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReadCSVFilePresenter = void 0;
-const UseCasePresenter = require("../../../common/use_case/UseCasePresenter");
+const { UseCasePresenter } = require("../../../common/use_case/UseCasePresenter");
 const { ipcMain, dialog } = require("electron");
 let presenter;
 class ReadCSVFilePresenter extends UseCasePresenter {

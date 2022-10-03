@@ -14,5 +14,5 @@ class Domain {
     }
 }
 exports.Domain = Domain;
-module.exports = Domain;
+module.exports = { Domain };
 //# sourceMappingURL=Domain.js.map

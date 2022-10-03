@@ -1,5 +1,5 @@
 const {ipcRenderer} = require("electron");
-const HTMLReader = require("../../util/HTMLReader");
+const {HTMLReader} = require("../../util/HTMLReader");
 const path = require("path");
 
 
@@ -95,6 +95,6 @@ class UseCaseView {
     }
 }
 
-module.exports = UseCaseView;
+module.exports = {UseCaseView};
 export {UseCaseView}
 

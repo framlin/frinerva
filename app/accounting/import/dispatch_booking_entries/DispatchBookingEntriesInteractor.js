@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DispatchBookingEntriesInteractor = void 0;
-const UseCaseInteractor = require("../../../common/use_case/UseCaseInteractor");
+const { UseCaseInteractor } = require("../../../common/use_case/UseCaseInteractor");
 const { Accounting } = require("../../account/Accounting");
 class DispatchBookingEntriesInteractor extends UseCaseInteractor {
     async execute(booking_records) {

@@ -27,4 +27,5 @@ class AccountingWorkspaceView extends WorkspaceView {
 }
 
 
-module.exports = AccountingWorkspaceView;
+module.exports = {AccountingWorkspaceView};
+export {AccountingWorkspaceView}

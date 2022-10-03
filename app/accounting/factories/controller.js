@@ -12,5 +12,5 @@ const Controller = {
     dispatch_booking_entries: DispatchBookingEntriesController_1.DispatchBookingEntriesController,
 };
 exports.Controller = Controller;
-module.exports = Controller;
+module.exports = { Controller };
 //# sourceMappingURL=controller.js.map

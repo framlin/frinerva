@@ -8,5 +8,5 @@ const Helper = {
     show_list: ShowListHelper,
     dispatch_booking_entries: DispatchBookingEntriesHelper,
 }
-module.exports = Helper;
+module.exports = {Helper};
 export {Helper}

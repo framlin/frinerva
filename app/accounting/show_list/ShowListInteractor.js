@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShowListInteractor = void 0;
-const UseCaseInteractor = require("../../common/use_case/UseCaseInteractor");
-// const Accounting = require('../account/Accounting');
+const UseCaseInteractor_1 = require("../../common/use_case/UseCaseInteractor");
 const Accounting_1 = require("../account/Accounting");
-class ShowListInteractor extends UseCaseInteractor {
+class ShowListInteractor extends UseCaseInteractor_1.UseCaseInteractor {
     async execute() {
         let accounting = new Accounting_1.Accounting(this._helper);
         let account_list = await accounting.get_account_names();
-        this._presenter.show(account_list);
+        if (this._presenter)
+            this._presenter.show(account_list);
     }
 }
 exports.ShowListInteractor = ShowListInteractor;

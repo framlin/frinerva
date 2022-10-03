@@ -34,5 +34,5 @@ class AccountingHelper {
     }
 }
 exports.AccountingHelper = AccountingHelper;
-module.exports = AccountingHelper;
+module.exports = { AccountingHelper };
 //# sourceMappingURL=AccountingHelper.js.map

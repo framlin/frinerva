@@ -1,5 +1,5 @@
 const {ipcMain} = require("electron");
-const UseCasePresenter = require("../../common/use_case/UseCasePresenter");
+const {UseCasePresenter} = require("../../common/use_case/UseCasePresenter");
 
 let presenter: CreateAccountPresenter;
 

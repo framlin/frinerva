@@ -1,4 +1,4 @@
-const UseCaseInteractor = require("../../../common/use_case/UseCaseInteractor");
+const {UseCaseInteractor} = require("../../../common/use_case/UseCaseInteractor");
 const {Accounting} = require("../../account/Accounting");
 
 class DispatchBookingEntriesInteractor extends UseCaseInteractor{

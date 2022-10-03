@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DispatchBookingEntriesView = void 0;
 const { ipcRenderer, contextBridge } = require("electron");
-const UseCaseView = require("../../../../common/ui/use_case/UseCaseView");
-const BookingEntry = require("../../../account/BookingEntry");
+const { UseCaseView } = require("../../../../common/ui/use_case/UseCaseView");
+const { BookingEntry } = require("../../../account/BookingEntry");
 const path = require("path");
 class DispatchBookingEntriesView extends UseCaseView {
     constructor(use_case_name) {

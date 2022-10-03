@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReadCSVFileInteractor = void 0;
-const UseCaseInteractor = require("../../../common/use_case/UseCaseInteractor");
+const { UseCaseInteractor } = require("../../../common/use_case/UseCaseInteractor");
 const { MoneyMoneyToBookingRecordConverter } = require("./util/MoneyMoneyToBookingRecordConverter");
 class ReadCSVFileInteractor extends UseCaseInteractor {
     constructor() {

@@ -1,6 +1,6 @@
 const {ipcRenderer, contextBridge} = require("electron");
-const UseCaseView = require("../../../../common/ui/use_case/UseCaseView");
-const BookingEntry = require("../../../account/BookingEntry");
+const {UseCaseView} = require("../../../../common/ui/use_case/UseCaseView");
+const {BookingEntry} = require("../../../account/BookingEntry");
 
 const path = require("path");
 let read_cvs_file_view: ReadCSVFileView;

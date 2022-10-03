@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountInteractor = void 0;
-const UseCaseInteractor = require("../../common/use_case/UseCaseInteractor");
+const { UseCaseInteractor } = require("../../common/use_case/UseCaseInteractor");
 const { Accounting } = require("../account/Accounting");
 class CreateAccountInteractor extends UseCaseInteractor {
     async execute() {

@@ -9,5 +9,5 @@ const Controller = {
     show_list: ShowListController,
     dispatch_booking_entries: DispatchBookingEntriesController,
 }
-module.exports = Controller;
+module.exports = {Controller};
 export {Controller}

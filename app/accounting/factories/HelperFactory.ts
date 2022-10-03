@@ -1,4 +1,4 @@
-const Helper = require('./helper');
+const {Helper} = require('./helper');
 
 class HelperFactory{
     static create(use_case_name: string) {

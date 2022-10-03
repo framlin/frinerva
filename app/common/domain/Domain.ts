@@ -18,5 +18,5 @@ class Domain {
     _domain_name;
 }
 
-module.exports = Domain;
+module.exports = {Domain};
 export {Domain}

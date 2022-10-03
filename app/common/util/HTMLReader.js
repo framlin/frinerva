@@ -8,5 +8,5 @@ class HTMLReader {
     }
 }
 exports.HTMLReader = HTMLReader;
-module.exports = HTMLReader;
+module.exports = { HTMLReader };
 //# sourceMappingURL=HTMLReader.js.map

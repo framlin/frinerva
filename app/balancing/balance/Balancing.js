@@ -27,5 +27,5 @@ class Balancing {
     }
 }
 exports.Balancing = Balancing;
-module.exports = Balancing;
+module.exports = { Balancing };
 //# sourceMappingURL=Balancing.js.map

@@ -11,5 +11,5 @@ class WorkspaceViewFactory {
 }
 
 
-module.exports = WorkspaceViewFactory;
+module.exports = {WorkspaceViewFactory};
 export {WorkspaceViewFactory}

@@ -33,5 +33,5 @@ class Balance {
     }
 }
 exports.Balance = Balance;
-module.exports = Balance;
+module.exports = { Balance };
 //# sourceMappingURL=Balance.js.map

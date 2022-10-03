@@ -12,5 +12,5 @@ const Interactors = {
     dispatch_booking_entries: DispatchBookingEntriesInteractor_1.DispatchBookingEntriesInteractor,
 };
 exports.Interactors = Interactors;
-module.exports = Interactors;
+module.exports = { Interactors };
 //# sourceMappingURL=interactors.js.map

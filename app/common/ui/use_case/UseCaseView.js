@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UseCaseView = void 0;
 const { ipcRenderer } = require("electron");
-const HTMLReader = require("../../util/HTMLReader");
+const { HTMLReader } = require("../../util/HTMLReader");
 const path = require("path");
 class UseCaseView {
     constructor(domain_name, use_case_name) {
@@ -77,5 +77,5 @@ class UseCaseView {
     }
 }
 exports.UseCaseView = UseCaseView;
-module.exports = UseCaseView;
+module.exports = { UseCaseView };
 //# sourceMappingURL=UseCaseView.js.map

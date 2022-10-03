@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountView = void 0;
-const UseCaseView = require("../../../common/ui/use_case/UseCaseView");
+const { UseCaseView } = require("../../../common/ui/use_case/UseCaseView");
 const { ipcRenderer, contextBridge } = require("electron");
 const path = require('path');
 let create_account_view;

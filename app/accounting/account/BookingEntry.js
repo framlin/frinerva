@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingEntry = void 0;
-const BOOKING_CODE = require("./BOOKING_CODE");
+const { BOOKING_CODE } = require("./BOOKING_CODE");
 const { v4: uuidv4 } = require('uuid');
 class BookingEntry {
     constructor(date, subject, name, amount, booking_code, id) {
@@ -62,5 +62,5 @@ class BookingEntry {
 }
 exports.BookingEntry = BookingEntry;
 BookingEntry.property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
-module.exports = BookingEntry;
+module.exports = { BookingEntry };
 //# sourceMappingURL=BookingEntry.js.map

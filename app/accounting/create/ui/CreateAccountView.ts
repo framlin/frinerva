@@ -1,4 +1,4 @@
-const UseCaseView = require("../../../common/ui/use_case/UseCaseView");
+const {UseCaseView} = require("../../../common/ui/use_case/UseCaseView");
 const {ipcRenderer, contextBridge} = require("electron");
 const path = require('path');
 

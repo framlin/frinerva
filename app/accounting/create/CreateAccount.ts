@@ -1,6 +1,6 @@
 import {UseCaseFactory} from "../factories/UseCaseFactory";
 
-const UseCase = require("../../common/use_case/UseCase");
+const {UseCase} = require("../../common/use_case/UseCase");
 
 class CreateAccount extends UseCase{
     constructor(_UseCaseFactory: UseCaseFactory) {

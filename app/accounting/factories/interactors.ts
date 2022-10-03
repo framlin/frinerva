@@ -9,5 +9,5 @@ const Interactors = {
     show_list: ShowListInteractor,
     dispatch_booking_entries: DispatchBookingEntriesInteractor,
 }
-module.exports = Interactors;
+module.exports = {Interactors};
 export {Interactors}

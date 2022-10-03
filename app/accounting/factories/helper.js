@@ -12,5 +12,5 @@ const Helper = {
     dispatch_booking_entries: DispatchBookingEntriesHelper_1.DispatchBookingEntriesHelper,
 };
 exports.Helper = Helper;
-module.exports = Helper;
+module.exports = { Helper };
 //# sourceMappingURL=helper.js.map

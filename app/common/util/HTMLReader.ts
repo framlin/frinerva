@@ -6,5 +6,5 @@ class HTMLReader {
     }
 }
 
-module.exports = HTMLReader;
+module.exports = {HTMLReader};
 export {HTMLReader}

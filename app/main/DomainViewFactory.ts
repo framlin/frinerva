@@ -1,8 +1,10 @@
+import {WorkspaceViewFactory}  from '../accounting/factories/WorkspaceViewFactory';
+import {AccountingWorkspaceView} from '../accounting/workspace/AccountingWorkspaceView';
 const workspaces = {
-    accounting: require('../accounting/workspace/AccountingWorkspaceView'),
+    accounting: AccountingWorkspaceView,
 }
 const factories = {
-    accounting: require ('../accounting/factories/WorkspaceViewFactory'),
+    accounting: WorkspaceViewFactory,
 }
 
 class DomainViewFactory {

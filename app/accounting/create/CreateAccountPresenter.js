@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountPresenter = void 0;
 const { ipcMain } = require("electron");
-const UseCasePresenter = require("../../common/use_case/UseCasePresenter");
+const { UseCasePresenter } = require("../../common/use_case/UseCasePresenter");
 let presenter;
 class CreateAccountPresenter extends UseCasePresenter {
     constructor(ipc_chanel) {

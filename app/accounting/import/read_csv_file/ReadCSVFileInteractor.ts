@@ -1,6 +1,6 @@
 import {BookingRecord} from "../../account/BookingRecord";
 
-const UseCaseInteractor = require("../../../common/use_case/UseCaseInteractor");
+const {UseCaseInteractor} = require("../../../common/use_case/UseCaseInteractor");
 const {MoneyMoneyToBookingRecordConverter} = require("./util/MoneyMoneyToBookingRecordConverter");
 
 class ReadCSVFileInteractor extends UseCaseInteractor {

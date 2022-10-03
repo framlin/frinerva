@@ -23,5 +23,5 @@ class UseCaseInteractor{
     _helper: UseCaseHelper | undefined;
 }
 
-module.exports = UseCaseInteractor;
+module.exports = {UseCaseInteractor};
 export {UseCaseInteractor}

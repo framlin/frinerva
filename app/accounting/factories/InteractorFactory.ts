@@ -1,4 +1,4 @@
-const Interactors = require('./interactors');
+const {Interactors} = require('./interactors');
 
 class InteractorFactory{
     static create(use_case_name: string) {

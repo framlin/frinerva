@@ -4,7 +4,7 @@ exports.ShowListHelper = void 0;
 const UseCaseHelper_1 = require("../../common/use_case/UseCaseHelper");
 const JSONStorage = require("../../common/persistence/json/JSONStorage");
 const path = require("path");
-const AccountingStorageHelper = require("../../common/persistence/helper/AccountingHelper");
+const AccountingHelper_1 = require("../../common/persistence/helper/AccountingHelper");
 const STORAGE_ROOT_DIR = path.join(__dirname, "../../common/persistence/data");
 class ShowListHelper extends UseCaseHelper_1.UseCaseHelper {
     async get_account_name_list() {
@@ -18,7 +18,7 @@ class ShowListHelper extends UseCaseHelper_1.UseCaseHelper {
         return result;
     }
     async load_cost_center_configuration() {
-        return await AccountingStorageHelper.load_cost_center_configuration();
+        return await AccountingHelper_1.AccountingHelper.load_cost_center_configuration();
     }
 }
 exports.ShowListHelper = ShowListHelper;
