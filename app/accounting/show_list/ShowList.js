@@ -8,5 +8,5 @@ class ShowList extends UseCase {
     }
 }
 exports.ShowList = ShowList;
-module.exports = ShowList;
+module.exports = { ShowList };
 //# sourceMappingURL=ShowList.js.map

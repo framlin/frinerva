@@ -8,5 +8,5 @@ class ShowList  extends UseCase{
     }
 }
 
-module.exports = ShowList;
+module.exports = {ShowList};
 export {ShowList}

@@ -12,5 +12,5 @@ class ShowListInteractor extends UseCaseInteractor {
     }
 }
 exports.ShowListInteractor = ShowListInteractor;
-module.exports = ShowListInteractor;
+module.exports = { ShowListInteractor };
 //# sourceMappingURL=ShowListInteractor.js.map

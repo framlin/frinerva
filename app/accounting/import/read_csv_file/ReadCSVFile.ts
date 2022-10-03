@@ -7,5 +7,5 @@ class ReadCSVFile extends UseCase{
     }
 }
 
-module.exports = ReadCSVFile;
+module.exports = {ReadCSVFile};
 export {ReadCSVFile}

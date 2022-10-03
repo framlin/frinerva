@@ -8,5 +8,5 @@ class ReadCSVFile extends UseCase {
     }
 }
 exports.ReadCSVFile = ReadCSVFile;
-module.exports = ReadCSVFile;
+module.exports = { ReadCSVFile };
 //# sourceMappingURL=ReadCSVFile.js.map

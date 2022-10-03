@@ -7,7 +7,7 @@ const HTMLReader = require("../../util/HTMLReader");
 const path = require("path");
 // @ts-ignore
 const { ipcRenderer } = require("electron");
-const ViewFactory = require("../../../accounting/factories/ViewFactory");
+const ViewFactory_1 = require("../../../accounting/factories/ViewFactory");
 class WorkspaceView {
     switch_sideboard_to(sideboard_entry_selector) {
         this.clear_sideboard_entries();
@@ -136,7 +136,7 @@ class WorkspaceView {
 }
 exports.WorkspaceView = WorkspaceView;
 ipcRenderer.on('use_case:created', async (e, use_case_name, ...data) => {
-    await ViewFactory.create(use_case_name).put_view_into_dom(...data);
+    await ViewFactory_1.ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
 module.exports = { WorkspaceView };
 //# sourceMappingURL=WorkspaceView.js.map

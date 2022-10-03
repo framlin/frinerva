@@ -12,25 +12,25 @@ import {HelperFactory} from "./HelperFactory";
 import {UseCases} from './use_cases'
 
 function create_interactor(use_case: UseCase, use_case_name: string) {
-    let interactor = UseCaseFactory.InteractorFactory.create(use_case_name);
+    let interactor = InteractorFactory.create(use_case_name);
     use_case.interactor = interactor;
     return interactor;
 }
 
 function create_presenter(use_case: UseCase, use_case_name: string) {
-    let presenter = UseCaseFactory.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
+    let presenter = PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     use_case.presenter = presenter;
     return presenter;
 }
 
 function create_controller(use_case: UseCase, use_case_name: string) {
-    let controller = UseCaseFactory.ControllerFactory.create(use_case_name);
+    let controller = ControllerFactory.create(use_case_name);
     use_case.controller = controller;
     return controller;
 }
 
 function create_helper(use_case: UseCase, use_case_name: string) {
-    let helper = UseCaseFactory.HelperFactory.create(use_case_name);
+    let helper = HelperFactory.create(use_case_name);
     use_case.helper = helper;
     return helper;
 }
@@ -60,24 +60,7 @@ function create_use_case(use_case_name: string) {
 
 
 class UseCaseFactory {
-    static PresenterFactory: typeof PresenterFactory;
-    static InteractorFactory: typeof InteractorFactory;
-    static ControllerFactory: typeof ControllerFactory;
-    static HelperFactory: typeof HelperFactory;
     static IPCChannel: WebContents;
-
-    static config(_PresenterFactory: typeof PresenterFactory,
-                  _InteractorFactory: typeof InteractorFactory,
-                  _ControllerFactory: typeof ControllerFactory,
-                  _HelperFactory: typeof HelperFactory,
-                  _IPCChannel: WebContents) {
-        this.PresenterFactory = _PresenterFactory;
-        this.InteractorFactory = _InteractorFactory;
-        this.ControllerFactory = _ControllerFactory;
-        this.HelperFactory = _HelperFactory;
-        this.IPCChannel = _IPCChannel;
-    }
-
 
     static create(use_case_name: string) {
         if (UseCases[use_case_name]) {

@@ -11,7 +11,7 @@ const domain_factories = {
 function create_domain(domain_name: string, main_window: MainWindow) {
     // @ts-ignore
     let factories = domain_factories[domain_name];
-    factories.use_case.config(factories.presenter, factories.interactor, factories.controller, factories.helper, main_window.webContents)
+    factories.use_case.IPCChannel = main_window.webContents;
     return new Domain(domain_name, factories);
 }
 

@@ -8,5 +8,5 @@ class InteractorFactory {
     }
 }
 exports.InteractorFactory = InteractorFactory;
-module.exports = InteractorFactory;
+module.exports = { InteractorFactory };
 //# sourceMappingURL=InteractorFactory.js.map

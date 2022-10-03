@@ -4,7 +4,7 @@ const HTMLReader = require("../../util/HTMLReader");
 const path = require("path");
 // @ts-ignore
 const {ipcRenderer} = require("electron");
-const ViewFactory = require("../../../accounting/factories/ViewFactory");
+import {ViewFactory}  from "../../../accounting/factories/ViewFactory";
 
 class WorkspaceView {
 

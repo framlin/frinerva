@@ -10,5 +10,5 @@ class ShowListInteractor extends UseCaseInteractor{
     }
 }
 
-module.exports = ShowListInteractor;
+module.exports = {ShowListInteractor};
 export {ShowListInteractor}

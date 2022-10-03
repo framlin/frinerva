@@ -5,5 +5,5 @@ class ControllerFactory{
     }
 }
 
-module.exports = ControllerFactory;
+module.exports = {ControllerFactory};
 export {ControllerFactory}

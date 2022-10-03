@@ -1,24 +1,28 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UseCaseFactory = void 0;
+const InteractorFactory_1 = require("./InteractorFactory");
+const PresenterFactory_1 = require("./PresenterFactory");
+const ControllerFactory_1 = require("./ControllerFactory");
+const HelperFactory_1 = require("./HelperFactory");
 const use_cases_1 = require("./use_cases");
 function create_interactor(use_case, use_case_name) {
-    let interactor = UseCaseFactory.InteractorFactory.create(use_case_name);
+    let interactor = InteractorFactory_1.InteractorFactory.create(use_case_name);
     use_case.interactor = interactor;
     return interactor;
 }
 function create_presenter(use_case, use_case_name) {
-    let presenter = UseCaseFactory.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
+    let presenter = PresenterFactory_1.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     use_case.presenter = presenter;
     return presenter;
 }
 function create_controller(use_case, use_case_name) {
-    let controller = UseCaseFactory.ControllerFactory.create(use_case_name);
+    let controller = ControllerFactory_1.ControllerFactory.create(use_case_name);
     use_case.controller = controller;
     return controller;
 }
 function create_helper(use_case, use_case_name) {
-    let helper = UseCaseFactory.HelperFactory.create(use_case_name);
+    let helper = HelperFactory_1.HelperFactory.create(use_case_name);
     use_case.helper = helper;
     return helper;
 }
@@ -41,13 +45,6 @@ function create_use_case(use_case_name) {
     return use_case;
 }
 class UseCaseFactory {
-    static config(_PresenterFactory, _InteractorFactory, _ControllerFactory, _HelperFactory, _IPCChannel) {
-        this.PresenterFactory = _PresenterFactory;
-        this.InteractorFactory = _InteractorFactory;
-        this.ControllerFactory = _ControllerFactory;
-        this.HelperFactory = _HelperFactory;
-        this.IPCChannel = _IPCChannel;
-    }
     static create(use_case_name) {
         if (use_cases_1.UseCases[use_case_name]) {
             return create_use_case(use_case_name);

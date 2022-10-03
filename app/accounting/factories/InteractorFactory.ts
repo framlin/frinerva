@@ -6,5 +6,5 @@ class InteractorFactory{
     }
 }
 
-module.exports = InteractorFactory;
+module.exports = {InteractorFactory};
 export {InteractorFactory}

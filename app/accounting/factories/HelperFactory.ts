@@ -6,5 +6,5 @@ class HelperFactory{
     }
 }
 
-module.exports = HelperFactory;
+module.exports = {HelperFactory};
 export {HelperFactory}

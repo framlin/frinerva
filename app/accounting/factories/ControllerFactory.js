@@ -8,5 +8,5 @@ class ControllerFactory {
     }
 }
 exports.ControllerFactory = ControllerFactory;
-module.exports = ControllerFactory;
+module.exports = { ControllerFactory };
 //# sourceMappingURL=ControllerFactory.js.map

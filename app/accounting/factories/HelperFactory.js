@@ -8,5 +8,5 @@ class HelperFactory {
     }
 }
 exports.HelperFactory = HelperFactory;
-module.exports = HelperFactory;
+module.exports = { HelperFactory };
 //# sourceMappingURL=HelperFactory.js.map

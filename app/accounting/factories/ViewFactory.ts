@@ -1,4 +1,4 @@
-const Views = require('./views');
+import {Views} from './views';
 
 let view_cache = {}
 
@@ -13,5 +13,5 @@ class ViewFactory {
     }
 }
 
-module.exports = ViewFactory;
+module.exports = {ViewFactory};
 export {ViewFactory}
