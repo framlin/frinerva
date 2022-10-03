@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.UseCaseView = void 0;
 const { ipcRenderer } = require("electron");
 const HTMLReader = require("../../util/HTMLReader");
 const path = require("path");
@@ -74,5 +76,6 @@ class UseCaseView {
         ipcRenderer.send('use_case:view_ready', this._domain_name, this._use_case_name, ...data);
     }
 }
+exports.UseCaseView = UseCaseView;
 module.exports = UseCaseView;
 //# sourceMappingURL=UseCaseView.js.map

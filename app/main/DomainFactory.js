@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.DomainFactory = void 0;
 const Domain = require('../common/domain/Domain');
 const domain_factories = {
     accounting: require('../accounting/factories/factories'),
@@ -22,5 +23,6 @@ class DomainFactory {
         return domains;
     }
 }
+exports.DomainFactory = DomainFactory;
 module.exports = DomainFactory;
 //# sourceMappingURL=DomainFactory.js.map

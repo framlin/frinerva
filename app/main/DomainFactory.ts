@@ -31,3 +31,4 @@ class DomainFactory {
 }
 
 module.exports = DomainFactory;
+export {DomainFactory}

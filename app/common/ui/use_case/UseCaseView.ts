@@ -96,4 +96,5 @@ class UseCaseView {
 }
 
 module.exports = UseCaseView;
+export {UseCaseView}
 

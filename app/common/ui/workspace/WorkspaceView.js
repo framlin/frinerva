@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WorkspaceView = void 0;
 // @ts-ignore
 const HTMLReader = require("../../util/HTMLReader");
 // @ts-ignore
@@ -132,6 +134,7 @@ class WorkspaceView {
         return new WorkspaceView();
     }
 }
+exports.WorkspaceView = WorkspaceView;
 ipcRenderer.on('use_case:created', async (e, use_case_name, ...data) => {
     await ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
