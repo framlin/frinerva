@@ -1,6 +1,9 @@
-const {UseCaseController} = require("../../../common/use_case/UseCaseController");
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DispatchBookingEntriesController = void 0;
+const { UseCaseController } = require("../../../common/use_case/UseCaseController");
 class DispatchBookingEntriesController extends UseCaseController {
 }
-
-module.exports = DispatchBookingEntriesController;
+exports.DispatchBookingEntriesController = DispatchBookingEntriesController;
+module.exports = { DispatchBookingEntriesController };
+//# sourceMappingURL=DispatchBookingEntriesController.js.map

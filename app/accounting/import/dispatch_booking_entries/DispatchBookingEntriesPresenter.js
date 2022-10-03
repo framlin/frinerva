@@ -31,5 +31,5 @@ class DispatchBookingEntriesPresenter extends UseCasePresenter {
     }
 }
 exports.DispatchBookingEntriesPresenter = DispatchBookingEntriesPresenter;
-module.exports = DispatchBookingEntriesPresenter;
+module.exports = { DispatchBookingEntriesPresenter };
 //# sourceMappingURL=DispatchBookingEntriesPresenter.js.map
