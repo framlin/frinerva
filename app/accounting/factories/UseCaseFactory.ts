@@ -9,31 +9,27 @@ import {PresenterFactory} from "./PresenterFactory";
 import {ControllerFactory} from "./ControllerFactory";
 import {HelperFactory} from "./HelperFactory";
 
-const UseCases = require('./use_cases');
+import {UseCases} from './use_cases'
 
 function create_interactor(use_case: UseCase, use_case_name: string) {
-    //@ts-ignore
     let interactor = UseCaseFactory.InteractorFactory.create(use_case_name);
     use_case.interactor = interactor;
     return interactor;
 }
 
 function create_presenter(use_case: UseCase, use_case_name: string) {
-    //@ts-ignore
     let presenter = UseCaseFactory.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     use_case.presenter = presenter;
     return presenter;
 }
 
 function create_controller(use_case: UseCase, use_case_name: string) {
-    //@ts-ignore
     let controller = UseCaseFactory.ControllerFactory.create(use_case_name);
     use_case.controller = controller;
     return controller;
 }
 
 function create_helper(use_case: UseCase, use_case_name: string) {
-    //@ts-ignore
     let helper = UseCaseFactory.HelperFactory.create(use_case_name);
     use_case.helper = helper;
     return helper;
@@ -51,6 +47,7 @@ function wire_use_case(use_case: UseCase, interactor: UseCaseInteractor,
 }
 
 function create_use_case(use_case_name: string) {
+    // @ts-ignore
     let use_case = new UseCases[use_case_name](UseCaseFactory, use_case_name);
     let interactor = create_interactor(use_case, use_case_name);
     let presenter = create_presenter(use_case, use_case_name);
@@ -63,27 +60,27 @@ function create_use_case(use_case_name: string) {
 
 
 class UseCaseFactory {
-    static PresenterFactory: PresenterFactory;
-    static InteractorFactory: InteractorFactory;
-    static ControllerFactory: ControllerFactory;
-    static HelperFactory: HelperFactory;
+    static PresenterFactory: typeof PresenterFactory;
+    static InteractorFactory: typeof InteractorFactory;
+    static ControllerFactory: typeof ControllerFactory;
+    static HelperFactory: typeof HelperFactory;
     static IPCChannel: WebContents;
 
-    static config(PresenterFactory: PresenterFactory,
-                  InteractorFactory: InteractorFactory,
-                  ControllerFactory: ControllerFactory,
-                  HelperFactory: HelperFactory,
-                  IPCChannel: WebContents) {
-        this.PresenterFactory = PresenterFactory;
-        this.InteractorFactory = InteractorFactory;
-        this.ControllerFactory = ControllerFactory;
-        this.HelperFactory = HelperFactory;
-        this.IPCChannel = IPCChannel;
+    static config(_PresenterFactory: typeof PresenterFactory,
+                  _InteractorFactory: typeof InteractorFactory,
+                  _ControllerFactory: typeof ControllerFactory,
+                  _HelperFactory: typeof HelperFactory,
+                  _IPCChannel: WebContents) {
+        this.PresenterFactory = _PresenterFactory;
+        this.InteractorFactory = _InteractorFactory;
+        this.ControllerFactory = _ControllerFactory;
+        this.HelperFactory = _HelperFactory;
+        this.IPCChannel = _IPCChannel;
     }
 
 
     static create(use_case_name: string) {
-        if (use_case_name in UseCases) {
+        if (UseCases[use_case_name]) {
             return create_use_case(use_case_name);
         } else {
             throw Error(`NO USE_CASE ${use_case_name}`);
