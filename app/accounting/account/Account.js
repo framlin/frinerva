@@ -33,5 +33,5 @@ class Account {
     }
 }
 exports.Account = Account;
-module.exports = Account;
+module.exports = { Account };
 //# sourceMappingURL=Account.js.map

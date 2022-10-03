@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accounting = void 0;
-const Account = require("./Account");
+const Account_1 = require("./Account");
 const BookingEntry = require("./BookingEntry");
 class Accounting {
     constructor(account_storage) {
@@ -13,7 +13,7 @@ class Accounting {
     async create_account(booking_period, cost_center) {
         let account = null;
         if (!this._account_storage.account_exists(booking_period, cost_center)) {
-            account = new Account(booking_period, cost_center);
+            account = new Account_1.Account(booking_period, cost_center);
             await this._account_storage.save_account(account);
         }
         return account;
@@ -24,7 +24,7 @@ class Accounting {
             result = await this._account_storage.load_account(booking_period, cost_center);
         }
         else {
-            result = new Account(booking_period, cost_center);
+            result = new Account_1.Account(booking_period, cost_center);
         }
         return result;
     }
@@ -41,5 +41,5 @@ class Accounting {
     }
 }
 exports.Accounting = Accounting;
-module.exports = Accounting;
+module.exports = { Accounting };
 //# sourceMappingURL=Accounting.js.map

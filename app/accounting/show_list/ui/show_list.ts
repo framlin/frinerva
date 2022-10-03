@@ -1,4 +1,3 @@
-"use strict";
 // @ts-ignore
 window["accounting__show_list"].show_account_name_list((account_name_list) => {
     let account_list_div = document.querySelector('.sideboard-entry.account-list');
@@ -11,4 +10,3 @@ window["accounting__show_list"].show_account_name_list((account_name_list) => {
         }
     }
 });
-//# sourceMappingURL=show_list.js.map

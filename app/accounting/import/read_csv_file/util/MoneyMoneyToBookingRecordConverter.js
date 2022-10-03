@@ -1,4 +1,4 @@
-const Accounting = require("../../../account/Accounting");
+const {Accounting} = require("../../../account/Accounting");
 
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',

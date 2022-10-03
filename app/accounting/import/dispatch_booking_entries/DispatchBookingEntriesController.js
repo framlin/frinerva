@@ -1,4 +1,4 @@
-const UseCaseController = require("../../../common/use_case/UseCaseController");
+const {UseCaseController} = require("../../../common/use_case/UseCaseController");
 
 class DispatchBookingEntriesController extends UseCaseController {
 }

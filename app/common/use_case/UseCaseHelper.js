@@ -4,5 +4,5 @@ exports.UseCaseHelper = void 0;
 class UseCaseHelper {
 }
 exports.UseCaseHelper = UseCaseHelper;
-module.exports = UseCaseHelper;
+module.exports = { UseCaseHelper };
 //# sourceMappingURL=UseCaseHelper.js.map

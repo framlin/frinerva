@@ -31,5 +31,5 @@ class UseCaseController{
 
 }
 
-module.exports = UseCaseController;
+module.exports = {UseCaseController};
 export {UseCaseController}

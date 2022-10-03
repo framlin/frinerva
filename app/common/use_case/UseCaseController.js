@@ -24,5 +24,5 @@ class UseCaseController {
     }
 }
 exports.UseCaseController = UseCaseController;
-module.exports = UseCaseController;
+module.exports = { UseCaseController };
 //# sourceMappingURL=UseCaseController.js.map

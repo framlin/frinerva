@@ -1,4 +1,4 @@
-const UseCaseHelper = require("../../../common/use_case/UseCaseHelper");
+const {UseCaseHelper} = require("../../../common/use_case/UseCaseHelper");
 const AccountingStorageHelper = require("../../../common/persistence/helper/AccountingHelper");
 
 class DispatchBookingEntriesHelper extends UseCaseHelper{

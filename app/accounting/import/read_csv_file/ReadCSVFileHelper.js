@@ -1,4 +1,4 @@
-const UseCaseHelper = require("../../../common/use_case/UseCaseHelper");
+const {UseCaseHelper} = require("../../../common/use_case/UseCaseHelper");
 const Fs = require("fs");
 const MoneyMoneyCSVReader = require("./util/MoneyMoneyCSVReader");
 

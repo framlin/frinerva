@@ -1,4 +1,4 @@
-const UseCaseController = require("../../common/use_case/UseCaseController");
+const {UseCaseController} = require("../../common/use_case/UseCaseController");
 
 class CreateAccountController extends UseCaseController {
     period_cost_center_selection(period_cost_center) {

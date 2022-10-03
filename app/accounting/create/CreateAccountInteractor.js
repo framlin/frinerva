@@ -1,5 +1,5 @@
 const UseCaseInteractor = require("../../common/use_case/UseCaseInteractor");
-const Accounting = require("../account/Accounting");
+const {Accounting} = require("../account/Accounting");
 
 class CreateAccountInteractor extends UseCaseInteractor {
     async execute() {

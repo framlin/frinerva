@@ -45,6 +45,6 @@ class Account {
     private _booking_entries: BookingEntry[];
 }
 
-module.exports = Account;
+module.exports = {Account};
 
 export {Account, AccountData}

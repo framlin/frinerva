@@ -1,4 +1,4 @@
-const Account = require("./Account");
+import {Account} from "./Account";
 const BookingEntry = require("./BookingEntry");
 
 
@@ -14,8 +14,8 @@ class Accounting{
         return new BookingEntry(date, subject, name, amount, booking_code);
     }
 
-    async create_account(booking_period: string, cost_center: string) {
-        let account = null;
+    async create_account(booking_period: string, cost_center: string): Promise<Account | null> {
+        let account: Account | null = null;
         if (!this._account_storage.account_exists(booking_period, cost_center)) {
             account = new Account(booking_period, cost_center);
             await this._account_storage.save_account(account);
@@ -47,6 +47,6 @@ class Accounting{
 
 }
 
-module.exports = Accounting;
+module.exports = {Accounting};
 
 export {Accounting}
