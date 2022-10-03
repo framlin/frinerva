@@ -88,5 +88,5 @@ class UseCaseFactory {
     }
 }
 
-module.exports = UseCaseFactory;
+module.exports = {UseCaseFactory};
 export {UseCaseFactory}

@@ -78,5 +78,5 @@ class MainMenu {
     }
 }
 exports.MainMenu = MainMenu;
-module.exports = MainMenu;
+module.exports = { MainMenu };
 //# sourceMappingURL=MainMenu.js.map

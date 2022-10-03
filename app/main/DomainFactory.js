@@ -24,5 +24,5 @@ class DomainFactory {
     }
 }
 exports.DomainFactory = DomainFactory;
-module.exports = DomainFactory;
+module.exports = { DomainFactory };
 //# sourceMappingURL=DomainFactory.js.map

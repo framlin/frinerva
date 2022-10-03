@@ -30,5 +30,5 @@ class DomainFactory {
     }
 }
 
-module.exports = DomainFactory;
+module.exports = {DomainFactory};
 export {DomainFactory}

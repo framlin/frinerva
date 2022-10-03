@@ -58,5 +58,5 @@ class UseCaseFactory {
     }
 }
 exports.UseCaseFactory = UseCaseFactory;
-module.exports = UseCaseFactory;
+module.exports = { UseCaseFactory };
 //# sourceMappingURL=UseCaseFactory.js.map

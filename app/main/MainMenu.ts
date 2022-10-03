@@ -77,5 +77,5 @@ class MainMenu {
 
     }
 }
-module.exports = MainMenu;
+module.exports = {MainMenu};
 export {MainMenu}

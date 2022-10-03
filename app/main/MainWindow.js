@@ -34,5 +34,5 @@ exports.MainWindow = MainWindow;
 electron_1.ipcMain.on('use_case:create', (e, domain_name, use_case_name) => {
     main_window.execute_use_case(domain_name, use_case_name);
 });
-module.exports = MainWindow;
+module.exports = { MainWindow };
 //# sourceMappingURL=MainWindow.js.map
