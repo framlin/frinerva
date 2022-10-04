@@ -1,6 +1,6 @@
 import {Account, AccountData} from "../../account/Account";
 import {WebContents} from 'electron';
-import {BookingEntryData} from "../../account/BookingEntry";
+import {BookingEntry, BookingEntryData} from "../../account/BookingEntry";
 import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 
 const {UseCasePresenter} = require("../../../common/use_case/UseCasePresenter");
@@ -14,7 +14,17 @@ class DispatchBookingEntriesPresenter extends UseCasePresenter implements Dispat
         presenter = this;
     }
 
+    private implement_booking_entry_data() {
+        let properties = BookingEntry.property_mapping.slice();
+        let entry: BookingEntryData = properties.reduce((previous: any, current: any) => {
+            previous[current] = ""
+            return previous;
+        }, {});
+        return entry;
+    }
+
     show(_virtual_accounts: Account[]) {
+        let properties = BookingEntry.property_mapping.slice();
         let virtual_accounts: AccountData[]  = [];
         for (let _account of _virtual_accounts) {
             let virtual_account:AccountData = {
@@ -23,11 +33,10 @@ class DispatchBookingEntriesPresenter extends UseCasePresenter implements Dispat
                 booking_entries: []
             }
             for (let _entry of _account.booking_entries) {
-                // @ts-ignore
-                let entry : BookingEntryData = {};
-                for (let _prop of Object.getOwnPropertyNames(_entry)) {
+                let entry : BookingEntryData = this.implement_booking_entry_data();
+                for (let prop of properties) {
                     // @ts-ignore
-                    entry[_prop.substring(1)] = _entry[_prop];
+                    entry[prop] = _entry["_"+prop];
                 }
                 virtual_account.booking_entries.push(entry);
             }

@@ -10,6 +10,7 @@ interface CreateAccountResponseBoundary extends UseCaseResponseBoundary {
 
     show_error(error_object: any): void;
 
+    account_creation_done(): void;
 }
 
 export {CreateAccountResponseBoundary}

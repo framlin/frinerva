@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DispatchBookingEntriesInteractor = void 0;
+const Accounting_1 = require("../../account/Accounting");
 const { UseCaseInteractor } = require("../../../common/use_case/UseCaseInteractor");
-const { Accounting } = require("../../account/Accounting");
+//const {Accounting} = require("../../account/Accounting");
 class DispatchBookingEntriesInteractor extends UseCaseInteractor {
     async execute(booking_records) {
         let account_dict = this.create_account_dict(booking_records);
@@ -24,7 +25,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor {
         return result;
     }
     async create_virtual_accounts(account_dict) {
-        let accounting = new Accounting(this._helper);
+        let accounting = new Accounting_1.Accounting(this._helper);
         let result = [];
         let keys = Object.keys(account_dict);
         for await (let account_key of keys) {
