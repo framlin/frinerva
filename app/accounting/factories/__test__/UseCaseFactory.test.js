@@ -36,7 +36,7 @@ function expect_use_case_creation(use_case_name, use_case_class, use_case_intera
     let use_case = UseCaseFactory.create(use_case_name);
     expect(use_case).toBeInstanceOf(use_case_class);
     expect(use_case.interactor).toBeInstanceOf(use_case_interactor);
-    expect(use_case.interactor.presenter).toBeInstanceOf(use_case_presenter);
+    expect(use_case.interactor.response_boundary).toBeInstanceOf(use_case_presenter);
     expect(use_case.interactor.helper).toBeInstanceOf(use_case_helper);
 
     expect(use_case.presenter).toBeInstanceOf(use_case_presenter);

@@ -7,8 +7,8 @@ class ShowListInteractor extends UseCaseInteractor_1.UseCaseInteractor {
     async execute() {
         let accounting = new Accounting_1.Accounting(this._helper);
         let account_list = await accounting.get_account_names();
-        if (this._presenter)
-            this._presenter.show(account_list);
+        if (this._response_boundary)
+            this._response_boundary.show(account_list);
     }
 }
 exports.ShowListInteractor = ShowListInteractor;

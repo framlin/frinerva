@@ -1,13 +1,13 @@
-const {ipcMain} = require("electron");
+import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
+
 const {UseCasePresenter} = require("../../common/use_case/UseCasePresenter");
 
-let presenter: CreateAccountPresenter;
-
-class CreateAccountPresenter extends UseCasePresenter {
+class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
     constructor(ipc_chanel: any) {
         super(ipc_chanel);
-        presenter = this;
     }
+
+    show(...data: any[]) {}
 
     show_cost_center_list(cost_center_list: any) {
         this._ipc_channel.send('create_account:show_cost_center_list', cost_center_list);
@@ -34,22 +34,7 @@ class CreateAccountPresenter extends UseCasePresenter {
         this._ipc_channel.send('create_account:done');
     }
 
-    on_period_cost_center_selection(period_cost_center: any) {
-        this._controller.period_cost_center_selection(period_cost_center);
-    }
-
-    on_create(new_accounts_list: any) {
-        this._controller.create(new_accounts_list);
-    }
 }
-
-ipcMain.on('create_account:period_cost_center-selected', (e, period_cost_center) => {
-    presenter.on_period_cost_center_selection(period_cost_center);
-})
-
-ipcMain.on('create_account:create', (e, new_accounts_list) => {
-    presenter.on_create(new_accounts_list);
-});
 
 module.exports = {CreateAccountPresenter};
 export {CreateAccountPresenter}

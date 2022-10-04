@@ -1,19 +1,20 @@
 import {Account, AccountData} from "../../account/Account";
 import {WebContents} from 'electron';
 import {BookingEntryData} from "../../account/BookingEntry";
+import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 
 const {UseCasePresenter} = require("../../../common/use_case/UseCasePresenter");
 let presenter: DispatchBookingEntriesPresenter;
 
 
-class DispatchBookingEntriesPresenter extends UseCasePresenter {
+class DispatchBookingEntriesPresenter extends UseCasePresenter implements DispatchBookingEntriesResponseBoundary{
 
     constructor(ipc_chanel: WebContents) {
         super(ipc_chanel);
         presenter = this;
     }
 
-    show_virtual_accounts(_virtual_accounts: Account[]) {
+    show(_virtual_accounts: Account[]) {
         let virtual_accounts: AccountData[]  = [];
         for (let _account of _virtual_accounts) {
             let virtual_account:AccountData = {

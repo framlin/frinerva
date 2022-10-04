@@ -1,7 +1,8 @@
 import {UseCasePresenter}  from "../../common/use_case/UseCasePresenter";
+import {ShowListResponseBoundary} from "./ShowListResponseBoundary";
 
 let presenter: ShowListPresenter;
-class ShowListPresenter extends UseCasePresenter{
+class ShowListPresenter extends UseCasePresenter implements ShowListResponseBoundary{
     constructor(ipc_chanel: any) {
         super(ipc_chanel);
         presenter = this;

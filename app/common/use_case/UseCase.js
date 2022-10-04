@@ -19,29 +19,11 @@ class UseCase {
         //@ts-ignore
         this._UseCaseFactory.create(use_case_name).execute(...data);
     }
-    get interactor() {
-        return this._interactor;
-    }
-    set interactor(value) {
-        this._interactor = value;
-    }
-    get controller() {
-        return this._controller;
-    }
-    set controller(value) {
-        this._controller = value;
-    }
     get presenter() {
         return this._presenter;
     }
     set presenter(value) {
         this._presenter = value;
-    }
-    get helper() {
-        return this._helper;
-    }
-    set helper(value) {
-        this._helper = value;
     }
 }
 exports.UseCase = UseCase;

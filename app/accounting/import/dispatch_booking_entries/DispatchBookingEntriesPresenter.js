@@ -8,7 +8,7 @@ class DispatchBookingEntriesPresenter extends UseCasePresenter {
         super(ipc_chanel);
         presenter = this;
     }
-    show_virtual_accounts(_virtual_accounts) {
+    show(_virtual_accounts) {
         let virtual_accounts = [];
         for (let _account of _virtual_accounts) {
             let virtual_account = {

@@ -1,7 +1,7 @@
-import {UseCasePresenter} from "./UseCasePresenter";
 import {UseCaseHelper} from "./UseCaseHelper";
+import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
 
-class UseCaseInteractor{
+abstract class UseCaseInteractor{
     get helper() {
         return this._helper;
     }
@@ -9,17 +9,17 @@ class UseCaseInteractor{
     set helper(value) {
         this._helper = value;
     }
-    execute(...data: any[]) {}
+    abstract execute(...data: any[]): any;
 
-    get presenter() {
-        return this._presenter;
+    get response_boundary() {
+        return this._response_boundary;
     }
 
-    set presenter(value) {
-        this._presenter = value;
+    set response_boundary(value) {
+        this._response_boundary = value;
     }
 
-    _presenter: UseCasePresenter | undefined;
+    _response_boundary: UseCaseResponseBoundary | undefined;
     _helper: UseCaseHelper | undefined;
 }
 

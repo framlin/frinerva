@@ -4,10 +4,10 @@ const {Accounting} = require("../account/Accounting");
 class CreateAccountInteractor extends UseCaseInteractor {
     async execute() {
         let cost_center_config = await this._helper.load_cost_center_configuration();
-        this._presenter.show_cost_center_list(JSON.parse(cost_center_config));
+        this._response_boundary.show_cost_center_list(JSON.parse(cost_center_config));
 
         let booking_period_config = await this._helper.load_booking_period_configuration();
-        this._presenter.show_booking_period_list(JSON.parse(booking_period_config))
+        this._response_boundary.show_booking_period_list(JSON.parse(booking_period_config))
     }
 
     period_cost_center_selection(period_cost_center: { periods: any; accounts: any; }) {
@@ -24,7 +24,7 @@ class CreateAccountInteractor extends UseCaseInteractor {
             }
         }
 
-        this._presenter.show_new_accounts_list(new_entry_list);
+        this._response_boundary.show_new_accounts_list(new_entry_list);
     }
 
     async create(new_accounts_list: any) {
@@ -34,10 +34,10 @@ class CreateAccountInteractor extends UseCaseInteractor {
             let cost_center = new_account.cost_center;
             let account = await accounting.create_account(booking_period, cost_center);
             if (!account) {
-                this._presenter.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
+                this._response_boundary.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
             }
         }
-        this._presenter.account_creation_done();
+        this._response_boundary.account_creation_done();
     }
 }
 

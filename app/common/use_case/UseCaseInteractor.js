@@ -8,12 +8,11 @@ class UseCaseInteractor {
     set helper(value) {
         this._helper = value;
     }
-    execute(...data) { }
-    get presenter() {
-        return this._presenter;
+    get response_boundary() {
+        return this._response_boundary;
     }
-    set presenter(value) {
-        this._presenter = value;
+    set response_boundary(value) {
+        this._response_boundary = value;
     }
 }
 exports.UseCaseInteractor = UseCaseInteractor;

@@ -8,7 +8,7 @@ class ReadCSVFileInteractor extends UseCaseInteractor {
         if (file_name) {
             let file = this._helper.load_file(file_name);
             this._payments = await this._helper.create_payments(file);
-            this._presenter.show_payments(this._payments);
+            this._response_boundary.show_payments(this._payments);
         } else {
             console.log("ReadCSVFileInteractor: FILENAME MISSING");
         }
@@ -18,7 +18,7 @@ class ReadCSVFileInteractor extends UseCaseInteractor {
 
     create_booking_entries() {
         this._booking_records = this.convert_payments_to_booking_records(this._payments);
-        this._presenter.show_booking_records(this._booking_records);
+        this._response_boundary.show_booking_records(this._booking_records);
     }
 
     convert_payments_to_booking_records(payments: any[]) {

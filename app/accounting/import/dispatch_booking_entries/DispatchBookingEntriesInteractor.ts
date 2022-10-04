@@ -5,7 +5,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor{
     async execute(booking_records: any[]) {
         let account_dict = this.create_account_dict(booking_records);
         let virtual_accounts = await this.create_virtual_accounts(account_dict);
-        this._presenter.show_virtual_accounts(virtual_accounts);
+        this._response_boundary.show(virtual_accounts);
     }
 
     create_account_dict(booking_records: any[]) {
