@@ -23,7 +23,7 @@ class Accounting{
         return account;
     }
 
-    async create_virtual_account(booking_period: string, cost_center: string) {
+    async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account>{
         let result;
         if (this._account_storage.account_exists(booking_period, cost_center)) {
             result = await this._account_storage.load_account(booking_period, cost_center);

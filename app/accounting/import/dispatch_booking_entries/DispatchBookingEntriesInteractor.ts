@@ -1,5 +1,8 @@
+import {Account} from "../../account/Account";
+import {Accounting} from "../../account/Accounting";
+
 const {UseCaseInteractor} = require("../../../common/use_case/UseCaseInteractor");
-const {Accounting} = require("../../account/Accounting");
+//const {Accounting} = require("../../account/Accounting");
 
 class DispatchBookingEntriesInteractor extends UseCaseInteractor{
     async execute(booking_records: any[]) {
@@ -22,9 +25,9 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor{
         return result;
     }
 
-    async create_virtual_accounts(account_dict: any) {
-        let accounting = new Accounting(this._helper);
-        let result = [];
+    async create_virtual_accounts(account_dict: any): Promise<Account[]> {
+        let accounting: Accounting = new Accounting(this._helper);
+        let result : Account[] = [];
         let keys = Object.keys(account_dict)
         for await (let account_key of keys) {
             let [booking_period, cost_center] = account_key.split('!');
