@@ -1,8 +1,8 @@
 const {ipcRenderer, contextBridge} = require("electron");
 const {UseCaseView} = require("../../../../common/ui/use_case/UseCaseView");
-const {BookingEntry} = require("../../../account/BookingEntry");
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
-const path = require("path");
+
+
 let read_cvs_file_view: ReadCSVFileView;
 
 class ReadCSVFileView extends UseCaseView {
@@ -34,7 +34,7 @@ class ReadCSVFileView extends UseCaseView {
 
     get_booking_records() {
         let booking_records: any[] = [];
-        let rows = document.querySelectorAll('#payment-entries > table tr');
+        let rows = document.querySelectorAll('#payment-entries > table tr') as NodeListOf<HTMLTableRowElement>;
         rows.forEach((row) => {
             // @ts-ignore
             booking_records.push(row.booking_record);

@@ -3,9 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReadCSVFileView = void 0;
 const { ipcRenderer, contextBridge } = require("electron");
 const { UseCaseView } = require("../../../../common/ui/use_case/UseCaseView");
-const { BookingEntry } = require("../../../account/BookingEntry");
 const CSVFileImportRenderer_1 = require("./CSVFileImportRenderer");
-const path = require("path");
 let read_cvs_file_view;
 class ReadCSVFileView extends UseCaseView {
     constructor(use_case_name) {
