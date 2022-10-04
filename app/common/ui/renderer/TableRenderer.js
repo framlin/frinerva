@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TableRenderer = void 0;
 class TableRenderer {
     static create_editable_table(title, rows, properties, redraw) {
         let table_div = document.createElement('DIV');
@@ -72,4 +74,6 @@ class TableRenderer {
         return input_elem;
     }
 }
+exports.TableRenderer = TableRenderer;
+module.exports = { TableRenderer };
 //# sourceMappingURL=TableRenderer.js.map

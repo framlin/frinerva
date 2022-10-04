@@ -3,7 +3,7 @@ const {HTMLReader} = require("../../util/HTMLReader");
 const path = require("path");
 
 
-class UseCaseView {
+abstract class UseCaseView {
 
     _use_case_name;
     _domain_name;
@@ -13,9 +13,9 @@ class UseCaseView {
         this._domain_name = domain_name;
     }
 
-    link_style(stylesheet_filename:string) {
+    link_style(stylesheet_filename: string) {
         let existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
-        if(!existing_link) {
+        if (!existing_link) {
             let head = document.getElementsByTagName('HEAD')[0];
             let link = document.createElement('link');
             link.rel = 'stylesheet';
@@ -69,20 +69,16 @@ class UseCaseView {
             }
 
 
-
         });
     }
 
-    async create_view() {
-        //abstract
-    }
+     // @ts-ignore
+    abstract async create_view(): void;
 
     forward(use_case_name: string) {
     }
 
-    register_event_listener() {
-        //abstract
-    }
+    abstract register_event_listener(): void;
 
     async put_view_into_dom(...data: any[]) {
         await this.create_view();

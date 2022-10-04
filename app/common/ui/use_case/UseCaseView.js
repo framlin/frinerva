@@ -59,13 +59,7 @@ class UseCaseView {
             }
         });
     }
-    async create_view() {
-        //abstract
-    }
     forward(use_case_name) {
-    }
-    register_event_listener() {
-        //abstract
     }
     async put_view_into_dom(...data) {
         await this.create_view();

@@ -84,3 +84,6 @@ class TableRenderer {
 
 }
 
+module.exports = {TableRenderer}
+export {TableRenderer}
+

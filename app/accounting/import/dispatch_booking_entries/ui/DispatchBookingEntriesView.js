@@ -1,34 +1,53 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DispatchBookingEntriesView = void 0;
-const { ipcRenderer, contextBridge } = require("electron");
-const { UseCaseView } = require("../../../../common/ui/use_case/UseCaseView");
-const { BookingEntry } = require("../../../account/BookingEntry");
-const path = require("path");
-class DispatchBookingEntriesView extends UseCaseView {
+const electron_1 = require("electron");
+const UseCaseView_1 = require("../../../../common/ui/use_case/UseCaseView");
+const BookingEntry_1 = require("../../../account/BookingEntry");
+const TableRenderer_1 = require("../../../../common/ui/renderer/TableRenderer");
+let view;
+class DispatchBookingEntriesView extends UseCaseView_1.UseCaseView {
     constructor(use_case_name) {
         super('accounting', use_case_name);
-    }
-    register_event_listener() {
-        on_register_event_listener();
+        view = this;
     }
     async create_view() {
-        await this.add_script(path.join(__dirname, '../../../../common/ui/renderer/TableRenderer.js'));
-        await this.add_script(path.join(__dirname, 'dispatch_booking_entries.js'));
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
     }
+    register_event_listener() {
+        console.log("NEXT_BUTTON not implemented yet");
+    }
+    show_virtual_accounts(virtual_accounts) {
+        let virtual_account_list_elem = document.getElementById("virtual-account-list");
+        if (virtual_account_list_elem) {
+            while (virtual_account_list_elem.firstChild) {
+                try {
+                    virtual_account_list_elem.removeChild(virtual_account_list_elem.firstChild);
+                }
+                catch (e) {
+                }
+            }
+        }
+        for (let virtual_account of virtual_accounts) {
+            this.show_virtual_account(virtual_account, virtual_accounts);
+        }
+    }
+    show_virtual_account(virtual_account, virtual_accounts) {
+        let virtual_account_list_elem = document.getElementById("virtual-account-list");
+        let property_mapping = BookingEntry_1.BookingEntry.property_mapping;
+        let account_div = TableRenderer_1.TableRenderer.create_editable_table(`${virtual_account.booking_period} - ${virtual_account.cost_center}`, virtual_account.booking_entries, property_mapping, () => {
+            this.show_virtual_accounts(virtual_accounts);
+        });
+        // add_submit_button(account_div)
+        if (virtual_account_list_elem) {
+            virtual_account_list_elem.appendChild(account_div);
+        }
+    }
 }
 exports.DispatchBookingEntriesView = DispatchBookingEntriesView;
-let show_virtual_accounts;
-let on_register_event_listener;
-contextBridge.exposeInMainWorld('accounting__dispatch_booking_entries', {
-    show_virtual_accounts: (callback) => { show_virtual_accounts = callback; },
-    register_event_listener: (callback) => { on_register_event_listener = callback; },
-    get_property_mapping: () => BookingEntry.property_mapping,
-});
-ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts) => {
-    show_virtual_accounts(virtual_accounts);
+electron_1.ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts) => {
+    view.show_virtual_accounts(virtual_accounts);
 });
 module.exports = { DispatchBookingEntriesView };
 //# sourceMappingURL=DispatchBookingEntriesView.js.map

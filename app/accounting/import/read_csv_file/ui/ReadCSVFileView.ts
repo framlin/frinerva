@@ -1,50 +1,89 @@
 const {ipcRenderer, contextBridge} = require("electron");
 const {UseCaseView} = require("../../../../common/ui/use_case/UseCaseView");
 const {BookingEntry} = require("../../../account/BookingEntry");
-
+import {CSVFileImportRenderer} from './CSVFileImportRenderer';
 const path = require("path");
 let read_cvs_file_view: ReadCSVFileView;
 
 class ReadCSVFileView extends UseCaseView {
 
+    public import_renderer = new CSVFileImportRenderer();
     constructor(use_case_name: string) {
         super('accounting', use_case_name);
         read_cvs_file_view = this;
     }
 
-
     register_event_listener() {
-        this.on_register_callback();
+        this.register_next_button();
     };
 
     async create_view() {
-        await this.add_script(path.join(__dirname, 'read_csv_file.js'));
-        await this.add_script(path.join(__dirname, 'CSVFileImportRenderer.js'));
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
     }
 
-    on_register_callback: Function = () => {};
+    register_next_button() {
+        let next_button = document.querySelector('.next-btn');
+        if (next_button) {
+            next_button.addEventListener('click', () => {
+                let booking_entries = this.get_booking_records();
+                ipcRenderer.send('read_csv_file:next', booking_entries);
+            });
+        }
+    }
+
+    get_booking_records() {
+        let booking_records: any[] = [];
+        let rows = document.querySelectorAll('#payment-entries > table tr');
+        rows.forEach((row) => {
+            // @ts-ignore
+            booking_records.push(row.booking_record);
+        })
+        return booking_records;
+    }
+
+    show_payments(payments: any) {
+        let payments_div = document.querySelector("#payment-entries") as HTMLDivElement;
+        if (payments_div) {
+            if (payments_div.firstChild) {
+                this._clear_payment_entries(payments_div);
+            } else {
+                let table: HTMLTableElement = document.createElement("table");
+                payments_div.appendChild(table);
+                for (let payment of payments) {
+                    let values = [payment.Datum, payment.Kategorie, payment.Name, payment.Betrag]
+                    this._add_payments_row(table, values);
+                }
+            }
+        }
+    };
+
+    _clear_payment_entries(payments_div: HTMLDivElement) {
+        while (payments_div.firstChild) {
+            try {
+                payments_div.removeChild(payments_div.firstChild);
+            } catch (e) {
+            }
+        }
+    }
+
+    _add_payments_row(table: HTMLTableElement, payments: any[]) {
+        let row = table.insertRow(-1);
+        payments.forEach((payment, i) => {
+            let cell = row.insertCell(i);
+            let text = document.createTextNode(payment);
+            cell.appendChild(text);
+        });
+    }
+
 }
 
-contextBridge.exposeInMainWorld('accounting__read_csv_file', {
-    show_payments: (callback: Function) => {show_payments = callback},
-    show_booking_records: (callback: Function) => {show_booking_records = callback},
-    get_property_mapping : () => BookingEntry.property_mapping,
-    register_event_listener: (callback: Function) => {read_cvs_file_view.on_register_callback = callback},
-    send_next: (booking_entries:any) => ipcRenderer.send('read_csv_file:next', booking_entries),
-});
-
-let show_payments: Function;
 ipcRenderer.on('read_csv_file:show_payments', (e, payments) => {
-    show_payments(payments);
+    read_cvs_file_view.show_payments(payments);
 });
 
-let show_booking_records: Function;
-let booking_records;
 ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records) => {
-    booking_records = _booking_records
-    show_booking_records(_booking_records);
+    read_cvs_file_view.import_renderer.show_booking_records(_booking_records);
 });
 
 
