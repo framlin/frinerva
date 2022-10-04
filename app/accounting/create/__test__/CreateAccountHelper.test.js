@@ -1,4 +1,4 @@
-const CreateAccountHelper = require('../CreateAccountHelper');
+const {CreateAccountHelper} = require('../CreateAccountHelper');
 
 let create_account_helper;
 

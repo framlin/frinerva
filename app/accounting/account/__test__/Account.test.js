@@ -1,4 +1,4 @@
-const Account = require("../Account");
+const {Account} = require("../Account");
 const {BookingEntry} = require("../BookingEntry");
 
 function account_with_two_entries() {

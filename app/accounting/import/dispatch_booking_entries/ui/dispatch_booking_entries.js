@@ -27,6 +27,7 @@ function show_virtual_account(virtual_account, virtual_accounts) {
     let account_div = TableRenderer.create_editable_table(`${virtual_account.booking_period} - ${virtual_account.cost_center}`, virtual_account.booking_entries, property_mapping, () => {
         show_virtual_accounts(virtual_accounts);
     });
+    // add_submit_button(account_div)
     if (virtual_account_list_elem) {
         virtual_account_list_elem.appendChild(account_div);
     }

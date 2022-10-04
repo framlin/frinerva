@@ -1,13 +1,10 @@
-
 // @ts-ignore
 window["accounting__dispatch_booking_entries"].show_virtual_accounts(show_virtual_accounts);
-
 
 // @ts-ignore
 window["accounting__dispatch_booking_entries"].register_event_listener((virtual_accounts) => {
     console.log("NEXT_BUTTON not implemented yet")
 });
-
 function show_virtual_accounts(virtual_accounts:any[]) {
     let virtual_account_list_elem = document.getElementById("virtual-account-list");
     if (virtual_account_list_elem) {
@@ -26,7 +23,7 @@ function show_virtual_accounts(virtual_accounts:any[]) {
 
 function show_virtual_account(virtual_account: any, virtual_accounts: any[]){
 
-    let virtual_account_list_elem = document.getElementById("virtual-account-list");
+    let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
     // @ts-ignore
     let property_mapping = window["accounting__dispatch_booking_entries"].get_property_mapping();
     let account_div = TableRenderer.create_editable_table(
@@ -36,6 +33,7 @@ function show_virtual_account(virtual_account: any, virtual_accounts: any[]){
         () => {
             show_virtual_accounts(virtual_accounts);
         });
+    // add_submit_button(account_div)
     if (virtual_account_list_elem) {
         virtual_account_list_elem.appendChild(account_div);
     }

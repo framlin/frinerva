@@ -1,7 +1,7 @@
 // noinspection JSNonASCIINames
 
-const MoneyMoneyToBookingRecordConverter = require("../MoneyMoneyToBookingRecordConverter");
-const BookingEntry = require("../../../../account/BookingEntry");
+const {MoneyMoneyToBookingRecordConverter} = require("../MoneyMoneyToBookingRecordConverter");
+const {BookingEntry} = require("../../../../account/BookingEntry");
 
 it('should be possible, to create a payment_to_booking_entry_converter', () => {
     let payment_to_booking_entry_converter = new MoneyMoneyToBookingRecordConverter();

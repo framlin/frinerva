@@ -1,4 +1,4 @@
-const ShowListInteractor = require("../ShowListInteractor");
+const {ShowListInteractor} = require("../ShowListInteractor");
 let interactor;
 
 class PresenterSpy{
@@ -10,7 +10,7 @@ class PresenterSpy{
     }
 
 }
-let presenter = new PresenterSpy();
+let response_boundary = new PresenterSpy();
 
 class HelperSpy {
     get_account_name_list_called;
@@ -34,11 +34,11 @@ test('creation', () => {
 });
 
 test('execute', async () => {
-    interactor.presenter = presenter;
+    interactor.response_boundary = response_boundary;
     interactor.helper = helper;
 
     await interactor.execute();
     expect(interactor.helper.get_account_name_list_called).toBe(true);
-    expect(interactor.presenter.show_called).toBe(true);
-    expect(interactor.presenter.show_params).toStrictEqual(['1 - a']);
+    expect(interactor.response_boundary.show_called).toBe(true);
+    expect(interactor.response_boundary.show_params).toStrictEqual(['1 - a']);
 });

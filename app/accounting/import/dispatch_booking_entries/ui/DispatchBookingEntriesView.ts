@@ -1,8 +1,9 @@
 const {ipcRenderer, contextBridge} = require("electron");
 const {UseCaseView} = require("../../../../common/ui/use_case/UseCaseView");
 const {BookingEntry} = require("../../../account/BookingEntry");
-
 const path = require("path");
+
+
 
 class DispatchBookingEntriesView extends UseCaseView {
 
@@ -21,11 +22,12 @@ class DispatchBookingEntriesView extends UseCaseView {
         this.link_styles(__dirname);
     }
 }
+type fn_show_virtual_accounts = (virtual_accounts: any[]) => void;
+let show_virtual_accounts: fn_show_virtual_accounts;
 
-let show_virtual_accounts: Function;
 let on_register_event_listener: Function;
 contextBridge.exposeInMainWorld('accounting__dispatch_booking_entries', {
-    show_virtual_accounts: (callback: Function) => {show_virtual_accounts = callback},
+    show_virtual_accounts: (callback: fn_show_virtual_accounts) => {show_virtual_accounts = callback},
     register_event_listener: (callback: Function) => {on_register_event_listener = callback},
     get_property_mapping: () => BookingEntry.property_mapping,
 });

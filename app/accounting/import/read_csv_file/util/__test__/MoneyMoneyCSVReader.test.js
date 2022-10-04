@@ -1,4 +1,4 @@
-const MoneyMoneyCSVReader =  require("../MoneyMoneyCSVReader");
+const {MoneyMoneyCSVReader} =  require("../MoneyMoneyCSVReader");
 const Readable = require('stream').Readable
 //###########################################
 //

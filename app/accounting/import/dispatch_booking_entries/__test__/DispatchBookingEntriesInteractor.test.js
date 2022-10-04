@@ -1,5 +1,5 @@
-const DispatchBookingEntriesInteractor = require('../DispatchBookingEntriesInteractor');
-const Account = require("../../../account/Account");
+const {DispatchBookingEntriesInteractor} = require('../DispatchBookingEntriesInteractor');
+const {Account} = require("../../../account/Account");
 
 let interactor;
 

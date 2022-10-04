@@ -1,5 +1,5 @@
-const CreateAccountInteractor = require('../CreateAccountInteractor');
-const Account = require("../../account/Account");
+const {CreateAccountInteractor} = require('../CreateAccountInteractor');
+const {Account} = require("../../account/Account");
 
 let create_account_interactor;
 
@@ -45,7 +45,7 @@ class PresenterSpy {
 
 }
 
-let presenter = new PresenterSpy();
+let response_boundary = new PresenterSpy();
 
 class HelperSpy {
     load_account_called;
@@ -111,15 +111,15 @@ test('creation', () => {
 });
 
 test('execute', async () => {
-    create_account_interactor.presenter = presenter;
+    create_account_interactor.response_boundary = response_boundary;
     create_account_interactor.helper = helper;
 
     await create_account_interactor.execute();
-    expect(create_account_interactor.presenter.show_cost_center_list_called).toBe(true);
-    expect(create_account_interactor.presenter.show_cost_center_list_params).toStrictEqual({"TEST": "test"});
+    expect(create_account_interactor.response_boundary.show_cost_center_list_called).toBe(true);
+    expect(create_account_interactor.response_boundary.show_cost_center_list_params).toStrictEqual({"TEST": "test"});
 
-    expect(create_account_interactor.presenter.show_booking_period_list_called).toBe(true);
-    expect(create_account_interactor.presenter.show_booking_period_list_params).toStrictEqual([1]);
+    expect(create_account_interactor.response_boundary.show_booking_period_list_called).toBe(true);
+    expect(create_account_interactor.response_boundary.show_booking_period_list_params).toStrictEqual([1]);
 
     expect(create_account_interactor.helper.load_cost_center_configuration_called).toBe(true);
     expect(create_account_interactor.helper.load_booking_period_configuration_called).toBe(true);
@@ -129,13 +129,13 @@ test('execute', async () => {
 describe('period_cost_center_selection', () => {
     beforeEach(() => {
         create_account_interactor = new CreateAccountInteractor();
-        create_account_interactor.presenter = new PresenterSpy();
+        create_account_interactor.response_boundary = new PresenterSpy();
         create_account_interactor.helper = new HelperSpy();
     })
 
     function expect_empty_result() {
-        expect(create_account_interactor.presenter.show_new_accounts_list_called).toBe(true);
-        expect(create_account_interactor.presenter.show_new_accounts_list_params).toStrictEqual([]);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_params).toStrictEqual([]);
     }
 
     test('period_cost_center_selection - 0 : 0', () => {
@@ -165,8 +165,8 @@ describe('period_cost_center_selection', () => {
         let period_cost_center = {periods: [1], accounts: [{key: 'A', label: 'a'}]};
         create_account_interactor.period_cost_center_selection(period_cost_center);
 
-        expect(create_account_interactor.presenter.show_new_accounts_list_called).toBe(true);
-        expect(create_account_interactor.presenter.show_new_accounts_list_params).toStrictEqual([{booking_period: 1, cost_center: 'A', label: 'a'}]);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_params).toStrictEqual([{booking_period: 1, cost_center: 'A', label: 'a'}]);
     });
 
     test('period_cost_center_selection - 2 : 1', () => {
@@ -176,8 +176,8 @@ describe('period_cost_center_selection', () => {
         };
         create_account_interactor.period_cost_center_selection(period_cost_center);
 
-        expect(create_account_interactor.presenter.show_new_accounts_list_called).toBe(true);
-        expect(create_account_interactor.presenter.show_new_accounts_list_params).toStrictEqual([
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_params).toStrictEqual([
             {booking_period: 1, cost_center: 'A', label: 'a'},
             {booking_period: 2, cost_center: 'A', label: 'a'}
         ]);
@@ -193,8 +193,8 @@ describe('period_cost_center_selection', () => {
         };
         create_account_interactor.period_cost_center_selection(period_cost_center);
 
-        expect(create_account_interactor.presenter.show_new_accounts_list_called).toBe(true);
-        expect(create_account_interactor.presenter.show_new_accounts_list_params).toStrictEqual([
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_new_accounts_list_params).toStrictEqual([
             {booking_period: 1, cost_center: 'A', label: 'a'},
             {booking_period: 1, cost_center: 'B', label: 'b'}
         ]);
@@ -216,7 +216,7 @@ describe('create', () => {
 
     beforeEach(() => {
         create_account_interactor = new CreateAccountInteractor();
-        create_account_interactor.presenter = new PresenterSpy();
+        create_account_interactor.response_boundary = new PresenterSpy();
         create_account_interactor.helper = new HelperSpy();
     });
 
@@ -231,8 +231,8 @@ describe('create', () => {
         await create_account_interactor.create([params]);
         expect(create_account_interactor.helper.account_exists_called).toBe(true);
         expect(create_account_interactor.helper.account_exists_params[0]).toStrictEqual(params);
-        expect(create_account_interactor.presenter.show_error_called).toBe(true);
-        expect(create_account_interactor.presenter.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "A", "error": "ACCOUNT_EXIST"});
+        expect(create_account_interactor.response_boundary.show_error_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "A", "error": "ACCOUNT_EXIST"});
     });
 
     test('one new account will be stored', async () => {
@@ -241,12 +241,12 @@ describe('create', () => {
         await create_account_interactor.create([params]);
         expect(create_account_interactor.helper.account_exists_called).toBe(true);
         expect(create_account_interactor.helper.account_exists_params[0]).toStrictEqual(params);
-        expect(create_account_interactor.presenter.show_error_called).toBeUndefined();
+        expect(create_account_interactor.response_boundary.show_error_called).toBeUndefined();
         expect(create_account_interactor.helper.save_account_called).toBe(true);
         expect(create_account_interactor.helper.save_account_params[0]).toBeInstanceOf(Account);
         expect(create_account_interactor.helper.save_account_params[0].booking_period).toBe(params.booking_period);
         expect(create_account_interactor.helper.save_account_params[0].cost_center).toBe(params.cost_center);
-        expect(create_account_interactor.presenter.account_creation_done_called).toBe(true);
+        expect(create_account_interactor.response_boundary.account_creation_done_called).toBe(true);
     });
 
     test('one new account will be stored, one existing gets error', async () => {
@@ -255,7 +255,7 @@ describe('create', () => {
         await create_account_interactor.create(params);
         expect(create_account_interactor.helper.account_exists_ctr).toBe(2);
         expect(create_account_interactor.helper.save_account_ctr).toBe(1);
-        expect(create_account_interactor.presenter.show_error_called).toBe(true);
-        expect(create_account_interactor.presenter.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "X", "error": "ACCOUNT_EXIST"});
+        expect(create_account_interactor.response_boundary.show_error_called).toBe(true);
+        expect(create_account_interactor.response_boundary.show_error_params).toStrictEqual({"booking_period": "1", "cost_center": "X", "error": "ACCOUNT_EXIST"});
     });
 });
