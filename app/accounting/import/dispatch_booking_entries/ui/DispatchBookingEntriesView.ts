@@ -1,15 +1,16 @@
-import {ipcRenderer, contextBridge} from "electron";
+import {ipcRenderer} from "electron";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {BookingEntry} from "../../../account/BookingEntry";
 import {TableRenderer} from "../../../../common/ui/renderer/TableRenderer";
+import {AccountData} from "../../../account/Account";
 
-let view: DispatchBookingEntriesView;
+let dispatch_booking_entry_view: DispatchBookingEntriesView;
 
 class DispatchBookingEntriesView extends UseCaseView {
 
     constructor(use_case_name: string) {
         super('accounting', use_case_name)
-        view = this;
+        dispatch_booking_entry_view = this;
     }
 
     async create_view() {
@@ -21,8 +22,8 @@ class DispatchBookingEntriesView extends UseCaseView {
         console.log("NEXT_BUTTON not implemented yet")
     }
 
-    show_virtual_accounts(virtual_accounts:any[]) {
-        let virtual_account_list_elem = document.getElementById("virtual-account-list");
+    show_virtual_accounts(virtual_accounts:AccountData[]) {
+        let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
         if (virtual_account_list_elem) {
             while (virtual_account_list_elem.firstChild) {
                 try {
@@ -37,7 +38,7 @@ class DispatchBookingEntriesView extends UseCaseView {
         }
     }
 
-    show_virtual_account(virtual_account: any, virtual_accounts: any[]){
+    show_virtual_account(virtual_account: AccountData, virtual_accounts: AccountData[]){
 
         let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
         let property_mapping = BookingEntry.property_mapping;
@@ -55,8 +56,8 @@ class DispatchBookingEntriesView extends UseCaseView {
     }
 }
 
-ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts) => {
-    view.show_virtual_accounts(virtual_accounts);
+ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts: AccountData[]) => {
+    dispatch_booking_entry_view.show_virtual_accounts(virtual_accounts);
 });
 
 module.exports = {DispatchBookingEntriesView};

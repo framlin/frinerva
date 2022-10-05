@@ -33,23 +33,27 @@ class TableRenderer {
     static _add_cell(row, i, prop, buffer) {
         let cell = row.insertCell(i);
         cell.className = "editable-table-cell";
+        // @ts-ignore
         cell.prop = prop;
         let content = buffer[prop];
         let text = document.createTextNode(content);
         return { cell, text };
     }
     static _add_event_listener(input_elem, buffer, cell, text, redraw) {
-        input_elem.addEventListener('blur', (event) => {
+        input_elem.addEventListener('blur', (_e) => {
             if (input_elem.value !== "") {
+                // @ts-ignore
                 buffer[cell.prop] = input_elem.value;
             }
             else {
+                // @ts-ignore
                 buffer[cell.prop] = text.wholeText;
             }
             redraw();
         });
         input_elem.addEventListener('keypress', ({ key }) => {
             if (key === "Enter") {
+                // @ts-ignore
                 buffer[cell.prop] = input_elem.value;
                 redraw();
             }

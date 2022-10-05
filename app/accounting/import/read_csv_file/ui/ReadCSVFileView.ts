@@ -1,6 +1,8 @@
-const {ipcRenderer, contextBridge} = require("electron");
-const {UseCaseView} = require("../../../../common/ui/use_case/UseCaseView");
+import {BookingRecordData} from "../../../account/BookingRecord";
+import {ipcRenderer} from "electron";
+import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
+import {MoneyMoneyPayment} from "../../../account/Payment";
 
 
 let read_cvs_file_view: ReadCSVFileView;
@@ -23,7 +25,7 @@ class ReadCSVFileView extends UseCaseView {
     }
 
     register_next_button() {
-        let next_button = document.querySelector('.next-btn');
+        let next_button = document.querySelector('.next-btn') as HTMLButtonElement;
         if (next_button) {
             next_button.addEventListener('click', () => {
                 let booking_entries = this.get_booking_records();
@@ -33,7 +35,7 @@ class ReadCSVFileView extends UseCaseView {
     }
 
     get_booking_records() {
-        let booking_records: any[] = [];
+        let booking_records: BookingRecordData[] = [];
         let rows = document.querySelectorAll('#payment-entries > table tr') as NodeListOf<HTMLTableRowElement>;
         rows.forEach((row) => {
             // @ts-ignore
@@ -42,7 +44,7 @@ class ReadCSVFileView extends UseCaseView {
         return booking_records;
     }
 
-    show_payments(payments: any) {
+    show_payments(payments: MoneyMoneyPayment[]) {
         let payments_div = document.querySelector("#payment-entries") as HTMLDivElement;
         if (payments_div) {
             if (payments_div.firstChild) {
@@ -67,7 +69,7 @@ class ReadCSVFileView extends UseCaseView {
         }
     }
 
-    _add_payments_row(table: HTMLTableElement, payments: any[]) {
+    _add_payments_row(table: HTMLTableElement, payments: string[]) {
         let row = table.insertRow(-1);
         payments.forEach((payment, i) => {
             let cell = row.insertCell(i);
@@ -78,11 +80,11 @@ class ReadCSVFileView extends UseCaseView {
 
 }
 
-ipcRenderer.on('read_csv_file:show_payments', (e, payments) => {
+ipcRenderer.on('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
     read_cvs_file_view.show_payments(payments);
 });
 
-ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records) => {
+ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
     read_cvs_file_view.import_renderer.show_booking_records(_booking_records);
 });
 

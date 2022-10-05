@@ -1,4 +1,4 @@
-const {UseCaseController} = require("../../../common/use_case/UseCaseController");
+import {UseCaseController} from "../../../common/use_case/UseCaseController";
 
 class DispatchBookingEntriesController extends UseCaseController {
 }

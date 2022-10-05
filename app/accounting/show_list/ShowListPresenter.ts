@@ -8,7 +8,7 @@ class ShowListPresenter extends UseCasePresenter implements ShowListResponseBoun
         presenter = this;
     }
 
-    show(account_name_list: any) {
+    show(account_name_list: string[]) {
         this._ipc_channel.send('show_list:show_account_name_list', account_name_list);
     }
 }

@@ -45,5 +45,5 @@ class JSONStorage {
     }
 }
 exports.JSONStorage = JSONStorage;
-module.exports = JSONStorage;
+module.exports = { JSONStorage };
 //# sourceMappingURL=JSONStorage.js.map

@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingHelper = void 0;
-const JSONStorage = require("../json/JSONStorage");
+const { JSONStorage } = require("../json/JSONStorage");
 const Account_1 = require("../../../accounting/account/Account");
 const path = require("path");
 const STORAGE_ROOT_DIR = path.join(__dirname, "../data");

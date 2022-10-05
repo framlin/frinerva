@@ -1,4 +1,4 @@
-const JSONStorage = require("../json/JSONStorage");
+const {JSONStorage} = require("../json/JSONStorage");
 import {Account} from "../../../accounting/account/Account";
 const path = require("path");
 const STORAGE_ROOT_DIR = path.join(__dirname,"../data");

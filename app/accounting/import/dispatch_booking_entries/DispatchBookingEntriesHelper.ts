@@ -1,7 +1,7 @@
 import {Account} from "../../account/Account";
 
-const {UseCaseHelper} = require("../../../common/use_case/UseCaseHelper");
-const {AccountingHelper} = require("../../../common/persistence/helper/AccountingHelper");
+import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
+import {AccountingHelper} from "../../../common/persistence/helper/AccountingHelper";
 
 class DispatchBookingEntriesHelper extends UseCaseHelper{
     async load_account(booking_period: string, cost_center: string) {

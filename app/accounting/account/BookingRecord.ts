@@ -1,9 +1,15 @@
-import {BookingEntry} from "./BookingEntry";
+import {BookingEntry, BookingEntryData} from "./BookingEntry";
 
-class BookingRecord{
-    _booking_entry: BookingEntry;
-    _cost_center : string= "";
-    _booking_period: string = "";
+interface BookingRecordData{
+    booking_entry: BookingEntryData,
+    cost_center: string,
+    booking_period: string
+}
+
+class BookingRecord implements BookingRecordData{
+    private readonly _booking_entry: BookingEntry;
+    private readonly _cost_center : string= "";
+    private readonly _booking_period: string = "";
 
     constructor(booking_entry: BookingEntry, cost_center: string, booking_period: string) {
         this._booking_entry = booking_entry;
@@ -25,4 +31,4 @@ class BookingRecord{
 }
 
 module.exports = {BookingRecord};
-export {BookingRecord}
+export {BookingRecord, BookingRecordData}

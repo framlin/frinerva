@@ -12,6 +12,14 @@ class BookingEntry {
         this._booking_code = booking_code || BOOKING_CODE.NONE;
         this._id = id || BookingEntry.generate_id();
     }
+    static implement_booking_entry_data() {
+        let properties = BookingEntry.property_mapping.slice();
+        let entry = properties.reduce((previous, current) => {
+            previous[current] = "";
+            return previous;
+        }, {});
+        return entry;
+    }
     get id() {
         return this._id;
     }

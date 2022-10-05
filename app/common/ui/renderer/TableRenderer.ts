@@ -26,7 +26,7 @@ class TableRenderer {
         });
     }
 
-    static _insert_editable_cell(row: any, i: number, prop: string, buffer: any, redraw: Function) {
+    static _insert_editable_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: any, redraw: Function) {
         let {cell, text} = TableRenderer._add_cell(row, i, prop, buffer);
         cell.appendChild(text);
         cell.addEventListener('click', () => {
@@ -35,20 +35,23 @@ class TableRenderer {
         });
     }
 
-    static  _add_cell(row: any, i: number, prop: string, buffer: any) {
+    static  _add_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: any) {
         let cell = row.insertCell(i);
         cell.className="editable-table-cell";
+        // @ts-ignore
         cell.prop = prop;
         let content = buffer[prop];
         let text = document.createTextNode(content);
         return {cell, text};
     }
 
-    static _add_event_listener(input_elem: HTMLInputElement, buffer: any, cell: any, text: any, redraw: Function) {
-        input_elem.addEventListener('blur', (event) => {
+    static _add_event_listener(input_elem: HTMLInputElement, buffer: any, cell: HTMLTableCellElement, text: Text, redraw: Function) {
+        input_elem.addEventListener('blur', (_e) => {
             if (input_elem.value !== "") {
+                // @ts-ignore
                 buffer[cell.prop] = input_elem.value;
             } else {
+                // @ts-ignore
                 buffer[cell.prop] = text.wholeText;
             }
             redraw();
@@ -56,13 +59,14 @@ class TableRenderer {
 
         input_elem.addEventListener('keypress', ({key}) => {
             if (key === "Enter") {
+                // @ts-ignore
                 buffer[cell.prop] = input_elem.value;
                 redraw();
             }
         });
     }
 
-    static _make_cell_editable(text: any, cell: any, row: any) {
+    static _make_cell_editable(text: Text, cell: HTMLTableCellElement, row: HTMLTableRowElement) {
         let input_elem = document.createElement("input");
         input_elem.setAttribute('type', 'text');
         input_elem.value = text.wholeText;

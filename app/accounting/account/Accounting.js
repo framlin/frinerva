@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Accounting = void 0;
 const Account_1 = require("./Account");
-const { BookingEntry } = require("./BookingEntry");
+const BookingEntry_1 = require("./BookingEntry");
 class Accounting {
     constructor(account_storage) {
         this._account_storage = account_storage;
     }
     static create_booking_entry(date, subject, name, amount, booking_code) {
-        return new BookingEntry(date, subject, name, amount, booking_code);
+        return new BookingEntry_1.BookingEntry(date, subject, name, amount, booking_code);
     }
     async create_account(booking_period, cost_center) {
         let account = null;

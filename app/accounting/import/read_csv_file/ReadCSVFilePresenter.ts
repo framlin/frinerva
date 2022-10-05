@@ -1,7 +1,7 @@
-import {BookingRecord} from "../../account/BookingRecord";
+import {BookingRecordData} from "../../account/BookingRecord";
 import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
-
-const {UseCasePresenter} = require("../../../common/use_case/UseCasePresenter");
+import {MoneyMoneyPayment} from "../../account/Payment";
+import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 
 let presenter: ReadCSVFilePresenter;
 
@@ -15,12 +15,12 @@ class ReadCSVFilePresenter extends UseCasePresenter implements ReadCSVFileRespon
         //
     }
 
-    show_payments(payments: any) {
+    show_payments(payments: MoneyMoneyPayment[]) {
         this._ipc_channel.send('read_csv_file:show_payments', payments);
     }
 
 
-    show_booking_records(booking_records: BookingRecord[]) {
+    show_booking_records(booking_records: BookingRecordData[]) {
         this._ipc_channel.send('read_csv_file:show_booking_records', booking_records);
     }
 

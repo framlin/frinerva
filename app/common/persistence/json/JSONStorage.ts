@@ -33,7 +33,7 @@ class JSONStorage {
         return existsSync(file_name);
     }
 
-    static async get_name_list(root_dir: string, dir_name: string) {
+    static async get_name_list(root_dir: string, dir_name?: string) {
         let result: any[] = [];
         let filenames = await readdir(root_dir);
         for await (let filename of filenames) {
@@ -51,5 +51,5 @@ class JSONStorage {
 
 }
 
-module.exports = JSONStorage;
+module.exports = {JSONStorage};
 export {JSONStorage}

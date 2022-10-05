@@ -1,14 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountInteractor = void 0;
-const { UseCaseInteractor } = require("../../common/use_case/UseCaseInteractor");
-const { Accounting } = require("../account/Accounting");
-class CreateAccountInteractor extends UseCaseInteractor {
+const UseCaseInteractor_1 = require("../../common/use_case/UseCaseInteractor");
+const Accounting_1 = require("../account/Accounting");
+class CreateAccountInteractor extends UseCaseInteractor_1.UseCaseInteractor {
     async execute() {
-        let cost_center_config = await this._helper.load_cost_center_configuration();
-        this._response_boundary.show_cost_center_list(JSON.parse(cost_center_config));
-        let booking_period_config = await this._helper.load_booking_period_configuration();
-        this._response_boundary.show_booking_period_list(JSON.parse(booking_period_config));
+        let cost_center_config = await this.helper.load_cost_center_configuration();
+        this.response_boundary.show_cost_center_list(JSON.parse(cost_center_config));
+        let booking_period_config = await this.helper.load_booking_period_configuration();
+        this.response_boundary.show_booking_period_list(JSON.parse(booking_period_config));
     }
     period_cost_center_selection(period_cost_center) {
         let new_entry_list = [];
@@ -23,19 +23,31 @@ class CreateAccountInteractor extends UseCaseInteractor {
                 new_entry_list.push({ booking_period, cost_center, label });
             }
         }
-        this._response_boundary.show_new_accounts_list(new_entry_list);
+        this.response_boundary.show_new_accounts_list(new_entry_list);
     }
     async create(new_accounts_list) {
-        let accounting = new Accounting(this._helper);
+        let accounting = new Accounting_1.Accounting(this._helper);
         for (let new_account of new_accounts_list) {
             let booking_period = new_account.booking_period;
             let cost_center = new_account.cost_center;
             let account = await accounting.create_account(booking_period, cost_center);
             if (!account) {
-                this._response_boundary.show_error({ error: 'ACCOUNT_EXIST', booking_period, cost_center });
+                this.response_boundary.show_error({ error: 'ACCOUNT_EXIST', booking_period, cost_center });
             }
         }
-        this._response_boundary.account_creation_done();
+        this.response_boundary.account_creation_done();
+    }
+    get helper() {
+        return this._helper;
+    }
+    get response_boundary() {
+        return this._response_boundary;
+    }
+    set helper(value) {
+        this._helper = value;
+    }
+    set response_boundary(value) {
+        this._response_boundary = value;
     }
 }
 exports.CreateAccountInteractor = CreateAccountInteractor;

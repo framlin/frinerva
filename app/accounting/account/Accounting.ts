@@ -1,5 +1,5 @@
 import {Account} from "./Account";
-const {BookingEntry} = require("./BookingEntry");
+import {BookingEntry}  from"./BookingEntry";
 
 
 class Accounting{
@@ -10,7 +10,7 @@ class Accounting{
         this._account_storage = account_storage;
     }
 
-    static create_booking_entry(date: Date, subject: string, name: string, amount: number, booking_code: string) {
+    static create_booking_entry(date: Date, subject: string, name: string, amount: number, booking_code: string) : BookingEntry {
         return new BookingEntry(date, subject, name, amount, booking_code);
     }
 

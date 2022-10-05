@@ -1,8 +1,8 @@
 import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
-
-const JSONStorage = require("../../common/persistence/json/JSONStorage");
-const path = require("path");
+import {JSONStorage} from "../../common/persistence/json/JSONStorage";
 import {AccountingHelper}  from "../../common/persistence/helper/AccountingHelper";
+import * as path from 'path';
+
 const STORAGE_ROOT_DIR = path.join(__dirname,"../../common/persistence/data") ;
 
 class ShowListHelper extends UseCaseHelper{

@@ -5,11 +5,11 @@ const electron_1 = require("electron");
 const UseCaseView_1 = require("../../../../common/ui/use_case/UseCaseView");
 const BookingEntry_1 = require("../../../account/BookingEntry");
 const TableRenderer_1 = require("../../../../common/ui/renderer/TableRenderer");
-let view;
+let dispatch_booking_entry_view;
 class DispatchBookingEntriesView extends UseCaseView_1.UseCaseView {
     constructor(use_case_name) {
         super('accounting', use_case_name);
-        view = this;
+        dispatch_booking_entry_view = this;
     }
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
@@ -47,7 +47,7 @@ class DispatchBookingEntriesView extends UseCaseView_1.UseCaseView {
 }
 exports.DispatchBookingEntriesView = DispatchBookingEntriesView;
 electron_1.ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts) => {
-    view.show_virtual_accounts(virtual_accounts);
+    dispatch_booking_entry_view.show_virtual_accounts(virtual_accounts);
 });
 module.exports = { DispatchBookingEntriesView };
 //# sourceMappingURL=DispatchBookingEntriesView.js.map

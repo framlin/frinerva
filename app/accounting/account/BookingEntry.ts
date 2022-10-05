@@ -10,8 +10,17 @@ interface BookingEntryData {
     id: string;
 }
 
-class BookingEntry {
+class BookingEntry implements BookingEntryData{
     static property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
+
+    static implement_booking_entry_data() {
+        let properties = BookingEntry.property_mapping.slice();
+        let entry: BookingEntryData = properties.reduce((previous: any, current: any) => {
+            previous[current] = ""
+            return previous;
+        }, {});
+        return entry;
+    }
 
     _date: Date;
     _subject: string;

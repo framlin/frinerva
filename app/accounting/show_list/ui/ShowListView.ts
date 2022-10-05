@@ -1,5 +1,5 @@
-const {ipcRenderer, contextBridge} = require("electron");
-const {UseCaseView} = require("../../../common/ui/use_case/UseCaseView");
+import {ipcRenderer} from "electron";
+import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 
 let show_list_view: ShowListView;
 
@@ -12,7 +12,6 @@ class ShowListView extends UseCaseView {
     register_event_listener() {}
 
     async create_view() {
-        // await this.add_script(path.join(__dirname, 'show_list.js'));
         await this.append_markup_at(__dirname, '.sideboard');
         this.link_styles(__dirname);
     };
@@ -30,7 +29,7 @@ class ShowListView extends UseCaseView {
     };
 }
 
-ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: any) => {
+ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: string[]) => {
     show_list_view.show_account_name_list(account_name_list);
 })
 

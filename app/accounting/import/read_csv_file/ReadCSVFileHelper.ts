@@ -1,6 +1,6 @@
-const {UseCaseHelper} = require("../../../common/use_case/UseCaseHelper");
-const Fs = require("fs");
-const {MoneyMoneyCSVReader} = require("./util/MoneyMoneyCSVReader");
+import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
+import * as Fs from 'fs';
+import {MoneyMoneyCSVReader} from "./util/MoneyMoneyCSVReader";
 
 class ReadCSVFileHelper extends UseCaseHelper{
 

@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ReadCSVFileView = void 0;
-const { ipcRenderer, contextBridge } = require("electron");
-const { UseCaseView } = require("../../../../common/ui/use_case/UseCaseView");
+const electron_1 = require("electron");
+const UseCaseView_1 = require("../../../../common/ui/use_case/UseCaseView");
 const CSVFileImportRenderer_1 = require("./CSVFileImportRenderer");
 let read_cvs_file_view;
-class ReadCSVFileView extends UseCaseView {
+class ReadCSVFileView extends UseCaseView_1.UseCaseView {
     constructor(use_case_name) {
         super('accounting', use_case_name);
         this.import_renderer = new CSVFileImportRenderer_1.CSVFileImportRenderer();
@@ -24,7 +24,7 @@ class ReadCSVFileView extends UseCaseView {
         if (next_button) {
             next_button.addEventListener('click', () => {
                 let booking_entries = this.get_booking_records();
-                ipcRenderer.send('read_csv_file:next', booking_entries);
+                electron_1.ipcRenderer.send('read_csv_file:next', booking_entries);
             });
         }
     }
@@ -73,10 +73,10 @@ class ReadCSVFileView extends UseCaseView {
     }
 }
 exports.ReadCSVFileView = ReadCSVFileView;
-ipcRenderer.on('read_csv_file:show_payments', (e, payments) => {
+electron_1.ipcRenderer.on('read_csv_file:show_payments', (e, payments) => {
     read_cvs_file_view.show_payments(payments);
 });
-ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records) => {
+electron_1.ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records) => {
     read_cvs_file_view.import_renderer.show_booking_records(_booking_records);
 });
 module.exports = { ReadCSVFileView };

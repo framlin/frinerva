@@ -1,6 +1,5 @@
 import {UseCaseFactory} from "../../factories/UseCaseFactory";
-
-const {UseCase} = require("../../../common/use_case/UseCase");
+import {UseCase} from "../../../common/use_case/UseCase";
 
 class DispatchBookingEntries extends UseCase{
 

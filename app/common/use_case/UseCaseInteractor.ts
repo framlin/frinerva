@@ -2,6 +2,9 @@ import {UseCaseHelper} from "./UseCaseHelper";
 import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
 
 abstract class UseCaseInteractor{
+
+    abstract execute(...data: any[]): any;
+
     get helper() {
         return this._helper;
     }
@@ -9,7 +12,6 @@ abstract class UseCaseInteractor{
     set helper(value) {
         this._helper = value;
     }
-    abstract execute(...data: any[]): any;
 
     get response_boundary() {
         return this._response_boundary;

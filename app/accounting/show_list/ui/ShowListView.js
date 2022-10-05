@@ -1,17 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ShowListView = void 0;
-const { ipcRenderer, contextBridge } = require("electron");
-const { UseCaseView } = require("../../../common/ui/use_case/UseCaseView");
+const electron_1 = require("electron");
+const UseCaseView_1 = require("../../../common/ui/use_case/UseCaseView");
 let show_list_view;
-class ShowListView extends UseCaseView {
+class ShowListView extends UseCaseView_1.UseCaseView {
     constructor(use_case_name) {
         super('accounting', use_case_name);
         show_list_view = this;
     }
     register_event_listener() { }
     async create_view() {
-        // await this.add_script(path.join(__dirname, 'show_list.js'));
         await this.append_markup_at(__dirname, '.sideboard');
         this.link_styles(__dirname);
     }
@@ -30,7 +29,7 @@ class ShowListView extends UseCaseView {
     ;
 }
 exports.ShowListView = ShowListView;
-ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list) => {
+electron_1.ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list) => {
     show_list_view.show_account_name_list(account_name_list);
 });
 module.exports = { ShowListView };

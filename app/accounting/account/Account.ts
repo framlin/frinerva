@@ -6,7 +6,7 @@ interface AccountData {
     booking_entries: BookingEntryData[];
 }
 
-class Account {
+class Account implements AccountData{
     constructor(private _booking_period: string, private _cost_center: string) {
         this._booking_entries = [];
     }

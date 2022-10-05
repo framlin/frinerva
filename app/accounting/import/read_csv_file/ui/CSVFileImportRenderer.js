@@ -24,23 +24,22 @@ class CSVFileImportRenderer {
         });
         payments_div.appendChild(table);
     }
-    _add_booking_entries_row(table, booking_entry_with_cc_and_year) {
+    _add_booking_entries_row(table, booking_record) {
         let row = table.insertRow(-1);
-        let { booking_entry } = booking_entry_with_cc_and_year;
+        let { booking_entry } = booking_record;
         // @ts-ignore
-        row.booking_record = booking_entry_with_cc_and_year;
-        // @ts-ignore
-        let PropertyMapping = BookingEntry_1.BookingEntry.property_mapping;
-        PropertyMapping.forEach((prop, i) => {
+        row.booking_record = booking_record;
+        let property_mapping = BookingEntry_1.BookingEntry.property_mapping;
+        property_mapping.forEach((prop, i) => {
             if (prop !== 'id') {
-                this._insert_editable_cell(row, i, '_' + prop, booking_entry);
+                this._insert_editable_cell(row, i, prop, booking_entry);
             }
         });
         let i = 5;
-        let { cost_center, year } = booking_entry_with_cc_and_year;
-        let metadata = { cost_center, year };
+        let { cost_center, booking_period } = booking_record;
+        let metadata = { cost_center, booking_period };
         for (let prop in metadata) {
-            this._insert_editable_cell(row, i++, prop, booking_entry_with_cc_and_year);
+            this._insert_editable_cell(row, i++, prop, booking_record);
         }
     }
     _insert_editable_cell(row, i, prop, buffer) {
@@ -55,9 +54,10 @@ class CSVFileImportRenderer {
         let cell = row.insertCell(i);
         // @ts-ignore
         cell.prop = prop;
-        let content = (prop === '_date') ?
-            buffer[prop].toLocaleString('de-DE').split(',')[0] :
-            buffer[prop];
+        // @ts-ignore
+        let content = (prop === 'date') ?
+            // @ts-ignore
+            buffer[prop].toLocaleString('de-DE').split(',')[0] : buffer[prop];
         let text = document.createTextNode(content);
         return { cell, text };
     }
