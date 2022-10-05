@@ -126,7 +126,7 @@ class CreateAccountView extends UseCaseView {
     }
 
     clear_list(selector: string) {
-        let list = document.querySelector(selector);
+        let list = document.querySelector(selector) as HTMLDivElement;
         // @ts-ignore
         for (let child of list.children) {
             if (!child.classList.contains('account-list-header')) {
@@ -136,7 +136,7 @@ class CreateAccountView extends UseCaseView {
     }
 
     reset_list(selector: string) {
-        let list = document.querySelector(selector);
+        let list = document.querySelector(selector) as HTMLDivElement;
         // @ts-ignore
         for (let child of list.children) {
             child.classList.remove('selected');
