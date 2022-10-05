@@ -35,6 +35,7 @@ class TableRenderer {
         cell.className = "editable-table-cell";
         // @ts-ignore
         cell.prop = prop;
+        // @ts-ignore
         let content = buffer[prop];
         let text = document.createTextNode(content);
         return { cell, text };

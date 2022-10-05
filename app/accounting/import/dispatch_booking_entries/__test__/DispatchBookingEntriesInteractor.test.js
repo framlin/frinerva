@@ -1,5 +1,5 @@
 const {DispatchBookingEntriesInteractor} = require('../DispatchBookingEntriesInteractor');
-const {Account} = require("../../../account/Account");
+const {Account, AccountData} = require("../../../account/Account");
 
 let interactor;
 
@@ -57,7 +57,7 @@ describe('account-dict-creation', () => {
     function expect_account_dict(booking_entries, expected_dict) {
         let given_booking_entries = [];
         for (let be of booking_entries) {
-            given_booking_entries.push({year:be[0], cost_center:be[1], booking_entry:be[2]});
+            given_booking_entries.push({booking_period:be[0], cost_center:be[1], booking_entry:be[2]});
         }
         let account_dict = interactor.create_account_dict(given_booking_entries);
         expect(account_dict).toStrictEqual(expected_dict);
@@ -126,7 +126,7 @@ describe('virtual-accounts-creation', () => {
     test('dict with one empty account => account without booking_entries', async () => {
         let virtual_accounts = await interactor.create_virtual_accounts({"1!A":[]});
         expect(virtual_accounts.length).toBe(1);
-        expect(virtual_accounts[0]).toBeInstanceOf(Account);
+        expect(virtual_accounts[0]).toBeInstanceOf(Object);
         expect(virtual_accounts[0].booking_period).toBe("1");
         expect(virtual_accounts[0].cost_center).toBe("A");
         expect(virtual_accounts[0].booking_entries.length).toBe(0);
@@ -135,7 +135,7 @@ describe('virtual-accounts-creation', () => {
     test('dict with one NEW account with entries => account with same booking_entries', async () => {
         let virtual_accounts = await interactor.create_virtual_accounts({"1!A":[1]});
         expect(virtual_accounts.length).toBe(1);
-        expect(virtual_accounts[0]).toBeInstanceOf(Account);
+        expect(virtual_accounts[0]).toBeInstanceOf(Object);
         expect(virtual_accounts[0].booking_period).toBe("1");
         expect(virtual_accounts[0].cost_center).toBe("A");
         expect(virtual_accounts[0].booking_entries.length).toBe(1);
@@ -147,7 +147,7 @@ describe('virtual-accounts-creation', () => {
         interactor.helper.booking_entries = [2];
         let virtual_accounts = await interactor.create_virtual_accounts({"1!A":[1]});
         expect(virtual_accounts.length).toBe(1);
-        expect(virtual_accounts[0]).toBeInstanceOf(Account);
+        expect(virtual_accounts[0]).toBeInstanceOf(Object);
         expect(virtual_accounts[0].booking_period).toBe("1");
         expect(virtual_accounts[0].cost_center).toBe("A");
         expect(virtual_accounts[0].booking_entries.length).toBe(2);
@@ -156,7 +156,7 @@ describe('virtual-accounts-creation', () => {
     test('dict with two accounts => two accounts', async() => {
         let virtual_accounts = await interactor.create_virtual_accounts({"1!A":[1], "2!B":[1]});
         expect(virtual_accounts.length).toBe(2);
-        expect(virtual_accounts[1]).toBeInstanceOf(Account);
+        expect(virtual_accounts[1]).toBeInstanceOf(Object);
         expect(virtual_accounts[0].booking_period).toBe("1");
         expect(virtual_accounts[1].cost_center).toBe("B");
         expect(virtual_accounts[1].booking_entries.length).toBe(1);

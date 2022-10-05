@@ -1,15 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookingEntry = void 0;
-const { BOOKING_CODE } = require("./BOOKING_CODE");
-const { v4: uuidv4 } = require('uuid');
+const BOOKING_CODE_1 = require("./BOOKING_CODE");
+// const { v4: uuidv4 } = require('uuid');
+const uuid_1 = require("uuid");
 class BookingEntry {
     constructor(date, subject, name, amount, booking_code, id) {
         this._date = date || 0;
         this._subject = subject || "";
         this._name = name || "";
         this._amount = amount || 0.00;
-        this._booking_code = booking_code || BOOKING_CODE.NONE;
+        this._booking_code = booking_code || BOOKING_CODE_1.BOOKING_CODE.NONE;
         this._id = id || BookingEntry.generate_id();
     }
     static implement_booking_entry_data() {
@@ -58,7 +59,7 @@ class BookingEntry {
     }
     static generate_id() {
         // return crypto.randomUUID();
-        return uuidv4();
+        return (0, uuid_1.v4)();
     }
     static create_from_JSON(serialized_booking_entry) {
         let booking_entry_data = JSON.parse(serialized_booking_entry);

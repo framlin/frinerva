@@ -24,20 +24,20 @@ it('should be possible to convert a payment entry to a booking entry', () => {
         "Währung": "EUR"
     };
 
-    let {booking_entry, cost_center, year} = payment_to_booking_entry_converter.convert(payment_entry);
-    booking_entry._id="0";
+    let {booking_entry, cost_center, booking_period} = payment_to_booking_entry_converter.convert(payment_entry);
+    booking_entry.id="0";
     let date = new Date(2020, 11, 31);
-    let expected_booking_entry = new BookingEntry(
-        date,
-        "04082 Leipzig Kontoabschluss 4. Quartal 20 AktivKonto (Kontofuhrung) 20,70 13 kostenfreie Poste",
-        "Saldo der Abschlussposten QM - Support",
-        -30.70,
-        "BC??",
-        "0"
-    );
+    let expected_booking_entry = {
+        date: date,
+        subject: "04082 Leipzig Kontoabschluss 4. Quartal 20 AktivKonto (Kontofuhrung) 20,70 13 kostenfreie Poste",
+        name: "Saldo der Abschlussposten QM - Support",
+        amount: -30.70,
+        booking_code: "BC??",
+        id: "0"
+    };
 
     expect(booking_entry).toStrictEqual(expected_booking_entry);
-    expect(year).toBe(2020);
+    expect(booking_period).toBe("2020");
     expect(cost_center).toBe('BANKING');
 
 })

@@ -35,7 +35,7 @@ class DispatchBookingEntriesView extends UseCaseView_1.UseCaseView {
     }
     show_virtual_account(virtual_account, virtual_accounts) {
         let virtual_account_list_elem = document.getElementById("virtual-account-list");
-        let property_mapping = BookingEntry_1.BookingEntry.property_mapping;
+        let property_mapping = BookingEntry_1.BookingEntry.property_mapping.filter((prop) => prop !== 'id');
         let account_div = TableRenderer_1.TableRenderer.create_editable_table(`${virtual_account.booking_period} - ${virtual_account.cost_center}`, virtual_account.booking_entries, property_mapping, () => {
             this.show_virtual_accounts(virtual_accounts);
         });

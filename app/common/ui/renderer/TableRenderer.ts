@@ -1,12 +1,16 @@
+import {BookingEntryData} from "../../../accounting/account/BookingEntry";
+
+type Redraw = () => void;
+
 class TableRenderer {
 
-    static create_editable_table(title: string, rows: any, properties: any, redraw: Function) {
+    static create_editable_table(title: string, rows: BookingEntryData[], properties: string[], redraw: Redraw) {
         let table_div = document.createElement('DIV');
         table_div.className = "editable-table";
         table_div.innerHTML = `<DIV class="editable-table-header">${title}</DIV>`;
 
         let table_elem = document.createElement("TABLE") as HTMLTableElement;
-        rows.forEach((values: any) => {
+        rows.forEach((values: BookingEntryData) => {
             TableRenderer._add_booking_entries_row(table_elem, values, properties, redraw);
         });
 
@@ -15,7 +19,7 @@ class TableRenderer {
     }
 
 
-    static _add_booking_entries_row(table: HTMLTableElement, values: any, properties: string[], redraw: Function) {
+    static _add_booking_entries_row(table: HTMLTableElement, values: BookingEntryData, properties: string[], redraw: Redraw) {
         let row = table.insertRow(-1);
         row.className = "editable-table-row";
         // @ts-ignore
@@ -26,7 +30,7 @@ class TableRenderer {
         });
     }
 
-    static _insert_editable_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: any, redraw: Function) {
+    static _insert_editable_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingEntryData, redraw: Redraw) {
         let {cell, text} = TableRenderer._add_cell(row, i, prop, buffer);
         cell.appendChild(text);
         cell.addEventListener('click', () => {
@@ -35,17 +39,18 @@ class TableRenderer {
         });
     }
 
-    static  _add_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: any) {
+    static  _add_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingEntryData) {
         let cell = row.insertCell(i);
         cell.className="editable-table-cell";
         // @ts-ignore
         cell.prop = prop;
+        // @ts-ignore
         let content = buffer[prop];
         let text = document.createTextNode(content);
         return {cell, text};
     }
 
-    static _add_event_listener(input_elem: HTMLInputElement, buffer: any, cell: HTMLTableCellElement, text: Text, redraw: Function) {
+    static _add_event_listener(input_elem: HTMLInputElement, buffer: BookingEntryData, cell: HTMLTableCellElement, text: Text, redraw: Redraw) {
         input_elem.addEventListener('blur', (_e) => {
             if (input_elem.value !== "") {
                 // @ts-ignore

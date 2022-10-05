@@ -1,6 +1,6 @@
-const {BOOKING_CODE} = require("./BOOKING_CODE");
-const { v4: uuidv4 } = require('uuid');
-
+import {BOOKING_CODE} from "./BOOKING_CODE";
+// const { v4: uuidv4 } = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 interface BookingEntryData {
     date: Date;
     subject: string;

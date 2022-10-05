@@ -1,5 +1,4 @@
 import {Account} from "../../account/Account";
-
 import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import {AccountingHelper} from "../../../common/persistence/helper/AccountingHelper";
 
