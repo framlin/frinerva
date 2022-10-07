@@ -11,16 +11,16 @@ class ReadCSVFileController extends UseCaseController_1.UseCaseController {
         controller = this;
     }
     async execute(file_path) {
-        if (this._interactor) {
-            this._interactor.execute(file_path);
+        if (this._request_boundary) {
+            this._request_boundary.execute(file_path);
             this._current_state = "START";
         }
     }
     next(...data) {
         switch (this._current_state) {
             case "START":
-                if (this._interactor) {
-                    this._interactor.create_booking_entries();
+                if (this._request_boundary) {
+                    this._request_boundary.create_booking_entries();
                     this._current_state = "BOOKING_ENTRY_CREATION";
                 }
                 break;

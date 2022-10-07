@@ -18,7 +18,7 @@ function wire_use_case(use_case: UseCase, interactor: UseCaseInteractor,
     use_case.presenter = presenter;
     interactor.response_boundary = presenter;
     interactor.helper = helper;
-    controller.interactor = interactor;
+    controller.request_boundary = interactor;
     controller.use_case = use_case;
 }
 

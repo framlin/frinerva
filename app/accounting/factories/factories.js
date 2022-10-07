@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.factories = void 0;
 const UseCaseFactory_1 = require("./UseCaseFactory");
 const ControllerFactory_1 = require("./ControllerFactory");
 const HelperFactory_1 = require("./HelperFactory");
@@ -12,5 +13,6 @@ const factories = {
     presenter: PresenterFactory_1.PresenterFactory,
     use_case: UseCaseFactory_1.UseCaseFactory,
 };
+exports.factories = factories;
 module.exports = { factories };
 //# sourceMappingURL=factories.js.map

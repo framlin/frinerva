@@ -1,13 +1,11 @@
 import {MainWindow} from "./MainWindow";
 
-const {Domain} = require('../common/domain/Domain');
-const {factories} = require('../accounting/factories/factories');
+import {Domain} from '../common/domain/Domain';
+import {factories} from '../accounting/factories/factories';
 
 const domain_factories = {
     accounting: factories,
 }
-
-
 
 function create_domain(domain_name: string, main_window: MainWindow) {
     // @ts-ignore
@@ -15,7 +13,6 @@ function create_domain(domain_name: string, main_window: MainWindow) {
     factories.use_case.IPCChannel = main_window.webContents;
     return new Domain(domain_name, factories);
 }
-
 
 class DomainFactory {
     static main_window: MainWindow;

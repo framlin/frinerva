@@ -8,18 +8,18 @@ class UseCaseController {
         controller = this;
     }
     execute(...data) {
-        if (this._interactor)
-            this._interactor.execute(...data);
+        if (this._request_boundary)
+            this._request_boundary.execute(...data);
     }
     forward(use_case_name, ...data) {
         if (this._use_case)
             this._use_case.forward(use_case_name, ...data);
     }
-    get interactor() {
-        return this._interactor;
+    get request_boundary() {
+        return this._request_boundary;
     }
-    set interactor(value) {
-        this._interactor = value;
+    set request_boundary(value) {
+        this._request_boundary = value;
     }
     get use_case() {
         return this._use_case;

@@ -1,9 +1,6 @@
-// @ts-ignore
-const {HTMLReader} = require("../../util/HTMLReader");
-// @ts-ignore
-const path = require("path");
-// @ts-ignore
-const {ipcRenderer} = require("electron");
+import {HTMLReader} from "../../util/HTMLReader";
+import * as path from "path";
+import {ipcRenderer} from "electron";
 import {ViewFactory}  from "../../../accounting/factories/ViewFactory";
 
 class WorkspaceView {

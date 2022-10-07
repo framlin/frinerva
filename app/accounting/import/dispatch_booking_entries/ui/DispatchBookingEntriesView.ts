@@ -49,10 +49,24 @@ class DispatchBookingEntriesView extends UseCaseView {
             () => {
                 this.show_virtual_accounts(virtual_accounts);
             });
-        // add_submit_button(account_div)
+        this.add_submit_button(account_div, virtual_account);
         if (virtual_account_list_elem) {
             virtual_account_list_elem.appendChild(account_div);
         }
+    }
+
+    add_submit_button(account_div: HTMLDivElement, virtual_account: AccountData) {
+        let button_element = document.createElement('button');
+        button_element.innerText = "Submit";
+        account_div.appendChild(button_element);
+        button_element.addEventListener('click', (e: MouseEvent) => {
+            if (e.target) {
+                ipcRenderer.send('create_account:submit', virtual_account);
+
+                console.log(`ACCOUNT ${virtual_account.booking_period}/${virtual_account.cost_center} submitted`)
+            }
+
+        })
     }
 }
 

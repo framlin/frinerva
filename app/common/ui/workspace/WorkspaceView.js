@@ -1,12 +1,32 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WorkspaceView = void 0;
-// @ts-ignore
-const { HTMLReader } = require("../../util/HTMLReader");
-// @ts-ignore
-const path = require("path");
-// @ts-ignore
-const { ipcRenderer } = require("electron");
+const HTMLReader_1 = require("../../util/HTMLReader");
+const path = __importStar(require("path"));
+const electron_1 = require("electron");
 const ViewFactory_1 = require("../../../accounting/factories/ViewFactory");
 class WorkspaceView {
     switch_sideboard_to(sideboard_entry_selector) {
@@ -53,7 +73,7 @@ class WorkspaceView {
             //@ts-ignore
             let domain_name = use_case_starter.dataset.domain_name;
             use_case_starter.addEventListener('click', () => {
-                ipcRenderer.send('use_case:create', domain_name, use_case_name);
+                electron_1.ipcRenderer.send('use_case:create', domain_name, use_case_name);
             });
         }
     }
@@ -69,7 +89,7 @@ class WorkspaceView {
         }
     }
     static async create_segment(markup_file, target) {
-        let markup = await HTMLReader.read_html_file(markup_file);
+        let markup = await HTMLReader_1.HTMLReader.read_html_file(markup_file);
         this.replace_partial(markup, target);
     }
     static mark_workspace(workspace_name) {
@@ -135,7 +155,7 @@ class WorkspaceView {
     }
 }
 exports.WorkspaceView = WorkspaceView;
-ipcRenderer.on('use_case:created', async (e, use_case_name, ...data) => {
+electron_1.ipcRenderer.on('use_case:created', async (e, use_case_name, ...data) => {
     await ViewFactory_1.ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
 module.exports = { WorkspaceView };

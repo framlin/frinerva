@@ -1,16 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DomainFactory = void 0;
-const { Domain } = require('../common/domain/Domain');
-const { factories } = require('../accounting/factories/factories');
+const Domain_1 = require("../common/domain/Domain");
+const factories_1 = require("../accounting/factories/factories");
 const domain_factories = {
-    accounting: factories,
+    accounting: factories_1.factories,
 };
 function create_domain(domain_name, main_window) {
     // @ts-ignore
     let factories = domain_factories[domain_name];
     factories.use_case.IPCChannel = main_window.webContents;
-    return new Domain(domain_name, factories);
+    return new Domain_1.Domain(domain_name, factories);
 }
 class DomainFactory {
     static create(domain_name) {

@@ -4,11 +4,29 @@ exports.DispatchBookingEntriesInteractor = void 0;
 const Accounting_1 = require("../../account/Accounting");
 const UseCaseInteractor_1 = require("../../../common/use_case/UseCaseInteractor");
 const BookingEntry_1 = require("../../account/BookingEntry");
+const Subject_1 = require("../../../common/observation/Subject");
 class DispatchBookingEntriesInteractor extends UseCaseInteractor_1.UseCaseInteractor {
+    constructor() {
+        super(...arguments);
+        this._subject = new Subject_1.Subject();
+    }
+    add(observer) {
+        this._subject.add(observer);
+    }
+    set state(value) {
+        this._subject.state = value;
+    }
+    get state() {
+        return this._subject.state;
+    }
     async execute(booking_records) {
         let account_dict = this.create_account_dict(booking_records);
         let virtual_accounts = await this.create_virtual_accounts(account_dict);
         this.response_boundary.show(virtual_accounts);
+    }
+    submit(virtual_account) {
+        this.state = virtual_account;
+        console.log(virtual_account);
     }
     create_account_dict(booking_records) {
         let result = {};

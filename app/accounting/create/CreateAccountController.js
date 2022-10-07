@@ -10,10 +10,10 @@ class CreateAccountController extends UseCaseController {
         controller = this;
     }
     period_cost_center_selection(period_cost_center) {
-        this._interactor.period_cost_center_selection(period_cost_center);
+        this._request_boundary.period_cost_center_selection(period_cost_center);
     }
     create(new_accounts_list) {
-        this._interactor.create(new_accounts_list).then();
+        this._request_boundary.create(new_accounts_list).then();
     }
     on_period_cost_center_selection(period_cost_center) {
         this.period_cost_center_selection(period_cost_center);

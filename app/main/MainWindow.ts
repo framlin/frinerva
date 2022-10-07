@@ -1,5 +1,6 @@
 import {BrowserWindow, ipcMain} from 'electron';
-const path = require("path");
+import {Domain} from "../common/domain/Domain";
+import * as path from "path";
 
 let main_window: MainWindow;
 
@@ -32,7 +33,7 @@ class MainWindow extends BrowserWindow {
         use_case.execute();
     }
 
-    add_domain(domain: any) {
+    add_domain(domain: Domain) {
         // @ts-ignore
         this._domains[domain.domain_name] = domain;
     }

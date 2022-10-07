@@ -13,3 +13,4 @@ const factories = {
 }
 
 module.exports = {factories};
+export {factories}

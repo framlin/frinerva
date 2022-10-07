@@ -1,7 +1,8 @@
 import {UseCaseHelper} from "./UseCaseHelper";
 import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
+import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 
-abstract class UseCaseInteractor{
+abstract class UseCaseInteractor implements UseCaseRequestBoundary{
 
     abstract execute(...data: any[]): any;
 
@@ -23,6 +24,7 @@ abstract class UseCaseInteractor{
 
     _response_boundary: UseCaseResponseBoundary | undefined;
     _helper: UseCaseHelper | undefined;
+
 }
 
 module.exports = {UseCaseInteractor};

@@ -11,7 +11,7 @@ function wire_use_case(use_case, interactor, presenter, controller, helper) {
     use_case.presenter = presenter;
     interactor.response_boundary = presenter;
     interactor.helper = helper;
-    controller.interactor = interactor;
+    controller.request_boundary = interactor;
     controller.use_case = use_case;
 }
 function create_use_case(use_case_name) {

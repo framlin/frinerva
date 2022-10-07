@@ -13,7 +13,7 @@ class ReadCSVFileHelper extends UseCaseHelper{
         }
     }
 
-    async create_payments(file: any) {
+    async create_payments(file: any) : Promise<any>{
         return await MoneyMoneyCSVReader.create_payments(file);
     }
 

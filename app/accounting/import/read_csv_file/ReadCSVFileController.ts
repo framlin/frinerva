@@ -1,5 +1,3 @@
-import {BookingEntry} from "../../account/BookingEntry";
-
 import {UseCaseController} from "../../../common/use_case/UseCaseController";
 import {ReadCSVFileInteractor} from "./ReadCSVFileInteractor";
 import {dialog, ipcMain} from "electron";
@@ -14,8 +12,8 @@ class ReadCSVFileController extends UseCaseController {
     }
 
     async execute(file_path: string|null) {
-        if (this._interactor) {
-            this._interactor.execute(file_path);
+        if (this._request_boundary) {
+            this._request_boundary.execute(file_path);
             this._current_state = "START"
         }
     }
@@ -23,8 +21,8 @@ class ReadCSVFileController extends UseCaseController {
     next(...data:any[]) {
         switch (this._current_state) {
             case "START":
-                if (this._interactor) {
-                    (this._interactor as unknown as ReadCSVFileInteractor).create_booking_entries();
+                if (this._request_boundary) {
+                    (this._request_boundary as unknown as ReadCSVFileInteractor).create_booking_entries();
                     this._current_state = "BOOKING_ENTRY_CREATION";
                 }
                 break;

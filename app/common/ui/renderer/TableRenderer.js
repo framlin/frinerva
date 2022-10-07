@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TableRenderer = void 0;
 class TableRenderer {
     static create_editable_table(title, rows, properties, redraw) {
-        let table_div = document.createElement('DIV');
+        let table_div = document.createElement('div');
         table_div.className = "editable-table";
         table_div.innerHTML = `<DIV class="editable-table-header">${title}</DIV>`;
-        let table_elem = document.createElement("TABLE");
+        let table_elem = document.createElement("table");
         rows.forEach((values) => {
             TableRenderer._add_booking_entries_row(table_elem, values, properties, redraw);
         });

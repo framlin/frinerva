@@ -1,6 +1,7 @@
 import {UseCaseInteractor} from "./UseCaseInteractor";
 import {UseCase} from "./UseCase";
 import {ipcMain} from "electron";
+import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 
 let controller: UseCaseController;
 
@@ -9,19 +10,19 @@ class UseCaseController{
         controller = this;
     }
     execute(...data: any[]) {
-        if ( this._interactor) this._interactor.execute(...data)
+        if ( this._request_boundary) this._request_boundary.execute(...data)
     }
 
     forward(use_case_name: string, ... data: any[]){
        if ( this._use_case)  this._use_case.forward(use_case_name, ... data);
     }
 
-    get interactor() {
-        return this._interactor;
+    get request_boundary() {
+        return this._request_boundary;
     }
 
-    set interactor(value) {
-        this._interactor = value;
+    set request_boundary(value) {
+        this._request_boundary = value;
     }
 
     get use_case() {
@@ -36,7 +37,7 @@ class UseCaseController{
         this.execute(...data);
     }
 
-    _interactor: UseCaseInteractor | undefined;
+    _request_boundary: UseCaseRequestBoundary | undefined;
     _use_case: UseCase | undefined;
 
 }

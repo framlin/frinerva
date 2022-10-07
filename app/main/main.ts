@@ -5,7 +5,6 @@ import {UseCaseFactory} from '../accounting/factories/UseCaseFactory';
 import {DomainFactory} from './DomainFactory';
 const DOMAINS = DomainFactory.get_domains();
 
-// const menuTemplate = require('./MainMenu').createMenuTemplate(DomainFactory);
 import {MainMenu} from "./MainMenu";
 const menuTemplate = MainMenu.createMenuTemplate(DomainFactory)
 

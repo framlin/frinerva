@@ -5,7 +5,6 @@ const electron_1 = require("electron");
 const UseCaseFactory_1 = require("../accounting/factories/UseCaseFactory");
 const DomainFactory_1 = require("./DomainFactory");
 const DOMAINS = DomainFactory_1.DomainFactory.get_domains();
-// const menuTemplate = require('./MainMenu').createMenuTemplate(DomainFactory);
 const MainMenu_1 = require("./MainMenu");
 const menuTemplate = MainMenu_1.MainMenu.createMenuTemplate(DomainFactory_1.DomainFactory);
 let mainWindow;
