@@ -13,12 +13,10 @@ class Subject<T> implements Observable<T>{
 
     set state(value: T) {
         this._state = value;
-        this._state = value;
-        for (let observer of this._observers) {
+         for (let observer of this._observers) {
             observer.signal(this);
         }
     };
-
 
     get state(): T {
         return this._state;
