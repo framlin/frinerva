@@ -45,6 +45,7 @@ class Account implements AccountData{
     private _booking_entries: BookingEntry[];
 }
 
-module.exports = {Account};
+const ACCOUNT_ID = new Account("", "");
 
-export {Account, AccountData}
+module.exports = {Account};
+export {Account, AccountData, ACCOUNT_ID};

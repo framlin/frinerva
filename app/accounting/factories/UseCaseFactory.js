@@ -17,7 +17,7 @@ function wire_use_case(use_case, interactor, presenter, controller, helper) {
 function create_use_case(use_case_name) {
     // @ts-ignore
     let use_case = new use_cases_1.UseCases[use_case_name](UseCaseFactory, use_case_name);
-    let interactor = InteractorFactory_1.InteractorFactory.create(use_case_name);
+    let interactor = InteractorFactory_1.InteractorFactory.create(use_case_name, UseCaseFactory.DomainEntity);
     let presenter = PresenterFactory_1.PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     let controller = ControllerFactory_1.ControllerFactory.create(use_case_name);
     let helper = HelperFactory_1.HelperFactory.create(use_case_name);

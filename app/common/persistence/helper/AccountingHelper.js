@@ -1,12 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AccountingHelper = void 0;
+const DomainHelper_1 = require("../../domain/DomainHelper");
 const { JSONStorage } = require("../json/JSONStorage");
 const Account_1 = require("../../../accounting/account/Account");
 const path = require("path");
 const STORAGE_ROOT_DIR = path.join(__dirname, "../data");
 const CONFIGURATION_ROOT_DIR = path.join(__dirname, "../../../accounting/configuration");
-class AccountingHelper {
+class AccountingHelper extends DomainHelper_1.DomainHelper {
     static async load_cost_center_configuration() {
         return await JSONStorage.load(path.join(CONFIGURATION_ROOT_DIR, "cost-center.json"));
     }
@@ -31,6 +32,16 @@ class AccountingHelper {
     static account_exists(booking_period, cost_center) {
         let account_file_name = path.join(STORAGE_ROOT_DIR, `account/${booking_period}/${cost_center}.json`);
         return JSONStorage.exists(account_file_name);
+    }
+    static async get_account_name_list() {
+        let result = [];
+        let name_list = await JSONStorage.get_name_list(path.join(STORAGE_ROOT_DIR, `account`, ""));
+        for (let { dir_name, filename } of name_list) {
+            let booking_period = dir_name;
+            let cost_center = filename.split('.')[0];
+            result.push({ booking_period, cost_center });
+        }
+        return result;
     }
 }
 exports.AccountingHelper = AccountingHelper;

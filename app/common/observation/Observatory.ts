@@ -1,26 +1,26 @@
-import {Subject} from "./Subject";
+import {Observable} from "./Observable";
 import {Observer} from "./Observer";
 
-type SubjectSet = Set<Subject<any>>;
+type ObservableSet = Set<Observable<any>>;
 type ObserverSet = Set<Observer<any>>;
 
 class Observatory {
 
-    subject_map = new Map<any, SubjectSet>();
+    observable_map = new Map<any, ObservableSet>();
     observer_map = new Map<any, ObserverSet>();
 
     //TODO: revoke
-    provide<T>(subject: Subject<T>) {
-        if (this.subject_map.has(subject.CLASS_ID)) {
-            let subjects = this.subject_map.get(subject.CLASS_ID)!;
-            subjects.add(subject);
+    provide<T>(observable: Observable<T>) {
+        if (this.observable_map.has(observable.CLASS_ID)) {
+            let observables = this.observable_map.get(observable.CLASS_ID)!;
+            observables.add(observable);
         } else {
-            this.subject_map.set(subject.CLASS_ID, new Set<Subject<T>>([subject]));
+            this.observable_map.set(observable.CLASS_ID, new Set<Observable<T>>([observable]));
         }
-        let observer_set = this.observer_map.get(subject.CLASS_ID);
+        let observer_set = this.observer_map.get(observable.CLASS_ID);
         if (observer_set) {
             observer_set.forEach((observer) => {
-                subject.add(observer);
+                observable.add(observer);
             })
         }
     }
@@ -33,10 +33,10 @@ class Observatory {
         } else {
             this.observer_map.set(observer.CLASS_ID, new Set<Observer<T>>([observer]));
         }
-        let subject_set = this.subject_map.get(observer.CLASS_ID);
-        if (subject_set) {
-            subject_set.forEach((subject) => {
-                subject.add(observer);
+        let observable_set = this.observable_map.get(observer.CLASS_ID);
+        if (observable_set) {
+            observable_set.forEach((observable) => {
+                observable.add(observer);
             })
         }
     }

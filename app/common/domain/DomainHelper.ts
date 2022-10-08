@@ -1,0 +1,2 @@
+class DomainHelper{}
+export {DomainHelper}

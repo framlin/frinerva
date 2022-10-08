@@ -1,4 +1,4 @@
-import {Subject} from "./Subject";
+import {Observable} from "./Subject";
 
 abstract class Observer<T>{
     CLASS_ID: T
@@ -6,7 +6,7 @@ abstract class Observer<T>{
         this.CLASS_ID = class_id;
     }
 
-    abstract signal(subject: Subject<T>): void;
+    abstract signal(subject: Observable<T>): void;
 }
 
 export {Observer}

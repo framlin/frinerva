@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Account = void 0;
+exports.ACCOUNT_ID = exports.Account = void 0;
 class Account {
     constructor(_booking_period, _cost_center) {
         this._booking_period = _booking_period;
@@ -33,5 +33,7 @@ class Account {
     }
 }
 exports.Account = Account;
+const ACCOUNT_ID = new Account("", "");
+exports.ACCOUNT_ID = ACCOUNT_ID;
 module.exports = { Account };
 //# sourceMappingURL=Account.js.map

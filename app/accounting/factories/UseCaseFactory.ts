@@ -4,6 +4,7 @@ import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
 import {UseCaseController} from "../../common/use_case/UseCaseController";
 import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
 import WebContents = Electron.WebContents;
+import {DomainEntity} from "../../common/domain/DomainEntity";
 import {InteractorFactory} from "./InteractorFactory";
 import {PresenterFactory} from "./PresenterFactory";
 import {ControllerFactory} from "./ControllerFactory";
@@ -25,7 +26,7 @@ function wire_use_case(use_case: UseCase, interactor: UseCaseInteractor,
 function create_use_case(use_case_name: string) {
     // @ts-ignore
     let use_case = new UseCases[use_case_name](UseCaseFactory, use_case_name);
-    let interactor = InteractorFactory.create(use_case_name);
+    let interactor = InteractorFactory.create(use_case_name, UseCaseFactory.DomainEntity);
     let presenter = PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
     let controller = ControllerFactory.create(use_case_name);
     let helper = HelperFactory.create(use_case_name);
@@ -37,6 +38,7 @@ function create_use_case(use_case_name: string) {
 
 class UseCaseFactory {
     static IPCChannel: WebContents;
+    static DomainEntity: DomainEntity;
 
     static create(use_case_name: string) {
         if (UseCases[use_case_name]) {

@@ -2,9 +2,10 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Domain = void 0;
 class Domain {
-    constructor(domain_name, factories) {
+    constructor(domain_name, factories, entity) {
         this._domain_name = domain_name;
         this._factories = factories;
+        this._entity = entity;
     }
     get domain_name() {
         return this._domain_name;

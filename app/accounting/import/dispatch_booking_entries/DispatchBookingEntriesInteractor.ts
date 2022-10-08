@@ -5,7 +5,7 @@ import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 import {DispatchBookingEntriesHelper} from "./DispatchBookingEntriesHelper";
 import {BookingEntry, BookingEntryData} from "../../account/BookingEntry";
-import {Subject} from "../../../common/observation/Subject"
+import {Observable} from "../../../common/observation/Subject"
 import {Observer} from "../../../common/observation/Observer";
 import {Observable} from "../../../common/observation/Observable";
 

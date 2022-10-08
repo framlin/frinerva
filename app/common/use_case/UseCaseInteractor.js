@@ -2,6 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UseCaseInteractor = void 0;
 class UseCaseInteractor {
+    constructor(domain_entyty) {
+        this._domain_entity = domain_entyty;
+    }
     get helper() {
         return this._helper;
     }
