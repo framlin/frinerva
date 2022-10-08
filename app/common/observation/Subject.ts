@@ -9,6 +9,7 @@ class Subject<T> implements Observable<T|undefined>{
     };
 
     set state(value: T | undefined) {
+        this._state = value;
         for (let observer of this._observers) {
             observer.signal(this);
         }
