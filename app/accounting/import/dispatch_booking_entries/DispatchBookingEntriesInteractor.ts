@@ -11,19 +11,19 @@ import {Observable} from "../../../common/observation/Observable";
 
 type AccountDict = { [key: string]: BookingEntryData[] }
 
-class DispatchBookingEntriesInteractor extends UseCaseInteractor implements Observable<AccountData|undefined> {
+class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
 
-    add(observer: Observer<AccountData>): void {
-        this._subject.add(observer);
-    }
-
-    set state(value: AccountData|undefined) {
-        this._subject.state = value;
-    }
-
-    get state() {
-        return this._subject.state;
-    }
+    // add(observer: Observer<AccountData>): void {
+    //     //this._subject.add(observer);
+    // }
+    //
+    // set state(value: AccountData|undefined) {
+    //     this._subject.state = value;
+    // }
+    //
+    // get state() {
+    //     return this._subject.state;
+    // }
 
     async execute(booking_records: BookingRecordData[]) {
         let account_dict = this.create_account_dict(booking_records);
@@ -32,7 +32,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor implements Obse
     }
 
     submit(virtual_account: AccountData) {
-        this.state= virtual_account;
+        // this.state= virtual_account;
         console.log(virtual_account);
     }
 
@@ -100,7 +100,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor implements Obse
         this._response_boundary = value;
     }
 
-    private _subject = new Subject<AccountData|undefined>();
+    //private _subject = new Subject<AccountData|undefined>();
 
 }
 

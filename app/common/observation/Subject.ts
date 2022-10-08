@@ -1,25 +1,31 @@
 import {Observer} from "./Observer";
 import {Observable} from "./Observable";
 
-class Subject<T> implements Observable<T|undefined>{
-
-    _state: T | undefined;
+class Subject<T> implements Observable<T>{
+    readonly CLASS_ID: T
+    constructor(class_id: T) {
+        this.CLASS_ID = class_id;
+        this._state =  class_id;
+    }
     add(observer: Observer<T>): void{
-        this._observers.push(observer);
+        this._observers.add(observer);
     };
 
-    set state(value: T | undefined) {
+    set state(value: T) {
+        this._state = value;
         this._state = value;
         for (let observer of this._observers) {
             observer.signal(this);
         }
     };
 
-    get state(): T | undefined {
+
+    get state(): T {
         return this._state;
     }
 
-    private _observers: Observer<T>[] = []
+    private _state: T;
+    private _observers = new Set<Observer<T>>();
 }
 export {Subject}
 
