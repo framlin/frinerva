@@ -221,14 +221,14 @@ describe('create', () => {
     });
 
     test('empty result-list does nothing', async () => {
-        await create_account_interactor.create([]);
+        await create_account_interactor.create([], UseCaseFactory.Observatory);
         expect(create_account_interactor.helper.load_account_called).toBeUndefined()
     });
 
     test('one existing account gets error', async () => {
         let params = {booking_period: '1', cost_center: "A"};
         create_account_interactor.helper.account_exists.result = true;
-        await create_account_interactor.create([params]);
+        await create_account_interactor.create([params], UseCaseFactory.Observatory);
         expect(create_account_interactor.helper.account_exists_called).toBe(true);
         expect(create_account_interactor.helper.account_exists_params[0]).toStrictEqual(params);
         expect(create_account_interactor.response_boundary.show_error_called).toBe(true);
@@ -238,7 +238,7 @@ describe('create', () => {
     test('one new account will be stored', async () => {
         let params = {booking_period: '1', cost_center: "A"};
         create_account_interactor.helper.account_exists.result = false;
-        await create_account_interactor.create([params]);
+        await create_account_interactor.create([params], UseCaseFactory.Observatory);
         expect(create_account_interactor.helper.account_exists_called).toBe(true);
         expect(create_account_interactor.helper.account_exists_params[0]).toStrictEqual(params);
         expect(create_account_interactor.response_boundary.show_error_called).toBeUndefined();
@@ -252,7 +252,7 @@ describe('create', () => {
     test('one new account will be stored, one existing gets error', async () => {
         let params = [{booking_period: '1', cost_center: "A"}, {booking_period: '1', cost_center: "X"}];
         create_account_interactor.helper.account_exists.result = false;
-        await create_account_interactor.create(params);
+        await create_account_interactor.create(params, UseCaseFactory.Observatory);
         expect(create_account_interactor.helper.account_exists_ctr).toBe(2);
         expect(create_account_interactor.helper.save_account_ctr).toBe(1);
         expect(create_account_interactor.response_boundary.show_error_called).toBe(true);

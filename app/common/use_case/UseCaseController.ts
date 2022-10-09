@@ -2,10 +2,12 @@ import {UseCaseInteractor} from "./UseCaseInteractor";
 import {UseCase} from "./UseCase";
 import {ipcMain} from "electron";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
+import {Subscribing} from "../observation/Subscribing";
+import {Observatory} from "../observation/Observatory";
 
 let controller: UseCaseController;
 
-class UseCaseController{
+class UseCaseController implements Subscribing{
     constructor() {
         controller = this;
     }
@@ -15,6 +17,10 @@ class UseCaseController{
 
     forward(use_case_name: string, ... data: any[]){
        if ( this._use_case)  this._use_case.forward(use_case_name, ... data);
+    }
+
+    subscribe_at(observatory: Observatory): void {
+        //intentionally left blank
     }
 
     get request_boundary() {
@@ -39,6 +45,7 @@ class UseCaseController{
 
     _request_boundary: UseCaseRequestBoundary | undefined;
     _use_case: UseCase | undefined;
+
 
 }
 ipcMain.on('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {

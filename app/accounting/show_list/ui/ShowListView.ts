@@ -16,9 +16,20 @@ class ShowListView extends UseCaseView {
         this.link_styles(__dirname);
     };
 
+    _clear_account_name_list(account_name_list: HTMLDivElement) {
+        while (account_name_list.firstChild) {
+            try {
+                account_name_list.removeChild(account_name_list.firstChild);
+            } catch (e) {
+            }
+        }
+    }
+
+
     show_account_name_list(account_name_list: string[]) {
         let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
+           this. _clear_account_name_list(account_list_div);
             for (let entry of account_name_list) {
                 let entry_div = document.createElement('div');
                 entry_div.classList.add("sideboard-entry-list-entry", "clickable", "selectable");

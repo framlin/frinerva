@@ -11,9 +11,10 @@ class Observatory {
 
     //TODO: revoke
     provide<T>(observable: Observable<T>) {
+        console.log('OBSERVATORY PROVIDE')
         if (this.observable_map.has(observable.CLASS_ID)) {
             let observables = this.observable_map.get(observable.CLASS_ID)!;
-            observables.add(observable);
+            observables?.add(observable);
         } else {
             this.observable_map.set(observable.CLASS_ID, new Set<Observable<T>>([observable]));
         }
@@ -27,9 +28,10 @@ class Observatory {
 
     //TODO: unsubscribe
     subscribe<T>(observer: Observer<T>) {
+        console.log("OBSERVATORY SUBSCRIBE")
         if (this.observer_map.has(observer.CLASS_ID)) {
             let observers = this.observer_map.get(observer.CLASS_ID)!;
-            observers.add(observer);
+            observers?.add(observer);
         } else {
             this.observer_map.set(observer.CLASS_ID, new Set<Observer<T>>([observer]));
         }

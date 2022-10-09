@@ -1,4 +1,4 @@
-import {Observable} from "./Subject";
+import {Observable} from "./Observable";
 
 abstract class Observer<T>{
     CLASS_ID: T

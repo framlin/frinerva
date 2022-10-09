@@ -6,11 +6,10 @@ import {Observable} from "../../common/observation/Observable";
 import { Observer } from "../../common/observation/Observer";
 import {DomainHelper} from "../../common/domain/DomainHelper";
 import {AccountingHelper} from "../../common/persistence/helper/AccountingHelper";
+import { Observatory } from "../../common/observation/Observatory";
 
 
 class Accounting extends DomainEntity implements Observable<Account> {
-
-
     constructor(domain_helper: typeof DomainHelper) {
         super(domain_helper);
         this._account_storage = this._domain_helper as typeof AccountingHelper;
@@ -24,6 +23,10 @@ class Accounting extends DomainEntity implements Observable<Account> {
     }
     get state(): Account {
         return this._subject.state;
+    }
+
+    provide_at(observatory: Observatory): void {
+        observatory.provide(this);
     }
 
     static create_booking_entry(date: Date, subject: string, name: string, amount: number, booking_code: string) : BookingEntry {

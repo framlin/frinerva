@@ -4,6 +4,7 @@ import {Domain} from '../common/domain/Domain';
 import {factories} from '../accounting/factories/factories';
 import {Accounting} from "../accounting/account/Accounting";
 import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
+import {Observatory} from "../common/observation/Observatory";
 
 const domain_factories = {
     accounting: factories,
@@ -18,14 +19,17 @@ const domain_helper = {
 }
 
 function create_domain(domain_name: string, main_window: MainWindow) {
+    let observatory = new Observatory();
     // @ts-ignore
     let factories = domain_factories[domain_name];
     // @ts-ignore
     let helper = domain_helper[domain_name]
     // @ts-ignore
-    let domain_entity: Accounting = new domain_entities[domain_name](helper)
+    let domain_entity: DomainEntty = new domain_entities[domain_name](helper);
+    domain_entity.provide_at(observatory);
     factories.use_case.IPCChannel = main_window.webContents;
     factories.use_case.DomainEntity = domain_entity;
+    factories.use_case.Observatory = observatory;
     return new Domain(domain_name, factories, domain_entity);
 }
 

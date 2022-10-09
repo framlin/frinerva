@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.CreateAccountInteractor = void 0;
 const UseCaseInteractor_1 = require("../../common/use_case/UseCaseInteractor");
-const Accounting_1 = require("../account/Accounting");
 class CreateAccountInteractor extends UseCaseInteractor_1.UseCaseInteractor {
     async execute() {
         let cost_center_config = await this.helper.load_cost_center_configuration();
@@ -26,11 +25,10 @@ class CreateAccountInteractor extends UseCaseInteractor_1.UseCaseInteractor {
         this.response_boundary.show_new_accounts_list(new_entry_list);
     }
     async create(new_accounts_list) {
-        let accounting = new Accounting_1.Accounting(this._helper);
         for (let new_account of new_accounts_list) {
             let booking_period = new_account.booking_period;
             let cost_center = new_account.cost_center;
-            let account = await accounting.create_account(booking_period, cost_center);
+            let account = await this._domain_entity.create_account(booking_period, cost_center);
             if (!account) {
                 this.response_boundary.show_error({ error: 'ACCOUNT_EXIST', booking_period, cost_center });
             }

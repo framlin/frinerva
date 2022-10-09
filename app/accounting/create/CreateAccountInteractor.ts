@@ -30,11 +30,10 @@ class CreateAccountInteractor extends UseCaseInteractor {
     }
 
     async create(new_accounts_list: any) {
-        let accounting = new Accounting(this._helper);
         for (let new_account of new_accounts_list) {
             let booking_period = new_account.booking_period;
             let cost_center = new_account.cost_center;
-            let account = await accounting.create_account(booking_period, cost_center);
+            let account = await (this._domain_entity as Accounting).create_account(booking_period, cost_center);
             if (!account) {
                 this.response_boundary.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
             }
