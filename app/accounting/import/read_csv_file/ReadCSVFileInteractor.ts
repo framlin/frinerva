@@ -1,6 +1,5 @@
-import {BookingRecord, BookingRecordData} from "../../account/BookingRecord";
+import {BookingRecordData} from "../../account/BookingRecord";
 import {MoneyMoneyPayment} from "../../account/Payment";
-
 import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {MoneyMoneyToBookingRecordConverter} from "./util/MoneyMoneyToBookingRecordConverter";
 import {ReadCSVFileHelper} from "./ReadCSVFileHelper";

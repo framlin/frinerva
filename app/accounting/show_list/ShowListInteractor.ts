@@ -3,7 +3,6 @@ import {Accounting} from '../account/Accounting';
 
 class ShowListInteractor extends UseCaseInteractor{
     async execute() {
-        // let accounting: Accounting = new Accounting(this._helper);
         let account_list = await (this._domain_entity as Accounting).get_account_names();
         if (this._response_boundary) this._response_boundary.show(account_list);
     }

@@ -1,28 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DispatchBookingEntriesInteractor = void 0;
-const Accounting_1 = require("../../account/Accounting");
 const UseCaseInteractor_1 = require("../../../common/use_case/UseCaseInteractor");
 const BookingEntry_1 = require("../../account/BookingEntry");
 class DispatchBookingEntriesInteractor extends UseCaseInteractor_1.UseCaseInteractor {
-    // add(observer: Observer<AccountData>): void {
-    //     //this._subject.add(observer);
-    // }
-    //
-    // set state(value: AccountData|undefined) {
-    //     this._subject.state = value;
-    // }
-    //
-    // get state() {
-    //     return this._subject.state;
-    // }
     async execute(booking_records) {
         let account_dict = this.create_account_dict(booking_records);
         let virtual_accounts = await this.create_virtual_accounts(account_dict);
         this.response_boundary.show(virtual_accounts);
     }
     submit(virtual_account) {
-        // this.state= virtual_account;
+        //(this._domain_entity as Accounting).create_account_from(virtual_account);
+        //  ==> signal(observable<Account>)
         console.log(virtual_account);
     }
     create_account_dict(booking_records) {
@@ -42,26 +31,27 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor_1.UseCaseIntera
     _extract_account_data(account) {
         let result = {
             booking_entries: [],
-            booking_period: account.booking_period,
-            cost_center: account.cost_center
+            booking_period: account ? account.booking_period : "",
+            cost_center: account ? account.cost_center : ""
         };
-        for (let booking_entry of account.booking_entries) {
-            let booking_entry_data = BookingEntry_1.BookingEntry.implement_booking_entry_data();
-            for (let prop in booking_entry_data) {
-                // @ts-ignore
-                booking_entry_data[prop] = booking_entry[prop];
+        if (account) {
+            for (let booking_entry of account.booking_entries) {
+                let booking_entry_data = BookingEntry_1.BookingEntry.implement_booking_entry_data();
+                for (let prop in booking_entry_data) {
+                    // @ts-ignore
+                    booking_entry_data[prop] = booking_entry[prop];
+                }
+                result.booking_entries.push(booking_entry_data);
             }
-            result.booking_entries.push(booking_entry_data);
         }
         return result;
     }
     async create_virtual_accounts(account_dict) {
-        let accounting = new Accounting_1.Accounting(this.helper);
         let result = [];
         let keys = Object.keys(account_dict);
         for await (let account_key of keys) {
             let [booking_period, cost_center] = account_key.split('!');
-            let account = await accounting.create_virtual_account(booking_period, cost_center);
+            let account = await this._domain_entity.create_virtual_account(booking_period, cost_center);
             let account_data = this._extract_account_data(account);
             let booking_entries = account_dict[account_key];
             for (let booking_entry of booking_entries) {
