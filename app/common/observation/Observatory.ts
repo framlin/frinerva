@@ -11,7 +11,6 @@ class Observatory {
 
     //TODO: revoke
     provide<T>(observable: Observable<T>) {
-        console.log('OBSERVATORY PROVIDE')
         if (this.observable_map.has(observable.CLASS_ID)) {
             let observables = this.observable_map.get(observable.CLASS_ID)!;
             observables?.add(observable);
@@ -28,7 +27,6 @@ class Observatory {
 
     //TODO: unsubscribe
     subscribe<T>(observer: Observer<T>) {
-        console.log("OBSERVATORY SUBSCRIBE")
         if (this.observer_map.has(observer.CLASS_ID)) {
             let observers = this.observer_map.get(observer.CLASS_ID)!;
             observers?.add(observer);
