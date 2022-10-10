@@ -100,5 +100,4 @@ describe('create virtual account', () => {
         expect(account?.cost_center).toBe('X');
         expect(account?.booking_period).toBe('1');
     })
-
 })
