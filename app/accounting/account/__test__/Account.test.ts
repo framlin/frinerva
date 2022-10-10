@@ -1,5 +1,5 @@
-const {Account} = require("../Account");
-const {BookingEntry} = require("../BookingEntry");
+import {Account} from "../Account";
+import {BookingEntry} from "../BookingEntry";
 
 function account_with_two_entries() {
     let account = new Account('1', 'cost_center');
@@ -22,7 +22,7 @@ test('creation', () => {
 
 test('adding one booking entry', () => {
     let account = new Account('name', 'cost_center');
-    let booking_entry = new BookingEntry(Date.now(), 'subject', 'name', 1.0, 'BC??');
+    let booking_entry = new BookingEntry(new Date(), 'subject', 'name', 1.0, 'BC??');
 
     account.add(booking_entry);
     expect(account.booking_entries).not.toBeNull();
