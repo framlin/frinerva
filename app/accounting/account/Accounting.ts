@@ -35,9 +35,9 @@ class Accounting extends DomainEntity implements Observable<Account> {
 
     async create_account(booking_period: string, cost_center: string): Promise<Account | null> {
         let account: Account | null = null;
-        if (!this._account_storage.account_exists(booking_period, cost_center)) {
+        if (!(this._account_storage as typeof AccountingHelper).account_exists(booking_period, cost_center)) {
             account = new Account(booking_period, cost_center);
-            await this._account_storage.save_account(account);
+            await (this._account_storage as typeof AccountingHelper).save_account(account);
             if (this._subject) this._subject.state = account;
         }
         return account;
@@ -45,8 +45,8 @@ class Accounting extends DomainEntity implements Observable<Account> {
 
     async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account|null>{
         let result;
-        if (this._account_storage.account_exists(booking_period, cost_center)) {
-            result = await this._account_storage.load_account(booking_period, cost_center);
+        if ((this._account_storage as typeof AccountingHelper).account_exists(booking_period, cost_center)) {
+            result = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
         } else {
             result = new Account(booking_period, cost_center);
         }
@@ -54,8 +54,8 @@ class Accounting extends DomainEntity implements Observable<Account> {
     }
 
     async get_account_names() {
-        let account_storage_names =  await this._account_storage.get_account_name_list();
-        let cost_center_configuration = await this._account_storage.load_cost_center_configuration();
+        let account_storage_names =  await (this._account_storage as typeof AccountingHelper).get_account_name_list();
+        let cost_center_configuration = await (this._account_storage as typeof AccountingHelper).load_cost_center_configuration();
         let cost_center_mapping = JSON.parse(cost_center_configuration);
         let result = [];
         for (let {booking_period, cost_center} of account_storage_names) {
