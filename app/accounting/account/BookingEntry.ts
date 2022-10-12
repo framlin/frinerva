@@ -1,5 +1,4 @@
 import {BOOKING_CODE} from "./BOOKING_CODE";
-// const { v4: uuidv4 } = require('uuid');
 import { v4 as uuidv4 } from 'uuid';
 interface BookingEntryData {
     date: Date;
@@ -22,15 +21,15 @@ class BookingEntry implements BookingEntryData{
         return entry;
     }
 
-    _date: Date;
+    _date: Date = new Date();
     _subject: string;
     _name: string;
     _amount: number;
     _booking_code: string;
     _id: string;
 
-    constructor(date: Date, subject: string, name:string, amount: number, booking_code: string, id?: string) {
-        this._date = date || 0;
+    constructor(date?: Date, subject?: string, name?:string, amount?: number, booking_code?: string, id?: string) {
+        this._date = date || new Date();
         this._subject = subject || "";
         this._name = name || "";
         this._amount = amount || 0.00;
@@ -42,8 +41,8 @@ class BookingEntry implements BookingEntryData{
         return this._id;
     }
 
-    get date () {
-        return this._date;
+    get date (): Date{
+        return this._date ? this._date : new Date();
     }
 
     set date (date) {

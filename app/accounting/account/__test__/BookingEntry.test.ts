@@ -1,5 +1,5 @@
-const {BookingEntry} = require("../BookingEntry");
-const {BOOKING_CODE} = require("../BOOKING_CODE");
+import {BookingEntry} from "../BookingEntry";
+import {BOOKING_CODE} from "../BOOKING_CODE";
 
 let booking_entry;
 beforeEach(() => {
@@ -12,7 +12,7 @@ it('should be possible to create an empty booking entry', () => {
 
 test('if an empty booking_entry has a bunch of properties', () => {
     booking_entry = new BookingEntry();
-    expect(booking_entry.date).toBe(0)
+    expect(booking_entry.date).toBeDefined()
     expect(booking_entry.subject).toBe("");
     expect(booking_entry.name).toBe("");
     expect(booking_entry.amount).toBe(0);
@@ -21,7 +21,7 @@ test('if an empty booking_entry has a bunch of properties', () => {
 });
 
 it('should be possible, to create an booking_entry with values', () => {
-    let date = Date.now();
+    let date = new Date();
     booking_entry = new BookingEntry(date, "Vermietung", "Miete", 42.0, BOOKING_CODE.RENTAL_FEE,"1-1-1");
     expect(booking_entry.date).toBe(date);
     expect(booking_entry.subject).toBe("Vermietung");
