@@ -1,5 +1,9 @@
 module.exports = {
-    testMatch: [ "**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)" ]
+    testMatch: [ "**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)" ],
+    modulePathIgnorePatterns: [
+        "out",
+        "dist"
+    ]
 }
 
 //[ "**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)" ]

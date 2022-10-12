@@ -11,12 +11,6 @@
     "make": "electron-forge make",
     "watch": "nodemon --ignore 'app/common/persitence/data/*'  --exec electron-forge start"
   },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "out",
-      "dist"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/framlin/frinerva.git"
