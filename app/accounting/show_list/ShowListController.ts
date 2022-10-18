@@ -8,13 +8,10 @@ class ShowListController extends UseCaseController implements Observer<Account>{
     CLASS_ID: Account = ACCOUNT_ID;
 
     signal(subject: Observable<Account>): void {
-        console.log("SHOW_LIST_CONTROLLER::SIGNAL")
-        console.log(subject.state);
         this.request_boundary?.execute();
     }
 
     subscribe_at(observatory: Observatory) {
-        console.log("SUBSCRBE AT")
         observatory.subscribe(this);
     }
 }

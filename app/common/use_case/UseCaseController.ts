@@ -13,6 +13,7 @@ class UseCaseController implements Subscribing{
     ) {
         controller = this;
     }
+
     execute(...data: any[]) {
         if ( this._request_boundary) this._request_boundary.execute(...data)
     }
@@ -44,10 +45,6 @@ class UseCaseController implements Subscribing{
     on_use_case_view_ready(...data: any[]) {
         this.execute(...data);
     }
-
-    // _request_boundary: UseCaseRequestBoundary | undefined;
-    // _use_case: UseCase | undefined;
-
 
 }
 ipcMain.on('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {

@@ -20,6 +20,9 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
         //(this._domain_entity as Accounting).create_account_from(virtual_account);
         //  ==> signal(observable<Account>)
         console.log(virtual_account);
+        (this._domain_entity as Accounting).create_account_from(virtual_account).then(() => {
+            //signal(observable<Account>)
+        });
     }
 
     create_account_dict(booking_records: BookingRecordData[]) {

@@ -97,6 +97,12 @@ class BookingEntry implements BookingEntryData{
             booking_entry_data._id);
     }
 
+    static create_from_data(booking_entry_data: BookingEntryData) {
+        return new BookingEntry(new Date(booking_entry_data.date), booking_entry_data.subject,
+            booking_entry_data.name, booking_entry_data.amount, booking_entry_data.booking_code,
+            booking_entry_data.id);
+    }
+
     toString() {
         return `${this.date.toLocaleString('de-DE').split(',')[0]}; ${this.subject}; ${this.name}; ${this.amount}; ${this.booking_code}`;
     }

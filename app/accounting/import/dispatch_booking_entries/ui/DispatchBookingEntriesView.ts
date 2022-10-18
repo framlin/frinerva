@@ -60,6 +60,7 @@ class DispatchBookingEntriesView extends UseCaseView {
         button_element.innerText = "Submit";
         account_div.appendChild(button_element);
         button_element.addEventListener('click', (e: MouseEvent) => {
+            console.log(e);
             if (e.target) {
                 ipcRenderer.send('create_account:submit', virtual_account);
 

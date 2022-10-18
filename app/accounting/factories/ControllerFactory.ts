@@ -5,7 +5,7 @@ import {UseCase} from "../../common/use_case/UseCase";
 const {Controller} = require('./controller');
 class ControllerFactory{
     static create(use_case_name: string, observatory: Observatory, request_boundary: UseCaseRequestBoundary, use_case: UseCase){
-        let controller = new Controller[use_case_name](request_boundary);
+        let controller = new Controller[use_case_name](request_boundary, use_case);
         controller.subscribe_at(observatory);
         return controller;
     }

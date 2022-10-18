@@ -8,7 +8,7 @@ abstract class UseCaseView {
     _use_case_name;
     _domain_name;
 
-    constructor(domain_name: string, use_case_name: string) {
+    protected constructor(domain_name: string, use_case_name: string) {
         this._use_case_name = use_case_name;
         this._domain_name = domain_name;
     }

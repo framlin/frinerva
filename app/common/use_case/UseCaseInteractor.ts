@@ -28,10 +28,6 @@ abstract class UseCaseInteractor implements UseCaseRequestBoundary{
     set response_boundary(value) {
         this._response_boundary = value;
     }
-
-    // protected _response_boundary: UseCaseResponseBoundary | undefined;
-    // protected _helper: UseCaseHelper | undefined;
-    // protected _domain_entity;
 }
 
 module.exports = {UseCaseInteractor};

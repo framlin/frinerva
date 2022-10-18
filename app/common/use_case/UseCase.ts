@@ -27,9 +27,6 @@ class UseCase{
         this._presenter = value;
     }
 
-    // _presenter: UseCasePresenter | undefined;
-
-
 }
 
 module.exports = {UseCase};

@@ -1,8 +1,3 @@
-import {UseCase} from "../../common/use_case/UseCase";
-import {UseCaseInteractor} from "../../common/use_case/UseCaseInteractor";
-import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
-import {UseCaseController} from "../../common/use_case/UseCaseController";
-import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
 import WebContents = Electron.WebContents;
 import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory"
@@ -23,7 +18,6 @@ function create_use_case(use_case_name: string) {
     ControllerFactory.create(use_case_name, UseCaseFactory.Observatory, interactor, use_case);
     return use_case;
 }
-
 
 
 class UseCaseFactory {

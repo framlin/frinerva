@@ -34,6 +34,7 @@ class ReadCSVFileController extends UseCaseController {
         }
 
     }
+
     async on_use_case_view_ready() {
         const {canceled, filePaths} = await dialog.showOpenDialog({properties: ['openFile', 'multiSelections']});
         if (canceled) {

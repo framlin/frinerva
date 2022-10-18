@@ -1,4 +1,4 @@
-import {Account, ACCOUNT_ID} from "./Account";
+import {Account, ACCOUNT_ID, AccountData} from "./Account";
 import {BookingEntry}  from"./BookingEntry";
 import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Subject} from "../../common/observation/Subject";
@@ -41,6 +41,27 @@ class Accounting extends DomainEntity implements Observable<Account> {
             if (this._subject) this._subject.state = account;
         }
         return account;
+    }
+
+    async create_account_from(virtual_account: AccountData) {
+        const {booking_period, cost_center} = virtual_account;
+        let booking_entries: BookingEntry[] = [];
+        for(let entry of virtual_account.booking_entries) {
+            let booking_entry = BookingEntry.create_from_data(entry);
+            booking_entries.push(booking_entry);
+        }
+        let new_account = await this.create_account(booking_period, cost_center);
+        if (new_account) {
+            new_account.booking_entries = booking_entries;
+        } else {
+            new_account = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
+            if ( new_account)  {
+                new_account.booking_entries = booking_entries;
+                if (this._subject) this._subject.state = new_account;
+            }
+        }
+        if (new_account) await (this._account_storage as typeof AccountingHelper).save_account(new_account);
+        console.log("CREATE_ACCOUNT_FROM==>", new_account);
     }
 
     async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account|null>{

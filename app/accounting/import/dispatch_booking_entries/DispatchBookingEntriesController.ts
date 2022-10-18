@@ -11,6 +11,7 @@ class DispatchBookingEntriesController extends UseCaseController {
         super(request_boundary, use_case);
         controller = this;
     }
+
     on_submit(virtual_account: AccountData) {
         (this._request_boundary as DispatchBookingEntriesInteractor).submit(virtual_account);
     }
