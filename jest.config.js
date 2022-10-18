@@ -5,5 +5,3 @@ module.exports = {
         "dist"
     ]
 }
-
-//[ "**/__tests__/**/*.ts?(x)", "**/?(*.)+(spec|test).ts?(x)" ]

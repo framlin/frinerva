@@ -1,4 +1,3 @@
-import {UseCaseInteractor} from "./UseCaseInteractor";
 import {UseCase} from "./UseCase";
 import {ipcMain} from "electron";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
@@ -8,7 +7,10 @@ import {Observatory} from "../observation/Observatory";
 let controller: UseCaseController;
 
 class UseCaseController implements Subscribing{
-    constructor() {
+    constructor(
+        protected _request_boundary: UseCaseRequestBoundary,
+        protected _use_case: UseCase
+    ) {
         controller = this;
     }
     execute(...data: any[]) {
@@ -43,8 +45,8 @@ class UseCaseController implements Subscribing{
         this.execute(...data);
     }
 
-    _request_boundary: UseCaseRequestBoundary | undefined;
-    _use_case: UseCase | undefined;
+    // _request_boundary: UseCaseRequestBoundary | undefined;
+    // _use_case: UseCase | undefined;
 
 
 }

@@ -5,9 +5,11 @@ import {DomainEntity} from "../domain/DomainEntity";
 
 abstract class UseCaseInteractor implements UseCaseRequestBoundary{
 
-    constructor(domain_entyty: DomainEntity) {
-        this._domain_entity = domain_entyty;
-    }
+    constructor(
+        protected _domain_entity: DomainEntity,
+        protected _response_boundary: UseCaseResponseBoundary,
+        protected _helper : UseCaseHelper
+    ) {}
 
     abstract execute(...data: any[]): any;
 
@@ -27,9 +29,9 @@ abstract class UseCaseInteractor implements UseCaseRequestBoundary{
         this._response_boundary = value;
     }
 
-    protected _response_boundary: UseCaseResponseBoundary | undefined;
-    protected _helper: UseCaseHelper | undefined;
-    protected _domain_entity;
+    // protected _response_boundary: UseCaseResponseBoundary | undefined;
+    // protected _helper: UseCaseHelper | undefined;
+    // protected _domain_entity;
 }
 
 module.exports = {UseCaseInteractor};

@@ -2,11 +2,13 @@ import {UseCaseController} from "../../../common/use_case/UseCaseController";
 import {ipcMain} from "electron";
 import {AccountData} from "../../account/Account";
 import {DispatchBookingEntriesInteractor} from "./DispatchBookingEntriesInteractor";
+import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
+import {UseCase} from "../../../common/use_case/UseCase";
 
 let controller: DispatchBookingEntriesController;
 class DispatchBookingEntriesController extends UseCaseController {
-    constructor() {
-        super();
+    constructor(request_boundary: UseCaseRequestBoundary, use_case: UseCase) {
+        super(request_boundary, use_case);
         controller = this;
     }
     on_submit(virtual_account: AccountData) {

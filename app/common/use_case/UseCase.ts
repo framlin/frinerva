@@ -3,22 +3,18 @@ import {UseCaseFactory} from "../../accounting/factories/UseCaseFactory";
 
 class UseCase{
 
-    constructor(UseCaseFactory: UseCaseFactory, domain_name: string, use_case_name: string) {
-        this._UseCaseFactory = UseCaseFactory;
-        this._use_case_name = use_case_name;
-        this._domain_name = domain_name;
-    }
+    constructor(
+        protected _UseCaseFactory: typeof UseCaseFactory,
+        protected _domain_name: string,
+        protected _use_case_name: string,
+        protected _presenter: UseCasePresenter
+    ) {}
 
     execute(...data: any[]) {
         if (this._presenter) this._presenter.execute(this._use_case_name, ...data);
-        // this.view.show();
-        // ==> view.presenter.ready
-        // ==> presenter.controller.execute()
-        // ==> controller.interactor.execute()
     }
 
     forward(use_case_name: string,...data: any[]) {
-        //@ts-ignore
         this._UseCaseFactory.create(use_case_name).execute(...data);
     }
 
@@ -31,11 +27,7 @@ class UseCase{
         this._presenter = value;
     }
 
-
-    _use_case_name;
-    _domain_name;
-    _presenter: UseCasePresenter | undefined;
-    _UseCaseFactory: UseCaseFactory;
+    // _presenter: UseCasePresenter | undefined;
 
 
 }

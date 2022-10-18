@@ -13,25 +13,14 @@ import {HelperFactory} from "./HelperFactory";
 
 import {UseCases} from './use_cases';
 
-function wire_use_case(use_case: UseCase, interactor: UseCaseInteractor,
-                       presenter: UseCasePresenter, controller: UseCaseController,
-                       helper: UseCaseHelper) {
-    //order MATTERS
-    use_case.presenter = presenter;
-    interactor.response_boundary = presenter;
-    interactor.helper = helper;
-    controller.request_boundary = interactor;
-    controller.use_case = use_case;
-}
-
 function create_use_case(use_case_name: string) {
-    // @ts-ignore
-    let use_case = new UseCases[use_case_name](UseCaseFactory, use_case_name);
-    let interactor = InteractorFactory.create(use_case_name, UseCaseFactory.DomainEntity);
-    let presenter = PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
-    let controller = ControllerFactory.create(use_case_name, UseCaseFactory.Observatory);
+
     let helper = HelperFactory.create(use_case_name);
-    wire_use_case(use_case, interactor, presenter, controller, helper);
+    let presenter = PresenterFactory.create(use_case_name, UseCaseFactory.IPCChannel);
+    let interactor = InteractorFactory.create(use_case_name, UseCaseFactory.DomainEntity, presenter, helper);
+    // @ts-ignore
+    let use_case = new UseCases[use_case_name](UseCaseFactory, presenter);
+    ControllerFactory.create(use_case_name, UseCaseFactory.Observatory, interactor, use_case);
     return use_case;
 }
 

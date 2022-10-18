@@ -19,11 +19,6 @@ function create_main_window() {
     mainWindow.UseCaseFactory = UseCaseFactory;
     DomainFactory.main_window = mainWindow;
 
-    for(let i = 0; i < DOMAINS.length; i++) {
-        let domain = DomainFactory.create(DOMAINS[i]);
-        mainWindow.add_domain(domain);
-    }
-
     if (!process.env.APP_TEST_DRIVER) {
         mainWindow.loadFile('app/main/main.html').then().catch();
     } else {

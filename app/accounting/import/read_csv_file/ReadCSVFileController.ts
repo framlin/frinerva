@@ -1,13 +1,15 @@
 import {UseCaseController} from "../../../common/use_case/UseCaseController";
 import {ReadCSVFileInteractor} from "./ReadCSVFileInteractor";
 import {dialog, ipcMain} from "electron";
+import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
+import {UseCase} from "../../../common/use_case/UseCase";
 
 let controller: ReadCSVFileController;
 class ReadCSVFileController extends UseCaseController {
     _current_state: string = "";
 
-    constructor() {
-        super();
+    constructor(request_boundary: UseCaseRequestBoundary, use_case: UseCase) {
+        super(request_boundary, use_case);
         controller = this;
     }
 
