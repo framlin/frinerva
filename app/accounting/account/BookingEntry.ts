@@ -1,34 +1,28 @@
 import {BOOKING_CODE} from "./BOOKING_CODE";
-import { v4 as uuidv4 } from 'uuid';
+import {v4 as uuidv4} from 'uuid';
+
 interface BookingEntryData {
+    date_as_string: string;
     date: Date;
     subject: string;
-    name:string;
+    name: string;
     amount: number;
+    amount_as_string: string;
     booking_code: string;
     id: string;
 }
 
-class BookingEntry implements BookingEntryData{
+class BookingEntry implements BookingEntryData {
     static property_mapping = ['date', 'subject', 'name', 'amount', 'booking_code', 'id'];
 
-    static implement_booking_entry_data() {
-        let properties = BookingEntry.property_mapping.slice();
-        let entry: BookingEntryData = properties.reduce((previous: any, current: any) => {
-            previous[current] = ""
-            return previous;
-        }, {});
-        return entry;
-    }
-
-    _date: Date = new Date();
+    _date: Date;
     _subject: string;
     _name: string;
     _amount: number;
     _booking_code: string;
     _id: string;
 
-    constructor(date?: Date, subject?: string, name?:string, amount?: number, booking_code?: string, id?: string) {
+    constructor(date?: Date, subject?: string, name?: string, amount?: number, booking_code?: string, id?: string) {
         this._date = date || new Date();
         this._subject = subject || "";
         this._name = name || "";
@@ -37,15 +31,29 @@ class BookingEntry implements BookingEntryData{
         this._id = id || BookingEntry.generate_id();
     }
 
-    get id () {
+    get id() {
         return this._id;
     }
 
-    get date (): Date{
+    get data(): BookingEntryData {
+        return {
+            date_as_string: this.date_as_string,
+            date: this.date,
+            subject: this.subject,
+            name: this.name,
+            amount: this.amount,
+            amount_as_string: this.amount_as_string,
+            booking_code: this.booking_code,
+            id: this.id
+        }
+    }
+
+
+    get date(): Date {
         return this._date ? this._date : new Date();
     }
 
-    set date (date) {
+    set date(date) {
         this._date = date;
     }
 
@@ -69,10 +77,6 @@ class BookingEntry implements BookingEntryData{
         return this._amount;
     }
 
-    get amount_as_string(): string {
-        return this._amount.toFixed(2);
-    }
-
     set amount(amount) {
         this._amount = amount;
     }
@@ -86,7 +90,6 @@ class BookingEntry implements BookingEntryData{
     }
 
     static generate_id() {
-        // return crypto.randomUUID();
         return uuidv4();
     }
 
@@ -103,10 +106,23 @@ class BookingEntry implements BookingEntryData{
             booking_entry_data.id);
     }
 
+    get amount_as_string(): string {
+        return this._amount.toFixed(2);
+    }
+
+    get date_as_string() {
+        let date = this.date;
+        let year = this.date.getFullYear();
+        let month = this.date.getMonth() + 1;
+        let day = this.date.getDate();
+        return `${day}.${month}.${year}`;
+    }
+
     toString() {
-        return `${this.date.toLocaleString('de-DE').split(',')[0]}; ${this.subject}; ${this.name}; ${this.amount}; ${this.booking_code}`;
+        return `${this.date_as_string}; ${this.subject}; ${this.name}; ${this.amount_as_string}; ${this.booking_code}`;
     }
 }
+
 module.exports = {BookingEntry};
 
 export {BookingEntry, BookingEntryData}

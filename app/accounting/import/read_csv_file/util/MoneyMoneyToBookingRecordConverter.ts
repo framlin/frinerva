@@ -25,20 +25,10 @@ class MoneyMoneyToBookingRecordConverter {
             this._convert_to_amount(payment_entry.Betrag),
             "BC??"
         );
-        let booking_entry_data = this._convert_to_booking_entry_data(booking_entry);
+        let booking_entry_data = booking_entry.data;
         let booking_period = booking_entry.date.getFullYear().toString();
         let cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
         return {booking_entry: booking_entry_data, cost_center, booking_period};
-    }
-
-    _convert_to_booking_entry_data(booking_entry: BookingEntry): BookingEntryData {
-        let booking_entry_data: BookingEntryData = BookingEntry.implement_booking_entry_data();
-        let properties = BookingEntry.property_mapping.slice();
-        for (let prop of properties) {
-            // @ts-ignore
-            booking_entry_data[prop] = booking_entry[prop];
-        }
-        return booking_entry_data;
     }
 
     _convert_to_date(date_str: string) {

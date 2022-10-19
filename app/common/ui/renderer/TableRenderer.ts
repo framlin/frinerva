@@ -46,6 +46,10 @@ class TableRenderer {
         cell.prop = prop;
         // @ts-ignore
         let content = buffer[prop];
+        if (prop === 'date') {
+            content = buffer['date_as_string']
+        }
+
         let text = document.createTextNode(content);
         return {cell, text};
     }

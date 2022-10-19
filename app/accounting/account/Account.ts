@@ -11,6 +11,18 @@ class Account implements AccountData{
         this._booking_entries = [];
     }
 
+    get data() {
+        let result: AccountData = {
+            booking_period: this._booking_period,
+            cost_center: this._cost_center,
+            booking_entries: []
+        };
+        for (let booking_entry of this._booking_entries) {
+            result.booking_entries.push(booking_entry.data);
+        }
+        return result;
+    }
+
     get cost_center() {
         return this._cost_center;
     }
@@ -38,7 +50,19 @@ class Account implements AccountData{
     static create_from_JSON(json_string: string) {
         let account_data = JSON.parse(json_string);
         let account = new Account(account_data._booking_period, account_data._cost_center);
-        account.booking_entries = account_data._booking_entries;
+        let json_booking_entries = account_data._booking_entries;
+
+        for (let json_booking_entry of json_booking_entries) {
+            let booking_entry = new BookingEntry(
+                new Date(json_booking_entry._date),
+                json_booking_entry._subject,
+                json_booking_entry._name,
+                json_booking_entry._amount,
+                json_booking_entry._booking_code,
+                json_booking_entry._id
+            );
+            account.add(booking_entry);
+        }
         return account;
     }
 

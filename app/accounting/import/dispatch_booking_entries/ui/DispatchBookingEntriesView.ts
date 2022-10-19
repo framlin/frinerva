@@ -36,6 +36,8 @@ class DispatchBookingEntriesView extends UseCaseView {
         for (let virtual_account of virtual_accounts) {
             this.show_virtual_account(virtual_account, virtual_accounts);
         }
+        this.hide_next_button();
+
     }
 
     show_virtual_account(virtual_account: AccountData, virtual_accounts: AccountData[]){
@@ -68,6 +70,13 @@ class DispatchBookingEntriesView extends UseCaseView {
             }
 
         })
+    }
+
+    private hide_next_button() {
+        let next_button = document.querySelector('.next-btn')
+        if (next_button) {
+            next_button.remove()
+        }
     }
 }
 

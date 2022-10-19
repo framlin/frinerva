@@ -47,11 +47,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
         };
         if (account) {
             for (let booking_entry of account.booking_entries) {
-                let booking_entry_data = BookingEntry.implement_booking_entry_data();
-                for (let prop in booking_entry_data) {
-                    // @ts-ignore
-                    booking_entry_data[prop] = booking_entry['_'+prop];
-                }
+                let booking_entry_data = booking_entry.data
                 result.booking_entries.push(booking_entry_data);
             }
         }
