@@ -50,7 +50,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
                 let booking_entry_data = BookingEntry.implement_booking_entry_data();
                 for (let prop in booking_entry_data) {
                     // @ts-ignore
-                    booking_entry_data[prop] = booking_entry[prop];
+                    booking_entry_data[prop] = booking_entry['_'+prop];
                 }
                 result.booking_entries.push(booking_entry_data);
             }
@@ -71,6 +71,7 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
             }
             result.push(account_data);
         }
+        console.log("create_virtual_accounts: ", result)
         return result;
     }
 
