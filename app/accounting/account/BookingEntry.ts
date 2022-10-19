@@ -115,6 +115,7 @@ class BookingEntry implements BookingEntryData {
         let year = this.date.getFullYear();
         let month = this.date.getMonth() + 1;
         let day = this.date.getDate();
+        //at the moment this is german-format
         return `${day}.${month}.${year}`;
     }
 

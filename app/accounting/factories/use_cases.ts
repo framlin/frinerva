@@ -4,6 +4,7 @@ import {ShowList} from "../show_list/ShowList";
 import {DispatchBookingEntries} from "../import/dispatch_booking_entries/DispatchBookingEntries";
 
 import {UseCase} from "../../common/use_case/UseCase";
+import {ShowAccount} from "../show_account/ShowAccount";
 
 interface UseCaseList {
     [use_case_name: string] : UseCase
@@ -15,6 +16,8 @@ let UseCases : UseCaseList = {
     create_account: CreateAccount,
     //@ts-ignore
     show_list: ShowList,
+    //@ts-ignore
+    show_account: ShowAccount,
     //@ts-ignore
     dispatch_booking_entries: DispatchBookingEntries,
 };

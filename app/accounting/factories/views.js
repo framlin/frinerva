@@ -5,10 +5,12 @@ const ReadCSVFileView_1 = require("../import/read_csv_file/ui/ReadCSVFileView");
 const CreateAccountView_1 = require("../create/ui/CreateAccountView");
 const ShowListView_1 = require("../show_list/ui/ShowListView");
 const DispatchBookingEntriesView_1 = require("../import/dispatch_booking_entries/ui/DispatchBookingEntriesView");
+const ShowAccountView_1 = require("../show_account/ui/ShowAccountView");
 const Views = {
     read_csv_file: ReadCSVFileView_1.ReadCSVFileView,
     create_account: CreateAccountView_1.CreateAccountView,
     show_list: ShowListView_1.ShowListView,
+    show_account: ShowAccountView_1.ShowAccountView,
     dispatch_booking_entries: DispatchBookingEntriesView_1.DispatchBookingEntriesView,
 };
 exports.Views = Views;
