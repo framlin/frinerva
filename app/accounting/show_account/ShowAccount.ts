@@ -8,8 +8,8 @@ export class ShowAccount extends UseCase {
         super(_UseCaseFactory, 'accounting', 'show_account', presenter);
     }
 
-    async execute() {
-        // ...
-    }
+    // async execute() {
+    //     // ...
+    // }
 
 }

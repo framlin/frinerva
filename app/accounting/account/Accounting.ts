@@ -61,7 +61,6 @@ class Accounting extends DomainEntity implements Observable<Account> {
             }
         }
         if (new_account) await (this._account_storage as typeof AccountingHelper).save_account(new_account);
-        console.log("CREATE_ACCOUNT_FROM==>", new_account);
     }
 
     async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account|null>{
@@ -74,16 +73,23 @@ class Accounting extends DomainEntity implements Observable<Account> {
         return result;
     }
 
-    async get_account_names() {
+    async get_account_names() : Promise<{ account_name: string, key: string }[]> {
         let account_storage_names =  await (this._account_storage as typeof AccountingHelper).get_account_name_list();
         let cost_center_configuration = await (this._account_storage as typeof AccountingHelper).load_cost_center_configuration();
         let cost_center_mapping = JSON.parse(cost_center_configuration);
         let result = [];
         for (let {booking_period, cost_center} of account_storage_names) {
             let account_name = cost_center_mapping[cost_center];
-            result.push(`${booking_period} - ${account_name}`);
+            let key = `${booking_period}!${cost_center}`;
+            result.push({account_name: `${booking_period} - ${account_name}`, key: key});
         }
         return result;
+    }
+
+    async load_account(key: string): Promise<Account | null> {
+        let [booking_period, cost_center] = key.split('!');
+        let account = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
+        return account;
     }
 
     protected _subject: Observable<Account> = new Subject<Account>(ACCOUNT_ID);

@@ -17,9 +17,6 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
     }
 
     submit(virtual_account: AccountData) {
-        //(this._domain_entity as Accounting).create_account_from(virtual_account);
-        //  ==> signal(observable<Account>)
-        console.log(virtual_account);
         (this._domain_entity as Accounting).create_account_from(virtual_account).then(() => {
             //signal(observable<Account>)
         });
@@ -67,7 +64,6 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
             }
             result.push(account_data);
         }
-        console.log("create_virtual_accounts: ", result)
         return result;
     }
 

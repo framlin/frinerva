@@ -8,7 +8,10 @@ export class ShowAccountController extends UseCaseController implements Observer
     CLASS_ID: Account = ACCOUNT_ID;
 
     signal(subject: Observable<Account>): void {
-        this.request_boundary?.execute();
+        //check if the subject is the current account and refresh the view
+        // if (subject.state === this._current_account) {
+        //     this._presenter.show(this._current_account);
+        // }
     }
 
     subscribe_at(observatory: Observatory) {

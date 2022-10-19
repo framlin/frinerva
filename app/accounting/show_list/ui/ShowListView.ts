@@ -9,7 +9,17 @@ class ShowListView extends UseCaseView {
         show_list_view = this;
     }
 
-    register_event_listener() {}
+    register_event_listener() {
+        let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
+        if (account_list_div) {
+            account_list_div.addEventListener('click', (event) => {
+                let target = event.target as HTMLDivElement;
+                if (target.classList.contains('sideboard-entry-list-entry')) {
+                    ipcRenderer.send('show_list:account_selected', target.dataset.key);
+                }
+            });
+        }
+    }
 
     async create_view() {
         await this.append_markup_at(__dirname, '.sideboard');
@@ -26,21 +36,22 @@ class ShowListView extends UseCaseView {
     }
 
 
-    show_account_name_list(account_name_list: string[]) {
+    show_account_name_list(account_name_list: {account_name: string, key: string}[]) {
         let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
            this. _clear_account_name_list(account_list_div);
             for (let entry of account_name_list) {
                 let entry_div = document.createElement('div');
                 entry_div.classList.add("sideboard-entry-list-entry", "clickable", "selectable");
-                entry_div.innerHTML = entry;
+                entry_div.innerHTML = entry.account_name;
+                entry_div.setAttribute('data-key', entry.key);
                 account_list_div.appendChild(entry_div);
             }
         }
     };
 }
 
-ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: string[]) => {
+ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: {account_name: string, key: string}[]) => {
     show_list_view.show_account_name_list(account_name_list);
 })
 
