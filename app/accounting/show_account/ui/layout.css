@@ -33,3 +33,14 @@
 .editable-table-header {
     padding:10px;
 }
+
+.dialog-footer {
+   justify-content: space-between;
+}
+.edit-btn {
+    margin: 0 5px;
+}
+
+.submit-btn {
+    margin: 0 5px;
+}

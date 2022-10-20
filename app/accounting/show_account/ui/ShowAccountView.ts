@@ -14,8 +14,9 @@ export class ShowAccountView extends UseCaseView {
         show_account_view = this;
     }
 
-    show_account(account: AccountData){
+    show_account(account: AccountData, editable: boolean = true): void {
         console.log('ShowAccountView.show_account', account);
+        this._current_account = account;
         let account_panel = document.querySelector('#account-panel') as HTMLDivElement;
         account_panel.innerHTML = '';
         let property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
@@ -26,7 +27,7 @@ export class ShowAccountView extends UseCaseView {
             () => {
                 this.show_account(account);
             },
-            false);
+            editable);
         account_panel.appendChild(account_div);
     }
 
@@ -36,10 +37,25 @@ export class ShowAccountView extends UseCaseView {
     }
 
     register_event_listener(): void {
-        console.log('ShowAccountView.register_event_listener');
+        let edit_button = document.querySelector('.edit-btn') as HTMLButtonElement;
+        edit_button.addEventListener('click', () => {
+            if (this._current_account) this.show_account(this._current_account, true);
+            let submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
+            submit_button.removeAttribute('disabled');
+        })
+
+        let submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
+        submit_button.addEventListener('click', () => {
+            if (this._current_account) {
+                ipcRenderer.send('show_account:submit_account', this._current_account);
+                submit_button.setAttribute('disabled', 'true');
+            }
+        });
     }
+
+    private _current_account: AccountData | undefined;
 }
 
-ipcRenderer.on('show_account:show_account', (e, account: AccountData) => {
-    show_account_view.show_account(account);
+ipcRenderer.on('show_account:show_account', (e, account: AccountData, editable) => {
+    show_account_view.show_account(account, editable);
 })

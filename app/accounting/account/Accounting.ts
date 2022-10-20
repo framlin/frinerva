@@ -61,6 +61,7 @@ class Accounting extends DomainEntity implements Observable<Account> {
             }
         }
         if (new_account) await (this._account_storage as typeof AccountingHelper).save_account(new_account);
+        return new_account;
     }
 
     async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account|null>{
@@ -95,6 +96,10 @@ class Accounting extends DomainEntity implements Observable<Account> {
     protected _subject: Observable<Account> = new Subject<Account>(ACCOUNT_ID);
     CLASS_ID: Account = ACCOUNT_ID;
     private _account_storage;
+
+    async save_account(account: Account) {
+        await (this._account_storage as typeof AccountingHelper).save_account(account);
+    }
 }
 
 module.exports = {Accounting};

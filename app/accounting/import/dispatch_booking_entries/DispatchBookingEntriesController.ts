@@ -16,7 +16,6 @@ class DispatchBookingEntriesController extends UseCaseController {
         (this._request_boundary as DispatchBookingEntriesInteractor).submit(virtual_account);
     }
 
-
 }
 
 ipcMain.on('create_account:submit', (e, virtual_account: AccountData) => {

@@ -11,6 +11,6 @@ export class ShowAccountPresenter extends UseCasePresenter implements ShowAccoun
     }
 
     show(account: AccountData) {
-        this._ipc_channel.send('show_account:show_account', account);
+        this._ipc_channel.send('show_account:show_account', account, false);
     }
 }
