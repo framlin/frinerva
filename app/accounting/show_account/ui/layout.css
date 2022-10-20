@@ -1,0 +1,35 @@
+#account-panel{
+    overflow-y: scroll;
+}
+#account-panel table{
+    margin: 0;
+    width:100%;
+}
+#account-panel table td:nth-child(1){
+    width: 7%;
+}
+
+#account-panel table td:nth-child(2){
+    width: 53%;
+}
+
+#account-panel table td:nth-child(3){
+    width: 25%;
+}
+
+#account-panel table td:nth-child(4){
+    width: 7%;
+}
+
+#account-panel table td:nth-child(5){
+    width: 8%;
+}
+
+#account-panel .editable-table{
+    margin: 3px;
+}
+
+
+.editable-table-header {
+    padding:10px;
+}

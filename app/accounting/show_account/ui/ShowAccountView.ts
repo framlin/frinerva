@@ -19,15 +19,15 @@ export class ShowAccountView extends UseCaseView {
         let account_panel = document.querySelector('#account-panel') as HTMLDivElement;
         account_panel.innerHTML = '';
         let property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
-        let account_div = TableRenderer.create_editable_table(
+        let account_div = TableRenderer.create_table(
             `${account.booking_period} - ${account.cost_center}`,
             account.booking_entries,
             property_mapping,
             () => {
                 this.show_account(account);
-            });
+            },
+            false);
         account_panel.appendChild(account_div);
-
     }
 
     async create_view(): Promise<void> {

@@ -44,7 +44,7 @@ class DispatchBookingEntriesView extends UseCaseView {
 
         let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
         let property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
-        let account_div = TableRenderer.create_editable_table(
+        let account_div = TableRenderer.create_table(
             `${virtual_account.booking_period} - ${virtual_account.cost_center}`,
             virtual_account.booking_entries,
             property_mapping,

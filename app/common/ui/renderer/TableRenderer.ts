@@ -4,14 +4,14 @@ type Redraw = () => void;
 
 class TableRenderer {
 
-    static create_editable_table(title: string, rows: BookingEntryData[], properties: string[], redraw: Redraw) {
+    static create_table(title: string, rows: BookingEntryData[], properties: string[], redraw: Redraw, editable: boolean = true) {
         let table_div = document.createElement('div');
         table_div.className = "editable-table";
-        table_div.innerHTML = `<DIV class="editable-table-header">${title}</DIV>`;
+        table_div.innerHTML = `<div class="editable-table-header">${title}</div>`;
 
         let table_elem = document.createElement("table") as HTMLTableElement;
         rows.forEach((values: BookingEntryData) => {
-            TableRenderer._add_booking_entries_row(table_elem, values, properties, redraw);
+            TableRenderer._add_booking_entries_row(table_elem, values, properties, redraw, editable);
         });
 
         table_div.appendChild(table_elem);
@@ -19,23 +19,25 @@ class TableRenderer {
     }
 
 
-    static _add_booking_entries_row(table: HTMLTableElement, values: BookingEntryData, properties: string[], redraw: Redraw) {
+    static _add_booking_entries_row(table: HTMLTableElement, values: BookingEntryData, properties: string[], redraw: Redraw, editable: boolean = true) {
         let row = table.insertRow(-1);
         row.className = "editable-table-row";
         // @ts-ignore
         row.values = values;
 
         properties.forEach((prop, i) => {
-            TableRenderer._insert_editable_cell(row, i, prop, values, redraw);
+            TableRenderer._insert_cell(row, i, prop, values, redraw, editable);
         });
     }
 
-    static _insert_editable_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingEntryData, redraw: Redraw) {
+    static _insert_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingEntryData, redraw: Redraw, editable: boolean = true) {
         let {cell, text} = TableRenderer._add_cell(row, i, prop, buffer);
         cell.appendChild(text);
         cell.addEventListener('click', () => {
-            let input_elem = TableRenderer._make_cell_editable(text, cell, row);
-            TableRenderer._add_event_listener(input_elem, buffer, cell, text, redraw);
+            if (editable) {
+                let input_elem = TableRenderer._make_cell_editable(text, cell, row);
+                TableRenderer._add_event_listener(input_elem, buffer, cell, text, redraw);
+            }
         });
     }
 

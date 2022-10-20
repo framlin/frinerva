@@ -1,0 +1,15 @@
+.editable-table-header {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white-blue);
+}
+
+#account-panel table {
+    background-color: var(--account-table-bg-color);
+}
+#account-panel table, th, td {
+    border: 1px solid var(--main-border-color);
+    border-collapse: collapse;
+}
+#account-panel tr:nth-child(even) {
+    background-color: var(--account-table-hilight-bg-color);
+}
