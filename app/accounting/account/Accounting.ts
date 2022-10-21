@@ -37,7 +37,7 @@ class Accounting extends DomainEntity implements Observable<Account> {
         let account: Account | null = null;
         if (!(this._account_storage as typeof AccountingHelper).account_exists(booking_period, cost_center)) {
             account = new Account(booking_period, cost_center);
-            await (this._account_storage as typeof AccountingHelper).save_account(account);
+            await this.save_account(account);
             if (this._subject) this._subject.state = account;
         }
         return account;
@@ -60,7 +60,7 @@ class Accounting extends DomainEntity implements Observable<Account> {
                 if (this._subject) this._subject.state = new_account;
             }
         }
-        if (new_account) await (this._account_storage as typeof AccountingHelper).save_account(new_account);
+        if (new_account) await this.save_account(new_account);
         return new_account;
     }
 
