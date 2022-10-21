@@ -1,55 +1,57 @@
 import {Account} from "../Account";
 import {BookingEntry} from "../BookingEntry";
 
-function account_with_two_entries() {
-    let account = new Account('1', 'cost_center');
-    let booking_entry = new BookingEntry(new Date(2022, 7, 5), 'subject', 'name', 1.0, 'BC??');
-    let booking_entry2 = new BookingEntry(new Date(2022, 7, 5), 'subject', 'name', 1.0, 'BC??');
-
-    booking_entry._id = "1";
-    booking_entry2._id = "2"
-    account.add(booking_entry);
-    account.add(booking_entry2);
-    return account;
-}
-
-test('creation', () => {
-    let account = new Account('1', 'cost_center');
-
-    expect(account.cost_center).toBe('cost_center');
-    expect(account.booking_period).toBe('1');
+// test creation of account from JSON
+test('create_from_JSON', () => {
+    let account = Account.create_from_JSON('{' +
+        '"_booking_period":"2018-01","_cost_center":"test",' +
+        '"_booking_entries":[{"_date":"2018-01-01T00:00:00.000Z",' +
+        '"_subject":"test","_name":"test","_amount":1,' +
+        '"_booking_code":"test","_id":"test"}]}');
+    expect(account.booking_period).toBe("2018-01");
+    expect(account.cost_center).toBe("test");
+    expect(account.booking_entries.length).toBe(1);
+    expect(account.booking_entries[0].date).toStrictEqual(new Date("2018-01-01T00:00:00.000Z"));
+    expect(account.booking_entries[0].subject).toBe("test");
+    expect(account.booking_entries[0].name).toBe("test");
+    expect(account.booking_entries[0].amount).toBe(1);
+    expect(account.booking_entries[0].booking_code).toBe("test");
+    expect(account.booking_entries[0].id).toBe("test");
 });
 
-test('adding one booking entry', () => {
-    let account = new Account('name', 'cost_center');
-    let booking_entry = new BookingEntry(new Date(), 'subject', 'name', 1.0, 'BC??');
-
-    account.add(booking_entry);
-    expect(account.booking_entries).not.toBeNull();
+// test serialization of account
+test('serialize', () => {
+    let account = new Account("2018-01", "test");
+    account.add(new BookingEntry(new Date("2018-01-01T00:00:00.000Z"), "test", "test", 1, "test", "test"));
+    expect(account.serialize()).toBe('{"_booking_period":"2018-01","_cost_center":"test","_booking_entries":[{"_date":"2018-01-01T00:00:00.000Z","_subject":"test","_name":"test","_amount":1,"_booking_code":"test","_id":"test"}]}');
 });
 
-test('adding two booking entries', () => {
-    let account = account_with_two_entries();
 
-    expect(account.booking_entries.length).toBe(2);
-
+// test getting data from account
+test('get data', () => {
+    let account = new Account("2018-01", "test");
+    let expected_date = new Date("2018-01-01T00:00:00.000Z");
+    account.add(new BookingEntry(new Date("2018-01-01T00:00:00.000Z"), "test", "test", 1, "test", "test"));
+    expect(account.data).toStrictEqual({
+        booking_period: "2018-01",
+        cost_center: "test",
+        booking_entries: [{
+            date: expected_date,
+            date_as_string: "1.1.2018",
+            subject: "test",
+            name: "test",
+            amount: 1,
+            amount_as_string: "1.00",
+            booking_code: "test",
+            id: "test"
+        }]
+    });
 });
 
-test('serialization', () => {
-    let account = account_with_two_entries();
-
-    expect(account.serialize()).toBe("{\"_booking_period\":\"1\",\"_cost_center\":\"cost_center\",\"_booking_entries\":[{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":1,\"_booking_code\":\"BC??\",\"_id\":\"1\"},{\"_date\":\"2022-08-04T22:00:00.000Z\",\"_subject\":\"subject\",\"_name\":\"name\",\"_amount\":1,\"_booking_code\":\"BC??\",\"_id\":\"2\"}]}");
-
+// test adding booking entry to account
+test('add', () => {
+    let account = new Account("2018-01", "test");
+    account.add(new BookingEntry(new Date("2018-01-01T00:00:00.000Z"), "test", "test", 1, "test", "test"));
+    expect(account.booking_entries.length).toBe(1);
 });
 
-test('un-serialization', () => {
-    let account = account_with_two_entries();
-
-    let serialized_account = account.serialize();
-    let un_serialized_account = Account.create_from_JSON(serialized_account);
-
-    expect(un_serialized_account).toBeInstanceOf(Account);
-    expect(un_serialized_account.booking_period).toBe('1');
-    expect(un_serialized_account.cost_center).toBe('cost_center');
-    expect(un_serialized_account.booking_entries.length).toBe(2);
-})
