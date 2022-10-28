@@ -1,14 +1,11 @@
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 import {WebContents} from "electron";
+import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
 
-const {UseCasePresenter} = require("../../common/use_case/UseCasePresenter");
-
-class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
-    constructor(ipc_chanel: WebContents) {
-        super(ipc_chanel);
+export class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
+    constructor(protected _ipc_channel: WebContents) {
+        super(_ipc_channel);
     }
-
-    show(...data: any[]) {}
 
     show_cost_center_list(cost_center_list: any) {
         this._ipc_channel.send('create_account:show_cost_center_list', cost_center_list);
@@ -37,5 +34,3 @@ class CreateAccountPresenter extends UseCasePresenter implements CreateAccountRe
 
 }
 
-module.exports = {CreateAccountPresenter};
-export {CreateAccountPresenter}

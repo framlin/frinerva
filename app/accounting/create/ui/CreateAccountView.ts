@@ -7,7 +7,7 @@ let create_account_view: CreateAccountView;
 class CreateAccountView extends UseCaseView {
 
     constructor(use_case_name: string) {
-        super('accounting', use_case_name);
+        super(use_case_name, 'accounting');
         create_account_view = this;
     }
 

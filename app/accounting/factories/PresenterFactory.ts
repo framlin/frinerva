@@ -1,10 +1,10 @@
 import WebContents = Electron.WebContents;
-
-import {Presenter}  from './presenter';
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
+import {Blueprint} from "../../common/use_case/Blueprint";
+
 class PresenterFactory{
-    static create(use_case_name: string, ipc_channel: WebContents) : UseCasePresenter{
-        return new Presenter[use_case_name](ipc_channel);
+    static create(blueprint: Blueprint, ipc_channel: WebContents) : UseCasePresenter{
+        return new blueprint.presenter(ipc_channel);
     }
 }
 

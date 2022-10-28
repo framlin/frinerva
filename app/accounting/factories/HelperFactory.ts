@@ -1,9 +1,8 @@
 import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
-
-const {Helper} = require('./helper');
+import {Blueprint} from "../../common/use_case/Blueprint";
 
 export class HelperFactory{
-    static create(use_case_name: string) : UseCaseHelper{
-        return new Helper[use_case_name]();
+    static create(blueprint: Blueprint) : UseCaseHelper{
+        return new blueprint.helper();
     }
 }

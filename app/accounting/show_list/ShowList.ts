@@ -4,6 +4,6 @@ import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
 
 export class ShowList  extends UseCase{
     constructor(_UseCaseFactory: typeof UseCaseFactory, presenter: UseCasePresenter) {
-        super(_UseCaseFactory, 'accounting', 'show_list', presenter);
+        super(_UseCaseFactory, presenter, 'accounting', 'show_list');
     }
 }

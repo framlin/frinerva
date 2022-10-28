@@ -6,7 +6,7 @@ let show_list_view: ShowListView;
 
 class ShowListView extends UseCaseView {
     constructor(use_case_name: string) {
-        super('accounting', use_case_name);
+        super(use_case_name, 'accounting');
         show_list_view = this;
     }
 

@@ -11,7 +11,7 @@ let show_account_view: ShowAccountView;
 export class ShowAccountView extends UseCaseView {
 
     constructor(use_case_name: string) {
-        super('accounting', use_case_name);
+        super(use_case_name, 'accounting');
         show_account_view = this;
     }
 

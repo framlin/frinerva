@@ -12,7 +12,7 @@ class ReadCSVFileView extends UseCaseView {
 
     public import_renderer = new CSVFileImportRenderer();
     constructor(use_case_name: string) {
-        super('accounting', use_case_name);
+        super(use_case_name, 'accounting');
         read_cvs_file_view = this;
     }
 

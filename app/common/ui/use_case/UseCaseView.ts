@@ -3,12 +3,12 @@ const {HTMLReader} = require("../../util/HTMLReader");
 const path = require("path");
 
 
-abstract class UseCaseView {
+class UseCaseView {
 
     _use_case_name;
     _domain_name;
 
-    protected constructor(domain_name: string, use_case_name: string) {
+    constructor(use_case_name: string, domain_name?: string) {
         this._use_case_name = use_case_name;
         this._domain_name = domain_name;
     }
@@ -73,12 +73,12 @@ abstract class UseCaseView {
     }
 
      // @ts-ignore
-    abstract async create_view(): void;
+    async create_view(): void {};
 
     forward(use_case_name: string) {
     }
 
-    abstract register_event_listener(): void;
+    register_event_listener(): void {};
 
     async put_view_into_dom(...data: any[]) {
         await this.create_view();

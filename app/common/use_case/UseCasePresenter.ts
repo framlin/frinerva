@@ -7,7 +7,7 @@ class UseCasePresenter implements UseCaseResponseBoundary{
 
     show(...data: unknown[]){}
 
-    execute(use_case_name: string, ...data: any[]) {
+    execute(use_case_name: string|undefined, ...data: any[]) {
         this._ipc_channel.send('use_case:created', use_case_name, ...data);
     }
 }

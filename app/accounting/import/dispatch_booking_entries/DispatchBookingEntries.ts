@@ -5,6 +5,6 @@ import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 export class DispatchBookingEntries extends UseCase {
 
     constructor(_UseCaseFactory: typeof UseCaseFactory, presenter: UseCasePresenter) {
-        super(_UseCaseFactory, 'accounting', 'dispatch_booking_entries', presenter);
+        super(_UseCaseFactory, presenter, 'accounting', 'dispatch_booking_entries');
     }
 }

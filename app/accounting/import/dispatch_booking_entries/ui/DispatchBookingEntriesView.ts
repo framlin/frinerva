@@ -10,7 +10,7 @@ let dispatch_booking_entry_view: DispatchBookingEntriesView;
 class DispatchBookingEntriesView extends UseCaseView {
 
     constructor(use_case_name: string) {
-        super('accounting', use_case_name)
+        super(use_case_name, 'accounting')
         dispatch_booking_entry_view = this;
     }
 
