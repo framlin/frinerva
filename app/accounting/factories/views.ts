@@ -1,15 +1,16 @@
-import {ReadCSVFileView} from "../import/read_csv_file/ui/ReadCSVFileView";
-import {CreateAccountView} from "../create/ui/CreateAccountView";
-import {ShowListView} from "../show_list/ui/ShowListView";
-import {DispatchBookingEntriesView} from "../import/dispatch_booking_entries/ui/DispatchBookingEntriesView";
-import {ShowAccountView} from "../show_account/ui/ShowAccountView";
-const Views = {
-    read_csv_file: ReadCSVFileView,
-    create_account: CreateAccountView,
-    show_list: ShowListView,
-    show_account: ShowAccountView,
-    dispatch_booking_entries: DispatchBookingEntriesView,
-}
+import {UseCaseView} from "../../common/ui/use_case/UseCaseView";
+import {read_csv_file_blueprint} from "../import/read_csv_file/read_csv_file_blueprint";
+import {create_account_blueprint} from "../create/create_account_blueprint";
+import {show_list_blueprint} from "../show_list/show_list_blueprint";
+import {show_account_blueprint} from "../show_account/show_account_blueprint";
+import {
+    dispatch_booking_entries_blueprint
+} from "../import/dispatch_booking_entries/dispatch_booking_entries_blueprint";
 
-module.exports = {Views};
-export {Views}
+export const Views : Record<string, typeof UseCaseView>= {
+    read_csv_file: read_csv_file_blueprint.view,
+    create_account: create_account_blueprint.view,
+    show_list: show_list_blueprint.view,
+    show_account: show_account_blueprint.view,
+    dispatch_booking_entries: dispatch_booking_entries_blueprint.view,
+}

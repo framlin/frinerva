@@ -3,6 +3,7 @@ import {ReadCSVFileInteractor} from "./ReadCSVFileInteractor";
 import {dialog, ipcMain} from "electron";
 import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
 import {UseCase} from "../../../common/use_case/UseCase";
+import {register_IPCMain_listener} from "../../../common/ui/ipc/register_IPCMain_listener";
 
 let controller: ReadCSVFileController;
 class ReadCSVFileController extends UseCaseController {
@@ -11,6 +12,13 @@ class ReadCSVFileController extends UseCaseController {
     constructor(request_boundary: UseCaseRequestBoundary, use_case: UseCase) {
         super(request_boundary, use_case);
         controller = this;
+    }
+
+    register_ipc_listener() {
+        super.register_ipc_listener();
+        register_IPCMain_listener('read_csv_file:next', (e, ...data) => {
+            this.on_next(...data);
+        });
     }
 
     async execute(file_path: string|null) {
@@ -51,9 +59,8 @@ class ReadCSVFileController extends UseCaseController {
 
 }
 
-ipcMain.on('read_csv_file:next', (e, ...data) => {
-    controller.on_next(...data)
-});
+// ipcMain.on('read_csv_file:next', (e, ...data) => {
+//     controller.on_next(...data)
+// });
 
-module.exports = {ReadCSVFileController};
 export {ReadCSVFileController}

@@ -1,18 +1,16 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Views = void 0;
-const ReadCSVFileView_1 = require("../import/read_csv_file/ui/ReadCSVFileView");
-const CreateAccountView_1 = require("../create/ui/CreateAccountView");
-const ShowListView_1 = require("../show_list/ui/ShowListView");
-const DispatchBookingEntriesView_1 = require("../import/dispatch_booking_entries/ui/DispatchBookingEntriesView");
-const ShowAccountView_1 = require("../show_account/ui/ShowAccountView");
-const Views = {
-    read_csv_file: ReadCSVFileView_1.ReadCSVFileView,
-    create_account: CreateAccountView_1.CreateAccountView,
-    show_list: ShowListView_1.ShowListView,
-    show_account: ShowAccountView_1.ShowAccountView,
-    dispatch_booking_entries: DispatchBookingEntriesView_1.DispatchBookingEntriesView,
+const read_csv_file_blueprint_1 = require("../import/read_csv_file/read_csv_file_blueprint");
+const create_account_blueprint_1 = require("../create/create_account_blueprint");
+const show_list_blueprint_1 = require("../show_list/show_list_blueprint");
+const show_account_blueprint_1 = require("../show_account/show_account_blueprint");
+const dispatch_booking_entries_blueprint_1 = require("../import/dispatch_booking_entries/dispatch_booking_entries_blueprint");
+exports.Views = {
+    read_csv_file: read_csv_file_blueprint_1.read_csv_file_blueprint.view,
+    create_account: create_account_blueprint_1.create_account_blueprint.view,
+    show_list: show_list_blueprint_1.show_list_blueprint.view,
+    show_account: show_account_blueprint_1.show_account_blueprint.view,
+    dispatch_booking_entries: dispatch_booking_entries_blueprint_1.dispatch_booking_entries_blueprint.view,
 };
-exports.Views = Views;
-module.exports = { Views };
 //# sourceMappingURL=views.js.map

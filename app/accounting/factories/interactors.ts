@@ -1,15 +1,16 @@
-import {ReadCSVFileInteractor} from "../import/read_csv_file/ReadCSVFileInteractor";
-import {CreateAccountInteractor} from "../create/CreateAccountInteractor";
-import {ShowListInteractor} from "../show_list/ShowListInteractor";
-import {DispatchBookingEntriesInteractor} from "../import/dispatch_booking_entries/DispatchBookingEntriesInteractor";
-import {ShowAccountInteractor} from "../show_account/ShowAccountInteractor";
+import {UseCaseInteractor} from "../../common/use_case/UseCaseInteractor";
+import {read_csv_file_blueprint} from "../import/read_csv_file/read_csv_file_blueprint";
+import {create_account_blueprint} from "../create/create_account_blueprint";
+import {show_list_blueprint} from "../show_list/show_list_blueprint";
+import {show_account_blueprint} from "../show_account/show_account_blueprint";
+import {
+    dispatch_booking_entries_blueprint
+} from "../import/dispatch_booking_entries/dispatch_booking_entries_blueprint";
 
-const Interactors = {
-    read_csv_file: ReadCSVFileInteractor,
-    create_account: CreateAccountInteractor,
-    show_list: ShowListInteractor,
-    show_account: ShowAccountInteractor,
-    dispatch_booking_entries: DispatchBookingEntriesInteractor,
+export const Interactors: Record<string, typeof UseCaseInteractor> = {
+    read_csv_file: read_csv_file_blueprint.interactor,
+    create_account: create_account_blueprint.interactor,
+    show_list: show_list_blueprint.interactor,
+    show_account: show_account_blueprint.interactor,
+    dispatch_booking_entries: dispatch_booking_entries_blueprint.interactor,
 }
-module.exports = {Interactors};
-export {Interactors}

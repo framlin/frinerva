@@ -3,6 +3,7 @@ import {ipcRenderer} from "electron";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
 import {MoneyMoneyPayment} from "../../../account/Payment";
+import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 
 
 let read_cvs_file_view: ReadCSVFileView;
@@ -22,6 +23,7 @@ class ReadCSVFileView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
+        this.register_IPCRenderer_listener();
     }
 
     register_next_button() {
@@ -78,15 +80,23 @@ class ReadCSVFileView extends UseCaseView {
         });
     }
 
+    private register_IPCRenderer_listener() {
+        register_IPCRenderer_listener('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
+            this.show_payments(payments);
+        });
+        register_IPCRenderer_listener('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
+            this.import_renderer.show_booking_records(_booking_records);
+        })
+    }
 }
 
-ipcRenderer.on('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
-    read_cvs_file_view.show_payments(payments);
-});
-
-ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
-    read_cvs_file_view.import_renderer.show_booking_records(_booking_records);
-});
+// ipcRenderer.on('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
+//     read_cvs_file_view.show_payments(payments);
+// });
+//
+// ipcRenderer.on('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
+//     read_cvs_file_view.import_renderer.show_booking_records(_booking_records);
+// });
 
 
 module.exports = {ReadCSVFileView};

@@ -1,5 +1,6 @@
 import {ipcRenderer} from "electron";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
+import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 
 let show_list_view: ShowListView;
 
@@ -24,6 +25,7 @@ class ShowListView extends UseCaseView {
     async create_view() {
         await this.append_markup_at(__dirname, '.sideboard');
         this.link_styles(__dirname);
+        this.register_IPCRenderer_listener()
     };
 
     _clear_account_name_list(account_name_list: HTMLDivElement) {
@@ -36,10 +38,10 @@ class ShowListView extends UseCaseView {
     }
 
 
-    show_account_name_list(account_name_list: {account_name: string, key: string}[]) {
+    show_account_name_list(account_name_list: { account_name: string, key: string }[]) {
         let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
-           this. _clear_account_name_list(account_list_div);
+            this._clear_account_name_list(account_list_div);
             for (let entry of account_name_list) {
                 let entry_div = document.createElement('div');
                 entry_div.classList.add("sideboard-entry-list-entry", "clickable", "selectable");
@@ -49,11 +51,18 @@ class ShowListView extends UseCaseView {
             }
         }
     };
+
+    private register_IPCRenderer_listener() {
+        register_IPCRenderer_listener('show_list:show_account_name_list',
+            (e, account_name_list: { account_name: string, key: string }[]) => {
+                this.show_account_name_list(account_name_list);
+            });
+    }
 }
 
-ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: {account_name: string, key: string}[]) => {
-    show_list_view.show_account_name_list(account_name_list);
-})
+// ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: { account_name: string, key: string }[]) => {
+//     show_list_view.show_account_name_list(account_name_list);
+// })
 
 module.exports = {ShowListView};
 export {ShowListView}

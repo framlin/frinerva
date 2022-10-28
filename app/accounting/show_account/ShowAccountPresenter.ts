@@ -1,11 +1,12 @@
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
 import {AccountData} from "../account/Account";
 import {ShowAccountResponseBoundary} from "./ShowAccountResponseBoundary";
+import {WebContents} from "electron";
 
 let presenter: ShowAccountPresenter;
 
 export class ShowAccountPresenter extends UseCasePresenter implements ShowAccountResponseBoundary {
-    constructor(ipc_chanel: any) {
+    constructor(ipc_chanel: WebContents) {
         super(ipc_chanel);
         presenter = this;
     }

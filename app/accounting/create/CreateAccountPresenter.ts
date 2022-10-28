@@ -1,9 +1,10 @@
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
+import {WebContents} from "electron";
 
 const {UseCasePresenter} = require("../../common/use_case/UseCasePresenter");
 
 class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
-    constructor(ipc_chanel: any) {
+    constructor(ipc_chanel: WebContents) {
         super(ipc_chanel);
     }
 

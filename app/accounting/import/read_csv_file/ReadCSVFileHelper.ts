@@ -19,5 +19,4 @@ class ReadCSVFileHelper extends UseCaseHelper{
 
 }
 
-module.exports = {ReadCSVFileHelper};
 export {ReadCSVFileHelper}

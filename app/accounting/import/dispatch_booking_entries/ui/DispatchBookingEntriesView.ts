@@ -3,6 +3,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {BookingEntry} from "../../../account/BookingEntry";
 import {TableRenderer} from "../../../../common/ui/renderer/TableRenderer";
 import {AccountData} from "../../../account/Account";
+import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 
 let dispatch_booking_entry_view: DispatchBookingEntriesView;
 
@@ -16,13 +17,14 @@ class DispatchBookingEntriesView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
+        this.register_IPCRenderer_listener();
     }
 
     register_event_listener() {
         console.log("NEXT_BUTTON not implemented yet")
     }
 
-    show_virtual_accounts(virtual_accounts:AccountData[]) {
+    show_virtual_accounts(virtual_accounts: AccountData[]) {
         let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
         if (virtual_account_list_elem) {
             while (virtual_account_list_elem.firstChild) {
@@ -40,7 +42,7 @@ class DispatchBookingEntriesView extends UseCaseView {
 
     }
 
-    show_virtual_account(virtual_account: AccountData, virtual_accounts: AccountData[]){
+    show_virtual_account(virtual_account: AccountData, virtual_accounts: AccountData[]) {
 
         let virtual_account_list_elem = document.getElementById("virtual-account-list") as HTMLDivElement;
         let property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
@@ -75,11 +77,19 @@ class DispatchBookingEntriesView extends UseCaseView {
             next_button.remove()
         }
     }
+
+    private register_IPCRenderer_listener() {
+        register_IPCRenderer_listener('dispatch_booking_entries:show_virtual_accounts',
+            (e, virtual_accounts: AccountData[]) => {
+                this.show_virtual_accounts(virtual_accounts);
+            });
+
+    }
 }
 
-ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts: AccountData[]) => {
-    dispatch_booking_entry_view.show_virtual_accounts(virtual_accounts);
-});
+// ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts: AccountData[]) => {
+//     dispatch_booking_entry_view.show_virtual_accounts(virtual_accounts);
+// });
 
 module.exports = {DispatchBookingEntriesView};
 export {DispatchBookingEntriesView}

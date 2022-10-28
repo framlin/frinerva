@@ -1,5 +1,6 @@
 import {UseCaseView}  from "../../../common/ui/use_case/UseCaseView";
 import {ipcRenderer}  from "electron";
+import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 
 let create_account_view: CreateAccountView;
 
@@ -13,6 +14,7 @@ class CreateAccountView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
+        this.register_IPCRenderer_listener();
     };
 
 
@@ -142,26 +144,48 @@ class CreateAccountView extends UseCaseView {
             child.classList.remove('selected');
         }
     }
+
+    private register_IPCRenderer_listener() {
+        register_IPCRenderer_listener('create_account:show_cost_center_list', (e, cost_center_list) => {
+            this.show_cost_center_list(cost_center_list);
+        });
+
+        register_IPCRenderer_listener('create_account:show_booking_period_list', (e, booking_period_list) => {
+            this.show_booking_period_list(booking_period_list);
+        })
+
+        register_IPCRenderer_listener('create_account:show_new_accounts_list', (e, new_accounts_list) => {
+            this.show_new_accounts_list(new_accounts_list);
+        });
+
+        register_IPCRenderer_listener('create_account:show_error', (e, error_message) => {
+            this.show_error(error_message);
+        });
+
+        register_IPCRenderer_listener('create_account:done', () => {
+            this.account_creation_finished();
+        })
+    }
 }
 
-ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
-    create_account_view.show_cost_center_list(cost_center_list);
-});
-
-ipcRenderer.on('create_account:show_booking_period_list', (e, booking_period_list) => {
-    create_account_view.show_booking_period_list(booking_period_list);
-})
-
-ipcRenderer.on('create_account:show_new_accounts_list', (e, new_accounts_list) => {
-    create_account_view.show_new_accounts_list(new_accounts_list);
-});
-
-ipcRenderer.on('create_account:show_error', (e, error_message) => {
-    create_account_view.show_error(error_message);
-});
-
-ipcRenderer.on('create_account:done', () => {
-    create_account_view.account_creation_finished();
-})
+// ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
+//     create_account_view.show_cost_center_list(cost_center_list);
+// });
+//
+// ipcRenderer.on('create_account:show_booking_period_list', (e, booking_period_list) => {
+//     create_account_view.show_booking_period_list(booking_period_list);
+// })
+//
+// ipcRenderer.on('create_account:show_new_accounts_list', (e, new_accounts_list) => {
+//     create_account_view.show_new_accounts_list(new_accounts_list);
+// });
+//
+// ipcRenderer.on('create_account:show_error', (e, error_message) => {
+//     create_account_view.show_error(error_message);
+// });
+//
+// ipcRenderer.on('create_account:done', () => {
+//     create_account_view.account_creation_finished();
+// })
 module.exports = {CreateAccountView};
 export {CreateAccountView}

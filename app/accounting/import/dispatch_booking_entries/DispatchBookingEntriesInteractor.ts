@@ -3,8 +3,7 @@ import {Accounting} from "../../account/Accounting";
 import {BookingRecordData} from "../../account/BookingRecord";
 import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
-import {DispatchBookingEntriesHelper} from "./DispatchBookingEntriesHelper";
-import {BookingEntry, BookingEntryData} from "../../account/BookingEntry";
+import {BookingEntryData} from "../../account/BookingEntry";
 
 type AccountDict = { [key: string]: BookingEntryData[] }
 
@@ -67,17 +66,11 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
         return result;
     }
 
-    get helper(): DispatchBookingEntriesHelper {
-        return this._helper as DispatchBookingEntriesHelper;
-    }
 
     get response_boundary(): DispatchBookingEntriesResponseBoundary {
         return this._response_boundary as DispatchBookingEntriesResponseBoundary;
     }
 
-    set helper(value) {
-        this._helper = value;
-    }
 
     set response_boundary(value) {
         this._response_boundary = value;

@@ -4,12 +4,21 @@ import {AccountData} from "../../account/Account";
 import {DispatchBookingEntriesInteractor} from "./DispatchBookingEntriesInteractor";
 import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
 import {UseCase} from "../../../common/use_case/UseCase";
+import {register_IPCMain_listener} from "../../../common/ui/ipc/register_IPCMain_listener";
 
 let controller: DispatchBookingEntriesController;
-class DispatchBookingEntriesController extends UseCaseController {
+
+export class DispatchBookingEntriesController extends UseCaseController {
     constructor(request_boundary: UseCaseRequestBoundary, use_case: UseCase) {
         super(request_boundary, use_case);
         controller = this;
+    }
+
+    register_ipc_listener() {
+        super.register_ipc_listener();
+        register_IPCMain_listener('create_account:submit', (e, virtual_account: AccountData) => {
+            this.on_submit(virtual_account);
+        });
     }
 
     on_submit(virtual_account: AccountData) {
@@ -18,9 +27,7 @@ class DispatchBookingEntriesController extends UseCaseController {
 
 }
 
-ipcMain.on('create_account:submit', (e, virtual_account: AccountData) => {
-    controller.on_submit(virtual_account);
-});
+// ipcMain.on('create_account:submit', (e, virtual_account: AccountData) => {
+//     controller.on_submit(virtual_account);
+// });
 
-module.exports = {DispatchBookingEntriesController};
-export {DispatchBookingEntriesController}

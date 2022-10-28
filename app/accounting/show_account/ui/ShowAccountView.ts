@@ -3,6 +3,7 @@ import {AccountData} from "../../account/Account";
 import {ipcRenderer} from "electron";
 import {BookingEntry} from "../../account/BookingEntry";
 import {TableRenderer} from "../../../common/ui/renderer/TableRenderer";
+import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 
 
 let show_account_view: ShowAccountView;
@@ -34,6 +35,7 @@ export class ShowAccountView extends UseCaseView {
     async create_view(): Promise<void> {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
+        this.register_IPCRenderer_listener();
     }
 
     register_event_listener(): void {
@@ -54,8 +56,15 @@ export class ShowAccountView extends UseCaseView {
     }
 
     private _current_account: AccountData | undefined;
+
+    private register_IPCRenderer_listener() {
+        register_IPCRenderer_listener('show_account:show_account',
+            (e, account: AccountData, editable) => {
+                this.show_account(account, editable);
+            })
+    }
 }
 
-ipcRenderer.on('show_account:show_account', (e, account: AccountData, editable) => {
-    show_account_view.show_account(account, editable);
-})
+// ipcRenderer.on('show_account:show_account', (e, account: AccountData, editable) => {
+//     show_account_view.show_account(account, editable);
+// })

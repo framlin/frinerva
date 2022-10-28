@@ -1,25 +1,25 @@
-import {ReadCSVFile} from "../import/read_csv_file/ReadCSVFile";
-import {CreateAccount} from "../create/CreateAccount";
-import {ShowList} from "../show_list/ShowList";
-import {DispatchBookingEntries} from "../import/dispatch_booking_entries/DispatchBookingEntries";
-
 import {UseCase} from "../../common/use_case/UseCase";
-import {ShowAccount} from "../show_account/ShowAccount";
+import {read_csv_file_blueprint} from "../import/read_csv_file/read_csv_file_blueprint";
+import {create_account_blueprint} from "../create/create_account_blueprint";
+import {show_list_blueprint} from "../show_list/show_list_blueprint";
+import {show_account_blueprint} from "../show_account/show_account_blueprint";
+import {
+    dispatch_booking_entries_blueprint
+} from "../import/dispatch_booking_entries/dispatch_booking_entries_blueprint";
 
-interface UseCaseList {
-    [use_case_name: string] : UseCase
-}
+type UseCaseList = Record < string, typeof UseCase > ;
+
 let UseCases : UseCaseList = {
     //@ts-ignore
-    read_csv_file: ReadCSVFile,
+    read_csv_file: read_csv_file_blueprint.usecase,
     //@ts-ignore
-    create_account: CreateAccount,
+    create_account: create_account_blueprint.usecase,
     //@ts-ignore
-    show_list: ShowList,
+    show_list: show_list_blueprint.usecase,
     //@ts-ignore
-    show_account: ShowAccount,
+    show_account: show_account_blueprint.usecase,
     //@ts-ignore
-    dispatch_booking_entries: DispatchBookingEntries,
+    dispatch_booking_entries: dispatch_booking_entries_blueprint.usecase,
 };
 
 export {UseCases}

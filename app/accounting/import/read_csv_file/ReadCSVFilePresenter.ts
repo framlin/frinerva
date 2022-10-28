@@ -2,11 +2,12 @@ import {BookingRecordData} from "../../account/BookingRecord";
 import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
 import {MoneyMoneyPayment} from "../../account/Payment";
 import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
+import {WebContents} from "electron";
 
 let presenter: ReadCSVFilePresenter;
 
 class ReadCSVFilePresenter extends UseCasePresenter implements ReadCSVFileResponseBoundary{
-    constructor(ipc_chanel: any) {
+    constructor(ipc_chanel: WebContents) {
         super(ipc_chanel);
         presenter = this;
     }

@@ -1,9 +1,10 @@
 import {UseCasePresenter}  from "../../common/use_case/UseCasePresenter";
 import {ShowListResponseBoundary} from "./ShowListResponseBoundary";
+import {WebContents} from "electron";
 
 let presenter: ShowListPresenter;
 class ShowListPresenter extends UseCasePresenter implements ShowListResponseBoundary{
-    constructor(ipc_chanel: any) {
+    constructor(ipc_chanel: WebContents) {
         super(ipc_chanel);
         presenter = this;
     }
@@ -13,5 +14,4 @@ class ShowListPresenter extends UseCasePresenter implements ShowListResponseBoun
     }
 }
 
-module.exports = {ShowListPresenter};
 export {ShowListPresenter}
