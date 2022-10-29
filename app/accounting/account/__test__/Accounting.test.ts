@@ -1,6 +1,6 @@
-import {Accounting} from '../Accounting';
-import {Account} from "../Account";
 import {AccountingHelper} from "../../../common/persistence/helper/AccountingHelper";
+import {Account} from "../Account";
+import {Accounting} from '../Accounting';
 import {BookingEntry} from "../BookingEntry";
 
 function mock_accounting_helper() {

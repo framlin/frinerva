@@ -1,5 +1,5 @@
-import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import * as Fs from 'fs';
+import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import {MoneyMoneyCSVReader} from "./util/MoneyMoneyCSVReader";
 
 class ReadCSVFileHelper extends UseCaseHelper{

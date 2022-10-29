@@ -1,50 +1,119 @@
-import {BookingEntry} from "../BookingEntry";
-import {BOOKING_CODE} from "../BOOKING_CODE";
+import {BookingEntry, BookingEntryData} from "../BookingEntry";
 
+let booking_entry: BookingEntry;
 
+//test create empty booking entry
+it('should be possible to create an empty booking entry', () => {
+    booking_entry = new BookingEntry();
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+});
 
-let booking_entry;
-// beforeEach(() => {
-//
-// })
-// it('should be possible to create an empty booking entry', () => {
-//     booking_entry = new BookingEntry();
-//     expect(booking_entry).toBeDefined();
-// });
-//
-// test('if an empty booking_entry has a bunch of properties', () => {
-//     booking_entry = new BookingEntry();
-//     expect(booking_entry.date).toBeDefined()
-//     expect(booking_entry.subject).toBe("");
-//     expect(booking_entry.name).toBe("");
-//     expect(booking_entry.amount).toBe(0);
-//     expect(booking_entry.booking_code).toBe(BOOKING_CODE.NONE);
-//     expect(booking_entry.id.indexOf('-')).toBeGreaterThan(0);
-// });
-//
-// it('should be possible, to create an booking_entry with values', () => {
-//     let date = new Date();
-//     booking_entry = new BookingEntry(date, "Vermietung", "Miete", 42.0, BOOKING_CODE.RENTAL_FEE,"1-1-1");
-//     expect(booking_entry.date).toBe(date);
-//     expect(booking_entry.subject).toBe("Vermietung");
-//     expect(booking_entry.name).toBe("Miete");
-//     expect(booking_entry.amount).toBe(42);
-//     expect(booking_entry.booking_code).toBe(BOOKING_CODE.RENTAL_FEE);
-//     expect(booking_entry.id).toBe("1-1-1");
-//
-// });
-//
-// it('should be possible, to creat it from an un-serialized object', () => {
-//     let un_serialized_object = {
-//         _date: "2019-12-30T23:00:00.000Z",
-//         _subject: "04082 Leipzig Kontoabschluss 4. Quartal 19 14,9 % Uberziehungszinsen 0,04 AktivKonto (Kontofuhrung)",
-//         _name: "Saldo der Abschlussposten QM - Support",
-//         _amount: "-27.74",
-//         _booking_code: "BC??",
-//         _id: "1"
-//     };
-//     let booking_entry = BookingEntry.create_from_JSON(JSON.stringify(un_serialized_object));
-//
-//     expect(booking_entry.name).toBe("Saldo der Abschlussposten QM - Support");
-//     expect(booking_entry.id).toBe("1");
-// })
+//test create booking entry with date
+it('should be possible to create a booking entry with a date', () => {
+    const date = new Date();
+    booking_entry = new BookingEntry(date);
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.date).toBe(date);
+});
+
+//test create booking entry with date and subject
+it('should be possible to create a booking entry with a date and a subject', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject');
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.subject).toBe('subject');
+});
+
+//test create booking entry with date, subject and name
+it('should be possible to create a booking entry with a date, a subject and a name', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject', 'name');
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.name).toBe('name');
+});
+
+//test create booking entry with date, subject, name and amount
+it('should be possible to create a booking entry with a date, a subject, a name and an amount', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject', 'name', 100);
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.amount).toBe(100);
+});
+
+//test create booking entry with date, subject, name, amount and booking code
+it('should be possible to create a booking entry with a date, a subject, a name, an amount and a booking code', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject', 'name', 100, 'booking code');
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.booking_code).toBe('booking code');
+});
+
+//test create booking entry with date, subject, name, amount, booking code and id
+it('should be possible to create a booking entry with a date, a subject, a name, an amount, a booking code and an id', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject', 'name', 100, 'booking code', 'id');
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.id).toBe('id');
+});
+
+//test create_fron_JSON
+it('should be possible to create a booking entry from JSON', () => {
+    const date = new Date();
+    const subject = 'subject';
+    const name = 'name';
+    const amount = 100;
+    const booking_code = 'booking code';
+    const id = 'id';
+    const serialized_booking_entry = JSON.stringify({
+        _date: date,
+        _subject: subject,
+        _name: name,
+        _amount: amount,
+        _booking_code: booking_code,
+        _id: id
+    });
+    booking_entry = BookingEntry.create_from_JSON(serialized_booking_entry);
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.date).toStrictEqual(date);
+    expect(booking_entry.subject).toBe(subject);
+    expect(booking_entry.name).toBe(name);
+    expect(booking_entry.amount).toBe(amount);
+    expect(booking_entry.booking_code).toBe(booking_code);
+    expect(booking_entry.id).toBe(id);
+});
+
+//test create_from_data
+it('should be possible to create a booking entry from data', () => {
+    const bookingEntryData: BookingEntryData = {
+        date_as_string: '2020-01-01',
+        date: new Date(2020, 0, 1),
+        subject: 'subject',
+        name: 'name',
+        amount: 100,
+        amount_as_string: '100',
+        booking_code: 'booking code',
+        id: 'id'
+    }
+
+    booking_entry = BookingEntry.create_from_data(bookingEntryData);
+    expect(booking_entry).toBeInstanceOf(BookingEntry);
+    expect(booking_entry.date).toStrictEqual(bookingEntryData.date);
+    expect(booking_entry.subject).toBe(bookingEntryData.subject);
+    expect(booking_entry.name).toBe(bookingEntryData.name);
+    expect(booking_entry.amount).toBe(bookingEntryData.amount);
+    expect(booking_entry.booking_code).toBe(bookingEntryData.booking_code);
+    expect(booking_entry.id).toBe(bookingEntryData.id);
+});
+
+//test amount_as_string
+it('should be possible to get the amount as a string', () => {
+    booking_entry = new BookingEntry(new Date(), 'subject', 'name', 100, 'booking code', 'id');
+    expect(booking_entry.amount_as_string).toBe('100.00');
+});
+
+//test date_as_string
+it('should be possible to get the date as a string', () => {
+    booking_entry = new BookingEntry(new Date(2020, 0, 1), 'subject', 'name', 100, 'booking code', 'id');
+    expect(booking_entry.date_as_string).toBe('1.1.2020');
+});
+
+//test to_string
+it('should be possible to get the booking entry as a string', () => {
+    booking_entry = new BookingEntry(new Date(2020, 0, 1), 'subject', 'name', 100, 'booking code', 'id');
+    expect(booking_entry.toString()).toBe('1.1.2020; subject; name; 100.00; booking code');
+});

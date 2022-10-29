@@ -1,6 +1,6 @@
-import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 import {WebContents} from "electron";
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
+import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 
 export class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
     constructor(protected _ipc_channel: WebContents) {

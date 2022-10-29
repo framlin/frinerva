@@ -1,3 +1,1 @@
-class UseCaseHelper{}
-module.exports = {UseCaseHelper};
-export {UseCaseHelper}
+export class UseCaseHelper{}

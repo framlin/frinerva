@@ -1,15 +1,15 @@
-import {Account, ACCOUNT_ID, AccountData} from "./Account";
-import {BookingEntry}  from"./BookingEntry";
 import {DomainEntity} from "../../common/domain/DomainEntity";
-import {Subject} from "../../common/observation/Subject";
-import {Observable} from "../../common/observation/Observable";
-import { Observer } from "../../common/observation/Observer";
 import {DomainHelper} from "../../common/domain/DomainHelper";
+import {Observable} from "../../common/observation/Observable";
+import {Observatory} from "../../common/observation/Observatory";
+import {Observer} from "../../common/observation/Observer";
+import {Subject} from "../../common/observation/Subject";
 import {AccountingHelper} from "../../common/persistence/helper/AccountingHelper";
-import { Observatory } from "../../common/observation/Observatory";
+import {Account, ACCOUNT_ID, AccountData} from "./Account";
+import {BookingEntry} from "./BookingEntry";
 
 
-class Accounting extends DomainEntity implements Observable<Account> {
+export class Accounting extends DomainEntity implements Observable<Account> {
     constructor(domain_helper: typeof DomainHelper) {
         super(domain_helper);
         this._account_storage = this._domain_helper as typeof AccountingHelper;
@@ -102,7 +102,3 @@ class Accounting extends DomainEntity implements Observable<Account> {
 
     CLASS_ID: Account = ACCOUNT_ID;
 }
-
-module.exports = {Accounting};
-
-export {Accounting}

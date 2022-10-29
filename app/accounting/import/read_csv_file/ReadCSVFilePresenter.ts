@@ -1,8 +1,8 @@
-import {BookingRecordData} from "../../account/BookingRecord";
-import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
-import {MoneyMoneyPayment} from "../../account/Payment";
-import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 import {WebContents} from "electron";
+import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
+import {BookingRecordData} from "../../account/BookingRecord";
+import {MoneyMoneyPayment} from "../../account/Payment";
+import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
 
 let presenter: ReadCSVFilePresenter;
 

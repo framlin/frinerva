@@ -1,9 +1,9 @@
+import {ipcRenderer} from "electron";
+import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
+import {TableRenderer} from "../../../common/ui/renderer/TableRenderer";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 import {AccountData} from "../../account/Account";
-import {ipcRenderer} from "electron";
 import {BookingEntry} from "../../account/BookingEntry";
-import {TableRenderer} from "../../../common/ui/renderer/TableRenderer";
-import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 
 
 let show_account_view: ShowAccountView;

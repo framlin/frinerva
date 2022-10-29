@@ -47,9 +47,9 @@ class WorkspaceView {
     register_use_case_starter_btn(btn_selector: string) {
         let use_case_starter = document.querySelector(btn_selector);
         if (use_case_starter) {
-            //@ts-ignore
+            // @ts-ignore
             let use_case_name = use_case_starter.dataset.use_case_name;
-            //@ts-ignore
+            // @ts-ignore
             let domain_name = use_case_starter.dataset.domain_name;
             use_case_starter.addEventListener('click', () => {
                 ipcRenderer.send('use_case:create', domain_name, use_case_name);

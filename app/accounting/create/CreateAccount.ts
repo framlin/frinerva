@@ -1,7 +1,6 @@
-import {UseCaseFactory} from "../factories/UseCaseFactory";
+import {UseCase} from "../../common/use_case/UseCase";
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
-
-import  {UseCase} from"../../common/use_case/UseCase";
+import {UseCaseFactory} from "../factories/UseCaseFactory";
 
 export class CreateAccount extends UseCase{
     constructor(_UseCaseFactory: typeof UseCaseFactory, presenter: UseCasePresenter) {

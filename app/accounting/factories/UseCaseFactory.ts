@@ -3,13 +3,13 @@
 import WebContents = Electron.WebContents;
 import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory";
-import {InteractorFactory} from "./InteractorFactory";
-import {PresenterFactory} from "./PresenterFactory";
+import {Blueprint} from "../../common/use_case/Blueprint";
+import {UseCase} from "../../common/use_case/UseCase";
 import {ControllerFactory} from "./ControllerFactory";
 import {HelperFactory} from "./HelperFactory";
-import {UseCase} from "../../common/use_case/UseCase";
+import {InteractorFactory} from "./InteractorFactory";
+import {PresenterFactory} from "./PresenterFactory";
 import {UseCases} from './use_cases';
-import {Blueprint} from "../../common/use_case/Blueprint";
 
 function create_use_case(blueprint: Blueprint) : UseCase {
     const helper = HelperFactory.create(blueprint);
@@ -21,7 +21,7 @@ function create_use_case(blueprint: Blueprint) : UseCase {
 }
 
 
-class UseCaseFactory {
+export class UseCaseFactory {
     static IPCChannel: WebContents;
     static DomainEntity: DomainEntity;
     static Observatory: Observatory;
@@ -34,6 +34,3 @@ class UseCaseFactory {
         }
     }
 }
-
-module.exports = {UseCaseFactory};
-export {UseCaseFactory}

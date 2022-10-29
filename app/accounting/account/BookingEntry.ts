@@ -1,5 +1,5 @@
-import {BOOKING_CODE} from "./BOOKING_CODE";
 import {v4 as uuidv4} from 'uuid';
+import {BOOKING_CODE} from "./BOOKING_CODE";
 
 interface BookingEntryData {
     date_as_string: string;
@@ -123,7 +123,5 @@ class BookingEntry implements BookingEntryData {
         return `${this.date_as_string}; ${this.subject}; ${this.name}; ${this.amount_as_string}; ${this.booking_code}`;
     }
 }
-
-module.exports = {BookingEntry};
 
 export {BookingEntry, BookingEntryData}

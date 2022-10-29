@@ -1,5 +1,5 @@
-import {BookingRecordData} from "../../account/BookingRecord";
 import {UseCaseResponseBoundary} from "../../../common/use_case/UseCaseResponseBoundary";
+import {BookingRecordData} from "../../account/BookingRecord";
 import {MoneyMoneyPayment} from "../../account/Payment";
 
 interface ReadCSVFileResponseBoundary extends UseCaseResponseBoundary{

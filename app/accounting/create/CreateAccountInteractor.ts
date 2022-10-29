@@ -3,7 +3,7 @@ import {Accounting} from "../account/Accounting";
 import {CreateAccountHelper} from "./CreateAccountHelper";
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 
-class CreateAccountInteractor extends UseCaseInteractor {
+export class CreateAccountInteractor extends UseCaseInteractor {
     async execute() {
         let cost_center_config = await this.helper.load_cost_center_configuration();
         this.response_boundary.show_cost_center_list(JSON.parse(cost_center_config));
@@ -35,7 +35,7 @@ class CreateAccountInteractor extends UseCaseInteractor {
             let cost_center = new_account.cost_center;
             let account = await (this._domain_entity as Accounting).create_account(booking_period, cost_center);
             if (!account) {
-                this.response_boundary.show_error({error:'ACCOUNT_EXIST', booking_period, cost_center});
+                this.response_boundary.show_error({error: 'ACCOUNT_EXIST', booking_period, cost_center});
             }
         }
         this.response_boundary.account_creation_done();
@@ -59,6 +59,3 @@ class CreateAccountInteractor extends UseCaseInteractor {
 
 
 }
-
-module.exports = {CreateAccountInteractor};
-export {CreateAccountInteractor}

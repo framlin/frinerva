@@ -1,7 +1,7 @@
-import {AccountData} from "../../account/Account";
 import {WebContents} from 'electron';
-import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
+import {AccountData} from "../../account/Account";
+import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 
 let presenter: DispatchBookingEntriesPresenter;
 

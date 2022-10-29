@@ -1,10 +1,10 @@
 import {Observatory} from "../../common/observation/Observatory";
-import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
+import {Blueprint} from "../../common/use_case/Blueprint";
 import {UseCase} from "../../common/use_case/UseCase";
 import {UseCaseController} from "../../common/use_case/UseCaseController";
-import {Blueprint} from "../../common/use_case/Blueprint";
+import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
 
-class ControllerFactory{
+export class ControllerFactory{
     static create(blueprint: Blueprint,
                   observatory: Observatory,
                   request_boundary: UseCaseRequestBoundary,
@@ -15,6 +15,3 @@ class ControllerFactory{
         return controller;
     }
 }
-
-module.exports = {ControllerFactory};
-export {ControllerFactory}

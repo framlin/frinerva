@@ -1,6 +1,6 @@
-import {UseCaseView}  from "../../../common/ui/use_case/UseCaseView";
-import {ipcRenderer}  from "electron";
+import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
+import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 
 let create_account_view: CreateAccountView;
 

@@ -1,7 +1,6 @@
 import {UseCaseResponseBoundary} from "../../common/use_case/UseCaseResponseBoundary";
 
-interface CreateAccountResponseBoundary extends UseCaseResponseBoundary {
-
+export interface CreateAccountResponseBoundary extends UseCaseResponseBoundary {
     show_cost_center_list(cost_center_list: any): void;
 
     show_booking_period_list(booking_period_list: any): void;
@@ -12,5 +11,3 @@ interface CreateAccountResponseBoundary extends UseCaseResponseBoundary {
 
     account_creation_done(): void;
 }
-
-export {CreateAccountResponseBoundary}

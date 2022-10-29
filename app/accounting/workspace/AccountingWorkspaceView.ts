@@ -1,4 +1,5 @@
 import {WorkspaceView} from "../../common/ui/workspace/WorkspaceView";
+
 const {ipcRenderer} = require("electron");
 
 class AccountingWorkspaceView extends WorkspaceView {

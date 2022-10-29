@@ -1,12 +1,12 @@
-import {CreateAccountHelper} from "./CreateAccountHelper";
-import {CreateAccountController} from "./CreateAccountController";
-import {CreateAccountView} from "./ui/CreateAccountView";
+import {Blueprint} from "../../common/use_case/Blueprint";
 import {CreateAccount} from "./CreateAccount";
+import {CreateAccountController} from "./CreateAccountController";
+import {CreateAccountHelper} from "./CreateAccountHelper";
 import {CreateAccountInteractor} from "./CreateAccountInteractor";
 import {CreateAccountPresenter} from "./CreateAccountPresenter";
-import {Blueprint} from "../../common/use_case/Blueprint";
+import {CreateAccountView} from "./ui/CreateAccountView";
 
-export const create_account_blueprint: Blueprint = {
+export const create_account: Blueprint = {
     controller: CreateAccountController,
     helper: CreateAccountHelper,
     interactor: CreateAccountInteractor,

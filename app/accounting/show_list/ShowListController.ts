@@ -1,12 +1,11 @@
-import {UseCaseController} from "../../common/use_case/UseCaseController";
-import {Observer} from "../../common/observation/Observer";
-import {Account, ACCOUNT_ID} from "../account/Account";
 import {Observable} from "../../common/observation/Observable";
 import {Observatory} from "../../common/observation/Observatory";
-import {ipcMain} from "electron";
-import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
-import {UseCase} from "../../common/use_case/UseCase";
+import {Observer} from "../../common/observation/Observer";
 import {register_IPCMain_listener} from "../../common/ui/ipc/register_IPCMain_listener";
+import {UseCase} from "../../common/use_case/UseCase";
+import {UseCaseController} from "../../common/use_case/UseCaseController";
+import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
+import {Account, ACCOUNT_ID} from "../account/Account";
 
 let controller: ShowListController;
 
@@ -23,10 +22,6 @@ export class ShowListController extends UseCaseController implements Observer<Ac
         register_IPCMain_listener('show_list:account_selected', (e, key: string) => {
             this.forward('show_account', key);
         })
-        // ipcMain.removeAllListeners('show_list:account_selected');
-        // ipcMain.on('show_list:account_selected', (e, key: string) => {
-        //     this.forward('show_account', key);
-        // });
     }
 
     signal(subject: Observable<Account>): void {

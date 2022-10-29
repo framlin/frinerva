@@ -1,5 +1,5 @@
-import {UseCases} from './use_cases';
 import {UseCaseView} from "../../common/ui/use_case/UseCaseView";
+import {UseCases} from './use_cases';
 
 const view_cache: Record<string, UseCaseView> = {}
 

@@ -1,11 +1,10 @@
-import {BrowserWindow, ipcMain} from 'electron';
+import {BrowserWindow} from 'electron';
 import {Domain} from "../common/domain/Domain";
 import * as path from "path";
+import {register_IPCMain_listener} from "../common/ui/ipc/register_IPCMain_listener";
 
-let main_window: MainWindow;
-
-class MainWindow extends BrowserWindow {
-    _domains = {};
+export class MainWindow extends BrowserWindow {
+    _domains: Record<string, Domain> = {};
 
     constructor() {
         super({
@@ -18,7 +17,9 @@ class MainWindow extends BrowserWindow {
         });
 
 
-        main_window = this;
+        register_IPCMain_listener('use_case:create', (e, domain_name, use_case_name) => {
+            this.execute_use_case(domain_name, use_case_name);
+        })
     }
 
     _UseCaseFactory: any;
@@ -28,20 +29,11 @@ class MainWindow extends BrowserWindow {
     }
 
     execute_use_case(domain_name: string, use_case_name: string) {
-        // @ts-ignore
         let use_case = this._domains[domain_name].create_use_case(use_case_name);
         use_case.execute();
     }
 
     add_domain(domain: Domain) {
-        // @ts-ignore
         this._domains[domain.domain_name] = domain;
     }
 }
-
-ipcMain.on('use_case:create', (e, domain_name, use_case_name) => {
-    main_window.execute_use_case(domain_name, use_case_name);
-});
-
-module.exports = {MainWindow};
-export {MainWindow}

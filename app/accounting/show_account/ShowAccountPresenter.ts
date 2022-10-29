@@ -1,7 +1,7 @@
+import {WebContents} from "electron";
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
 import {AccountData} from "../account/Account";
 import {ShowAccountResponseBoundary} from "./ShowAccountResponseBoundary";
-import {WebContents} from "electron";
 
 let presenter: ShowAccountPresenter;
 

@@ -20,9 +20,6 @@ class UseCaseController implements Subscribing {
         register_IPCMain_listener('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {
             this.on_use_case_view_ready(...data)
         });
-        // ipcMain.once('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {
-        //     this.on_use_case_view_ready(...data)
-        // });
     }
 
     execute(...data: any[]) {

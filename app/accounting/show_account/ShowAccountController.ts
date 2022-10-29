@@ -1,13 +1,12 @@
-import {UseCaseController} from "../../common/use_case/UseCaseController";
-import {Observer} from "../../common/observation/Observer";
-import {Account, ACCOUNT_ID, AccountData} from "../account/Account";
 import {Observable} from "../../common/observation/Observable";
 import {Observatory} from "../../common/observation/Observatory";
-import {ipcMain} from 'electron'
-import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
-import {UseCase} from "../../common/use_case/UseCase";
-import {ShowAccountInteractor} from "./ShowAccountInteractor";
+import {Observer} from "../../common/observation/Observer";
 import {register_IPCMain_listener} from "../../common/ui/ipc/register_IPCMain_listener";
+import {UseCase} from "../../common/use_case/UseCase";
+import {UseCaseController} from "../../common/use_case/UseCaseController";
+import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
+import {Account, ACCOUNT_ID, AccountData} from "../account/Account";
+import {ShowAccountInteractor} from "./ShowAccountInteractor";
 
 let controller: ShowAccountController;
 
@@ -42,8 +41,5 @@ export class ShowAccountController extends UseCaseController implements Observer
     }
 }
 
-// ipcMain.on('show_account:submit_account', (_e, account: AccountData) => {
-//     controller.on_submit(account);
-// });
 
 

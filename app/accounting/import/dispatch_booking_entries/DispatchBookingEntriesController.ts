@@ -1,10 +1,9 @@
+import {register_IPCMain_listener} from "../../../common/ui/ipc/register_IPCMain_listener";
+import {UseCase} from "../../../common/use_case/UseCase";
 import {UseCaseController} from "../../../common/use_case/UseCaseController";
-import {ipcMain} from "electron";
+import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
 import {AccountData} from "../../account/Account";
 import {DispatchBookingEntriesInteractor} from "./DispatchBookingEntriesInteractor";
-import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
-import {UseCase} from "../../../common/use_case/UseCase";
-import {register_IPCMain_listener} from "../../../common/ui/ipc/register_IPCMain_listener";
 
 let controller: DispatchBookingEntriesController;
 
@@ -26,8 +25,4 @@ export class DispatchBookingEntriesController extends UseCaseController {
     }
 
 }
-
-// ipcMain.on('create_account:submit', (e, virtual_account: AccountData) => {
-//     controller.on_submit(virtual_account);
-// });
 

@@ -1,7 +1,7 @@
-import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
 import {AccountingHelper} from "../../common/persistence/helper/AccountingHelper";
+import {UseCaseHelper} from "../../common/use_case/UseCaseHelper";
 
-class CreateAccountHelper extends UseCaseHelper{
+export class CreateAccountHelper extends UseCaseHelper{
     async load_cost_center_configuration() {
         return await AccountingHelper.load_cost_center_configuration();
     }
@@ -10,5 +10,3 @@ class CreateAccountHelper extends UseCaseHelper{
         return await AccountingHelper.load_booking_period_configuration();
     }
 }
-
-export {CreateAccountHelper}

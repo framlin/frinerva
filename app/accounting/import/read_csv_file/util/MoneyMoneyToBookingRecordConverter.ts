@@ -1,7 +1,6 @@
 import {Accounting} from "../../../account/Accounting";
-import {MoneyMoneyPayment} from "../../../account/Payment";
 import {BookingRecordData} from "../../../account/BookingRecord";
-import {BookingEntry, BookingEntryData} from "../../../account/BookingEntry";
+import {MoneyMoneyPayment} from "../../../account/Payment";
 
 const COST_CENTER_MAP = new Map(Object.entries({
     'HausKosten': 'HOUSE',

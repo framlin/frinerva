@@ -1,9 +1,9 @@
-import {BookingRecordData} from "../../../account/BookingRecord";
 import {ipcRenderer} from "electron";
-import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
-import {CSVFileImportRenderer} from './CSVFileImportRenderer';
-import {MoneyMoneyPayment} from "../../../account/Payment";
 import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
+import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
+import {BookingRecordData} from "../../../account/BookingRecord";
+import {MoneyMoneyPayment} from "../../../account/Payment";
+import {CSVFileImportRenderer} from './CSVFileImportRenderer';
 
 
 let read_cvs_file_view: ReadCSVFileView;

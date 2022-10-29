@@ -1,6 +1,6 @@
 import {UseCaseInteractor} from "../../common/use_case/UseCaseInteractor";
-import {Accounting} from "../account/Accounting";
 import {Account, AccountData} from "../account/Account";
+import {Accounting} from "../account/Accounting";
 
 export class ShowAccountInteractor extends UseCaseInteractor {
 

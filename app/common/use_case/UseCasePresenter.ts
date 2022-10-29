@@ -1,7 +1,7 @@
 import {WebContents} from 'electron';
 import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
 
-class UseCasePresenter implements UseCaseResponseBoundary{
+export class UseCasePresenter implements UseCaseResponseBoundary{
 
     constructor(protected _ipc_channel: WebContents) {}
 
@@ -11,6 +11,3 @@ class UseCasePresenter implements UseCaseResponseBoundary{
         this._ipc_channel.send('use_case:created', use_case_name, ...data);
     }
 }
-
-module.exports = {UseCasePresenter};
-export {UseCasePresenter}

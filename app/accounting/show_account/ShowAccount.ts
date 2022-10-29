@@ -1,6 +1,6 @@
 import {UseCase} from "../../common/use_case/UseCase";
-import {UseCaseFactory} from "../factories/UseCaseFactory";
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
+import {UseCaseFactory} from "../factories/UseCaseFactory";
 
 export class ShowAccount extends UseCase {
 

@@ -1,4 +1,4 @@
-import {UseCaseInteractor}  from "../../common/use_case/UseCaseInteractor";
+import {UseCaseInteractor} from "../../common/use_case/UseCaseInteractor";
 import {Accounting} from '../account/Accounting';
 
 class ShowListInteractor extends UseCaseInteractor{

@@ -1,9 +1,9 @@
+import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {Account, AccountData} from "../../account/Account";
 import {Accounting} from "../../account/Accounting";
-import {BookingRecordData} from "../../account/BookingRecord";
-import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
-import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 import {BookingEntryData} from "../../account/BookingEntry";
+import {BookingRecordData} from "../../account/BookingRecord";
+import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 
 type AccountDict = { [key: string]: BookingEntryData[] }
 

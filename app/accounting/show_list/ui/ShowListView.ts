@@ -1,6 +1,6 @@
 import {ipcRenderer} from "electron";
-import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
+import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 
 let show_list_view: ShowListView;
 
