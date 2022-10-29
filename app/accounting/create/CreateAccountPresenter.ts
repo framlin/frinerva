@@ -1,21 +1,17 @@
-import {WebContents} from "electron";
 import {UseCasePresenter} from "../../common/use_case/UseCasePresenter";
+import {AccountDescriptionLabel} from "./AccountDescriptionLabel";
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 
 export class CreateAccountPresenter extends UseCasePresenter implements CreateAccountResponseBoundary{
-    constructor(protected _ipc_channel: WebContents) {
-        super(_ipc_channel);
-    }
-
-    show_cost_center_list(cost_center_list: any) {
+    show_cost_center_list(cost_center_list: string[]) {
         this._ipc_channel.send('create_account:show_cost_center_list', cost_center_list);
     }
 
-    show_booking_period_list(booking_period_list: any) {
+    show_booking_period_list(booking_period_list: string[]) {
         this._ipc_channel.send('create_account:show_booking_period_list', booking_period_list);
     }
 
-    show_new_accounts_list(new_entry_list: any) {
+    show_new_accounts_list(new_entry_list: AccountDescriptionLabel[]) {
         this._ipc_channel.send('create_account:show_new_accounts_list', new_entry_list);
     }
 
@@ -31,6 +27,5 @@ export class CreateAccountPresenter extends UseCasePresenter implements CreateAc
     account_creation_done() {
         this._ipc_channel.send('create_account:done');
     }
-
 }
 

@@ -2,6 +2,7 @@ import {MainWindow} from "./MainWindow";
 
 import {Domain} from '../common/domain/Domain';
 import {factories} from '../accounting/factories/factories';
+import {UseCases} from "../accounting/factories/use_cases";
 import {Accounting} from "../accounting/account/Accounting";
 import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
 import {Observatory} from "../common/observation/Observatory";
@@ -30,6 +31,7 @@ function create_domain(domain_name: string, main_window: MainWindow) {
     factories.use_case.IPCChannel = main_window.webContents;
     factories.use_case.DomainEntity = domain_entity;
     factories.use_case.Observatory = observatory;
+    factories.use_case.UseCases = UseCases;
     return new Domain(domain_name, factories, domain_entity);
 }
 

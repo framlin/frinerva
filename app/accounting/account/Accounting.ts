@@ -45,7 +45,7 @@ export class Accounting extends DomainEntity implements Observable<Account> {
 
     async create_account_from(virtual_account: AccountData) {
         const {booking_period, cost_center} = virtual_account;
-        let booking_entries: BookingEntry[] = [];
+        const booking_entries: BookingEntry[] = [];
         for(let entry of virtual_account.booking_entries) {
             let booking_entry = BookingEntry.create_from_data(entry);
             booking_entries.push(booking_entry);
@@ -89,8 +89,7 @@ export class Accounting extends DomainEntity implements Observable<Account> {
 
     async load_account(key: string): Promise<Account | null> {
         let [booking_period, cost_center] = key.split('!');
-        let account = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
-        return account;
+        return await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
     }
 
     async save_account(account: Account) {

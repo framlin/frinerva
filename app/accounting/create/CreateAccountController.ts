@@ -1,18 +1,11 @@
 import {register_IPCMain_listener} from "../../common/ui/ipc/register_IPCMain_listener";
-import {UseCase} from "../../common/use_case/UseCase";
 import {UseCaseController} from "../../common/use_case/UseCaseController";
-import {UseCaseRequestBoundary} from "../../common/use_case/UseCaseRequestBoundary";
+import {AccountDescription} from "./AccountDescription";
+import {BookingPeriodAccountDescriptionList} from "./BookingPeriodAccountDescriptionList";
 import {CreateAccountInteractor} from "./CreateAccountInteractor";
 
-let controller: CreateAccountController;
 
 export class CreateAccountController extends UseCaseController {
-
-    constructor(request_boundary: UseCaseRequestBoundary, use_case: UseCase) {
-        super(request_boundary, use_case);
-        controller = this;
-
-    }
 
     register_ipc_listener() {
         super.register_ipc_listener();
@@ -24,19 +17,21 @@ export class CreateAccountController extends UseCaseController {
         });
     }
 
-    period_cost_center_selection(period_cost_center: any) {
+    period_cost_center_selection(period_cost_center: BookingPeriodAccountDescriptionList
+    ) {
         (this._request_boundary as CreateAccountInteractor).period_cost_center_selection(period_cost_center);
     }
 
-    create(new_accounts_list: any) {
+    create(new_accounts_list: AccountDescription[]) {
         (this._request_boundary as CreateAccountInteractor).create(new_accounts_list).then();
     }
 
-    on_period_cost_center_selection(period_cost_center: any) {
+    on_period_cost_center_selection(period_cost_center: BookingPeriodAccountDescriptionList
+    ) {
         this.period_cost_center_selection(period_cost_center);
     }
 
-    on_create(new_accounts_list: any) {
+    on_create(new_accounts_list: AccountDescription[]) {
         this.create(new_accounts_list);
     }
 }

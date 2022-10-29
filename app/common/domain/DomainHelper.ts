@@ -1,2 +1,1 @@
-class DomainHelper{}
-export {DomainHelper}
+export class DomainHelper{}

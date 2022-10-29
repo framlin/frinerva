@@ -1,0 +1,1 @@
+export type AccountDescription = { booking_period: string; cost_center: string};

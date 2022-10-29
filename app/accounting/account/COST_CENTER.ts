@@ -1,4 +1,4 @@
-const COST_CENTER = {
+export const COST_CENTER = {
     NONE: "",
     HOUSE: "HOUSE",
     ADMINISTRATION: "ADMINISTRATION",
@@ -11,5 +11,3 @@ const COST_CENTER = {
 };
 
 
-module.exports = {COST_CENTER};
-export {COST_CENTER}

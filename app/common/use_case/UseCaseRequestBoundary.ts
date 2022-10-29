@@ -1,5 +1,3 @@
-interface UseCaseRequestBoundary {
+export interface UseCaseRequestBoundary {
     execute(...data: any[]): any;
 }
-
-export {UseCaseRequestBoundary}

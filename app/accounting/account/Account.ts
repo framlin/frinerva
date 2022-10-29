@@ -1,12 +1,12 @@
 import {BookingEntry, BookingEntryData} from "./BookingEntry";
 
-interface AccountData {
+export interface AccountData {
     booking_period: string;
     cost_center: string;
     booking_entries: BookingEntryData[];
 }
 
-class Account implements AccountData{
+export class Account implements AccountData{
     constructor(private _booking_period: string, private _cost_center: string) {
         this._booking_entries = [];
     }
@@ -48,12 +48,12 @@ class Account implements AccountData{
     }
 
     static create_from_JSON(json_string: string) {
-        let account_data = JSON.parse(json_string);
-        let account = new Account(account_data._booking_period, account_data._cost_center);
-        let json_booking_entries = account_data._booking_entries;
+        const account_data = JSON.parse(json_string);
+        const account = new Account(account_data._booking_period, account_data._cost_center);
+        const json_booking_entries = account_data._booking_entries;
 
-        for (let json_booking_entry of json_booking_entries) {
-            let booking_entry = new BookingEntry(
+        for (const json_booking_entry of json_booking_entries) {
+            const booking_entry = new BookingEntry(
                 new Date(json_booking_entry._date),
                 json_booking_entry._subject,
                 json_booking_entry._name,
@@ -69,7 +69,4 @@ class Account implements AccountData{
     private _booking_entries: BookingEntry[];
 }
 
-const ACCOUNT_ID = new Account("", "");
-
-module.exports = {Account};
-export {Account, AccountData, ACCOUNT_ID};
+export const ACCOUNT_ID = new Account("", "");

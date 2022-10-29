@@ -1,14 +1,14 @@
 import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
+import {AccountDescription} from "../AccountDescription";
+import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
 
-let create_account_view: CreateAccountView;
 
-class CreateAccountView extends UseCaseView {
+export class CreateAccountView extends UseCaseView {
 
     constructor(use_case_name: string) {
         super(use_case_name, 'accounting');
-        create_account_view = this;
     }
 
     async create_view() {
@@ -25,7 +25,7 @@ class CreateAccountView extends UseCaseView {
     }
 
     register_create_button() {
-        let create_button = document.querySelector('.next-btn' ) as HTMLButtonElement;
+        const create_button = document.querySelector('.next-btn' ) as HTMLButtonElement;
         create_button.addEventListener('click', () => {
             let new_accounts_list = this.get_new_accounts_list();
             ipcRenderer.send('create_account:create', new_accounts_list)
@@ -33,12 +33,12 @@ class CreateAccountView extends UseCaseView {
     }
 
     get_new_accounts_list() {
-        let new_accounts_list : { booking_period: string|undefined, cost_center:string|undefined }[]= [];
+        let new_accounts_list : AccountDescription[] = [];
         let result_column_entries = document.querySelectorAll('#result-column .account-entry') as NodeListOf<HTMLElement>;
         result_column_entries.forEach((entry) => {
             new_accounts_list.push({
-                booking_period: entry.dataset.bookingPeriod,
-                cost_center: entry.dataset.costCenter,
+                booking_period: entry.dataset.bookingPeriod!,
+                cost_center: entry.dataset.costCenter!,
             });
         });
         return new_accounts_list;
@@ -104,7 +104,7 @@ class CreateAccountView extends UseCaseView {
         }
     }
 
-    show_new_accounts_list(new_accounts_list: { booking_period: string, label: string, cost_center: string }[]) {
+    show_new_accounts_list(new_accounts_list: AccountDescriptionLabel[]) {
         let result_column = document.querySelector('#result-column') as HTMLDivElement;
         for (let new_account of new_accounts_list) {
             let new_entry = document.createElement('div');
@@ -167,25 +167,3 @@ class CreateAccountView extends UseCaseView {
         })
     }
 }
-
-// ipcRenderer.on('create_account:show_cost_center_list', (e, cost_center_list) => {
-//     create_account_view.show_cost_center_list(cost_center_list);
-// });
-//
-// ipcRenderer.on('create_account:show_booking_period_list', (e, booking_period_list) => {
-//     create_account_view.show_booking_period_list(booking_period_list);
-// })
-//
-// ipcRenderer.on('create_account:show_new_accounts_list', (e, new_accounts_list) => {
-//     create_account_view.show_new_accounts_list(new_accounts_list);
-// });
-//
-// ipcRenderer.on('create_account:show_error', (e, error_message) => {
-//     create_account_view.show_error(error_message);
-// });
-//
-// ipcRenderer.on('create_account:done', () => {
-//     create_account_view.account_creation_finished();
-// })
-module.exports = {CreateAccountView};
-export {CreateAccountView}

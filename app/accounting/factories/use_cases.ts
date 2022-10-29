@@ -1,11 +1,9 @@
-import {Blueprint} from "../../common/use_case/Blueprint";
 import {create_account} from "../create";
 import {dispatch_booking_entries} from "../import/dispatch_booking_entries";
 import {read_csv_file} from "../import/read_csv_file";
 import {show_account} from "../show_account";
 import {show_list} from "../show_list";
-
-type UseCaseList = Record < string, Blueprint > ;
+import {UseCaseList} from "./UseCaseList";
 
 export const  UseCases : UseCaseList = {
     read_csv_file,

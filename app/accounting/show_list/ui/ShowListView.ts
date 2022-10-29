@@ -2,12 +2,9 @@ import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 
-let show_list_view: ShowListView;
-
-class ShowListView extends UseCaseView {
+export class ShowListView extends UseCaseView {
     constructor(use_case_name: string) {
         super(use_case_name, 'accounting');
-        show_list_view = this;
     }
 
     register_event_listener() {
@@ -59,10 +56,3 @@ class ShowListView extends UseCaseView {
             });
     }
 }
-
-// ipcRenderer.on('show_list:show_account_name_list', (e, account_name_list: { account_name: string, key: string }[]) => {
-//     show_list_view.show_account_name_list(account_name_list);
-// })
-
-module.exports = {ShowListView};
-export {ShowListView}

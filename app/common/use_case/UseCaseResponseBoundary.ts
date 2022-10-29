@@ -1,5 +1,3 @@
-interface UseCaseResponseBoundary {
+export interface UseCaseResponseBoundary {
     show(...data:unknown[]): void
 }
-
-export {UseCaseResponseBoundary}
