@@ -3,15 +3,14 @@ import {Account, AccountData} from "../../account/Account";
 import {Accounting} from "../../account/Accounting";
 import {BookingEntryData} from "../../account/BookingEntry";
 import {BookingRecordData} from "../../account/BookingRecord";
-import {DispatchBookingEntriesResponseBoundary} from "./DispatchBookingEntriesResponseBoundary";
 
 type AccountDict = { [key: string]: BookingEntryData[] }
 
-class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
+export class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
 
     async execute(booking_records: BookingRecordData[]) {
-        let account_dict = this.create_account_dict(booking_records);
-        let virtual_accounts = await this.create_virtual_accounts(account_dict);
+        const account_dict = this.create_account_dict(booking_records);
+        const virtual_accounts = await this.create_virtual_accounts(account_dict);
         this.response_boundary.show(virtual_accounts);
     }
 
@@ -22,10 +21,10 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
     }
 
     create_account_dict(booking_records: BookingRecordData[]) {
-        let result: AccountDict = {};
-        for (let booking_record of booking_records) {
-            let {booking_entry, cost_center, booking_period} = booking_record;
-            let key = `${booking_period}!${cost_center}`;
+        const result: AccountDict = {};
+        for (const booking_record of booking_records) {
+            const {booking_entry, cost_center, booking_period} = booking_record;
+            const key = `${booking_period}!${cost_center}`;
             if (key in result) {
                 result[key].push(booking_entry);
             } else {
@@ -35,15 +34,15 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
         return result;
     }
 
-    private _extract_account_data(account: Account|null): AccountData {
-        let result: AccountData = {
+    private static _extract_account_data(account: Account|null): AccountData {
+        const result: AccountData = {
             booking_entries: [],
             booking_period: account ? account.booking_period : "",
             cost_center: account ? account.cost_center: ""
         };
         if (account) {
-            for (let booking_entry of account.booking_entries) {
-                let booking_entry_data = booking_entry.data
+            for (const booking_entry of account.booking_entries) {
+                const booking_entry_data = booking_entry.data
                 result.booking_entries.push(booking_entry_data);
             }
         }
@@ -51,14 +50,14 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
     }
 
     async create_virtual_accounts(account_dict: AccountDict): Promise<AccountData[]> {
-        let result: AccountData[] = [];
-        let keys = Object.keys(account_dict)
-        for await (let account_key of keys) {
-            let [booking_period, cost_center] = account_key.split('!');
-            let account = await (this._domain_entity as Accounting).create_virtual_account(booking_period, cost_center);
-            let account_data = this._extract_account_data(account);
-            let booking_entries = account_dict[account_key];
-            for (let booking_entry of booking_entries) {
+        const result: AccountData[] = [];
+        const keys = Object.keys(account_dict)
+        for await (const account_key of keys) {
+            const [booking_period, cost_center] = account_key.split('!');
+            const account = await (this._domain_entity as Accounting).create_virtual_account({booking_period, cost_center});
+            const account_data = DispatchBookingEntriesInteractor._extract_account_data(account);
+            const booking_entries = account_dict[account_key];
+            for (const booking_entry of booking_entries) {
                 account_data.booking_entries.push(booking_entry)
             }
             result.push(account_data);
@@ -67,15 +66,12 @@ class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
     }
 
 
-    get response_boundary(): DispatchBookingEntriesResponseBoundary {
-        return this._response_boundary as DispatchBookingEntriesResponseBoundary;
-    }
-
-
-    set response_boundary(value) {
-        this._response_boundary = value;
-    }
+    // get response_boundary(): DispatchBookingEntriesResponseBoundary {
+    //     return this._response_boundary as DispatchBookingEntriesResponseBoundary;
+    // }
+    //
+    //
+    // set response_boundary(value) {
+    //     this._response_boundary = value;
+    // }
 }
-
-module.exports = {DispatchBookingEntriesInteractor};
-export {DispatchBookingEntriesInteractor}

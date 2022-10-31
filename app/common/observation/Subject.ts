@@ -1,7 +1,7 @@
 import {Observer} from "./Observer";
 import {Observable} from "./Observable";
 
-class Subject<T> implements Observable<T>{
+export class Subject<T> implements Observable<T>{
     readonly CLASS_ID: T
     constructor(class_id: T) {
         this.CLASS_ID = class_id;
@@ -25,6 +25,4 @@ class Subject<T> implements Observable<T>{
     private _state: T;
     private _observers = new Set<Observer<T>>();
 }
-export {Subject}
-
 

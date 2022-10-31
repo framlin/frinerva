@@ -3,10 +3,10 @@ const {HTMLReader} = require("../../util/HTMLReader");
 const path = require("path");
 
 
-class UseCaseView {
+export class UseCaseView {
 
-    _use_case_name;
-    _domain_name;
+    private readonly _use_case_name;
+    private readonly _domain_name;
 
     constructor(use_case_name: string, domain_name?: string) {
         this._use_case_name = use_case_name;
@@ -14,37 +14,40 @@ class UseCaseView {
     }
 
     link_style(stylesheet_filename: string) {
-        let existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
+        const existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
         if (!existing_link) {
-            let head = document.getElementsByTagName('HEAD')[0];
-            let link = document.createElement('link');
+            const head = document.getElementsByTagName('HEAD')[0];
+            const link = document.createElement('link');
             link.rel = 'stylesheet';
             link.type = 'text/css';
             link.href = stylesheet_filename;
+            // noinspection TypeScriptValidateJSTypes
             head.appendChild(link);
         }
     }
 
 
     insert_partial(markup: string, frame: string) {
-        let frame_div = document.querySelector(frame);
+        const frame_div = document.querySelector(frame);
         if (frame_div) frame_div.innerHTML = markup;
     }
 
     async insert_markup_at(use_case_dir: string, target: string) {
-        let markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
+        const markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
         this.insert_partial(markup, target);
     }
 
     append_partial(markup: string, frame: string) {
-        let frame_div = document.querySelector(frame);
-        let partial_div = document.createElement('div');
+        const frame_div = document.querySelector(frame);
+        const partial_div = document.createElement('div');
         partial_div.innerHTML = markup;
-        if (frame_div) frame_div.appendChild(partial_div);
+        if (frame_div) { // noinspection TypeScriptValidateJSTypes
+            frame_div.appendChild(partial_div);
+        }
     }
 
     async append_markup_at(use_case_dir: string, target: string) {
-        let markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
+        const markup = await HTMLReader.read_html_file(path.join(use_case_dir, this._use_case_name + '.html'));
         this.append_partial(markup, target);
     }
 
@@ -55,7 +58,7 @@ class UseCaseView {
 
     add_script(src: string) {
         return new Promise((resolve, reject) => {
-            let script = document.querySelector(`script[src="${src}"]`);
+            const script = document.querySelector(`script[src="${src}"]`);
             if (!script) {
                 const s = document.createElement('script');
 
@@ -63,17 +66,16 @@ class UseCaseView {
                 s.addEventListener('load', resolve);
                 s.addEventListener('error', reject);
 
+                // noinspection TypeScriptValidateJSTypes
                 document.body.appendChild(s);
             } else {
                 resolve(true);
             }
-
-
         });
     }
 
-     // @ts-ignore
-    async create_view(): void {};
+
+    async create_view(): Promise<void> {};
 
     forward(use_case_name: string) {
     }
@@ -91,6 +93,4 @@ class UseCaseView {
     }
 }
 
-module.exports = {UseCaseView};
-export {UseCaseView}
 

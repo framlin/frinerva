@@ -8,10 +8,10 @@ export class ShowListView extends UseCaseView {
     }
 
     register_event_listener() {
-        let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
+        const account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
             account_list_div.addEventListener('click', (event) => {
-                let target = event.target as HTMLDivElement;
+                const target = event.target as HTMLDivElement;
                 if (target.classList.contains('sideboard-entry-list-entry')) {
                     ipcRenderer.send('show_list:account_selected', target.dataset.key);
                 }
@@ -36,11 +36,11 @@ export class ShowListView extends UseCaseView {
 
 
     show_account_name_list(account_name_list: { account_name: string, key: string }[]) {
-        let account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
+        const account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
             this._clear_account_name_list(account_list_div);
-            for (let entry of account_name_list) {
-                let entry_div = document.createElement('div');
+            for (const entry of account_name_list) {
+                const entry_div = document.createElement('div');
                 entry_div.classList.add("sideboard-entry-list-entry", "clickable", "selectable");
                 entry_div.innerHTML = entry.account_name;
                 entry_div.setAttribute('data-key', entry.key);

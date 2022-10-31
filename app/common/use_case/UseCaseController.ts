@@ -1,18 +1,14 @@
-import {UseCase} from "./UseCase";
-import {ipcMain} from "electron";
-import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
-import {Subscribing} from "../observation/Subscribing";
 import {Observatory} from "../observation/Observatory";
+import {Subscribing} from "../observation/Subscribing";
 import {register_IPCMain_listener} from "../ui/ipc/register_IPCMain_listener";
+import {UseCase} from "./UseCase";
+import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 
-let controller: UseCaseController;
-
-class UseCaseController implements Subscribing {
+export class UseCaseController implements Subscribing {
     constructor(
         protected _request_boundary: UseCaseRequestBoundary,
         protected _use_case: UseCase
     ) {
-        controller = this;
         this.register_ipc_listener();
     }
 
@@ -50,6 +46,3 @@ class UseCaseController implements Subscribing {
         this.execute(...data);
     }
 }
-
-module.exports = {UseCaseController};
-export {UseCaseController}

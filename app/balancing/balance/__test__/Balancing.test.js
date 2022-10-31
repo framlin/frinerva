@@ -9,11 +9,11 @@ test('creation', () => {
 });
 test('getting an Account', () => {
     let balancing = new Balancing_1.Balancing();
-    let account = new Account_1.Account('name', 'CC');
+    let account = new Account_1.Account({ booking_period: 'name', cost_center: 'CC' });
     let balance = new Balance_1.Balance('name', "2022");
     balance.add(account);
     balancing.register(balance);
-    let account2 = balancing.get_accounts('CC', "2022")[0];
+    let account2 = balancing.get_accounts({ cost_center: 'CC', booking_period: "2022" })[0];
     expect(account2).toStrictEqual(account);
 });
 //# sourceMappingURL=Balancing.test.js.map

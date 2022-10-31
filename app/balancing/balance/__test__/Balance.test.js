@@ -9,30 +9,30 @@ test('creation', () => {
 });
 test('add Account', () => {
     let balance = new Balance_1.Balance("name", "2022");
-    let account = new Account_1.Account('account1', 'CC');
+    let account = new Account_1.Account({ booking_period: 'account1', cost_center: 'CC' });
     balance.add(account);
     expect(balance.accounts.length).toBe(1);
 });
 test('add two Accounts', () => {
     let balance = new Balance_1.Balance("name", "2022");
-    let account = new Account_1.Account('account1', 'CC');
-    let account2 = new Account_1.Account('account2', 'C2');
+    let account = new Account_1.Account({ booking_period: 'account1', cost_center: 'CC' });
+    let account2 = new Account_1.Account({ booking_period: 'account2', cost_center: 'C2' });
     balance.add(account);
     balance.add(account2);
     expect(balance.accounts.length).toBe(2);
 });
 test('setting accounts', () => {
     let balance = new Balance_1.Balance("name", "2022");
-    let account = new Account_1.Account('account1', 'CC');
-    let account2 = new Account_1.Account('account2', 'C2');
+    let account = new Account_1.Account({ booking_period: 'account1', cost_center: 'CC' });
+    let account2 = new Account_1.Account({ booking_period: 'account2', cost_center: 'C2' });
     let accounts = [account, account2];
     balance.accounts = accounts;
     expect(balance.accounts).toStrictEqual(accounts);
 });
 test('serialization', () => {
     let balance = new Balance_1.Balance("name", "2022");
-    let account = new Account_1.Account('account1', 'CC');
-    let account2 = new Account_1.Account('account2', 'C2');
+    let account = new Account_1.Account({ booking_period: 'account1', cost_center: 'CC' });
+    let account2 = new Account_1.Account({ booking_period: 'account2', cost_center: 'C2' });
     balance.add(account);
     balance.add(account2);
     let serialized_balance = balance.serialize();
@@ -40,8 +40,8 @@ test('serialization', () => {
 });
 test('un-serialization', () => {
     let balance = new Balance_1.Balance("name", "2022");
-    let account = new Account_1.Account('account1', 'CC');
-    let account2 = new Account_1.Account('account2', 'C2');
+    let account = new Account_1.Account({ booking_period: 'account1', cost_center: 'CC' });
+    let account2 = new Account_1.Account({ booking_period: 'account2', cost_center: 'C2' });
     balance.add(account);
     balance.add(account2);
     let serialized_balance = balance.serialize();

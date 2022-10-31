@@ -7,5 +7,6 @@
   "BANKING": "Bank",
   "PRIVATE": "Privat",
   "DEPOSIT": "Kaution",
+  "ESTATE": "Nachlass",
   "RENT": "Miete"
 }

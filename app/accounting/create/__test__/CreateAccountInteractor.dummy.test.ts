@@ -33,7 +33,7 @@ class CreateAccountPresenterMock extends CreateAccountPresenter {
     show_new_accounts_list(new_entry_list: any) {
     }
 
-    show_error(error: { error: string; booking_period: any; cost_center: any; }) {
+    show_error(error: { error: string; booking_period: string; cost_center: string; }) {
     }
 
     account_creation_done() {

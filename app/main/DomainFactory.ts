@@ -1,32 +1,43 @@
-import {MainWindow} from "./MainWindow";
-
-import {Domain} from '../common/domain/Domain';
+import {Accounting} from "../accounting/account/Accounting";
 import {factories} from '../accounting/factories/factories';
 import {UseCases} from "../accounting/factories/use_cases";
-import {Accounting} from "../accounting/account/Accounting";
-import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
+import {Domain} from '../common/domain/Domain';
+import {DomainEntity} from "../common/domain/DomainEntity";
+import {DomainHelper} from "../common/domain/DomainHelper";
 import {Observatory} from "../common/observation/Observatory";
+import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
+import {MainWindow} from "./MainWindow";
 
-const domain_factories = {
+type DomainEntityConstructor = { new(domain_helper: typeof DomainHelper): DomainEntity } & typeof DomainEntity;
+
+const domain_factories: Record<string, typeof factories> = {
     accounting: factories,
 }
 
-const domain_entities = {
+const domain_entities: Record<string, DomainEntityConstructor> = {
     accounting: Accounting,
 }
 
-const domain_helper = {
+const domain_helper: Record<string, typeof DomainHelper> = {
     accounting: AccountingHelper
 }
 
+function create_domain_entity(
+    ctor: DomainEntityConstructor,
+    helper: typeof DomainHelper
+): DomainEntity {
+    return new ctor(helper);
+}
+
 function create_domain(domain_name: string, main_window: MainWindow) {
-    let observatory = new Observatory();
-    // @ts-ignore
-    let factories = domain_factories[domain_name];
-    // @ts-ignore
-    let helper = domain_helper[domain_name]
-    // @ts-ignore
-    let domain_entity: DomainEntty = new domain_entities[domain_name](helper);
+
+    const observatory = new Observatory();
+    const factories = domain_factories[domain_name];
+    const helper = domain_helper[domain_name]
+
+
+    const domain_entity = create_domain_entity(domain_entities[domain_name], helper);
+
     domain_entity.provide_at(observatory);
     factories.use_case.IPCChannel = main_window.webContents;
     factories.use_case.DomainEntity = domain_entity;
@@ -35,19 +46,18 @@ function create_domain(domain_name: string, main_window: MainWindow) {
     return new Domain(domain_name, factories, domain_entity);
 }
 
-class DomainFactory {
+export class DomainFactory {
     static main_window: MainWindow;
+
     static create(domain_name: string) {
         return create_domain(domain_name, this.main_window);
     }
+
     static get_domains() {
-        let domains = [];
-        for (let domain in domain_factories) {
+        const domains = [];
+        for (const domain in domain_factories) {
             domains.push(domain);
         }
         return domains;
     }
 }
-
-module.exports = {DomainFactory};
-export {DomainFactory}

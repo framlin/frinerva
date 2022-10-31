@@ -1,7 +1,7 @@
 import {UseCasePresenter} from "./UseCasePresenter";
 import {UseCaseFactory} from "../../accounting/factories/UseCaseFactory";
 
-class UseCase{
+export class UseCase{
 
     constructor(
         protected _UseCaseFactory: typeof UseCaseFactory,
@@ -28,6 +28,3 @@ class UseCase{
     }
 
 }
-
-module.exports = {UseCase};
-export {UseCase}

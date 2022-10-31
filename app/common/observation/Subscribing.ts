@@ -1,7 +1,5 @@
 import {Observatory} from "./Observatory";
 
-interface Subscribing{
+export interface Subscribing{
     subscribe_at(observatory: Observatory): void;
 }
-
-export {Subscribing}

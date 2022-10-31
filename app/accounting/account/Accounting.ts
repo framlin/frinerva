@@ -6,6 +6,7 @@ import {Observer} from "../../common/observation/Observer";
 import {Subject} from "../../common/observation/Subject";
 import {AccountingHelper} from "../../common/persistence/helper/AccountingHelper";
 import {Account, ACCOUNT_ID, AccountData} from "./Account";
+import {AccountHandle} from "./AccountHandle";
 import {BookingEntry} from "./BookingEntry";
 
 
@@ -33,10 +34,10 @@ export class Accounting extends DomainEntity implements Observable<Account> {
         return new BookingEntry(date, subject, name, amount, booking_code);
     }
 
-    async create_account(booking_period: string, cost_center: string): Promise<Account | null> {
+    async create_account({booking_period, cost_center}: AccountHandle): Promise<Account | null> {
         let account: Account | null = null;
-        if (!(this._account_storage as typeof AccountingHelper).account_exists(booking_period, cost_center)) {
-            account = new Account(booking_period, cost_center);
+        if (!(this._account_storage as typeof AccountingHelper).account_exists({booking_period, cost_center})) {
+            account = new Account({booking_period, cost_center});
             await this.save_account(account);
             if (this._subject) this._subject.state = account;
         }
@@ -50,11 +51,14 @@ export class Accounting extends DomainEntity implements Observable<Account> {
             let booking_entry = BookingEntry.create_from_data(entry);
             booking_entries.push(booking_entry);
         }
-        let new_account = await this.create_account(booking_period, cost_center);
+        let new_account = await this.create_account({booking_period, cost_center});
         if (new_account) {
             new_account.booking_entries = booking_entries;
         } else {
-            new_account = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
+            new_account = await (this._account_storage as typeof AccountingHelper).load_account({
+                booking_period,
+                cost_center
+            });
             if ( new_account)  {
                 new_account.booking_entries = booking_entries;
                 if (this._subject) this._subject.state = new_account;
@@ -64,12 +68,12 @@ export class Accounting extends DomainEntity implements Observable<Account> {
         return new_account;
     }
 
-    async create_virtual_account(booking_period: string, cost_center: string) : Promise<Account|null>{
+    async create_virtual_account({booking_period, cost_center}: AccountHandle) : Promise<Account|null>{
         let result;
-        if ((this._account_storage as typeof AccountingHelper).account_exists(booking_period, cost_center)) {
-            result = await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
+        if ((this._account_storage as typeof AccountingHelper).account_exists({booking_period, cost_center})) {
+            result = await (this._account_storage as typeof AccountingHelper).load_account({booking_period, cost_center});
         } else {
-            result = new Account(booking_period, cost_center);
+            result = new Account({booking_period, cost_center});
         }
         return result;
     }
@@ -89,7 +93,7 @@ export class Accounting extends DomainEntity implements Observable<Account> {
 
     async load_account(key: string): Promise<Account | null> {
         let [booking_period, cost_center] = key.split('!');
-        return await (this._account_storage as typeof AccountingHelper).load_account(booking_period, cost_center);
+        return await (this._account_storage as typeof AccountingHelper).load_account({booking_period, cost_center});
     }
 
     async save_account(account: Account) {

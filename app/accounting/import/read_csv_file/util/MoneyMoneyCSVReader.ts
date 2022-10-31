@@ -1,7 +1,6 @@
 import CsvReadableStream from 'csv-reader';
 
-class MoneyMoneyCSVReader{
-
+export class MoneyMoneyCSVReader {
     static create_payments(file_stream: any) {
         return new Promise(resolve => {
             let payment_entries: any[] = [];
@@ -18,6 +17,3 @@ class MoneyMoneyCSVReader{
         });
     }
 }
-
-module.exports = {MoneyMoneyCSVReader};
-export {MoneyMoneyCSVReader}

@@ -5,7 +5,7 @@ import {ReadCSVFileHelper} from "./ReadCSVFileHelper";
 import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
 import {MoneyMoneyToBookingRecordConverter} from "./util/MoneyMoneyToBookingRecordConverter";
 
-class ReadCSVFileInteractor extends UseCaseInteractor {
+export class ReadCSVFileInteractor extends UseCaseInteractor {
     async execute(file_name: string) {
         if (file_name) {
             let file = this.helper.load_file(file_name);
@@ -51,8 +51,4 @@ class ReadCSVFileInteractor extends UseCaseInteractor {
 
     private _payments: MoneyMoneyPayment[] = [];
     private _booking_records: BookingRecordData[] = [];
-
 }
-
-module.exports = {ReadCSVFileInteractor};
-export {ReadCSVFileInteractor}

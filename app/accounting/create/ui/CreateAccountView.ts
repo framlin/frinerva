@@ -1,7 +1,7 @@
 import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
-import {AccountDescription} from "../AccountDescription";
+import {AccountHandle} from "../../account/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
 
 
@@ -33,7 +33,7 @@ export class CreateAccountView extends UseCaseView {
     }
 
     get_new_accounts_list() {
-        let new_accounts_list : AccountDescription[] = [];
+        let new_accounts_list : AccountHandle[] = [];
         let result_column_entries = document.querySelectorAll('#result-column .account-entry') as NodeListOf<HTMLElement>;
         result_column_entries.forEach((entry) => {
             new_accounts_list.push({

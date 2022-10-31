@@ -6,22 +6,19 @@ import {AccountData} from "../../account/Account";
 import {BookingEntry} from "../../account/BookingEntry";
 
 
-let show_account_view: ShowAccountView;
-
 export class ShowAccountView extends UseCaseView {
 
     constructor(use_case_name: string) {
         super(use_case_name, 'accounting');
-        show_account_view = this;
     }
 
     show_account(account: AccountData, editable: boolean = true): void {
         console.log('ShowAccountView.show_account', account);
         this._current_account = account;
-        let account_panel = document.querySelector('#account-panel') as HTMLDivElement;
+        const account_panel = document.querySelector('#account-panel') as HTMLDivElement;
         account_panel.innerHTML = '';
-        let property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
-        let account_div = TableRenderer.create_table(
+        const property_mapping = BookingEntry.property_mapping.filter((prop) => prop !== 'id');
+        const account_div = TableRenderer.create_table(
             `${account.booking_period} - ${account.cost_center}`,
             account.booking_entries,
             property_mapping,
@@ -39,14 +36,14 @@ export class ShowAccountView extends UseCaseView {
     }
 
     register_event_listener(): void {
-        let edit_button = document.querySelector('.edit-btn') as HTMLButtonElement;
+        const edit_button = document.querySelector('.edit-btn') as HTMLButtonElement;
         edit_button.addEventListener('click', () => {
             if (this._current_account) this.show_account(this._current_account, true);
-            let submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
+            const submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
             submit_button.removeAttribute('disabled');
         })
 
-        let submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
+        const submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
         submit_button.addEventListener('click', () => {
             if (this._current_account) {
                 ipcRenderer.send('show_account:submit_account', this._current_account);
@@ -64,7 +61,3 @@ export class ShowAccountView extends UseCaseView {
             })
     }
 }
-
-// ipcRenderer.on('show_account:show_account', (e, account: AccountData, editable) => {
-//     show_account_view.show_account(account, editable);
-// })

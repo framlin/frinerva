@@ -1,6 +1,6 @@
 import {Observable} from "./Observable";
 
-abstract class Observer<T>{
+export abstract class Observer<T>{
     CLASS_ID: T
     protected constructor(class_id: T) {
         this.CLASS_ID = class_id;
@@ -9,4 +9,3 @@ abstract class Observer<T>{
     abstract signal(subject: Observable<T>): void;
 }
 
-export {Observer}

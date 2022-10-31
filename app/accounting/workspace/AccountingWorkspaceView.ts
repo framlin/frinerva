@@ -1,8 +1,7 @@
 import {WorkspaceView} from "../../common/ui/workspace/WorkspaceView";
+import {ipcRenderer} from "electron";
 
-const {ipcRenderer} = require("electron");
-
-class AccountingWorkspaceView extends WorkspaceView {
+export class AccountingWorkspaceView extends WorkspaceView {
 
     constructor() {
         super();
@@ -10,7 +9,7 @@ class AccountingWorkspaceView extends WorkspaceView {
     }
 
     static async create_workspace() : Promise<WorkspaceView> {
-        let wsv = await WorkspaceView.create_workspace('accounting', __dirname);
+        const wsv = await WorkspaceView.create_workspace('accounting', __dirname);
         ipcRenderer.send('use_case:create', 'accounting', 'show_list');
         return wsv;
     }
@@ -26,7 +25,3 @@ class AccountingWorkspaceView extends WorkspaceView {
         ]);
     }
 }
-
-
-module.exports = {AccountingWorkspaceView};
-export {AccountingWorkspaceView}

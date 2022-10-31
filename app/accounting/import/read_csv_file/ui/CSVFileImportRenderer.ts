@@ -10,7 +10,7 @@ class CSVFileImportRenderer {
      show_booking_records(booking_entries: BookingRecordData[]) {
         this._active_booking_entries = booking_entries;
 
-        let payments_div = document.querySelector("#payment-entries") as HTMLDivElement;
+        const payments_div = document.querySelector("#payment-entries") as HTMLDivElement;
         if (payments_div.firstChild) {
             while (payments_div.firstChild) {
                 try {
@@ -19,7 +19,7 @@ class CSVFileImportRenderer {
                 }
             }
         }
-        let table = document.createElement("table");
+        const table = document.createElement("table");
         booking_entries.forEach((entry) => {
             this._add_booking_entries_row(table, entry);
         });
@@ -27,11 +27,11 @@ class CSVFileImportRenderer {
     }
 
      _add_booking_entries_row(table: HTMLTableElement, booking_record: BookingRecordData) {
-        let row = table.insertRow(-1);
-        let {booking_entry} = booking_record;
+        const row = table.insertRow(-1);
+        const {booking_entry} = booking_record;
         // @ts-ignore
         row.booking_record = booking_record;
-        let property_mapping = BookingEntry.property_mapping;
+        const property_mapping = BookingEntry.property_mapping;
         property_mapping.forEach((prop: string, i: number) => {
             if (prop !== 'id') {
                 this._insert_editable_cell(row, i, prop, booking_entry);
@@ -39,33 +39,34 @@ class CSVFileImportRenderer {
         });
 
         let i = 5;
-        let {cost_center, booking_period} = booking_record;
-        let metadata = {cost_center, booking_period};
-        for (let prop in metadata) {
+        const {cost_center, booking_period} = booking_record;
+        const metadata = {cost_center, booking_period};
+        for (const prop in metadata) {
             this._insert_editable_cell(row, i++, prop, booking_record);
         }
     }
 
      _insert_editable_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingData) {
-        let {cell, text} = this._add_cell(row, i, prop, buffer);
-        cell.appendChild(text);
+        const {cell, text} = this._add_cell(row, i, prop, buffer);
+        // noinspection TypeScriptValidateJSTypes
+         cell.appendChild(text);
         cell.addEventListener('click', () => {
-            let input_elem = this._make_cell_editable(cell, row);
+            const input_elem = this._make_cell_editable(cell, row);
             this._add_event_listener(input_elem, buffer, cell);
         });
     }
 
      _add_cell(row: HTMLTableRowElement, i: number, prop: string, buffer: BookingData) {
-        let cell = row.insertCell(i);
+        const cell = row.insertCell(i);
         // @ts-ignore
         cell.prop = prop;
 
         // @ts-ignore
-         let content = (prop === 'date') ?
+         const content = (prop === 'date') ?
              // @ts-ignore
             buffer[prop].toLocaleString('de-DE').split(',')[0] : buffer[prop];
 
-        let text = document.createTextNode(content);
+        const text = document.createTextNode(content);
         return {cell, text};
     }
 
@@ -86,7 +87,7 @@ class CSVFileImportRenderer {
     }
 
      _make_cell_editable(cell: HTMLTableCellElement, row: HTMLTableRowElement) {
-        let input_elem = document.createElement("input");
+        const input_elem = document.createElement("input");
         input_elem.setAttribute('type', 'text');
         cell.style.padding = "0px";
         cell.style.margin = "0px";

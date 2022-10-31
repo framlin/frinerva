@@ -10,7 +10,7 @@ test('creation', () => {
 
 test('add Account', () => {
     let balance = new Balance("name", "2022");
-    let account = new Account('account1', 'CC');
+    let account = new Account({booking_period: 'account1', cost_center: 'CC'});
 
     balance.add(account);
     expect(balance.accounts.length).toBe(1);
@@ -19,8 +19,8 @@ test('add Account', () => {
 
 test('add two Accounts', () => {
     let balance = new Balance("name", "2022");
-    let account = new Account('account1', 'CC');
-    let account2 = new Account('account2', 'C2');
+    let account = new Account({booking_period: 'account1', cost_center: 'CC'});
+    let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
     balance.add(account);
     balance.add(account2);
@@ -29,8 +29,8 @@ test('add two Accounts', () => {
 
 test('setting accounts', () => {
     let balance = new Balance("name", "2022");
-    let account = new Account('account1', 'CC');
-    let account2 = new Account('account2', 'C2');
+    let account = new Account({booking_period: 'account1', cost_center: 'CC'});
+    let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
     let accounts = [account, account2];
     balance.accounts = accounts;
@@ -40,8 +40,8 @@ test('setting accounts', () => {
 
 test('serialization', () => {
     let balance = new Balance("name", "2022");
-    let account = new Account('account1', 'CC');
-    let account2 = new Account('account2', 'C2');
+    let account = new Account({booking_period: 'account1', cost_center: 'CC'});
+    let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
     balance.add(account);
     balance.add(account2);
@@ -53,8 +53,8 @@ test('serialization', () => {
 
 test('un-serialization', () => {
     let balance = new Balance("name", "2022");
-    let account = new Account('account1', 'CC');
-    let account2 = new Account('account2', 'C2');
+    let account = new Account({booking_period: 'account1', cost_center: 'CC'});
+    let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
     balance.add(account);
     balance.add(account2);

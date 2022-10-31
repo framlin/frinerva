@@ -7,6 +7,7 @@ export const COST_CENTER = {
     BANKING: "BANKING",
     PRIVATE: "PRIVATE",
     DEPOSIT: "DEPOSIT",
+    ESTATE: "ESTATE",
     RENT: "RENT"
 };
 

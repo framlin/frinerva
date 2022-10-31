@@ -2,8 +2,7 @@ import * as Fs from 'fs';
 import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import {MoneyMoneyCSVReader} from "./util/MoneyMoneyCSVReader";
 
-class ReadCSVFileHelper extends UseCaseHelper{
-
+export class ReadCSVFileHelper extends UseCaseHelper {
 
     load_file(file_name: string) {
         if (file_name) {
@@ -13,10 +12,7 @@ class ReadCSVFileHelper extends UseCaseHelper{
         }
     }
 
-    async create_payments(file: any) : Promise<any>{
+    async create_payments(file: any): Promise<any> {
         return await MoneyMoneyCSVReader.create_payments(file);
     }
-
 }
-
-export {ReadCSVFileHelper}

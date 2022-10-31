@@ -15,23 +15,23 @@ const COST_CENTER_MAP = new Map(Object.entries({
     'NebenKosten': 'SERVICE_CHARGES'
 }));
 
-class MoneyMoneyToBookingRecordConverter {
+export class MoneyMoneyToBookingRecordConverter {
     convert(payment_entry: MoneyMoneyPayment): BookingRecordData {
-        let booking_entry = Accounting.create_booking_entry(
+        const booking_entry = Accounting.create_booking_entry(
             this._convert_to_date(payment_entry.Datum),
             payment_entry.Verwendungszweck,
             payment_entry.Name,
             this._convert_to_amount(payment_entry.Betrag),
             "BC??"
         );
-        let booking_entry_data = booking_entry.data;
-        let booking_period = booking_entry.date.getFullYear().toString();
-        let cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
+        const booking_entry_data = booking_entry.data;
+        const booking_period = booking_entry.date.getFullYear().toString();
+        const cost_center = this._convert_category_to_cost_center(payment_entry.Kategorie);
         return {booking_entry: booking_entry_data, cost_center, booking_period};
     }
 
     _convert_to_date(date_str: string) {
-        let [day, month, year] = date_str.split(".");
+        const [day, month, year] = date_str.split(".");
         return new Date(+year, +month - 1, +day);
     }
 
@@ -48,19 +48,14 @@ class MoneyMoneyToBookingRecordConverter {
     }
 
     _extract_cost_center_key(category: string) {
-        let elems = category.split('-');
-        let cost_center_key = elems[elems.length - 1]
+        const elems = category.split('-');
+        const cost_center_key = elems[elems.length - 1]
         return this._strip_whitespaces(cost_center_key);
     }
 
     _convert_category_to_cost_center(category: string) {
-        let cost_center_key = this._extract_cost_center_key(category);
-        let cost_center = COST_CENTER_MAP.get(cost_center_key);
+        const cost_center_key = this._extract_cost_center_key(category);
+        const cost_center = COST_CENTER_MAP.get(cost_center_key);
         return cost_center || "";
     }
-
-
 }
-
-module.exports = {MoneyMoneyToBookingRecordConverter};
-export {MoneyMoneyToBookingRecordConverter}

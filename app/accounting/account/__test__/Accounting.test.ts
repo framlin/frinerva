@@ -11,7 +11,7 @@ function mock_accounting_helper() {
         .mockImplementation(() => Promise.resolve());
 
     jest.spyOn(AccountingHelper, 'load_account')
-        .mockImplementation(() => Promise.resolve(new Account("2020-01", "123")));
+        .mockImplementation(() => Promise.resolve(new Account({booking_period: '2020-01', cost_center: '123'})));
 
     jest.spyOn(AccountingHelper, 'get_account_name_list')
         .mockImplementation(() => Promise.resolve([{booking_period: '2020-01', cost_center: '123'}]));
@@ -27,7 +27,7 @@ beforeEach(() => {
 });
 
 test('Accounting can create an account', async () => {
-    const account = await accounting.create_account('2020-01', '123');
+    const account = await accounting.create_account({booking_period: '2020-01', cost_center: '123'});
     expect(account).not.toBeNull();
     if (account) {
         expect(account).toBeInstanceOf(Account);
@@ -38,7 +38,7 @@ test('Accounting can create an account', async () => {
 
 
 test('Accounting can load an account', async () => {
-    const account = await accounting.create_account('2020-01', '123');
+    const account = await accounting.create_account({booking_period: '2020-01', cost_center: '123'});
     expect(account).not.toBeNull();
     if (account) {
         expect(account).toBeInstanceOf(Account);
@@ -87,7 +87,7 @@ test('Accounting can create a booking entry', () => {
 });
 
 test('get account names', async () => {
-    const account = await accounting.create_account('2020-01', '123');
+    const account = await accounting.create_account({booking_period: '2020-01', cost_center: '123'});
 
     expect(account).not.toBeNull();
     if (account) {
@@ -109,7 +109,7 @@ test('get account names', async () => {
 });
 
 test('Accounting can create a virtual account, if it does not exist', async () => {
-    const account = await accounting.create_virtual_account('2020-01', 'DOES NOT EXIST');
+    const account = await accounting.create_virtual_account({booking_period: '2020-01', cost_center: 'DOES NOT EXIST'});
     expect(account).not.toBeNull();
     if (account) {
         expect(account).toBeInstanceOf(Account);
@@ -124,7 +124,7 @@ test('Accounting can create a virtual account, if it already exists', async () =
         .mockImplementation(() => true);
 
     const accounting = new Accounting(AccountingHelper);
-    const account = await accounting.create_virtual_account('2020-01', '123');
+    const account = await accounting.create_virtual_account({booking_period: '2020-01', cost_center: '123'});
     expect(account).not.toBeNull();
     if (account) {
         expect(account).toBeInstanceOf(Account);

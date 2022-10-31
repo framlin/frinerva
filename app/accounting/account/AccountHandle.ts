@@ -1,0 +1,1 @@
+export interface AccountHandle { booking_period: string; cost_center: string}

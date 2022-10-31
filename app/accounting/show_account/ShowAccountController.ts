@@ -11,7 +11,7 @@ export class ShowAccountController extends UseCaseController implements Observer
 
     protected register_ipc_listener() {
         super.register_ipc_listener();
-        register_IPCMain_listener('show_account:submit', (e, account: AccountData) => {
+        register_IPCMain_listener('show_account:submit_account', (e, account: AccountData) => {
             this.on_submit(account);
         });
      }

@@ -1,6 +1,6 @@
 import {UseCaseInteractor} from "../../common/use_case/UseCaseInteractor";
+import {AccountHandle} from "../account/AccountHandle";
 import {Accounting} from "../account/Accounting";
-import {AccountDescription} from "./AccountDescription";
 import {AccountDescriptionLabel} from "./AccountDescriptionLabel";
 import {BookingPeriodAccountDescriptionList} from "./BookingPeriodAccountDescriptionList";
 import {CreateAccountHelper} from "./CreateAccountHelper";
@@ -29,11 +29,11 @@ export class CreateAccountInteractor extends UseCaseInteractor {
         this.response_boundary.show_new_accounts_list(new_entry_list);
     }
 
-    async create(new_accounts_list: AccountDescription[]) {
+    async create(new_accounts_list: AccountHandle[]) {
         for (const new_account of new_accounts_list) {
             const booking_period = new_account.booking_period;
             const cost_center = new_account.cost_center;
-            const account = await (this._domain_entity as Accounting).create_account(booking_period, cost_center);
+            const account = await (this._domain_entity as Accounting).create_account({booking_period, cost_center});
             if (!account) {
                 this.response_boundary.show_error({error: 'ACCOUNT_EXIST', booking_period, cost_center});
             }

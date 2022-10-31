@@ -10,11 +10,11 @@ test('creation', () => {
 
 test('getting an Account', () => {
     let balancing = new Balancing();
-    let account = new Account('name', 'CC');
+    let account = new Account({booking_period: 'name', cost_center: 'CC'});
     let balance = new Balance('name', "2022");
     balance.add(account);
     balancing.register(balance);
 
-    let account2 = balancing.get_accounts('CC', "2022")[0];
+    let account2 = balancing.get_accounts({cost_center:'CC', booking_period: "2022"})[0];
     expect(account2).toStrictEqual(account);
 })

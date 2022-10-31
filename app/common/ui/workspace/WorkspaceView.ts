@@ -11,54 +11,54 @@ class WorkspaceView {
     }
 
     clear_sideboard_entries() {
-        let sideboard_entries = document.querySelectorAll('.sideboard-entry');
+        const sideboard_entries = document.querySelectorAll('.sideboard-entry');
         sideboard_entries.forEach((entry) => {
             entry.classList.remove('active');
         });
     }
 
     activate_sideboard_entry(entry_selector: string) {
-        let element = document.querySelector(entry_selector);
+        const element = document.querySelector(entry_selector);
         if (element) element.classList.add('active');
     }
 
     register_sideboard_switches(side_board_switch_selector_list: string[]) {
-        for (let selector of side_board_switch_selector_list) {
+        for (const selector of side_board_switch_selector_list) {
             this.register_sideboard_switch(selector) ;
         }
     }
 
     register_sideboard_switch(sidebar_switch_selector: string) {
-        let sidebar_switch = document.querySelector(sidebar_switch_selector);
+        const sidebar_switch = document.querySelector(sidebar_switch_selector);
         if (sidebar_switch) sidebar_switch.addEventListener('click', () => {
             if (sidebar_switch) {
-                let switch_to_selector = sidebar_switch.getAttribute('switch_to');
+                const switch_to_selector = sidebar_switch.getAttribute('switch_to');
                 if (switch_to_selector) this.switch_sideboard_to(switch_to_selector);
             }
         });
     }
 
     register_use_case_starter(use_case_starter_selector_list: string[]) {
-        for (let selector of use_case_starter_selector_list) {
+        for (const selector of use_case_starter_selector_list) {
             this.register_use_case_starter_btn(selector)
         }
     }
 
     register_use_case_starter_btn(btn_selector: string) {
-        let use_case_starter = document.querySelector(btn_selector);
+        const use_case_starter = document.querySelector(btn_selector);
         if (use_case_starter) {
             // @ts-ignore
-            let use_case_name = use_case_starter.dataset.use_case_name;
+            const use_case_name = use_case_starter.dataset.use_case_name;
             // @ts-ignore
-            let domain_name = use_case_starter.dataset.domain_name;
+            const domain_name = use_case_starter.dataset.domain_name;
             use_case_starter.addEventListener('click', () => {
                 ipcRenderer.send('use_case:create', domain_name, use_case_name);
             });
         }
     }
     static replace_partial(markup: string, overlay: string) {
-        let overlay_div = document.querySelector(overlay);
-        let partial_frame_div = document.createElement('div');
+        const overlay_div = document.querySelector(overlay);
+        const partial_frame_div = document.createElement('div');
         if (partial_frame_div) {
             partial_frame_div.innerHTML = markup;
             if (overlay_div) {
@@ -69,16 +69,16 @@ class WorkspaceView {
     }
 
     static async create_segment(markup_file: string, target: string) {
-        let markup = await HTMLReader.read_html_file(markup_file);
+        const markup = await HTMLReader.read_html_file(markup_file);
         this.replace_partial(markup, target);
 
     }
 
     static mark_workspace(workspace_name: string) {
-        let workspace = document.querySelector('#workspace');
+        const workspace = document.querySelector('#workspace');
         if (workspace) {
             //@ts-ignore
-            for(let cls of workspace.classList.values()) {
+            for(const cls of workspace.classList.values()) {
                 workspace.classList.remove(cls);
             }
             workspace.classList.add(workspace_name);
@@ -87,24 +87,25 @@ class WorkspaceView {
 
 
     static link_style(stylesheet_filename: string) {
-        let head = document.getElementsByTagName('HEAD')[0];
-        let link = document.createElement('link');
+        const head = document.getElementsByTagName('HEAD')[0];
+        const link = document.createElement('link');
         link.rel = 'stylesheet';
         link.type = 'text/css';
         link.href = stylesheet_filename;
+        // noinspection TypeScriptValidateJSTypes
         head.appendChild(link);
     }
 
     static splitter() {
         let pointer_down: boolean;
-        let splitter = document.querySelector('#splitter-panel')!;
-        let side_board = document.querySelector('.sideboard')!;
-        let work_bench = document.querySelector('.workbench')!;
+        const splitter = document.querySelector('#splitter-panel')!;
+        const side_board = document.querySelector('.sideboard')!;
+        const work_bench = document.querySelector('.workbench')!;
 
         function move_splitter(e: any) {
             if (pointer_down) {
-                let x = e.layerX - 25;
-                let grid = document.querySelector('#workspace')!;
+                const x = e.layerX - 25;
+                const grid = document.querySelector('#workspace')!;
                 // @ts-ignore
                 grid.style.gridTemplateColumns = `25px [side-board] ${x}px [splitter] 3px  [work-bench]`;
             }

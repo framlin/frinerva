@@ -1,6 +1,8 @@
+import {Account} from "../../accounting/account/Account";
+import {AccountHandle} from "../../accounting/account/AccountHandle";
 import {Balance} from "./Balance";
 
-class Balancing {
+export class Balancing {
     _balances: Balance[];
 
     constructor() {
@@ -10,7 +12,7 @@ class Balancing {
         this._balances.push(balance)
     }
 
-    get_accounts(cost_center: string, booking_period: string) {
+    get_accounts({booking_period, cost_center}:AccountHandle): Account[]  {
         let balances = [];
         let accounts = []
         for(let balance of this._balances) {
@@ -29,6 +31,3 @@ class Balancing {
         return accounts;
     }
 }
-
-module.exports = {Balancing};
-export {Balancing}

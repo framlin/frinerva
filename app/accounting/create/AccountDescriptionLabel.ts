@@ -1,1 +1,5 @@
-export type AccountDescriptionLabel = { booking_period: string, label: string, cost_center: string };
+import {AccountHandle} from "../account/AccountHandle";
+
+export interface AccountDescriptionLabel extends AccountHandle {
+    label: string
+};

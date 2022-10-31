@@ -1,7 +1,5 @@
 import {Observatory} from "./Observatory";
 
-interface Providing {
+export interface Providing {
     provide_at(observatory: Observatory): void;
 }
-
-export {Providing}
