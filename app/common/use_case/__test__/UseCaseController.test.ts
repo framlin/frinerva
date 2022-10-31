@@ -9,8 +9,6 @@ class InteractorStub extends  UseCaseInteractor {
     execute(...data: any[]): any {}
 }
 
-// @ts-ignore
-const use_case_presenter = new UseCasePresenter({});
 
 function mock_use_case_presenter() {
     UseCasePresenter.prototype.show = jest.fn().mockImplementation((...data: unknown[]) => {});
@@ -31,12 +29,18 @@ function spy_on_controller() {
     jest.spyOn(UseCaseController.prototype, 'register_ipc_listener').mockImplementation(() => {});
 }
 
+
+// @ts-ignore
+const use_case_presenter = new UseCasePresenter({});
+
+
 describe('UseCaseController', () => {
+    mock_use_case_presenter();
+    stub_use_case_factory();
+    spy_on_controller();
+
     it('should be able to instantiate', () => {
         // Arrange
-        mock_use_case_presenter();
-        stub_use_case_factory();
-        spy_on_controller();
         // @ts-ignore DomainEntity
         const interactor = new InteractorStub({}, {}, new AccountingHelper());
         const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
@@ -44,5 +48,46 @@ describe('UseCaseController', () => {
         const use_case_controller = new UseCaseController(interactor, use_case);
         // Assert
         expect(use_case_controller).toBeInstanceOf(UseCaseController);
+    });
+
+    it('calls interactor.execute if execute is called', () => {
+        // Arrange
+        // @ts-ignore DomainEntity
+        const interactor = new InteractorStub({}, {}, new AccountingHelper());
+        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+        const use_case_controller = new UseCaseController(interactor, use_case);
+        const spy = jest.spyOn(interactor, 'execute');
+        // Act
+        use_case_controller.execute("hallo");
+        // Assert
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith("hallo");
+    });
+
+    it('calls use_case.forward if forward is called', () => {
+        // Arrange
+        // @ts-ignore DomainEntity
+        const interactor = new InteractorStub({}, {}, new AccountingHelper());
+        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+        const use_case_controller = new UseCaseController(interactor, use_case);
+        const spy = jest.spyOn(use_case, 'forward');
+        // Act
+        use_case_controller.forward("hallo");
+        // Assert
+        expect(spy).toHaveBeenCalled();
+        expect(spy).toHaveBeenCalledWith("hallo");
+    });
+
+    it('cals execute if on_use_case_ready is called', () => {
+        // Arrange
+        // @ts-ignore DomainEntity
+        const interactor = new InteractorStub({}, {}, new AccountingHelper());
+        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+        const use_case_controller = new UseCaseController(interactor, use_case);
+        const spy = jest.spyOn(use_case_controller, 'execute');
+        // Act
+        use_case_controller.on_use_case_view_ready();
+        // Assert
+        expect(spy).toHaveBeenCalled();
     });
 });
