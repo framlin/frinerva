@@ -1,14 +1,14 @@
-import {MainWindow} from "./MainWindow";
-import  {app, BrowserWindow, Menu}  from 'electron';
+import {app, BrowserWindow, Menu} from 'electron';
 import {UseCaseFactory} from '../accounting/factories/UseCaseFactory';
-
 import {DomainFactory} from './DomainFactory';
+import {MainMenu} from "./MainMenu";
+import {MainWindow} from "./MainWindow";
+
 const DOMAINS = DomainFactory.get_domains();
 
-import {MainMenu} from "./MainMenu";
 const menuTemplate = MainMenu.createMenuTemplate(DomainFactory)
 
-let mainWindow: MainWindow|null;
+let mainWindow: MainWindow | null;
 app.name = "Frinerva";
 
 // @ts-ignore
@@ -26,9 +26,9 @@ function create_main_window() {
     }
 
     mainWindow.once('ready-to-show', () => {
-        for(let i = 0; i < DOMAINS.length; i++) {
+        for (let i = 0; i < DOMAINS.length; i++) {
             let domain = DomainFactory.create(DOMAINS[i]);
-            if (mainWindow)  mainWindow.add_domain(domain);
+            if (mainWindow) mainWindow.add_domain(domain);
         }
         if (mainWindow) mainWindow.show();
     });
@@ -63,25 +63,3 @@ app.on('window-all-closed', function () {
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
 
-//================================    TEST     ==================================
-// const METHODS = require('./__test__/electron_tests');
-//
-// const onMessage = async ({msgId, cmd, args}) => {
-//     let method = METHODS[cmd];
-//     if (!method) method = () => new Error('Invalid method: ' + cmd)
-//     try {
-//         const resolve = await method(...args)
-//         process.send({msgId, resolve})
-//     } catch (err) {
-//         const reject = {
-//             message: err.message,
-//             stack: err.stack,
-//             name: err.name
-//         }
-//         process.send({msgId, reject})
-//     }
-// }
-//
-// if (process.env.APP_TEST_DRIVER) {
-//     process.on('message', onMessage)
-// }

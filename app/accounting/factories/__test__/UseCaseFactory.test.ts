@@ -35,9 +35,13 @@ class ControllerMock extends UseCaseController {
 }
 
 class PresenterMock extends UseCasePresenter {
+    show(...data: unknown[]): void {
+    }
 }
 
 class InteractorMock extends UseCaseInteractor {
+    execute(...data: any[]): any {
+    }
 }
 
 class ViewMock extends UseCaseView {

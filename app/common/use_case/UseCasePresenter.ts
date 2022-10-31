@@ -3,7 +3,7 @@ import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
 
 export abstract class UseCasePresenter implements UseCaseResponseBoundary{
 
-    protected constructor(protected _ipc_channel: WebContents) {}
+    constructor(protected _ipc_channel: WebContents) {}
 
     abstract show(...data: unknown[]): void;
 

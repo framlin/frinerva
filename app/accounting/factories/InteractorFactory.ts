@@ -6,11 +6,12 @@ import {UseCaseResponseBoundary} from "../../common/use_case/UseCaseResponseBoun
 
 
 export class InteractorFactory {
-    static create(ctor: UseCaseInteractorConstructor,
-                  domain_entity: DomainEntity,
-                  response_boundary: UseCaseResponseBoundary,
-                  helper: UseCaseHelper)
-        : UseCaseInteractor {
+    static create (
+        ctor: UseCaseInteractorConstructor,
+        domain_entity: DomainEntity,
+        response_boundary: UseCaseResponseBoundary,
+        helper: UseCaseHelper
+    ): UseCaseInteractor {
         return new ctor(domain_entity, response_boundary, helper);
     }
 }

@@ -5,7 +5,7 @@ import {DomainEntity} from "../domain/DomainEntity";
 
 export abstract class UseCaseInteractor implements UseCaseRequestBoundary{
 
-    protected constructor(
+    constructor(
         protected _domain_entity: DomainEntity,
         protected _response_boundary: UseCaseResponseBoundary,
         protected _helper : UseCaseHelper
