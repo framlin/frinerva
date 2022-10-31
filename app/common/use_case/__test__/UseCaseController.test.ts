@@ -39,11 +39,20 @@ describe('UseCaseController', () => {
     stub_use_case_factory();
     spy_on_controller();
 
-    it('should be able to instantiate', () => {
-        // Arrange
+
+    let interactor: InteractorStub;
+    let use_case_controller: UseCaseController;
+    let use_case: UseCase;
+
+    beforeEach(() => {
         // @ts-ignore DomainEntity
-        const interactor = new InteractorStub({}, {}, new AccountingHelper());
-        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+         interactor = new InteractorStub({}, {}, new AccountingHelper());
+         use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+         use_case_controller = new UseCaseController(interactor, use_case);
+    })
+
+
+    it('should be able to instantiate', () => {
         // Act
         const use_case_controller = new UseCaseController(interactor, use_case);
         // Assert
@@ -52,10 +61,6 @@ describe('UseCaseController', () => {
 
     it('calls interactor.execute if execute is called', () => {
         // Arrange
-        // @ts-ignore DomainEntity
-        const interactor = new InteractorStub({}, {}, new AccountingHelper());
-        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
-        const use_case_controller = new UseCaseController(interactor, use_case);
         const spy = jest.spyOn(interactor, 'execute');
         // Act
         use_case_controller.execute("hallo");
@@ -66,10 +71,6 @@ describe('UseCaseController', () => {
 
     it('calls use_case.forward if forward is called', () => {
         // Arrange
-        // @ts-ignore DomainEntity
-        const interactor = new InteractorStub({}, {}, new AccountingHelper());
-        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
-        const use_case_controller = new UseCaseController(interactor, use_case);
         const spy = jest.spyOn(use_case, 'forward');
         // Act
         use_case_controller.forward("hallo");
@@ -80,10 +81,6 @@ describe('UseCaseController', () => {
 
     it('cals execute if on_use_case_ready is called', () => {
         // Arrange
-        // @ts-ignore DomainEntity
-        const interactor = new InteractorStub({}, {}, new AccountingHelper());
-        const use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
-        const use_case_controller = new UseCaseController(interactor, use_case);
         const spy = jest.spyOn(use_case_controller, 'execute');
         // Act
         use_case_controller.on_use_case_view_ready();
