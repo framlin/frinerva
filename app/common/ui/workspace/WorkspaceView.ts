@@ -5,6 +5,14 @@ import {ViewFactory}  from "../../../accounting/factories/ViewFactory";
 
 class WorkspaceView {
 
+    static async create_workspace(workspace_name: string, workspace_directory: string): Promise<WorkspaceView> {
+        this.mark_workspace(workspace_name);
+        await this.create_segments(workspace_directory);
+        this.link_styles(workspace_directory);
+        this.splitter();
+        return new WorkspaceView();
+    }
+
     switch_sideboard_to(sideboard_entry_selector: string) {
         this.clear_sideboard_entries();
         this.activate_sideboard_entry(sideboard_entry_selector);
@@ -141,13 +149,6 @@ class WorkspaceView {
 
     }
 
-    static async create_workspace(workspace_name: string, workspace_directory: string) {
-        this.mark_workspace(workspace_name);
-        await this.create_segments(workspace_directory);
-        this.link_styles(workspace_directory);
-        this.splitter();
-        return new WorkspaceView();
-    }
 }
 
 ipcRenderer.on('use_case:created', async (e, use_case_name: string, ...data: any[]) => {

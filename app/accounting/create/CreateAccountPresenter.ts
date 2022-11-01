@@ -27,5 +27,8 @@ export class CreateAccountPresenter extends UseCasePresenter implements CreateAc
     account_creation_done() {
         this._ipc_channel.send('create_account:done');
     }
+
+    show(...data: unknown[]): void {
+    }
 }
 

@@ -3,9 +3,9 @@ import {dispatch_booking_entries} from "../import/dispatch_booking_entries";
 import {read_csv_file} from "../import/read_csv_file";
 import {show_account} from "../show_account";
 import {show_list} from "../show_list";
-import {UseCaseList} from "./UseCaseList";
+import {TUseCaseList} from "./TUseCaseList";
 
-export const  UseCases : UseCaseList = {
+export const  UseCases : TUseCaseList = {
     read_csv_file,
     create_account,
     show_list,

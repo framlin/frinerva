@@ -8,8 +8,8 @@ export class AccountingWorkspaceView extends WorkspaceView {
         this.register_event_handler();
     }
 
-    static async create_workspace() : Promise<WorkspaceView> {
-        const wsv = await WorkspaceView.create_workspace('accounting', __dirname);
+    static async create_workspace(workspace_name: string, workspace_directory: string = __dirname) : Promise<WorkspaceView> {
+        const wsv = await super.create_workspace(workspace_name, workspace_directory);
         ipcRenderer.send('use_case:create', 'accounting', 'show_list');
         return wsv;
     }
