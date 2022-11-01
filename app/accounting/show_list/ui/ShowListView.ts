@@ -1,9 +1,10 @@
 import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
+import {TUseCaseName} from "../../account/TUseCaseName";
 
 export class ShowListView extends UseCaseView {
-    constructor(use_case_name: string) {
+    constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting');
     }
 

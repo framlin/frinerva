@@ -3,6 +3,7 @@ import {Subscribing} from "../observation/Subscribing";
 import {register_IPCMain_listener} from "../ui/ipc/register_IPCMain_listener";
 import {UseCase} from "./UseCase";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
+import {TUseCaseName} from "../../accounting/account/TUseCaseName";
 
 export class UseCaseController implements Subscribing {
     constructor(
@@ -24,7 +25,7 @@ export class UseCaseController implements Subscribing {
         if (this._request_boundary) this._request_boundary.execute(...data)
     }
 
-    forward(use_case_name: string, ...data: any[]) {
+    forward(use_case_name: TUseCaseName, ...data: any[]) {
         if (this._use_case) this._use_case.forward(use_case_name, ...data);
     }
 

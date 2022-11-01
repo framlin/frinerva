@@ -4,11 +4,12 @@ import {TableRenderer} from "../../../common/ui/renderer/TableRenderer";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 import {AccountData} from "../../account/Account";
 import {BookingEntry} from "../../account/BookingEntry";
+import {TUseCaseName} from "../../account/TUseCaseName";
 
 
 export class ShowAccountView extends UseCaseView {
 
-    constructor(use_case_name: string) {
+    constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting');
     }
 

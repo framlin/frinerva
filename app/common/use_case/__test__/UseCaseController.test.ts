@@ -47,7 +47,7 @@ describe('UseCaseController', () => {
     beforeEach(() => {
         // @ts-ignore DomainEntity
          interactor = new InteractorStub({}, {}, new AccountingHelper());
-         use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
+         use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "show_list");
          use_case_controller = new UseCaseController(interactor, use_case, observatory);
     });
 
@@ -73,10 +73,10 @@ describe('UseCaseController', () => {
         // Arrange
         const spy = jest.spyOn(use_case, 'forward');
         // Act
-        use_case_controller.forward("hallo");
+        use_case_controller.forward("show_list");
         // Assert
         expect(spy).toHaveBeenCalled();
-        expect(spy).toHaveBeenCalledWith("hallo");
+        expect(spy).toHaveBeenCalledWith("show_list");
     });
 
     it('cals execute if on_use_case_ready is called', () => {

@@ -4,6 +4,7 @@ import {Observatory} from "../../common/observation/Observatory";
 import {Blueprint} from "../../common/use_case/Blueprint";
 import {UseCase} from "../../common/use_case/UseCase";
 import {TUseCaseList} from "./TUseCaseList";
+import {TUseCaseName} from "../account/TUseCaseName";
 
 function create_use_case(blueprint: Blueprint) : UseCase {
     const helper = new blueprint.helper();
@@ -21,7 +22,7 @@ export class UseCaseFactory {
     static Observatory: Observatory;
     static UseCases: TUseCaseList;
 
-    static create(use_case_name: string) {
+    static create(use_case_name: TUseCaseName) {
         if (this.UseCases[use_case_name]) {
             return create_use_case(this.UseCases[use_case_name]);
         } else {

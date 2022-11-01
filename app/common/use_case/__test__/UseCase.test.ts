@@ -2,11 +2,12 @@
 import {UseCaseFactory} from "../../../accounting/factories/UseCaseFactory";
 import {UseCase} from "../UseCase";
 import {UseCasePresenter} from "../UseCasePresenter";
+import {TUseCaseName} from "../../../accounting/account/TUseCaseName";
 
 describe('UseCase', () => {
 
     class UseCaseFactoryStub extends UseCaseFactory {
-        static create(use_case_name: string): UseCase {
+        static create(use_case_name: TUseCaseName): UseCase {
             return {
                 execute: (...data: any[]) => {
                 }
@@ -19,7 +20,7 @@ describe('UseCase', () => {
         execute(){};
     }
     const domain_name = "domain_name";
-    const use_case_name = "use_case_name";
+    const use_case_name = "show_list";
 
     // @ts-ignore
     const use_case_presenter = new UseCasePresenterStub({});

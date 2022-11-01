@@ -1,3 +1,5 @@
+import {TUseCaseName} from "../../../accounting/account/TUseCaseName";
+
 const {ipcRenderer} = require("electron");
 const {HTMLReader} = require("../../util/HTMLReader");
 const path = require("path");
@@ -8,7 +10,7 @@ export class UseCaseView {
     private readonly _use_case_name;
     private readonly _domain_name;
 
-    constructor(use_case_name: string, domain_name?: string) {
+    constructor(use_case_name: TUseCaseName, domain_name?: string) {
         this._use_case_name = use_case_name;
         this._domain_name = domain_name;
     }
@@ -77,7 +79,7 @@ export class UseCaseView {
 
     async create_view(): Promise<void> {};
 
-    forward(use_case_name: string) {
+    forward(use_case_name: TUseCaseName) {
     }
 
     register_event_listener(): void {};

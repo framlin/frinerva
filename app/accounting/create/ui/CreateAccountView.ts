@@ -3,11 +3,12 @@ import {register_IPCRenderer_listener} from "../../../common/ui/ipc/register_IPC
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
 import {AccountHandle} from "../../account/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
+import {TUseCaseName} from "../../account/TUseCaseName";
 
 
 export class CreateAccountView extends UseCaseView {
 
-    constructor(use_case_name: string) {
+    constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting');
     }
 

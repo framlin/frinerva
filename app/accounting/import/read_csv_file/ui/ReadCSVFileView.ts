@@ -4,12 +4,13 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {BookingRecordData} from "../../../account/BookingRecord";
 import {MoneyMoneyPayment} from "../../../account/Payment";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
+import {TUseCaseName} from "../../../account/TUseCaseName";
 
 
 export class ReadCSVFileView extends UseCaseView {
 
     public import_renderer = new CSVFileImportRenderer();
-    constructor(use_case_name: string) {
+    constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting');
     }
 

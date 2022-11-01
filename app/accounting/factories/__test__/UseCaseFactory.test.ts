@@ -9,6 +9,7 @@ import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 import {UseCaseFactory} from "../UseCaseFactory";
 import {TUseCaseList} from "../TUseCaseList";
+import {UseCases as AccountingUseCases} from "../use_cases";
 
 class IPCChannelMock {
 }
@@ -51,15 +52,14 @@ class HelperMock extends UseCaseHelper {
 }
 
 
-const test_use_cases: TUseCaseList = {
-    use_case_mock: {
-        usecase: UseCaseMock,
-        controller: ControllerMock,
-        interactor: InteractorMock,
-        presenter: PresenterMock,
-        helper: HelperMock,
-        view: ViewMock
-    }
+const test_use_cases: TUseCaseList = AccountingUseCases;
+test_use_cases["show_list"] = {
+    usecase: UseCaseMock,
+    controller: ControllerMock,
+    interactor: InteractorMock,
+    presenter: PresenterMock,
+    helper: HelperMock,
+    view: ViewMock
 }
 
 // @ts-ignore
@@ -70,7 +70,7 @@ UseCaseFactory.UseCases = test_use_cases;
 
 
 test('create show_list use case', () => {
-    const use_case = UseCaseFactory.create('use_case_mock');
+    const use_case = UseCaseFactory.create('show_list');
     expect(use_case).toBeInstanceOf(UseCaseMock);
     expect(use_case.presenter).toBeInstanceOf(PresenterMock);
 });
