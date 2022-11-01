@@ -41,7 +41,7 @@ export class AccountingHelper extends DomainHelper{
         const result = [];
         const name_list =  await JSONStorage.get_name_list(path.join(STORAGE_ROOT_DIR, `account`, ""));
         for (const {dir_name, filename} of name_list) {
-            const booking_period: string = dir_name;
+            const booking_period: string = dir_name || "";
             const cost_center: string = filename.split('.')[0];
             result.push({booking_period, cost_center});
         }

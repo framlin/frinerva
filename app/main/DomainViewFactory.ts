@@ -12,8 +12,9 @@ const factories: Record<string, typeof WorkspaceViewFactory> = {
 class DomainViewFactory {
     static async create_workspace(domain_name: string) {
         return factories[domain_name]
+            // @ts-expect-error
             .config(workspaces[domain_name])
-            .create();
+            .create(domain_name);
     }
 }
 

@@ -12,4 +12,7 @@ export class ReadCSVFilePresenter extends UseCasePresenter implements ReadCSVFil
     show_booking_records(booking_records: BookingRecordData[]) {
         this._ipc_channel.send('read_csv_file:show_booking_records', booking_records);
     }
+
+    show(...data: unknown[]): void {
+    }
 }

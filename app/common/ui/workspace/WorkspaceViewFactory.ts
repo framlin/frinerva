@@ -8,8 +8,8 @@ export class WorkspaceViewFactory {
         return WorkspaceViewFactory;
     };
 
-    static async create() {
-        await WorkspaceViewFactory.AccountingWorkspace.create_workspace();
+    static async create(domain_name: string) {
+        await WorkspaceViewFactory.AccountingWorkspace.create_workspace(domain_name);
         return new WorkspaceViewFactory.AccountingWorkspace();
     }
 }
