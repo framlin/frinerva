@@ -1,5 +1,5 @@
 import {Accounting} from "../accounting/account/Accounting";
-import {factories} from '../accounting/factories/factories';
+import {factories} from '../accounting/factories';
 import {UseCases} from "../accounting/factories/use_cases";
 import {Domain} from '../common/domain/Domain';
 import {DomainEntity} from "../common/domain/DomainEntity";
@@ -34,7 +34,6 @@ function create_domain(domain_name: string, main_window: MainWindow) {
     const observatory = new Observatory();
     const factories = domain_factories[domain_name];
     const helper = domain_helper[domain_name]
-
 
     const domain_entity = create_domain_entity(domain_entities[domain_name], helper);
 

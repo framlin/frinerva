@@ -4,11 +4,11 @@ import {UseCase} from "../UseCase";
 import {UseCaseController} from "../UseCaseController";
 import {UseCaseInteractor} from "../UseCaseInteractor";
 import {UseCasePresenter} from "../UseCasePresenter";
+import {Observatory} from "../../observation/Observatory";
 
 class InteractorStub extends  UseCaseInteractor {
     execute(...data: any[]): any {}
 }
-
 
 function mock_use_case_presenter() {
     UseCasePresenter.prototype.show = jest.fn().mockImplementation((...data: unknown[]) => {});
@@ -29,7 +29,6 @@ function spy_on_controller() {
     jest.spyOn(UseCaseController.prototype, 'register_ipc_listener').mockImplementation(() => {});
 }
 
-
 // @ts-ignore
 const use_case_presenter = new UseCasePresenter({});
 
@@ -43,18 +42,19 @@ describe('UseCaseController', () => {
     let interactor: InteractorStub;
     let use_case_controller: UseCaseController;
     let use_case: UseCase;
+    const observatory = new Observatory()
 
     beforeEach(() => {
         // @ts-ignore DomainEntity
          interactor = new InteractorStub({}, {}, new AccountingHelper());
          use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "");
-         use_case_controller = new UseCaseController(interactor, use_case);
-    })
+         use_case_controller = new UseCaseController(interactor, use_case, observatory);
+    });
 
 
     it('should be able to instantiate', () => {
         // Act
-        const use_case_controller = new UseCaseController(interactor, use_case);
+        const use_case_controller = new UseCaseController(interactor, use_case, observatory);
         // Assert
         expect(use_case_controller).toBeInstanceOf(UseCaseController);
     });

@@ -7,8 +7,10 @@ import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 export class UseCaseController implements Subscribing {
     constructor(
         protected _request_boundary: UseCaseRequestBoundary,
-        protected _use_case: UseCase
+        protected _use_case: UseCase,
+        observatory: Observatory
     ) {
+        this.subscribe_at(observatory)
         this.register_ipc_listener();
     }
 

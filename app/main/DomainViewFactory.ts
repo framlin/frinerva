@@ -1,4 +1,4 @@
-import {WorkspaceViewFactory}  from '../accounting/factories/WorkspaceViewFactory';
+import {WorkspaceViewFactory}  from '../common/ui/workspace/WorkspaceViewFactory';
 import {AccountingWorkspaceView} from '../accounting/workspace/AccountingWorkspaceView';
 import {WorkspaceView} from "../common/ui/workspace/WorkspaceView";
 

@@ -3,18 +3,14 @@ import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory";
 import {Blueprint} from "../../common/use_case/Blueprint";
 import {UseCase} from "../../common/use_case/UseCase";
-import {ControllerFactory} from "./ControllerFactory";
-import {HelperFactory} from "./HelperFactory";
-import {InteractorFactory} from "./InteractorFactory";
-import {PresenterFactory} from "./PresenterFactory";
 import {UseCaseList} from "./UseCaseList";
 
 function create_use_case(blueprint: Blueprint) : UseCase {
-    const helper = HelperFactory.create(blueprint.helper);
-    const presenter = PresenterFactory.create(blueprint.presenter, UseCaseFactory.IPCChannel);
-    const interactor = InteractorFactory.create(blueprint.interactor, UseCaseFactory.DomainEntity, presenter, helper);
+    const helper = new blueprint.helper();
+    const presenter = new blueprint.presenter(UseCaseFactory.IPCChannel);
+    const interactor = new blueprint.interactor(UseCaseFactory.DomainEntity, presenter, helper);
     const use_case = new blueprint.usecase(UseCaseFactory, presenter);
-    ControllerFactory.create(blueprint.controller, UseCaseFactory.Observatory, interactor, use_case);
+    new blueprint.controller(interactor, use_case, UseCaseFactory.Observatory);
     return use_case;
 }
 

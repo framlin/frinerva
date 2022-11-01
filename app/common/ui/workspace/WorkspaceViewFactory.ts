@@ -1,7 +1,9 @@
-export class WorkspaceViewFactory {
-    static AccountingWorkspace: any
+import {AccountingWorkspaceView} from "../../../accounting/workspace/AccountingWorkspaceView";
 
-    static config(accountingWS: any) {
+export class WorkspaceViewFactory {
+    static AccountingWorkspace: typeof AccountingWorkspaceView
+
+    static config(accountingWS: typeof AccountingWorkspaceView) {
         WorkspaceViewFactory.AccountingWorkspace = accountingWS;
         return WorkspaceViewFactory;
     };
