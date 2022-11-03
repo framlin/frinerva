@@ -1,8 +1,8 @@
 //test creation of use case
 import {UseCaseFactory} from "../../../accounting/factories/UseCaseFactory";
+import {TUseCaseName} from "../TUseCaseName";
 import {UseCase} from "../UseCase";
 import {UseCasePresenter} from "../UseCasePresenter";
-import {TUseCaseName} from "../../../accounting/account/TUseCaseName";
 
 describe('UseCase', () => {
 

@@ -1,7 +1,7 @@
-import {AccountHandle} from "../../../accounting/account/AccountHandle";
+import {AccountHandle} from "../../../accounting/entites/AccountHandle";
 import {DomainHelper} from "../../domain/DomainHelper";
 import {JSONStorage} from "../json/JSONStorage";
-import {Account} from "../../../accounting/account/Account";
+import {Account} from "../../../accounting/entites/Account";
 
 const path = require("path");
 const STORAGE_ROOT_DIR = path.join(__dirname,"../data");

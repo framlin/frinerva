@@ -3,8 +3,8 @@ import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory";
 import {Blueprint} from "../../common/use_case/Blueprint";
 import {UseCase} from "../../common/use_case/UseCase";
-import {TUseCaseList} from "./TUseCaseList";
-import {TUseCaseName} from "../account/TUseCaseName";
+import {TUseCaseList} from "../../common/use_case/TUseCaseList";
+import {TUseCaseName} from "../../common/use_case/TUseCaseName";
 
 function create_use_case(blueprint: Blueprint) : UseCase {
     const helper = new blueprint.helper();
@@ -20,7 +20,7 @@ export class UseCaseFactory {
     static IPCChannel: WebContents;
     static DomainEntity: DomainEntity;
     static Observatory: Observatory;
-    static UseCases: TUseCaseList;
+    static UseCases:TUseCaseList;
 
     static create(use_case_name: TUseCaseName) {
         if (this.UseCases[use_case_name]) {

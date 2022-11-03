@@ -1,8 +1,8 @@
 import {BrowserWindow} from 'electron';
+import {TUseCaseName} from "../common/use_case/TUseCaseName";
 import {Domain} from "../common/domain/Domain";
 import * as path from "path";
 import {register_IPCMain_listener} from "../common/ui/ipc/register_IPCMain_listener";
-import {TUseCaseName} from "../accounting/account/TUseCaseName";
 
 export class MainWindow extends BrowserWindow {
     _domains: Record<string, Domain> = {};

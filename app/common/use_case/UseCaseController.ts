@@ -1,9 +1,9 @@
+import {TUseCaseName} from "./TUseCaseName";
 import {Observatory} from "../observation/Observatory";
 import {Subscribing} from "../observation/Subscribing";
 import {register_IPCMain_listener} from "../ui/ipc/register_IPCMain_listener";
 import {UseCase} from "./UseCase";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
-import {TUseCaseName} from "../../accounting/account/TUseCaseName";
 
 export class UseCaseController implements Subscribing {
     constructor(

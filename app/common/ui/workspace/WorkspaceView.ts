@@ -1,8 +1,8 @@
+import {TUseCaseName} from "../../use_case/TUseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
 import {ipcRenderer} from "electron";
 import {ViewFactory}  from "../../../accounting/factories/ViewFactory";
-import {TUseCaseName} from "../../../accounting/account/TUseCaseName";
 
 class WorkspaceView {
 

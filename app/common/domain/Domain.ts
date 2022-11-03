@@ -1,5 +1,5 @@
+import {TUseCaseName} from "../use_case/TUseCaseName";
 import {DomainEntity} from "./DomainEntity";
-import {TUseCaseName} from "../../accounting/account/TUseCaseName";
 
 class Domain {
     get domain_name() {

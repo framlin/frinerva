@@ -1,4 +1,4 @@
-import {TUseCaseName} from "../../../accounting/account/TUseCaseName";
+import {TUseCaseName} from "../../use_case/TUseCaseName";
 
 const {ipcRenderer} = require("electron");
 const {HTMLReader} = require("../../util/HTMLReader");

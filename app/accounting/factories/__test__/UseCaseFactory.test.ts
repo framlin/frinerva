@@ -8,8 +8,8 @@ import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 import {UseCaseFactory} from "../UseCaseFactory";
-import {TUseCaseList} from "../TUseCaseList";
-import {UseCases as AccountingUseCases} from "../use_cases";
+import {TUseCaseList} from "../../../common/use_case/TUseCaseList";
+import {UseCases as AccountingUseCases} from "../../use_cases";
 
 class IPCChannelMock {
 }

@@ -1,4 +1,4 @@
-import {BookingEntryData} from "../../../accounting/account/BookingEntry";
+import {BookingEntryData} from "../../../accounting/entites/BookingEntry";
 
 type Redraw = () => void;
 

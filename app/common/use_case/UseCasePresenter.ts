@@ -1,6 +1,6 @@
 import {WebContents} from 'electron';
+import {TUseCaseName} from "./TUseCaseName";
 import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
-import {TUseCaseName} from "../../accounting/account/TUseCaseName";
 
 export abstract class UseCasePresenter implements UseCaseResponseBoundary{
 
