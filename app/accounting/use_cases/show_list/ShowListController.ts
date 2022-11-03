@@ -20,6 +20,10 @@ export class ShowListController extends UseCaseController implements Observer<Ac
     }
 
     subscribe_at(observatory: Observatory) {
+        //this is called from the base-class-constructor, so we have
+        //to initialize CLASS_ID before we subscribe
+        this.CLASS_ID = ACCOUNT_ID;
+
         observatory.subscribe(this);
     }
 }

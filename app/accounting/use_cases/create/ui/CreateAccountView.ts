@@ -1,9 +1,10 @@
 import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
-import {AccountHandle} from "../../../entites/AccountHandle";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {AccountHandle} from "../../../entites/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
+import {TCreateAccountViewChannelName} from "./TCreateAccountViewChannelName";
 
 
 export class CreateAccountView extends UseCaseView {
@@ -26,7 +27,7 @@ export class CreateAccountView extends UseCaseView {
     }
 
     register_create_button() {
-        const create_button = document.querySelector('.next-btn' ) as HTMLButtonElement;
+        const create_button = document.querySelector('.next-btn') as HTMLButtonElement;
         create_button.addEventListener('click', () => {
             let new_accounts_list = this.get_new_accounts_list();
             ipcRenderer.send('create_account:create', new_accounts_list)
@@ -34,7 +35,7 @@ export class CreateAccountView extends UseCaseView {
     }
 
     get_new_accounts_list() {
-        let new_accounts_list : AccountHandle[] = [];
+        let new_accounts_list: AccountHandle[] = [];
         let result_column_entries = document.querySelectorAll('#result-column .account-entry') as NodeListOf<HTMLElement>;
         result_column_entries.forEach((entry) => {
             new_accounts_list.push({
@@ -48,8 +49,8 @@ export class CreateAccountView extends UseCaseView {
     register_move_button() {
         let move_entry_button = document.querySelector('#move-entry-btn') as HTMLButtonElement;
         move_entry_button.addEventListener('click', () => {
-            let accounts : { key: string|undefined, label: string }[] = [];
-            let periods :string[] = [];
+            let accounts: { key: string | undefined, label: string }[] = [];
+            let periods: string[] = [];
 
             let account_selection = document.querySelectorAll('#account-column .selected') as NodeListOf<HTMLElement>;
             account_selection.forEach((list_entry) => {
@@ -147,23 +148,24 @@ export class CreateAccountView extends UseCaseView {
     }
 
     private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener('create_account:show_cost_center_list', (e, cost_center_list) => {
-            this.show_cost_center_list(cost_center_list);
-        });
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>(
+            'create_account:show_cost_center_list', (e, cost_center_list: string[]) => {
+                this.show_cost_center_list(cost_center_list);
+            });
 
-        register_IPCRenderer_listener('create_account:show_booking_period_list', (e, booking_period_list) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_booking_period_list', (e, booking_period_list) => {
             this.show_booking_period_list(booking_period_list);
         })
 
-        register_IPCRenderer_listener('create_account:show_new_accounts_list', (e, new_accounts_list) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_new_accounts_list', (e, new_accounts_list) => {
             this.show_new_accounts_list(new_accounts_list);
         });
 
-        register_IPCRenderer_listener('create_account:show_error', (e, error_message) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_error', (e, error_message) => {
             this.show_error(error_message);
         });
 
-        register_IPCRenderer_listener('create_account:done', () => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:account_creation_finished', () => {
             this.account_creation_finished();
         })
     }
