@@ -26,12 +26,12 @@ describe('UseCase', () => {
     const use_case_presenter = new UseCasePresenterStub({});
 
     it('could be created', () => {
-        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, domain_name, use_case_name);
+        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, use_case_name, domain_name);
         expect(useCase).toBeInstanceOf(UseCase);
     });
 
     it ('calls presenter.execute if execute is called', () => {
-        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, domain_name, use_case_name);
+        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, use_case_name, domain_name);
         const spy = jest.spyOn(useCase.presenter, 'execute');
         useCase.execute();
         expect(spy).toHaveBeenCalled();
@@ -39,7 +39,7 @@ describe('UseCase', () => {
     });
 
     it ('calls UseCaseFactory.create if forward is called', () => {
-        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, domain_name, use_case_name);
+        const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, use_case_name, domain_name);
         // @ts-ignore
         const spy = jest.spyOn(useCase._UseCaseFactory, 'create');
         useCase.forward(use_case_name);

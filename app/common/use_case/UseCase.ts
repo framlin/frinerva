@@ -7,8 +7,8 @@ export class UseCase{
     constructor(
         protected _UseCaseFactory: typeof UseCaseFactory,
         protected _presenter: UseCasePresenter,
-        protected _domain_name?: string,
-        protected _use_case_name?: TUseCaseName
+        protected _use_case_name?: TUseCaseName,
+        protected _domain_name?: string
     ) {}
 
     execute(...data: any[]) {

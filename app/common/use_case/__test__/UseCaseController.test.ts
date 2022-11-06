@@ -47,7 +47,7 @@ describe('UseCaseController', () => {
     beforeEach(() => {
         // @ts-ignore DomainEntity
          interactor = new InteractorStub({}, {}, new AccountingHelper());
-         use_case = new UseCase(UseCaseFactory, use_case_presenter, "", "show_list");
+         use_case = new UseCase(UseCaseFactory, use_case_presenter, "show_list", "");
          use_case_controller = new UseCaseController(interactor, use_case, observatory);
     });
 
