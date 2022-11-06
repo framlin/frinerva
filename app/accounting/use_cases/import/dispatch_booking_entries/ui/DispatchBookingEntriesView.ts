@@ -5,14 +5,12 @@ import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
 import {AccountData} from "../../../../entites/Account";
 import {BookingEntry} from "../../../../entites/BookingEntry";
 import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
-
-let dispatch_booking_entry_view: DispatchBookingEntriesView;
+import {TDispatchBookingEntriesViewChannelName} from "./TDispatchBookingEntriesViewChannelName";
 
 class DispatchBookingEntriesView extends UseCaseView {
 
     constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting')
-        dispatch_booking_entry_view = this;
     }
 
     async create_view() {
@@ -80,17 +78,14 @@ class DispatchBookingEntriesView extends UseCaseView {
     }
 
     private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener('dispatch_booking_entries:show_virtual_accounts',
+        register_IPCRenderer_listener<TDispatchBookingEntriesViewChannelName>
+        ('dispatch_booking_entries:show_virtual_accounts',
             (e, virtual_accounts: AccountData[]) => {
                 this.show_virtual_accounts(virtual_accounts);
             });
 
     }
 }
-
-// ipcRenderer.on('dispatch_booking_entries:show_virtual_accounts', (e, virtual_accounts: AccountData[]) => {
-//     dispatch_booking_entry_view.show_virtual_accounts(virtual_accounts);
-// });
 
 module.exports = {DispatchBookingEntriesView};
 export {DispatchBookingEntriesView}

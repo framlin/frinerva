@@ -5,11 +5,13 @@ import {BookingRecordData} from "../../../../entites/BookingRecord";
 import {MoneyMoneyPayment} from "../../../../entites/Payment";
 import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
+import {TReadCSVFileViewChannelName} from "./TReadCSVFileViewChannelName";
 
 
 export class ReadCSVFileView extends UseCaseView {
 
     public import_renderer = new CSVFileImportRenderer();
+
     constructor(use_case_name: TUseCaseName) {
         super(use_case_name, 'accounting');
     }
@@ -60,6 +62,10 @@ export class ReadCSVFileView extends UseCaseView {
         }
     };
 
+    show_booking_records(booking_records: BookingRecordData[]) {
+        this.import_renderer.show_booking_records(booking_records);
+    }
+
     private _clear_payment_entries(payments_div: HTMLDivElement) {
         while (payments_div.firstChild) {
             try {
@@ -80,11 +86,13 @@ export class ReadCSVFileView extends UseCaseView {
     }
 
     private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
+        register_IPCRenderer_listener<TReadCSVFileViewChannelName>
+        ('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
             this.show_payments(payments);
         });
-        register_IPCRenderer_listener('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
-            this.import_renderer.show_booking_records(_booking_records);
-        })
+        register_IPCRenderer_listener<TReadCSVFileViewChannelName>
+        ('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
+            this.show_booking_records(_booking_records);
+        });
     }
 }

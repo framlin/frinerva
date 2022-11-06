@@ -2,6 +2,7 @@ import {ipcRenderer} from "electron";
 import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {TShowListViewChannelName} from "./TShowListViewChannelName";
 
 export class ShowListView extends UseCaseView {
     constructor(use_case_name: TUseCaseName) {
@@ -51,7 +52,7 @@ export class ShowListView extends UseCaseView {
     };
 
     private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener('show_list:show_account_name_list',
+        register_IPCRenderer_listener<TShowListViewChannelName>('show_list:show_account_name_list',
             (e, account_name_list: { account_name: string, key: string }[]) => {
                 this.show_account_name_list(account_name_list);
             });

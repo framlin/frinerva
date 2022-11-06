@@ -5,6 +5,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {AccountData} from "../../../entites/Account";
 import {BookingEntry} from "../../../entites/BookingEntry";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {TShowAccountViewChannelName} from "./TShowAccountViewChannelName";
 
 
 export class ShowAccountView extends UseCaseView {
@@ -56,8 +57,8 @@ export class ShowAccountView extends UseCaseView {
     private _current_account: AccountData | undefined;
 
     private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener('show_account:show_account',
-            (e, account: AccountData, editable) => {
+        register_IPCRenderer_listener<TShowAccountViewChannelName>('show_account:show_account',
+            (e, account: AccountData, editable?:boolean) => {
                 this.show_account(account, editable);
             })
     }

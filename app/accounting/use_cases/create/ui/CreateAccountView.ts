@@ -153,19 +153,23 @@ export class CreateAccountView extends UseCaseView {
                 this.show_cost_center_list(cost_center_list);
             });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_booking_period_list', (e, booking_period_list) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        ('create_account:show_booking_period_list', (e, booking_period_list: string[]) => {
             this.show_booking_period_list(booking_period_list);
         })
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_new_accounts_list', (e, new_accounts_list) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        ('create_account:show_new_accounts_list', (e, new_accounts_list: AccountDescriptionLabel[]) => {
             this.show_new_accounts_list(new_accounts_list);
         });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:show_error', (e, error_message) => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        ('create_account:show_error', (e, error_message: string) => {
             this.show_error(error_message);
         });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>('create_account:account_creation_finished', () => {
+        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        ('create_account:account_creation_finished', () => {
             this.account_creation_finished();
         })
     }
