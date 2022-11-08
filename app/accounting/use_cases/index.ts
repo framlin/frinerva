@@ -1,4 +1,4 @@
-import {create_account} from "./create";
+import {create_account} from "./create_account";
 import {dispatch_booking_entries} from "./import/dispatch_booking_entries";
 import {read_csv_file} from "./import/read_csv_file";
 import {show_account} from "./show_account";
