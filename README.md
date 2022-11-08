@@ -1,2 +1,2 @@
 # frinerva
-property management
+a property management application
