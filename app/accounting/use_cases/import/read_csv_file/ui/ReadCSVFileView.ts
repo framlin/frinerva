@@ -3,7 +3,7 @@ import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {BookingRecordData} from "../../../../entites/BookingRecord";
 import {MoneyMoneyPayment} from "../../../../entites/Payment";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
-import {TReadCSVFileViewChannelName} from "./TReadCSVFileViewChannelName";
+import {ReadCSVFileResponseChannelName} from "../ReadCSVFileResponseChannelName";
 
 
 export class ReadCSVFileView extends UseCaseView {
@@ -84,11 +84,11 @@ export class ReadCSVFileView extends UseCaseView {
     }
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TReadCSVFileViewChannelName>
+        this._response_channel.register_receiver<ReadCSVFileResponseChannelName>
         ('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
             this.show_payments(payments);
         });
-        this._response_channel.register_receiver<TReadCSVFileViewChannelName>
+        this._response_channel.register_receiver<ReadCSVFileResponseChannelName>
         ('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
             this.show_booking_records(_booking_records);
         });

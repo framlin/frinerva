@@ -2,7 +2,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountHandle} from "../../../entites/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
-import {TCreateAccountViewChannelName} from "./TCreateAccountViewChannelName";
+import {CreateAccountResponseChannelName} from "../CreateAccountResponseChannelName";
 
 
 export class CreateAccountView extends UseCaseView {
@@ -146,27 +146,27 @@ export class CreateAccountView extends UseCaseView {
     }
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TCreateAccountViewChannelName>(
+        this._response_channel.register_receiver<CreateAccountResponseChannelName>(
             'create_account:show_cost_center_list', (e, cost_center_list: string[]) => {
                 this.show_cost_center_list(cost_center_list);
             });
 
-        this._response_channel.register_receiver<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<CreateAccountResponseChannelName>
         ('create_account:show_booking_period_list', (e, booking_period_list: string[]) => {
             this.show_booking_period_list(booking_period_list);
         })
 
-        this._response_channel.register_receiver<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<CreateAccountResponseChannelName>
         ('create_account:show_new_accounts_list', (e, new_accounts_list: AccountDescriptionLabel[]) => {
             this.show_new_accounts_list(new_accounts_list);
         });
 
-        this._response_channel.register_receiver<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<CreateAccountResponseChannelName>
         ('create_account:show_error', (e, error_message: string) => {
             this.show_error(error_message);
         });
 
-        this._response_channel.register_receiver<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<CreateAccountResponseChannelName>
         ('create_account:account_creation_done', () => {
             this.account_creation_done();
         })

@@ -3,7 +3,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../entites/Account";
 import {BookingEntry} from "../../../entites/BookingEntry";
-import {TShowAccountViewChannelName} from "./TShowAccountViewChannelName";
+import {ShowAccountResponseChannelName} from "../ShowAccountResponseChannelName";
 
 
 export class ShowAccountView extends UseCaseView {
@@ -55,7 +55,7 @@ export class ShowAccountView extends UseCaseView {
     private _current_account: AccountData | undefined;
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TShowAccountViewChannelName>('show_account:show',
+        this._response_channel.register_receiver<ShowAccountResponseChannelName>('show_account:show',
             (e, account: AccountData, editable?:boolean) => {
                 this.show_account(account, editable);
             })

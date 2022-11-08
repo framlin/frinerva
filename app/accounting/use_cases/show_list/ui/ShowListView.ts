@@ -1,6 +1,6 @@
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
-import {TShowListViewChannelName} from "./TShowListViewChannelName";
+import {ShowListResponseChannelName} from "../ShowListResponseChannelName";
 
 export class ShowListView extends UseCaseView {
     constructor(use_case_name: TUseCaseName) {
@@ -50,7 +50,7 @@ export class ShowListView extends UseCaseView {
     };
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TShowListViewChannelName>('show_list:show',
+        this._response_channel.register_receiver<ShowListResponseChannelName>('show_list:show',
             (e, account_name_list: { account_name: string, key: string }[]) => {
                 this.show(account_name_list);
             });

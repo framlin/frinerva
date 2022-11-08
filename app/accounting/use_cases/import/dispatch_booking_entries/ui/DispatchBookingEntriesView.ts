@@ -3,7 +3,7 @@ import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../../entites/Account";
 import {BookingEntry} from "../../../../entites/BookingEntry";
-import {TDispatchBookingEntriesViewChannelName} from "./TDispatchBookingEntriesViewChannelName";
+import {DispatchBookingEntriesResponseChannelName} from "../DispatchBookingEntriesResponseChannelName";
 
 class DispatchBookingEntriesView extends UseCaseView {
 
@@ -76,7 +76,7 @@ class DispatchBookingEntriesView extends UseCaseView {
     }
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TDispatchBookingEntriesViewChannelName>
+        this._response_channel.register_receiver<DispatchBookingEntriesResponseChannelName>
         ('dispatch_booking_entries:show',
             (e, virtual_accounts: AccountData[]) => {
                 this.show_virtual_accounts(virtual_accounts);
