@@ -1,5 +1,5 @@
-import {TUseCaseName} from "../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../common/use_case/UseCaseName";
 import {UseCaseResponseBoundary} from "../../../common/use_case/UseCaseResponseBoundary";
-import {TGetPropertyNames} from "../../../common/util/TGetPropertyNames";
+import {GetPropertyNames} from "../../../common/util/GetPropertyNames";
 
-export type ShowListResponseChannelName = `${TUseCaseName}:${TGetPropertyNames<UseCaseResponseBoundary>}`;
+export type ShowListResponseChannelName = `${UseCaseName}:${GetPropertyNames<UseCaseResponseBoundary>}`;

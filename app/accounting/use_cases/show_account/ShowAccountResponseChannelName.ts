@@ -1,6 +1,6 @@
-import {TUseCaseName} from "../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../common/use_case/UseCaseName";
 import {UseCaseRequestBoundary} from "../../../common/use_case/UseCaseRequestBoundary";
 import {UseCaseResponseBoundary} from "../../../common/use_case/UseCaseResponseBoundary";
-import {TGetPropertyNames} from "../../../common/util/TGetPropertyNames";
+import {GetPropertyNames} from "../../../common/util/GetPropertyNames";
 
-export type ShowAccountResponseChannelName = `${TUseCaseName}:${TGetPropertyNames<UseCaseResponseBoundary>}`;
+export type ShowAccountResponseChannelName = `${UseCaseName}:${GetPropertyNames<UseCaseResponseBoundary>}`;

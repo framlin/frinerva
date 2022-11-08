@@ -3,7 +3,7 @@ import {AccountHandle} from "../../entites/AccountHandle";
 import {Accounting} from "../../entites/Accounting";
 import {AccountDescriptionLabel} from "./AccountDescriptionLabel";
 import {CreateAccountRequestBoundary} from "./CreateAccountRequestBoundary";
-import {TBookingPeriodAccountDescriptionList} from "./TBookingPeriodAccountDescriptionList";
+import {BookingPeriodAccountDescriptionList} from "./BookingPeriodAccountDescriptionList";
 import {CreateAccountHelper} from "./CreateAccountHelper";
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 
@@ -16,7 +16,7 @@ export class CreateAccountInteractor extends UseCaseInteractor implements Create
         this.response_boundary.show_booking_period_list(JSON.parse(booking_period_config))
     }
 
-    period_cost_center_selection(period_cost_center: TBookingPeriodAccountDescriptionList) {
+    period_cost_center_selection(period_cost_center: BookingPeriodAccountDescriptionList) {
         const new_entry_list: AccountDescriptionLabel[] = [];
         for (const period_ of period_cost_center.periods) {
             const booking_period = period_;

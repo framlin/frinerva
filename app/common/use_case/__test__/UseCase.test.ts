@@ -1,13 +1,13 @@
 //test creation of use case
 import {UseCaseFactory} from "../../../accounting/factories/UseCaseFactory";
-import {TUseCaseName} from "../TUseCaseName";
+import {UseCaseName} from "../UseCaseName";
 import {UseCase} from "../UseCase";
 import {UseCasePresenter} from "../UseCasePresenter";
 
 describe('UseCase', () => {
 
     class UseCaseFactoryStub extends UseCaseFactory {
-        static create(use_case_name: TUseCaseName): UseCase {
+        static create(use_case_name: UseCaseName): UseCase {
             return {
                 execute: (...data: any[]) => {
                 }

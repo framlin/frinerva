@@ -1,7 +1,7 @@
 import {create_request_channel} from "../ipc/RequestChannel";
 import {Observatory} from "../observation/Observatory";
 import {Subscribing} from "../observation/Subscribing";
-import {TUseCaseName} from "./TUseCaseName";
+import {UseCaseName} from "./UseCaseName";
 import {UseCase} from "./UseCase";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 
@@ -26,7 +26,7 @@ export class UseCaseController implements Subscribing {
         if (this._request_boundary) this._request_boundary.execute(...data)
     }
 
-    forward(use_case_name: TUseCaseName, ...data: any[]) {
+    forward(use_case_name: UseCaseName, ...data: any[]) {
         if (this._use_case) this._use_case.forward(use_case_name, ...data);
     }
 

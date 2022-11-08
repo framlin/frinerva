@@ -1,6 +1,6 @@
 import {TableRenderer} from "../../../../common/ui/renderer/TableRenderer";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
-import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../../common/use_case/UseCaseName";
 import {AccountData} from "../../../entites/Account";
 import {BookingEntry} from "../../../entites/BookingEntry";
 import {ShowAccountRequestChannelName} from "../ShowAccountRequestChannelName";
@@ -9,7 +9,7 @@ import {ShowAccountResponseChannelName} from "../ShowAccountResponseChannelName"
 
 export class ShowAccountView extends UseCaseView {
 
-    constructor(use_case_name: TUseCaseName) {
+    constructor(use_case_name: UseCaseName) {
         super(use_case_name, 'accounting');
     }
 

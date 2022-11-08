@@ -2,7 +2,7 @@ import {UseCaseController} from "../../../common/use_case/UseCaseController";
 import {AccountHandle} from "../../entites/AccountHandle";
 import {CreateAccountInteractor} from "./CreateAccountInteractor";
 import {CreateAccountRequestChannelName} from "./CreateAccountRequestChannelName";
-import {TBookingPeriodAccountDescriptionList} from "./TBookingPeriodAccountDescriptionList";
+import {BookingPeriodAccountDescriptionList} from "./BookingPeriodAccountDescriptionList";
 
 
 export class CreateAccountController extends UseCaseController {
@@ -17,7 +17,7 @@ export class CreateAccountController extends UseCaseController {
         });
     }
 
-    period_cost_center_selection(period_cost_center: TBookingPeriodAccountDescriptionList
+    period_cost_center_selection(period_cost_center: BookingPeriodAccountDescriptionList
     ) {
         (this._request_boundary as CreateAccountInteractor).period_cost_center_selection(period_cost_center);
     }
@@ -26,7 +26,7 @@ export class CreateAccountController extends UseCaseController {
         (this._request_boundary as CreateAccountInteractor).create(new_accounts_list).then();
     }
 
-    on_period_cost_center_selection(period_cost_center: TBookingPeriodAccountDescriptionList
+    on_period_cost_center_selection(period_cost_center: BookingPeriodAccountDescriptionList
     ) {
         this.period_cost_center_selection(period_cost_center);
     }

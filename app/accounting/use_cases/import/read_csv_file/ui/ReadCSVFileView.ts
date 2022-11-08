@@ -1,5 +1,5 @@
 import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
-import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../../../common/use_case/UseCaseName";
 import {BookingRecordData} from "../../../../entites/BookingRecord";
 import {MoneyMoneyPayment} from "../../../../entites/Payment";
 import {ReadCSVFileRequestChannelName} from "../ReadCSVFileRequestChannelName";
@@ -11,7 +11,7 @@ export class ReadCSVFileView extends UseCaseView {
 
     public import_renderer = new CSVFileImportRenderer();
 
-    constructor(use_case_name: TUseCaseName) {
+    constructor(use_case_name: UseCaseName) {
         super(use_case_name, 'accounting');
     }
 

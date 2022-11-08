@@ -2,14 +2,14 @@ import * as  path from "path";
 import {IPCChannel} from "../../ipc/IPCChannel";
 import {create_request_channel} from "../../ipc/RequestChannel";
 import {create_response_channel} from "../../ipc/ResponseChannel";
-import {TUseCaseName} from "../../use_case/TUseCaseName";
+import {UseCaseName} from "../../use_case/UseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 
 export class UseCaseView {
     protected _response_channel: IPCChannel = create_response_channel();
     protected _request_channel: IPCChannel = create_request_channel();
 
-    constructor(private _use_case_name: TUseCaseName, private _domain_name?: string) {}
+    constructor(private _use_case_name: UseCaseName, private _domain_name?: string) {}
 
     link_style(stylesheet_filename: string) {
         const existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
@@ -73,7 +73,7 @@ export class UseCaseView {
 
     async create_view(): Promise<void> {};
 
-    forward(use_case_name: TUseCaseName) {
+    forward(use_case_name: UseCaseName) {
     }
 
     register_event_listener(): void {};

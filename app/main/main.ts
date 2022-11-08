@@ -5,7 +5,6 @@ import {MainMenu} from "./MainMenu";
 import {MainWindow} from "./MainWindow";
 
 const DOMAINS = DomainFactory.get_domains();
-
 const menuTemplate = MainMenu.createMenuTemplate(DomainFactory)
 
 let mainWindow: MainWindow | null;
@@ -19,15 +18,11 @@ function create_main_window() {
     mainWindow.UseCaseFactory = UseCaseFactory;
     DomainFactory.main_window = mainWindow;
 
-    if (!process.env.APP_TEST_DRIVER) {
-        mainWindow.loadFile('app/main/main.html').then().catch();
-    } else {
-        mainWindow.loadFile('main.html').then().catch();
-    }
+    mainWindow.loadFile('app/main/main.html').then().catch();
 
     mainWindow.once('ready-to-show', () => {
         for (let i = 0; i < DOMAINS.length; i++) {
-            let domain = DomainFactory.create(DOMAINS[i]);
+            const domain = DomainFactory.create(DOMAINS[i]);
             if (mainWindow) mainWindow.add_domain(domain);
         }
         if (mainWindow) mainWindow.show();

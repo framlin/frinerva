@@ -1,4 +1,4 @@
-import {TUseCaseName} from "../../use_case/TUseCaseName";
+import {UseCaseName} from "../../use_case/UseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
 import {ipcRenderer} from "electron";
@@ -152,7 +152,7 @@ class WorkspaceView {
 
 }
 
-ipcRenderer.on('use_case:created', async (e, use_case_name: TUseCaseName, ...data: any[]) => {
+ipcRenderer.on('use_case:created', async (e, use_case_name: UseCaseName, ...data: any[]) => {
     await ViewFactory.create(use_case_name).put_view_into_dom(...data);
 });
 module.exports = {WorkspaceView};

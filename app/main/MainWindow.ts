@@ -2,7 +2,7 @@ import {BrowserWindow} from 'electron';
 import * as path from "path";
 import {Domain} from "../common/domain/Domain";
 import {create_request_channel} from "../common/ipc/RequestChannel";
-import {TUseCaseName} from "../common/use_case/TUseCaseName";
+import {UseCaseName} from "../common/use_case/UseCaseName";
 
 export class MainWindow extends BrowserWindow {
     _domains: Record<string, Domain> = {};
@@ -29,7 +29,7 @@ export class MainWindow extends BrowserWindow {
         this._UseCaseFactory = value;
     }
 
-    execute_use_case(domain_name: string, use_case_name: TUseCaseName) {
+    execute_use_case(domain_name: string, use_case_name: UseCaseName) {
         let use_case = this._domains[domain_name].create_use_case(use_case_name);
         use_case.execute();
     }

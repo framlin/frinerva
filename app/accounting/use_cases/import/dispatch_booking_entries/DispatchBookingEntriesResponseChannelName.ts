@@ -1,6 +1,6 @@
-import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../../common/use_case/UseCaseName";
 import {UseCaseResponseBoundary} from "../../../../common/use_case/UseCaseResponseBoundary";
-import {TGetPropertyNames} from "../../../../common/util/TGetPropertyNames";
+import {GetPropertyNames} from "../../../../common/util/GetPropertyNames";
 import {DispatchBookingEntriesView} from "./ui/DispatchBookingEntriesView";
 
-export type DispatchBookingEntriesResponseChannelName = `${TUseCaseName}:${TGetPropertyNames<UseCaseResponseBoundary>}`;
+export type DispatchBookingEntriesResponseChannelName = `${UseCaseName}:${GetPropertyNames<UseCaseResponseBoundary>}`;

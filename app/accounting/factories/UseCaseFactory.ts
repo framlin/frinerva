@@ -3,10 +3,10 @@ import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory";
 import {Blueprint} from "../../common/use_case/Blueprint";
 import {UseCase} from "../../common/use_case/UseCase";
-import {TUseCaseList} from "../../common/use_case/TUseCaseList";
-import {TUseCaseName} from "../../common/use_case/TUseCaseName";
+import {UseCaseList} from "../../common/use_case/UseCaseList";
+import {UseCaseName} from "../../common/use_case/UseCaseName";
 
-function create_use_case(blueprint: Blueprint, use_case_name: TUseCaseName) : UseCase {
+function create_use_case(blueprint: Blueprint, use_case_name: UseCaseName) : UseCase {
     const helper = new blueprint.helper();
     const presenter = new blueprint.presenter(UseCaseFactory.IPCChannel);
     const interactor = new blueprint.interactor(UseCaseFactory.DomainEntity, presenter, helper);
@@ -20,9 +20,9 @@ export class UseCaseFactory {
     static IPCChannel: WebContents;
     static DomainEntity: DomainEntity;
     static Observatory: Observatory;
-    static UseCases:TUseCaseList;
+    static UseCases:UseCaseList;
 
-    static create(use_case_name: TUseCaseName) {
+    static create(use_case_name: UseCaseName) {
         if (this.UseCases[use_case_name]) {
             return create_use_case(this.UseCases[use_case_name], use_case_name);
         } else {

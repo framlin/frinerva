@@ -1,4 +1,4 @@
-import {TUseCaseName} from "./TUseCaseName";
+import {UseCaseName} from "./UseCaseName";
 import {UseCasePresenter} from "./UseCasePresenter";
 import {UseCaseFactory} from "../../accounting/factories/UseCaseFactory";
 
@@ -7,7 +7,7 @@ export class UseCase{
     constructor(
         protected _UseCaseFactory: typeof UseCaseFactory,
         protected _presenter: UseCasePresenter,
-        protected _use_case_name?: TUseCaseName,
+        protected _use_case_name?: UseCaseName,
         protected _domain_name?: string
     ) {}
 
@@ -15,7 +15,7 @@ export class UseCase{
         if (this._presenter) this._presenter.execute(this._use_case_name, ...data);
     }
 
-    forward(use_case_name: TUseCaseName,...data: any[]) {
+    forward(use_case_name: UseCaseName, ...data: any[]) {
         this._UseCaseFactory.create(use_case_name).execute(...data);
     }
 

@@ -1,5 +1,5 @@
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
-import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {UseCaseName} from "../../../../common/use_case/UseCaseName";
 import {AccountHandle} from "../../../entites/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
 import {CreateAccountRequestChannelName} from "../CreateAccountRequestChannelName";
@@ -8,7 +8,7 @@ import {CreateAccountResponseChannelName} from "../CreateAccountResponseChannelN
 
 export class CreateAccountView extends UseCaseView {
 
-    constructor(use_case_name: TUseCaseName) {
+    constructor(use_case_name: UseCaseName) {
         super(use_case_name, 'accounting');
     }
 

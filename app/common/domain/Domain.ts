@@ -1,4 +1,4 @@
-import {TUseCaseName} from "../use_case/TUseCaseName";
+import {UseCaseName} from "../use_case/UseCaseName";
 import {DomainEntity} from "./DomainEntity";
 
 class Domain {
@@ -12,7 +12,7 @@ class Domain {
         this._entity = entity
     }
 
-    create_use_case(use_case_name: TUseCaseName) {
+    create_use_case(use_case_name: UseCaseName) {
         return this._factories.use_case.create(use_case_name);
     }
 

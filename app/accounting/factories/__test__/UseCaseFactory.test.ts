@@ -8,7 +8,7 @@ import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
 import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
 import {UseCaseFactory} from "../UseCaseFactory";
-import {TUseCaseList} from "../../../common/use_case/TUseCaseList";
+import {UseCaseList} from "../../../common/use_case/UseCaseList";
 import {UseCases as AccountingUseCases} from "../../use_cases";
 
 class IPCChannelMock {
@@ -52,7 +52,7 @@ class HelperMock extends UseCaseHelper {
 }
 
 
-const test_use_cases: TUseCaseList = AccountingUseCases;
+const test_use_cases: UseCaseList = AccountingUseCases;
 test_use_cases["show_list"] = {
     usecase: UseCaseMock,
     controller: ControllerMock,

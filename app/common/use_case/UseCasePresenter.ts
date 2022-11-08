@@ -1,6 +1,6 @@
 import {WebContents} from 'electron';
 import {create_response_channel, ResponseChannel} from "../ipc/ResponseChannel";
-import {TUseCaseName} from "./TUseCaseName";
+import {UseCaseName} from "./UseCaseName";
 import {UseCaseResponseBoundary} from "./UseCaseResponseBoundary";
 
 export abstract class UseCasePresenter implements UseCaseResponseBoundary{
@@ -11,7 +11,7 @@ export abstract class UseCasePresenter implements UseCaseResponseBoundary{
 
     abstract show(...data: unknown[]): void;
 
-    execute(use_case_name: TUseCaseName|undefined, ...data: any[]) {
+    execute(use_case_name: UseCaseName|undefined, ...data: any[]) {
         this._response_channel.send('use_case:created', use_case_name, ...data);
     }
 

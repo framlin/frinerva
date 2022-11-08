@@ -1,2 +1,2 @@
-export type TBookingPeriodAccountDescriptionList
+export type BookingPeriodAccountDescriptionList
     = { periods: string[]; accounts: { key: string, label: string }[]; };

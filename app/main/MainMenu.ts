@@ -2,7 +2,7 @@ import {shell} from "electron";
 
 const isMac = process.platform === 'darwin';
 
-class MainMenu {
+export class MainMenu {
     static createMenuTemplate(DomainFactory: any) {
         return  [
             ...(isMac ? [{
@@ -74,8 +74,5 @@ class MainMenu {
             }
 
         ];
-
     }
 }
-module.exports = {MainMenu};
-export {MainMenu}

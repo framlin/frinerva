@@ -1,6 +1,6 @@
-import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
-import {TGetPropertyNames} from "../../../../common/util/TGetPropertyNames";
+import {UseCaseName} from "../../../../common/use_case/UseCaseName";
+import {GetPropertyNames} from "../../../../common/util/GetPropertyNames";
 import {ReadCSVFileResponseBoundary} from "./ReadCSVFileResponseBoundary";
 import {ReadCSVFileView} from "./ui/ReadCSVFileView";
 
-export type ReadCSVFileResponseChannelName = `${TUseCaseName}:${TGetPropertyNames<ReadCSVFileResponseBoundary>}`;
+export type ReadCSVFileResponseChannelName = `${UseCaseName}:${GetPropertyNames<ReadCSVFileResponseBoundary>}`;
