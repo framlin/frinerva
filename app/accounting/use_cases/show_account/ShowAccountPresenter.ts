@@ -7,6 +7,6 @@ export class ShowAccountPresenter extends UseCasePresenter {
 
     show(account: AccountData) {
         const channel:TShowAccountViewChannelName = 'show_account:show_account';
-        this._ipc_channel.send(channel, account, false);
+        this._response_channel.send(channel, account, false);
     }
 }

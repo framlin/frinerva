@@ -1,5 +1,5 @@
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {UseCaseResponseBoundary} from "../../../../common/use_case/UseCaseResponseBoundary";
 import {TGetPropertyNames} from "../../../../common/util/TGetPropertyNames";
-import {ShowListView} from "./ShowListView";
 
-export type TShowListViewChannelName = `${TUseCaseName}:${TGetPropertyNames<ShowListView>}`;
+export type TShowListViewChannelName = `${TUseCaseName}:${TGetPropertyNames<UseCaseResponseBoundary>}`;

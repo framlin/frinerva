@@ -30,7 +30,7 @@ class UseCaseMock extends UseCase {
 }
 
 class ControllerMock extends UseCaseController {
-    protected register_ipc_listener() {
+    protected register_request_channel_receiver() {
 
     }
 }

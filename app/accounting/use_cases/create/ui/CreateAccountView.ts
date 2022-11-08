@@ -1,5 +1,3 @@
-import {ipcRenderer} from "electron";
-import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountHandle} from "../../../entites/AccountHandle";
@@ -16,7 +14,7 @@ export class CreateAccountView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
-        this.register_IPCRenderer_listener();
+        this.register_response_channel_receiver();
     };
 
 
@@ -30,7 +28,7 @@ export class CreateAccountView extends UseCaseView {
         const create_button = document.querySelector('.next-btn') as HTMLButtonElement;
         create_button.addEventListener('click', () => {
             let new_accounts_list = this.get_new_accounts_list();
-            ipcRenderer.send('create_account:create', new_accounts_list)
+            this._request_channel.send('create_account:create', new_accounts_list)
         });
     }
 
@@ -60,7 +58,7 @@ export class CreateAccountView extends UseCaseView {
             period_selection.forEach((list_entry) => {
                 periods.push(list_entry.innerHTML);
             })
-            ipcRenderer.send('create_account:period_cost_center-selected', {periods, accounts});
+            this._request_channel.send('create_account:period_cost_center-selected', {periods, accounts});
         });
     }
 
@@ -147,28 +145,28 @@ export class CreateAccountView extends UseCaseView {
         }
     }
 
-    private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>(
+    private register_response_channel_receiver() {
+        this._response_channel.register_receiver<TCreateAccountViewChannelName>(
             'create_account:show_cost_center_list', (e, cost_center_list: string[]) => {
                 this.show_cost_center_list(cost_center_list);
             });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<TCreateAccountViewChannelName>
         ('create_account:show_booking_period_list', (e, booking_period_list: string[]) => {
             this.show_booking_period_list(booking_period_list);
         })
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<TCreateAccountViewChannelName>
         ('create_account:show_new_accounts_list', (e, new_accounts_list: AccountDescriptionLabel[]) => {
             this.show_new_accounts_list(new_accounts_list);
         });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<TCreateAccountViewChannelName>
         ('create_account:show_error', (e, error_message: string) => {
             this.show_error(error_message);
         });
 
-        register_IPCRenderer_listener<TCreateAccountViewChannelName>
+        this._response_channel.register_receiver<TCreateAccountViewChannelName>
         ('create_account:account_creation_finished', () => {
             this.account_creation_finished();
         })

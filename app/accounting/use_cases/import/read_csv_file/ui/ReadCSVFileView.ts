@@ -1,9 +1,7 @@
-import {ipcRenderer} from "electron";
-import {register_IPCRenderer_listener} from "../../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
+import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {BookingRecordData} from "../../../../entites/BookingRecord";
 import {MoneyMoneyPayment} from "../../../../entites/Payment";
-import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
 import {TReadCSVFileViewChannelName} from "./TReadCSVFileViewChannelName";
 
@@ -23,7 +21,7 @@ export class ReadCSVFileView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
-        this.register_IPCRenderer_listener();
+        this.register_response_channel_receiver();
     }
 
     register_next_button() {
@@ -31,7 +29,7 @@ export class ReadCSVFileView extends UseCaseView {
         if (next_button) {
             next_button.addEventListener('click', () => {
                 const booking_entries = this.get_booking_records();
-                ipcRenderer.send('read_csv_file:next', booking_entries);
+                this._request_channel.send('read_csv_file:next', booking_entries);
             });
         }
     }
@@ -85,12 +83,12 @@ export class ReadCSVFileView extends UseCaseView {
         });
     }
 
-    private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener<TReadCSVFileViewChannelName>
+    private register_response_channel_receiver() {
+        this._response_channel.register_receiver<TReadCSVFileViewChannelName>
         ('read_csv_file:show_payments', (e, payments: MoneyMoneyPayment[]) => {
             this.show_payments(payments);
         });
-        register_IPCRenderer_listener<TReadCSVFileViewChannelName>
+        this._response_channel.register_receiver<TReadCSVFileViewChannelName>
         ('read_csv_file:show_booking_records', (e, _booking_records: BookingRecordData[]) => {
             this.show_booking_records(_booking_records);
         });

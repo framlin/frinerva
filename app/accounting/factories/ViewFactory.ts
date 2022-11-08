@@ -1,3 +1,4 @@
+import {ResponseChannel} from "../../common/ipc/ResponseChannel";
 import {UseCaseView} from "../../common/ui/use_case/UseCaseView";
 import {UseCases} from '../use_cases';
 import {TUseCaseName} from "../../common/use_case/TUseCaseName";

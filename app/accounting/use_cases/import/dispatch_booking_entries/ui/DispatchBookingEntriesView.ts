@@ -1,10 +1,8 @@
-import {ipcRenderer} from "electron";
-import {register_IPCRenderer_listener} from "../../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {TableRenderer} from "../../../../../common/ui/renderer/TableRenderer";
 import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
+import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../../entites/Account";
 import {BookingEntry} from "../../../../entites/BookingEntry";
-import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {TDispatchBookingEntriesViewChannelName} from "./TDispatchBookingEntriesViewChannelName";
 
 class DispatchBookingEntriesView extends UseCaseView {
@@ -16,7 +14,7 @@ class DispatchBookingEntriesView extends UseCaseView {
     async create_view() {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
-        this.register_IPCRenderer_listener();
+        this.register_response_channel_receiver();
     }
 
     register_event_listener() {
@@ -64,7 +62,7 @@ class DispatchBookingEntriesView extends UseCaseView {
         account_div.appendChild(button_element);
         button_element.addEventListener('click', (e: MouseEvent) => {
             if (e.target) {
-                ipcRenderer.send('create_account:submit', virtual_account);
+                this._request_channel.send('create_account:submit', virtual_account);
             }
 
         })
@@ -77,8 +75,8 @@ class DispatchBookingEntriesView extends UseCaseView {
         }
     }
 
-    private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener<TDispatchBookingEntriesViewChannelName>
+    private register_response_channel_receiver() {
+        this._response_channel.register_receiver<TDispatchBookingEntriesViewChannelName>
         ('dispatch_booking_entries:show_virtual_accounts',
             (e, virtual_accounts: AccountData[]) => {
                 this.show_virtual_accounts(virtual_accounts);

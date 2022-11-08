@@ -1,10 +1,8 @@
-import {ipcRenderer} from "electron";
-import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {TableRenderer} from "../../../../common/ui/renderer/TableRenderer";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
+import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../entites/Account";
 import {BookingEntry} from "../../../entites/BookingEntry";
-import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {TShowAccountViewChannelName} from "./TShowAccountViewChannelName";
 
 
@@ -34,7 +32,7 @@ export class ShowAccountView extends UseCaseView {
     async create_view(): Promise<void> {
         await this.insert_markup_at(__dirname, '.workbench');
         this.link_styles(__dirname);
-        this.register_IPCRenderer_listener();
+        this.register_response_channel_receiver();
     }
 
     register_event_listener(): void {
@@ -48,7 +46,7 @@ export class ShowAccountView extends UseCaseView {
         const submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
         submit_button.addEventListener('click', () => {
             if (this._current_account) {
-                ipcRenderer.send('show_account:submit_account', this._current_account);
+                this._request_channel.send('show_account:submit_account', this._current_account);
                 submit_button.setAttribute('disabled', 'true');
             }
         });
@@ -56,8 +54,8 @@ export class ShowAccountView extends UseCaseView {
 
     private _current_account: AccountData | undefined;
 
-    private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener<TShowAccountViewChannelName>('show_account:show_account',
+    private register_response_channel_receiver() {
+        this._response_channel.register_receiver<TShowAccountViewChannelName>('show_account:show_account',
             (e, account: AccountData, editable?:boolean) => {
                 this.show_account(account, editable);
             })

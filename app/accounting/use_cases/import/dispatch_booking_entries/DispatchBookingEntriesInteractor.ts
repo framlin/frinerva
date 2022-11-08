@@ -64,14 +64,4 @@ export class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
         }
         return result;
     }
-
-
-    // get response_boundary(): DispatchBookingEntriesResponseBoundary {
-    //     return this._response_boundary as DispatchBookingEntriesResponseBoundary;
-    // }
-    //
-    //
-    // set response_boundary(value) {
-    //     this._response_boundary = value;
-    // }
 }

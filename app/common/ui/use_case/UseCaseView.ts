@@ -1,19 +1,15 @@
+import * as  path from "path";
+import {IPCChannel} from "../../ipc/IPCChannel";
+import {create_request_channel} from "../../ipc/RequestChannel";
+import {create_response_channel} from "../../ipc/ResponseChannel";
 import {TUseCaseName} from "../../use_case/TUseCaseName";
-
-const {ipcRenderer} = require("electron");
-const {HTMLReader} = require("../../util/HTMLReader");
-const path = require("path");
-
+import {HTMLReader} from "../../util/HTMLReader";
 
 export class UseCaseView {
+    protected _response_channel: IPCChannel = create_response_channel();
+    protected _request_channel: IPCChannel = create_request_channel();
 
-    private readonly _use_case_name;
-    private readonly _domain_name;
-
-    constructor(use_case_name: TUseCaseName, domain_name?: string) {
-        this._use_case_name = use_case_name;
-        this._domain_name = domain_name;
-    }
+    constructor(private _use_case_name: TUseCaseName, private _domain_name?: string) {}
 
     link_style(stylesheet_filename: string) {
         const existing_link = document.querySelector(`link[href="${stylesheet_filename}"]`);
@@ -27,7 +23,6 @@ export class UseCaseView {
             head.appendChild(link);
         }
     }
-
 
     insert_partial(markup: string, frame: string) {
         const frame_div = document.querySelector(frame);
@@ -76,7 +71,6 @@ export class UseCaseView {
         });
     }
 
-
     async create_view(): Promise<void> {};
 
     forward(use_case_name: TUseCaseName) {
@@ -91,7 +85,7 @@ export class UseCaseView {
     }
 
     send_view_ready(...data: any[]) {
-        ipcRenderer.send('use_case:view_ready', this._domain_name, this._use_case_name, ...data);
+        this._request_channel.send('use_case:view_ready', this._domain_name, this._use_case_name, ...data);
     }
 }
 

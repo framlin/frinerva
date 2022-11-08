@@ -1,5 +1,3 @@
-import {ipcRenderer} from "electron";
-import {register_IPCRenderer_listener} from "../../../../common/ui/ipc/register_IPCRenderer_listener";
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {TShowListViewChannelName} from "./TShowListViewChannelName";
@@ -15,7 +13,7 @@ export class ShowListView extends UseCaseView {
             account_list_div.addEventListener('click', (event) => {
                 const target = event.target as HTMLDivElement;
                 if (target.classList.contains('sideboard-entry-list-entry')) {
-                    ipcRenderer.send('show_list:account_selected', target.dataset.key);
+                    this._request_channel.send('show_list:account_selected', target.dataset.key);
                 }
             });
         }
@@ -24,7 +22,7 @@ export class ShowListView extends UseCaseView {
     async create_view() {
         await this.append_markup_at(__dirname, '.sideboard');
         this.link_styles(__dirname);
-        this.register_IPCRenderer_listener()
+        this.register_response_channel_receiver()
     };
 
     _clear_account_name_list(account_name_list: HTMLDivElement) {
@@ -37,7 +35,7 @@ export class ShowListView extends UseCaseView {
     }
 
 
-    show_account_name_list(account_name_list: { account_name: string, key: string }[]) {
+    show(account_name_list: { account_name: string, key: string }[]) {
         const account_list_div = document.querySelector('.sideboard-entry.account-list') as HTMLDivElement;
         if (account_list_div) {
             this._clear_account_name_list(account_list_div);
@@ -51,10 +49,12 @@ export class ShowListView extends UseCaseView {
         }
     };
 
-    private register_IPCRenderer_listener() {
-        register_IPCRenderer_listener<TShowListViewChannelName>('show_list:show_account_name_list',
+    private register_response_channel_receiver() {
+        this._response_channel.register_receiver<TShowListViewChannelName>('show_list:show',
             (e, account_name_list: { account_name: string, key: string }[]) => {
-                this.show_account_name_list(account_name_list);
+                this.show(account_name_list);
             });
+
+
     }
 }

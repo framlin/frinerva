@@ -1,7 +1,7 @@
-import {TUseCaseName} from "./TUseCaseName";
+import {create_request_channel} from "../ipc/RequestChannel";
 import {Observatory} from "../observation/Observatory";
 import {Subscribing} from "../observation/Subscribing";
-import {register_IPCMain_listener} from "../ui/ipc/register_IPCMain_listener";
+import {TUseCaseName} from "./TUseCaseName";
 import {UseCase} from "./UseCase";
 import {UseCaseRequestBoundary} from "./UseCaseRequestBoundary";
 
@@ -11,12 +11,13 @@ export class UseCaseController implements Subscribing {
         protected _use_case: UseCase,
         observatory: Observatory
     ) {
+        this._request_channel = create_request_channel()
         this.subscribe_at(observatory)
-        this.register_ipc_listener();
+        this.register_request_channel_receiver();
     }
 
-    protected register_ipc_listener() {
-        register_IPCMain_listener('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {
+    protected register_request_channel_receiver() {
+        this._request_channel.register_receiver('use_case:view_ready', (e, _domain_name, _use_case_name, ...data) => {
             this.on_use_case_view_ready(...data)
         });
     }
@@ -48,4 +49,6 @@ export class UseCaseController implements Subscribing {
     on_use_case_view_ready(...data: any[]) {
         this.execute(...data);
     }
+
+    protected _request_channel;
 }

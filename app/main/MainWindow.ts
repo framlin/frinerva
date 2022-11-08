@@ -1,8 +1,8 @@
 import {BrowserWindow} from 'electron';
-import {TUseCaseName} from "../common/use_case/TUseCaseName";
-import {Domain} from "../common/domain/Domain";
 import * as path from "path";
-import {register_IPCMain_listener} from "../common/ui/ipc/register_IPCMain_listener";
+import {Domain} from "../common/domain/Domain";
+import {create_request_channel} from "../common/ipc/RequestChannel";
+import {TUseCaseName} from "../common/use_case/TUseCaseName";
 
 export class MainWindow extends BrowserWindow {
     _domains: Record<string, Domain> = {};
@@ -18,7 +18,7 @@ export class MainWindow extends BrowserWindow {
         });
 
 
-        register_IPCMain_listener('use_case:create', (e, domain_name, use_case_name) => {
+        create_request_channel().register_receiver('use_case:create', (e, domain_name, use_case_name) => {
             this.execute_use_case(domain_name, use_case_name);
         })
     }

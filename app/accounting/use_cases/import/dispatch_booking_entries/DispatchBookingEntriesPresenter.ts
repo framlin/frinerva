@@ -7,6 +7,6 @@ export class DispatchBookingEntriesPresenter
 
     show(_virtual_accounts: AccountData[]) {
         const channel:TDispatchBookingEntriesViewChannelName = 'dispatch_booking_entries:show_virtual_accounts';
-        this._ipc_channel.send(channel, _virtual_accounts);
+        this._response_channel.send(channel, _virtual_accounts);
     }
 }
