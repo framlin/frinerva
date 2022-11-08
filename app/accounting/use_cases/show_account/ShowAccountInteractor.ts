@@ -1,8 +1,9 @@
 import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {Account, AccountData} from "../../entites/Account";
 import {Accounting} from "../../entites/Accounting";
+import {ShowAccountRequestBoundary} from "./ShowAccountRequestBoundary";
 
-export class ShowAccountInteractor extends UseCaseInteractor {
+export class ShowAccountInteractor extends UseCaseInteractor implements ShowAccountRequestBoundary{
 
     async execute(key: string): Promise<Account | null> {
         const account = await (this._domain_entity as Accounting).load_account(key);

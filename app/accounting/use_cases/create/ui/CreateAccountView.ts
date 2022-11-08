@@ -2,6 +2,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountHandle} from "../../../entites/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";
+import {CreateAccountRequestChannelName} from "../CreateAccountRequestChannelName";
 import {CreateAccountResponseChannelName} from "../CreateAccountResponseChannelName";
 
 
@@ -17,7 +18,6 @@ export class CreateAccountView extends UseCaseView {
         this.register_response_channel_receiver();
     };
 
-
     register_event_listener() {
         this.register_create_button();
         this.register_account_list_entry_selection();
@@ -28,7 +28,7 @@ export class CreateAccountView extends UseCaseView {
         const create_button = document.querySelector('.next-btn') as HTMLButtonElement;
         create_button.addEventListener('click', () => {
             let new_accounts_list = this.get_new_accounts_list();
-            this._request_channel.send('create_account:create', new_accounts_list)
+            this._request_channel.send<CreateAccountRequestChannelName>('create_account:create', new_accounts_list)
         });
     }
 
@@ -58,7 +58,8 @@ export class CreateAccountView extends UseCaseView {
             period_selection.forEach((list_entry) => {
                 periods.push(list_entry.innerHTML);
             })
-            this._request_channel.send('create_account:period_cost_center-selected', {periods, accounts});
+            this._request_channel.send<CreateAccountRequestChannelName>
+            ('create_account:period_cost_center_selection', {periods, accounts});
         });
     }
 

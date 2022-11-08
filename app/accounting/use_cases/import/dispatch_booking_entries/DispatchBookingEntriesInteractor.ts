@@ -3,10 +3,11 @@ import {Account, AccountData} from "../../../entites/Account";
 import {Accounting} from "../../../entites/Accounting";
 import {BookingEntryData} from "../../../entites/BookingEntry";
 import {BookingRecordData} from "../../../entites/BookingRecord";
+import {DispatchBookingEntriesRequestBoundary} from "./DispatchBookingEntriesRequestBoundary";
 
 type AccountDict = { [key: string]: BookingEntryData[] }
 
-export class DispatchBookingEntriesInteractor extends UseCaseInteractor  {
+export class DispatchBookingEntriesInteractor extends UseCaseInteractor  implements DispatchBookingEntriesRequestBoundary{
 
     async execute(booking_records: BookingRecordData[]) {
         const account_dict = this.create_account_dict(booking_records);

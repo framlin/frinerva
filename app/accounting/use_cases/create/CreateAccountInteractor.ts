@@ -2,11 +2,12 @@ import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
 import {AccountHandle} from "../../entites/AccountHandle";
 import {Accounting} from "../../entites/Accounting";
 import {AccountDescriptionLabel} from "./AccountDescriptionLabel";
+import {CreateAccountRequestBoundary} from "./CreateAccountRequestBoundary";
 import {TBookingPeriodAccountDescriptionList} from "./TBookingPeriodAccountDescriptionList";
 import {CreateAccountHelper} from "./CreateAccountHelper";
 import {CreateAccountResponseBoundary} from "./CreateAccountResponseBoundary";
 
-export class CreateAccountInteractor extends UseCaseInteractor {
+export class CreateAccountInteractor extends UseCaseInteractor implements CreateAccountRequestBoundary {
     async execute() {
         const cost_center_config = await this.helper.load_cost_center_configuration();
         this.response_boundary.show_cost_center_list(JSON.parse(cost_center_config));

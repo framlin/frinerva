@@ -3,6 +3,7 @@ import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../entites/Account";
 import {BookingEntry} from "../../../entites/BookingEntry";
+import {ShowAccountRequestChannelName} from "../ShowAccountRequestChannelName";
 import {ShowAccountResponseChannelName} from "../ShowAccountResponseChannelName";
 
 
@@ -13,7 +14,6 @@ export class ShowAccountView extends UseCaseView {
     }
 
     show_account(account: AccountData, editable: boolean = true): void {
-        console.log('ShowAccountView.show_account', account);
         this._current_account = account;
         const account_panel = document.querySelector('#account-panel') as HTMLDivElement;
         account_panel.innerHTML = '';
@@ -46,7 +46,7 @@ export class ShowAccountView extends UseCaseView {
         const submit_button = document.querySelector('.submit-btn') as HTMLButtonElement;
         submit_button.addEventListener('click', () => {
             if (this._current_account) {
-                this._request_channel.send('show_account:submit_account', this._current_account);
+                this._request_channel.send<ShowAccountRequestChannelName>('show_account:submit', this._current_account);
                 submit_button.setAttribute('disabled', 'true');
             }
         });
@@ -56,7 +56,7 @@ export class ShowAccountView extends UseCaseView {
 
     private register_response_channel_receiver() {
         this._response_channel.register_receiver<ShowAccountResponseChannelName>('show_account:show',
-            (e, account: AccountData, editable?:boolean) => {
+            (e, account: AccountData, editable?: boolean) => {
                 this.show_account(account, editable);
             })
     }

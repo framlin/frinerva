@@ -1,13 +1,14 @@
 import {dialog} from "electron";
 import {UseCaseController} from "../../../../common/use_case/UseCaseController";
 import {ReadCSVFileInteractor} from "./ReadCSVFileInteractor";
+import {ReadCSVFileRequestChannelName} from "./ReadCSVFileRequestChannelName";
 
 export class ReadCSVFileController extends UseCaseController {
     _current_state: string = "";
 
     register_request_channel_receiver() {
         super.register_request_channel_receiver();
-        this._request_channel.register_receiver('read_csv_file:next', (e, ...data) => {
+        this._request_channel.register_receiver<ReadCSVFileRequestChannelName>('read_csv_file:next', (e, ...data) => {
             this.on_next(...data);
         });
     }
@@ -23,7 +24,7 @@ export class ReadCSVFileController extends UseCaseController {
         switch (this._current_state) {
             case "START":
                 if (this._request_boundary) {
-                    (this._request_boundary as unknown as ReadCSVFileInteractor).create_booking_entries();
+                    (this._request_boundary as ReadCSVFileInteractor).create_booking_entries();
                     this._current_state = "BOOKING_ENTRY_CREATION";
                 }
                 break;

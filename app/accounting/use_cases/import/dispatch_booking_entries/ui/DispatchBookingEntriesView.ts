@@ -3,6 +3,7 @@ import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {AccountData} from "../../../../entites/Account";
 import {BookingEntry} from "../../../../entites/BookingEntry";
+import {DispatchBookingEntriesRequestChannelName} from "../DispatchBookingEntriesRequestChannelName";
 import {DispatchBookingEntriesResponseChannelName} from "../DispatchBookingEntriesResponseChannelName";
 
 class DispatchBookingEntriesView extends UseCaseView {
@@ -62,7 +63,7 @@ class DispatchBookingEntriesView extends UseCaseView {
         account_div.appendChild(button_element);
         button_element.addEventListener('click', (e: MouseEvent) => {
             if (e.target) {
-                this._request_channel.send('create_account:submit', virtual_account);
+                this._request_channel.send<DispatchBookingEntriesRequestChannelName>('create_account:submit', virtual_account);
             }
 
         })

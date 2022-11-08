@@ -1,5 +1,6 @@
 import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../common/use_case/TUseCaseName";
+import {ShowListRequestChannelName} from "../ShowListRequestChannelName";
 import {ShowListResponseChannelName} from "../ShowListResponseChannelName";
 
 export class ShowListView extends UseCaseView {
@@ -13,7 +14,7 @@ export class ShowListView extends UseCaseView {
             account_list_div.addEventListener('click', (event) => {
                 const target = event.target as HTMLDivElement;
                 if (target.classList.contains('sideboard-entry-list-entry')) {
-                    this._request_channel.send('show_list:account_selected', target.dataset.key);
+                    this._request_channel.send<ShowListRequestChannelName>('show_list:account_selected', target.dataset.key);
                 }
             });
         }

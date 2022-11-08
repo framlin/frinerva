@@ -2,6 +2,7 @@ import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
 import {TUseCaseName} from "../../../../../common/use_case/TUseCaseName";
 import {BookingRecordData} from "../../../../entites/BookingRecord";
 import {MoneyMoneyPayment} from "../../../../entites/Payment";
+import {ReadCSVFileRequestChannelName} from "../ReadCSVFileRequestChannelName";
 import {CSVFileImportRenderer} from './CSVFileImportRenderer';
 import {ReadCSVFileResponseChannelName} from "../ReadCSVFileResponseChannelName";
 
@@ -29,7 +30,7 @@ export class ReadCSVFileView extends UseCaseView {
         if (next_button) {
             next_button.addEventListener('click', () => {
                 const booking_entries = this.get_booking_records();
-                this._request_channel.send('read_csv_file:next', booking_entries);
+                this._request_channel.send<ReadCSVFileRequestChannelName>('read_csv_file:next', booking_entries);
             });
         }
     }
