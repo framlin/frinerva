@@ -77,7 +77,7 @@ class DispatchBookingEntriesView extends UseCaseView {
 
     private register_response_channel_receiver() {
         this._response_channel.register_receiver<TDispatchBookingEntriesViewChannelName>
-        ('dispatch_booking_entries:show_virtual_accounts',
+        ('dispatch_booking_entries:show',
             (e, virtual_accounts: AccountData[]) => {
                 this.show_virtual_accounts(virtual_accounts);
             });

@@ -121,7 +121,7 @@ export class CreateAccountView extends UseCaseView {
         alert(error_message);
     }
 
-    account_creation_finished() {
+    account_creation_done() {
         this.reset_list('#account-column');
         this.reset_list('#period-column');
         this.clear_list('#result-column');
@@ -167,8 +167,8 @@ export class CreateAccountView extends UseCaseView {
         });
 
         this._response_channel.register_receiver<TCreateAccountViewChannelName>
-        ('create_account:account_creation_finished', () => {
-            this.account_creation_finished();
+        ('create_account:account_creation_done', () => {
+            this.account_creation_done();
         })
     }
 }

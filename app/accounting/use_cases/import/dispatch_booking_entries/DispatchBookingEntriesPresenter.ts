@@ -6,7 +6,7 @@ export class DispatchBookingEntriesPresenter
     extends UseCasePresenter{
 
     show(_virtual_accounts: AccountData[]) {
-        const channel:TDispatchBookingEntriesViewChannelName = 'dispatch_booking_entries:show_virtual_accounts';
+        const channel:TDispatchBookingEntriesViewChannelName = 'dispatch_booking_entries:show';
         this._response_channel.send(channel, _virtual_accounts);
     }
 }

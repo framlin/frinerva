@@ -30,7 +30,7 @@ export class CreateAccountPresenter extends UseCasePresenter implements CreateAc
     }
 
     account_creation_done() {
-        const channel:TCreateAccountViewChannelName = "create_account:account_creation_finished";
+        const channel:TCreateAccountViewChannelName = "create_account:account_creation_done";
         this._response_channel.send(channel);
     }
 

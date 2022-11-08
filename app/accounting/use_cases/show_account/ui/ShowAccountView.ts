@@ -55,7 +55,7 @@ export class ShowAccountView extends UseCaseView {
     private _current_account: AccountData | undefined;
 
     private register_response_channel_receiver() {
-        this._response_channel.register_receiver<TShowAccountViewChannelName>('show_account:show_account',
+        this._response_channel.register_receiver<TShowAccountViewChannelName>('show_account:show',
             (e, account: AccountData, editable?:boolean) => {
                 this.show_account(account, editable);
             })
