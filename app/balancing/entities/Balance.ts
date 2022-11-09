@@ -1,11 +1,13 @@
 import {Account} from "../../accounting/entites/Account";
 
-class Balance{
+type BlanceHandle = {name: string; booking_period: string}
+export class Balance{
     _name: string;
     _booking_period: string;
     _accounts: Account[];
 
-    constructor(name: string, booking_period: string) {
+    //{booking_period, cost_center}: AccountHandle
+    constructor({name, booking_period}: BlanceHandle) {
         this._name = name;
         this._booking_period = booking_period;
         this._accounts = [];
@@ -37,11 +39,16 @@ class Balance{
 
     static create_from_JSON(serialized_balance: string) {
         let balance_data = JSON.parse(serialized_balance);
-        let balance = new Balance(balance_data._name, balance_data._booking_period);
+        let balance = new Balance({
+            name: balance_data._name,
+            booking_period: balance_data._booking_period
+        });
         balance.accounts = balance_data._accounts;
         return balance;
     }
 }
 
-module.exports = {Balance};
-export {Balance}
+export const BALANCE_ID = new Balance({
+    booking_period: "",
+    name: ""
+});

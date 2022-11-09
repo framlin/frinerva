@@ -7,6 +7,7 @@ import {DomainHelper} from "../common/domain/DomainHelper";
 import {Observatory} from "../common/observation/Observatory";
 import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
 import {MainWindow} from "./MainWindow";
+import {Balancing} from "../balancing/entities/Balancing";
 
 type DomainEntityConstructor = { new(domain_helper: typeof DomainHelper): DomainEntity } & typeof DomainEntity;
 
@@ -16,6 +17,7 @@ const domain_factories: Record<string, typeof factories> = {
 
 const domain_entities: Record<string, DomainEntityConstructor> = {
     accounting: Accounting,
+    balancing: Balancing
 }
 
 const domain_helper: Record<string, typeof DomainHelper> = {

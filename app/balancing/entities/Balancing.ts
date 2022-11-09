@@ -1,12 +1,30 @@
 import {Account} from "../../accounting/entites/Account";
 import {AccountHandle} from "../../accounting/entites/AccountHandle";
-import {Balance} from "./Balance";
+import {Balance, BALANCE_ID} from "./Balance";
+import {DomainEntity} from "../../common/domain/DomainEntity";
+import {Observable} from "../../common/observation/Observable";
+import {Observer} from "../../common/observation/Observer";
+import {Observatory} from "../../common/observation/Observatory";
+import {DomainHelper} from "../../common/domain/DomainHelper";
 
-export class Balancing {
-    _balances: Balance[];
+export class Balancing extends DomainEntity implements Observable<Balance> {
+    provide_at(observatory: Observatory): void {
+        throw new Error("Method not implemented.");
+    }
 
-    constructor() {
+    constructor(domain_helper: typeof DomainHelper) {
+        super(domain_helper);
         this._balances = [];
+    }
+
+    add(observer: Observer<Balance>): void {
+        throw new Error("Method not implemented.");
+    }
+    set state(value: Balance) {
+        throw new Error("Method not implemented.");
+    }
+    get state(): Balance {
+        throw new Error("Method not implemented.");
     }
     register(balance: Balance){
         this._balances.push(balance)
@@ -30,4 +48,7 @@ export class Balancing {
         }
         return accounts;
     }
+
+    private readonly _balances: Balance[];
+    CLASS_ID: Balance = BALANCE_ID;
 }
