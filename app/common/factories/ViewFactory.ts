@@ -1,7 +1,7 @@
-import {ResponseChannel} from "../../common/ipc/ResponseChannel";
-import {UseCaseView} from "../../common/ui/use_case/UseCaseView";
-import {UseCases} from '../usecases';
-import {UseCaseName} from "../../common/usecase/UseCaseName";
+import {ResponseChannel} from "../ipc/ResponseChannel";
+import {UseCaseView} from "../ui/use_case/UseCaseView";
+import {UseCases} from '../../accounting/usecases';
+import {UseCaseName} from "../usecase/UseCaseName";
 
 const view_cache: Record<string, UseCaseView> = {}
 

@@ -1,5 +1,5 @@
 //test creation of use case
-import {UseCaseFactory} from "../../../accounting/factories/UseCaseFactory";
+import {UseCaseFactory} from "../../factories/UseCaseFactory";
 import {UseCaseName} from "../UseCaseName";
 import {UseCase} from "../UseCase";
 import {UseCasePresenter} from "../UseCasePresenter";

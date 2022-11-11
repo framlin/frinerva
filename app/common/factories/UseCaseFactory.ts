@@ -1,10 +1,10 @@
 import WebContents = Electron.WebContents;
-import {DomainEntity} from "../../common/domain/DomainEntity";
-import {Observatory} from "../../common/observation/Observatory";
-import {Blueprint} from "../../common/usecase/Blueprint";
-import {UseCase} from "../../common/usecase/UseCase";
-import {UseCaseList} from "../../common/usecase/UseCaseList";
-import {UseCaseName} from "../../common/usecase/UseCaseName";
+import {DomainEntity} from "../domain/DomainEntity";
+import {Observatory} from "../observation/Observatory";
+import {Blueprint} from "../usecase/Blueprint";
+import {UseCase} from "../usecase/UseCase";
+import {UseCaseList} from "../usecase/UseCaseList";
+import {UseCaseName} from "../usecase/UseCaseName";
 
 function create_use_case(blueprint: Blueprint, use_case_name: UseCaseName) : UseCase {
     const helper = new blueprint.helper();

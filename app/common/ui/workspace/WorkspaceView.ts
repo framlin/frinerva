@@ -2,7 +2,7 @@ import {UseCaseName} from "../../usecase/UseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
 import {ipcRenderer} from "electron";
-import {ViewFactory}  from "../../../accounting/factories/ViewFactory";
+import {ViewFactory}  from "../../factories/ViewFactory";
 
 class WorkspaceView {
 

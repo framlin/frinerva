@@ -1,4 +1,4 @@
-import {UseCaseFactory} from "../../../accounting/factories/UseCaseFactory";
+import {UseCaseFactory} from "../../factories/UseCaseFactory";
 import {AccountingHelper} from "../../persistence/helper/AccountingHelper";
 import {UseCase} from "../UseCase";
 import {UseCaseController} from "../UseCaseController";

@@ -1,5 +1,5 @@
 import {app, BrowserWindow, Menu} from 'electron';
-import {UseCaseFactory} from '../accounting/factories/UseCaseFactory';
+import {UseCaseFactory} from '../common/factories/UseCaseFactory';
 import {DomainFactory} from './DomainFactory';
 import {MainMenu} from "./MainMenu";
 import {MainWindow} from "./MainWindow";

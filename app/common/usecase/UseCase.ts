@@ -1,6 +1,6 @@
 import {UseCaseName} from "./UseCaseName";
 import {UseCasePresenter} from "./UseCasePresenter";
-import {UseCaseFactory} from "../../accounting/factories/UseCaseFactory";
+import {UseCaseFactory} from "../factories/UseCaseFactory";
 
 export class UseCase{
 
