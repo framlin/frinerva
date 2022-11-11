@@ -2,14 +2,14 @@ import {Balance} from "../Balance";
 import {Account} from "../../../accounting/entites/Account";
 
 test('creation', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
 
     expect(balance.name).toBe("name");
     expect(balance.booking_period).toBe("2022");
 });
 
 test('add Account', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
     let account = new Account({booking_period: 'account1', cost_center: 'CC'});
 
     balance.add(account);
@@ -18,7 +18,7 @@ test('add Account', () => {
 });
 
 test('add two Accounts', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
     let account = new Account({booking_period: 'account1', cost_center: 'CC'});
     let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
@@ -28,7 +28,7 @@ test('add two Accounts', () => {
 });
 
 test('setting accounts', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
     let account = new Account({booking_period: 'account1', cost_center: 'CC'});
     let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
@@ -39,7 +39,7 @@ test('setting accounts', () => {
 });
 
 test('serialization', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
     let account = new Account({booking_period: 'account1', cost_center: 'CC'});
     let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 
@@ -52,7 +52,7 @@ test('serialization', () => {
 })
 
 test('un-serialization', () => {
-    let balance = new Balance("name", "2022");
+    let balance = new Balance({name: "name", booking_period: "2022"});
     let account = new Account({booking_period: 'account1', cost_center: 'CC'});
     let account2 = new Account({booking_period: 'account2', cost_center: 'C2'});
 

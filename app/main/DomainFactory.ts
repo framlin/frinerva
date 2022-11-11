@@ -1,11 +1,12 @@
 import {Accounting} from "../accounting/entites/Accounting";
 import {factories} from '../accounting/factories';
-import {UseCases} from "../accounting/use_cases";
+import {UseCases} from "../accounting/usecases";
 import {Domain} from '../common/domain/Domain';
 import {DomainEntity} from "../common/domain/DomainEntity";
 import {DomainHelper} from "../common/domain/DomainHelper";
 import {Observatory} from "../common/observation/Observatory";
 import {AccountingHelper} from "../common/persistence/helper/AccountingHelper";
+import {BalancingHelper} from "../common/persistence/helper/BalancingHelper";
 import {MainWindow} from "./MainWindow";
 import {Balancing} from "../balancing/entities/Balancing";
 
@@ -21,7 +22,8 @@ const domain_entities: Record<string, DomainEntityConstructor> = {
 }
 
 const domain_helper: Record<string, typeof DomainHelper> = {
-    accounting: AccountingHelper
+    accounting: AccountingHelper,
+    balancing: BalancingHelper
 }
 
 function create_domain_entity(

@@ -1,0 +1,41 @@
+.accounting {
+    background-color: var(--color-blue);
+}
+
+.accounting .sidebar .side-board-entry-toggle{
+    background-color: var(--color-darker-blue);
+    color: var(--color-lighter-blue);
+}
+
+.accounting .toolbar button {
+    background-color: var(--color-lighter-blue);
+}
+
+#accounting-switch{
+    cursor: default;
+    background-color: var(--select-accounting-color);
+    color: var(--select-accounting-font-color);
+}
+
+#accounting-switch:hover {
+    background-color: var(--select-accounting-hover-color);
+    color: var(--select-accounting-font-color);
+}
+
+.sideboard-entry-list-header, .account-list-header {
+    background-color: var(--color-dark-blue);
+    color: var(--color-white-blue);
+}
+
+
+.sideboard-entry-list-entry, .account-entry {
+    background-color: var(--color-white-blue);
+}
+
+.dialog-header{
+    background-color: var(--dialog-header-color);
+    padding: 5px 10px;
+}
+.dialog-footer{
+    background-color: var(--dialog-footer-color);
+}

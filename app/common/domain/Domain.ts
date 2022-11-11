@@ -1,4 +1,4 @@
-import {UseCaseName} from "../use_case/UseCaseName";
+import {UseCaseName} from "../usecase/UseCaseName";
 import {DomainEntity} from "./DomainEntity";
 
 class Domain {

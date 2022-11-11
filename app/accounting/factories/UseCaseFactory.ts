@@ -1,10 +1,10 @@
 import WebContents = Electron.WebContents;
 import {DomainEntity} from "../../common/domain/DomainEntity";
 import {Observatory} from "../../common/observation/Observatory";
-import {Blueprint} from "../../common/use_case/Blueprint";
-import {UseCase} from "../../common/use_case/UseCase";
-import {UseCaseList} from "../../common/use_case/UseCaseList";
-import {UseCaseName} from "../../common/use_case/UseCaseName";
+import {Blueprint} from "../../common/usecase/Blueprint";
+import {UseCase} from "../../common/usecase/UseCase";
+import {UseCaseList} from "../../common/usecase/UseCaseList";
+import {UseCaseName} from "../../common/usecase/UseCaseName";
 
 function create_use_case(blueprint: Blueprint, use_case_name: UseCaseName) : UseCase {
     const helper = new blueprint.helper();
@@ -20,7 +20,7 @@ export class UseCaseFactory {
     static IPCChannel: WebContents;
     static DomainEntity: DomainEntity;
     static Observatory: Observatory;
-    static UseCases:UseCaseList;
+    static UseCases: UseCaseList;
 
     static create(use_case_name: UseCaseName) {
         if (this.UseCases[use_case_name]) {

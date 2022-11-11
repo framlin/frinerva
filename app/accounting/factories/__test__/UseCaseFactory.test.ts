@@ -2,14 +2,14 @@ import {DomainEntity} from "../../../common/domain/DomainEntity";
 import {DomainHelper} from "../../../common/domain/DomainHelper";
 import {Observatory} from "../../../common/observation/Observatory";
 import {UseCaseView} from "../../../common/ui/use_case/UseCaseView";
-import {UseCase} from "../../../common/use_case/UseCase";
-import {UseCaseController} from "../../../common/use_case/UseCaseController";
-import {UseCaseHelper} from "../../../common/use_case/UseCaseHelper";
-import {UseCaseInteractor} from "../../../common/use_case/UseCaseInteractor";
-import {UseCasePresenter} from "../../../common/use_case/UseCasePresenter";
+import {UseCase} from "../../../common/usecase/UseCase";
+import {UseCaseController} from "../../../common/usecase/UseCaseController";
+import {UseCaseHelper} from "../../../common/usecase/UseCaseHelper";
+import {UseCaseInteractor} from "../../../common/usecase/UseCaseInteractor";
+import {UseCasePresenter} from "../../../common/usecase/UseCasePresenter";
 import {UseCaseFactory} from "../UseCaseFactory";
-import {UseCaseList} from "../../../common/use_case/UseCaseList";
-import {UseCases as AccountingUseCases} from "../../use_cases";
+import {UseCaseList} from "../../../common/usecase/UseCaseList";
+import {UseCases as AccountingUseCases} from "../../usecases";
 
 class IPCChannelMock {
 }

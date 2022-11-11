@@ -2,7 +2,7 @@ import * as  path from "path";
 import {IPCChannel} from "../../ipc/IPCChannel";
 import {create_request_channel} from "../../ipc/RequestChannel";
 import {create_response_channel} from "../../ipc/ResponseChannel";
-import {UseCaseName} from "../../use_case/UseCaseName";
+import {UseCaseName} from "../../usecase/UseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 
 export class UseCaseView {

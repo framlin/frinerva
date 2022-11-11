@@ -1,4 +1,4 @@
-import {UseCaseName} from "../../use_case/UseCaseName";
+import {UseCaseName} from "../../usecase/UseCaseName";
 import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
 import {ipcRenderer} from "electron";
