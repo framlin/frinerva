@@ -3,6 +3,7 @@ import * as path from "path";
 import {Domain} from "../common/domain/Domain";
 import {create_request_channel} from "../common/ipc/RequestChannel";
 import {UseCaseName} from "../common/usecase/UseCaseName";
+import {UseCaseRequestChannelName} from "../common/usecase/UseCaseRequestChannelName";
 
 export class MainWindow extends BrowserWindow {
     _domains: Record<string, Domain> = {};
@@ -17,15 +18,9 @@ export class MainWindow extends BrowserWindow {
             show: false
         });
 
-        create_request_channel().register_receiver('use_case:create', (e, domain_name, use_case_name) => {
+        create_request_channel().register_receiver<UseCaseRequestChannelName>('use_case:create', (e, domain_name, use_case_name) => {
             this.execute_use_case(domain_name, use_case_name);
         })
-    }
-
-    _UseCaseFactory: any;
-
-    set UseCaseFactory(value: any) {
-        this._UseCaseFactory = value;
     }
 
     execute_use_case(domain_name: string, use_case_name: UseCaseName) {

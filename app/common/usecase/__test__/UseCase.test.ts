@@ -14,6 +14,12 @@ describe('UseCase', () => {
             } as UseCase;
         }
     }
+//     const ucfs = new UseCaseFactoryStub(
+//         _DomainEntity: DomainEntity,
+//         _UseCases: UseCaseList,
+//         _IPCChannel: WebContents,
+//         _Observatory: Observatory
+// );
     class UseCasePresenterStub extends UseCasePresenter{
         show(...data: unknown[]): void {
         }

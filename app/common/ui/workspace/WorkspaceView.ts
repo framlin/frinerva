@@ -3,6 +3,8 @@ import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
 import {ipcRenderer} from "electron";
 import {ViewFactory}  from "../../factories/ViewFactory";
+import {create_request_channel} from "../../ipc/RequestChannel";
+import {UseCaseRequestChannelName} from "../../usecase/UseCaseRequestChannelName";
 
 class WorkspaceView {
 
@@ -61,7 +63,7 @@ class WorkspaceView {
             // @ts-ignore
             const domain_name = use_case_starter.dataset.domain_name;
             use_case_starter.addEventListener('click', () => {
-                ipcRenderer.send('use_case:create', domain_name, use_case_name);
+                create_request_channel().send<UseCaseRequestChannelName>('use_case:create', domain_name, use_case_name);
             });
         }
     }

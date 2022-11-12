@@ -1,5 +1,4 @@
 import {app, BrowserWindow, Menu} from 'electron';
-import {UseCaseFactory} from '../common/factories/UseCaseFactory';
 import {DomainFactory} from './DomainFactory';
 import {MainMenu} from "./MainMenu";
 import {MainWindow} from "./MainWindow";
@@ -15,7 +14,6 @@ Menu.setApplicationMenu(Menu.buildFromTemplate(menuTemplate));
 
 function create_main_window() {
     mainWindow = new MainWindow();
-    mainWindow.UseCaseFactory = UseCaseFactory;
     DomainFactory.main_window = mainWindow;
 
     mainWindow.loadFile('app/main/main.html').then().catch();
@@ -35,7 +33,7 @@ function create_main_window() {
 app.whenReady().then(() => {
     create_main_window();
     app.on('activate', function () {
-        // On macOS it's common to re-create a window in the app when the
+        // On macOS, it's common to re-create a window in the app when the
         // dock icon is clicked and there are no other windows open.
         if (BrowserWindow.getAllWindows().length === 0) {
             if (!mainWindow) {
