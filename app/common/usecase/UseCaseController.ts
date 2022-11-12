@@ -47,6 +47,7 @@ export class UseCaseController implements Subscribing {
     }
 
     on_use_case_view_ready(...data: any[]) {
+        console.log(`Use case view ready for ${this._use_case.domain_name}:${this._use_case.use_case_name} use case`);
         this.execute(...data);
     }
 

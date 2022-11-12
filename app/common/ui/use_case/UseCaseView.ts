@@ -85,6 +85,7 @@ export class UseCaseView {
     }
 
     send_view_ready(...data: any[]) {
+        console.log(`Sending view ready for ${this._use_case_name}`);
         this._request_channel.send('use_case:view_ready', this._domain_name, this._use_case_name, ...data);
     }
 }

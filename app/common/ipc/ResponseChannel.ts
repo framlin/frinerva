@@ -11,7 +11,7 @@ export class ResponseChannel implements IPCChannel {
     register_receiver<T extends string>(channel: T, listener: (event: IpcRendererEvent, ...args: any[]) => void) {
         ipcRenderer.removeAllListeners(channel);
         ipcRenderer.on(channel, listener);
-        console.log(`Registered listener for channel '${channel}'`);
+        console.log(`Registered listener for response-channel '${channel}'`);
     }
 
     send<T extends string>(channel: T, ...args: any[]) {

@@ -41,7 +41,7 @@ describe('UseCase', () => {
     it ('calls UseCaseFactory.create if forward is called', () => {
         const useCase = new UseCase(UseCaseFactoryStub, use_case_presenter, use_case_name, domain_name);
         // @ts-ignore
-        const spy = jest.spyOn(useCase._UseCaseFactory, 'create');
+        const spy = jest.spyOn(useCase._useCaseFactory, 'create');
         useCase.forward(use_case_name);
         expect(spy).toHaveBeenCalled();
         expect(spy).toHaveBeenCalledWith(use_case_name);

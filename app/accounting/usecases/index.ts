@@ -5,7 +5,7 @@ import {show_account} from "./show_account";
 import {show_list} from "./show_list";
 import {UseCaseList} from "../../common/usecase/UseCaseList";
 
-export const  UseCases: UseCaseList = {
+export const UseCases: UseCaseList = {
     read_csv_file,
     create_account,
     show_list,

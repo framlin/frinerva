@@ -5,7 +5,7 @@ import {UseCaseFactory} from "../factories/UseCaseFactory";
 export class UseCase{
 
     constructor(
-        protected _UseCaseFactory: typeof UseCaseFactory,
+        protected _useCaseFactory: UseCaseFactory,
         protected _presenter: UseCasePresenter,
         protected _use_case_name?: UseCaseName,
         protected _domain_name?: string
@@ -16,7 +16,7 @@ export class UseCase{
     }
 
     forward(use_case_name: UseCaseName, ...data: any[]) {
-        this._UseCaseFactory.create(use_case_name).execute(...data);
+        this._useCaseFactory.create(use_case_name).execute(...data);
     }
 
 
@@ -26,6 +26,14 @@ export class UseCase{
 
     set presenter(value) {
         this._presenter = value;
+    }
+
+    get use_case_name() {
+        return this._use_case_name;
+    }
+
+    get domain_name() {
+        return this._domain_name;
     }
 
 }
