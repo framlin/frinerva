@@ -1,4 +1,4 @@
-import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
+import {UseCaseView} from "../../../../common/ui/usecase/UseCaseView";
 import {UseCaseName} from "../../../../common/usecase/UseCaseName";
 import {AccountHandle} from "../../../entites/AccountHandle";
 import {AccountDescriptionLabel} from "../AccountDescriptionLabel";

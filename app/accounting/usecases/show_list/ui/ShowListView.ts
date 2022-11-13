@@ -1,4 +1,4 @@
-import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
+import {UseCaseView} from "../../../../common/ui/usecase/UseCaseView";
 import {UseCaseName} from "../../../../common/usecase/UseCaseName";
 import {ShowListRequestChannelName} from "../ShowListRequestChannelName";
 import {ShowListResponseChannelName} from "../ShowListResponseChannelName";

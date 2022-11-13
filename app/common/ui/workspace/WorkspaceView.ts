@@ -8,7 +8,7 @@ import {UseCaseRequestChannelName} from "../../usecase/UseCaseRequestChannelName
 
 class WorkspaceView {
 
-    static async create_workspace(workspace_name: string, workspace_directory: string): Promise<WorkspaceView> {
+    static async create_workspace(workspace_name: string, workspace_directory: string = '__dirname'): Promise<WorkspaceView> {
         this.mark_workspace(workspace_name);
         await this.create_segments(workspace_directory);
         this.link_styles(workspace_directory);

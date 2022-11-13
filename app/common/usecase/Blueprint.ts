@@ -1,6 +1,6 @@
 import {UseCaseHelper} from "./UseCaseHelper";
 import {UseCaseController} from "./UseCaseController";
-import {UseCaseView} from "../ui/use_case/UseCaseView";
+import {UseCaseView} from "../ui/usecase/UseCaseView";
 import {UseCase} from "./UseCase";
 import {UseCaseInteractorConstructor} from "./UseCaseInteractorConstructor";
 import {UseCasePresenterConstructor} from "./UseCasePresenterConstructor";
