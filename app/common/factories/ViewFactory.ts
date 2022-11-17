@@ -1,5 +1,5 @@
 import {ResponseChannel} from "../ipc/ResponseChannel";
-import {UseCaseView} from "../ui/use_case/UseCaseView";
+import {UseCaseView} from "../ui/usecase/UseCaseView";
 import {UseCases} from '../../accounting/usecases';
 import {UseCaseName} from "../usecase/UseCaseName";
 

@@ -1,5 +1,5 @@
 import {TableRenderer} from "../../../../../common/ui/renderer/TableRenderer";
-import {UseCaseView} from "../../../../../common/ui/use_case/UseCaseView";
+import {UseCaseView} from "../../../../../common/ui/usecase/UseCaseView";
 import {UseCaseName} from "../../../../../common/usecase/UseCaseName";
 import {AccountData} from "../../../../entites/Account";
 import {BookingEntry} from "../../../../entites/BookingEntry";

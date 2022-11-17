@@ -1,3 +1,3 @@
-import {UseCaseView} from "../../../../common/ui/use_case/UseCaseView";
+import {UseCaseView} from "../../../../common/ui/usecase/UseCaseView";
 
 export class ShowListView extends UseCaseView {}
