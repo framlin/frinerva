@@ -38,16 +38,7 @@ export class UseCaseController implements Subscribing {
         return this._request_boundary;
     }
 
-    get use_case() {
-        return this._use_case;
-    }
-
-    set use_case(value) {
-        this._use_case = value;
-    }
-
     on_use_case_view_ready(...data: any[]) {
-        console.log(`Use case view ready for ${this._use_case.domain_name}:${this._use_case.use_case_name} use case`);
         this.execute(...data);
     }
 

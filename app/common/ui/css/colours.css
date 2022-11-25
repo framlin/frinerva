@@ -2,13 +2,13 @@
     /* COLOUR DEFINITIONS */
     /*--color-orange:   #ff5f00; !* rgba(255, 95, 0, 1)    -- hsla(22, 100%, 50%, 1) *!*/
     --color-light-beige: #fcf6e9;
-    --color-leight-yellow: #FAECD1FF;
 
     --color-darker-gray: #1d1d1d;
     --color-dark-gray: #444444;
     --color-gray: #777777;
     --color-light-gray: #999999;
     --color-lighter-gray: #c1c1c1;
+    --color-lightest-gray: #e1e1e1;
 
 
     --color-darker-blue: #202079;
@@ -16,6 +16,71 @@
     --color-blue: #5c5cb0;
     --color-light-blue: #7f7fc9;
     --color-lighter-blue: #afafe8;
-    --color-white-blue: #cfe7fa;
+    --color-lightest-blue: #cfe7fa;
+
+
+    --color-darker-cyan: #005c7f;
+    --color-dark-cyan: #1d7f9f;
+    --color-cyan: #3c9fb0;
+    --color-light-cyan: #7fc9c9;
+    --color-lighter-cyan: #afe8e8;
+    --color-lightest-cyan: #d6fbd6;
+
+
+    --color-darker-teal: #005c5c;
+    --color-dark-teal: #1d7f7f;
+    --color-teal: #3c9f9f;
+    --color-light-teal: #7fc9c9;
+    --color-lighter-teal: #afe8e8;
+    --color-lightest-teal: #d6fbd6;
+
+
+    --color-darker-green: #1d5d1d;
+    --color-dark-green: #3c7f3c;
+    --color-green: #5cb05c;
+    --color-light-green: #7fc97f;
+    --color-lighter-green: #aee8ae;
+    --color-lightest-green: #d6fbd6;
+
+
+    --color-darker-red: #7f0000;
+    --color-dark-red: #9f1d1d;
+    --color-red: #b03c3c;
+    --color-light-red: #c97f7f;
+    --color-lighter-red: #e8afaf;
+    --color-lightest-red: #fbd6d6;
+
+
+    --color-darker-purple: #5c005c;
+    --color-dark-purple: #7f1d7f;
+    --color-purple: #9f3c9f;
+    --color-light-purple: #c97fc9;
+    --color-lighter-purple: #e8afe8;
+    --color-lightest-purple: #fbd6fbd6;
+
+
+    --color-darker-magenta: #7f005c;
+    --color-dark-magenta: #9f1d7f;
+    --color-magenta: #b03c9f;
+    --color-light-magenta: #c97fc9;
+    --color-lighter-magenta: #e8afe8;
+    --color-lightest-magenta: #fbd6fbd6;
+
+
+    --color-darker-brown: #5c3c00;
+    --color-dark-brown: #7f5c1d;
+    --color-brown: #9f7f3c;
+    --color-light-brown: #c9af7f;
+    --color-lighter-brown: #e8d6c9;
+    --color-lightest-brown: #fbd6d6;
+
+
+    --color-darker-yellow: #7f5c00;
+    --color-dark-yellow: #9f7f1d;
+    --color-yellow: #ecd440;
+    --color-light-yellow: #c9c97f;
+    --color-lighter-yellow: #e8e8af;
+    --color-lightest-yellow: #fbd6d6;
+
 
 }

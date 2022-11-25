@@ -1,19 +1,37 @@
-import {UseCaseName} from "../../usecase/UseCaseName";
-import {HTMLReader} from "../../util/HTMLReader";
 import * as path from "path";
-import {ipcRenderer} from "electron";
-import {ViewFactory}  from "../../factories/ViewFactory";
+import {create_view_factory, ViewFactory} from "../../factories/ViewFactory";
+import {IPCChannel} from "../../ipc/IPCChannel";
 import {create_request_channel} from "../../ipc/RequestChannel";
+import {create_response_channel} from "../../ipc/ResponseChannel";
+import {UseCaseList} from "../../usecase/UseCaseList";
+import {UseCaseName} from "../../usecase/UseCaseName";
 import {UseCaseRequestChannelName} from "../../usecase/UseCaseRequestChannelName";
+import {HTMLReader} from "../../util/HTMLReader";
 
-class WorkspaceView {
+export class WorkspaceView {
+    protected _response_channel: IPCChannel = create_response_channel();
+    protected _view_factory: ViewFactory;
 
-    static async create_workspace(workspace_name: string, workspace_directory: string = '__dirname'): Promise<WorkspaceView> {
-        this.mark_workspace(workspace_name);
+
+    constructor(protected _UseCases: UseCaseList) {
+        this._view_factory = create_view_factory(_UseCases);
+        this._response_channel.register_receiver('use_case:created', async (e, use_case_name: UseCaseName, ...data: any[]) => {
+            await this._view_factory.create(use_case_name).put_view_into_dom(...data);
+        });
+    }
+
+    static async create_workspace (
+        _UseCases: UseCaseList,
+        domain_name: string,
+        initial_usecase: string,
+        workspace_directory: string = __dirname
+    ): Promise<WorkspaceView> {
+        this.mark_workspace(domain_name);
         await this.create_segments(workspace_directory);
         this.link_styles(workspace_directory);
         this.splitter();
-        return new WorkspaceView();
+        create_request_channel().send<UseCaseRequestChannelName>('use_case:create', domain_name, initial_usecase);
+        return new WorkspaceView(_UseCases);
     }
 
     switch_sideboard_to(sideboard_entry_selector: string) {
@@ -85,14 +103,31 @@ class WorkspaceView {
 
     }
 
-    static mark_workspace(workspace_name: string) {
+    static mark_workspace(domain_name: string) {
+        this.mark_workspace_switch(domain_name);
         const workspace = document.querySelector('#workspace');
         if (workspace) {
             //@ts-ignore
             for(const cls of workspace.classList.values()) {
                 workspace.classList.remove(cls);
             }
-            workspace.classList.add(workspace_name);
+            workspace.classList.add(domain_name);
+        }
+    }
+
+    static clear_switches() {
+        const switches = document.querySelectorAll('.workspace-switch');
+        switches.forEach((sw) => {
+            sw.classList.remove('active');
+        });
+    }
+
+
+    static mark_workspace_switch(domain_name: string) {
+        this.clear_switches();
+        const workspace_switch = document.querySelector(`#${domain_name}-switch`);
+        if (workspace_switch) {
+            workspace_switch.classList.add('active');
         }
     }
 
@@ -153,9 +188,3 @@ class WorkspaceView {
     }
 
 }
-
-ipcRenderer.on('use_case:created', async (e, use_case_name: UseCaseName, ...data: any[]) => {
-    await ViewFactory.create(use_case_name).put_view_into_dom(...data);
-});
-module.exports = {WorkspaceView};
-export {WorkspaceView}

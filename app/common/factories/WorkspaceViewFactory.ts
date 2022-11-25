@@ -1,25 +1,24 @@
-import {AccountingWorkspaceView} from "../../accounting/workspace/AccountingWorkspaceView";
-import {BalancingWorkspaceView} from "../../balancing/workspace/BalancingWorkspaceView";
-import {WorkspaceView} from "../ui/workspace/WorkspaceView";
+import path from "path";
+import {AccountingDomain} from "../../accounting";
+import {BalancingDomain} from "../../balancing";
+import {InvoicingDomain} from "../../invoicing";
+import {ManagementDomain} from "../../management";
 
-
-const workspaces : Record<string, typeof WorkspaceView> = {
-    accounting: AccountingWorkspaceView,
-    balancing: BalancingWorkspaceView,
+const blueprints = {
+    accounting: AccountingDomain,
+    balancing: BalancingDomain,
+    invoicing: InvoicingDomain,
+    management: ManagementDomain,
 }
 
-
 export class WorkspaceViewFactory {
-    static AccountingWorkspace: typeof AccountingWorkspaceView
-
-    static config(accountingWS: typeof AccountingWorkspaceView) {
-        WorkspaceViewFactory.AccountingWorkspace = accountingWS;
-        return WorkspaceViewFactory;
-    };
-
     static async create(domain_name: string) {
-        const WorkspaceView = workspaces[domain_name];
-        await WorkspaceView.create_workspace(domain_name);
-        return new WorkspaceView();
+        const workspace_path = path.join(__dirname, '..', '..', domain_name, 'workspace');
+        // @ts-ignore
+        const workspace_view = blueprints[domain_name].workspace;
+        // @ts-ignore
+        const usecase_list = blueprints[domain_name].usecases;
+        await workspace_view.create_workspace(usecase_list, domain_name, 'show_list', workspace_path);
+        return new workspace_view(usecase_list);
     }
 }

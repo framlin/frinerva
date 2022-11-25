@@ -1,0 +1,20 @@
+:root {
+    --select-invoicing-color: var(--color-dark-brown);
+    --select-invoicing-hover-color: var(--color-darker-brown);
+    --select-invoicing-font-color: var(--color-lightest-brown);
+}
+
+.invoicing {
+    background-color: var(--color-brown);
+}
+
+#invoicing-switch.active{
+    cursor: default;
+    background-color: var(--select-invoicing-color);
+    color: var(--select-invoicing-font-color);
+}
+
+#invoicing-switch:hover {
+    background-color: var(--select-invoicing-hover-color);
+    color: var(--select-invoicing-font-color);
+}

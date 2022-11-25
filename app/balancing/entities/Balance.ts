@@ -1,6 +1,7 @@
 import {Account} from "../../accounting/entites/Account";
 
 type BlanceHandle = {name: string; booking_period: string}
+
 export class Balance{
     _name: string;
     _booking_period: string;

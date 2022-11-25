@@ -1,41 +1,21 @@
-.accounting {
-    background-color: var(--color-blue);
+:root {
+    --select-balancing-color: var(--color-dark-green);
+    --select-balancing-hover-color: var(--color-darker-green);
+    --select-balancing-font-color: var(--color-lightest-green);
 }
 
-.accounting .sidebar .side-board-entry-toggle{
-    background-color: var(--color-darker-blue);
-    color: var(--color-lighter-blue);
+.balancing {
+    background-color: var(--color-green);
 }
 
-.accounting .toolbar button {
-    background-color: var(--color-lighter-blue);
-}
-
-#accounting-switch{
+#balancing-switch.active{
     cursor: default;
-    background-color: var(--select-accounting-color);
-    color: var(--select-accounting-font-color);
+    background-color: var(--select-balancing-color);
+    color: var(--select-balancing-font-color);
 }
 
-#accounting-switch:hover {
-    background-color: var(--select-accounting-hover-color);
-    color: var(--select-accounting-font-color);
-}
+/*#balancing-switch:hover {*/
+/*    background-color: var(--select-balancing-hover-color);*/
+/*    color: var(--select-balancing-font-color);*/
+/*}*/
 
-.sideboard-entry-list-header, .account-list-header {
-    background-color: var(--color-dark-blue);
-    color: var(--color-white-blue);
-}
-
-
-.sideboard-entry-list-entry, .account-entry {
-    background-color: var(--color-white-blue);
-}
-
-.dialog-header{
-    background-color: var(--dialog-header-color);
-    padding: 5px 10px;
-}
-.dialog-footer{
-    background-color: var(--dialog-footer-color);
-}

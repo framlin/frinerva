@@ -4,7 +4,7 @@
 }
 
 #account-creation-area .account-list{
-    background-color: var(--color-white-blue);
+    background-color: var(--color-lightest-blue);
     box-shadow: -1px -1px 2px var(--color-blue);
 }
 

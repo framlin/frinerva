@@ -1,16 +1,15 @@
-import {ResponseChannel} from "../ipc/ResponseChannel";
 import {UseCaseView} from "../ui/usecase/UseCaseView";
-import {UseCases} from '../../accounting/usecases';
+import {UseCaseList} from "../usecase/UseCaseList";
 import {UseCaseName} from "../usecase/UseCaseName";
 
-const view_cache: Record<string, UseCaseView> = {}
-
 export class ViewFactory {
-    static create(use_case_name: UseCaseName) : UseCaseView{
-        if (!(use_case_name in view_cache)) {
-            // noinspection JSPotentiallyInvalidConstructorUsage
-            view_cache[use_case_name] = new UseCases[use_case_name].view(use_case_name);
-        }
-        return view_cache[use_case_name]
+    constructor(private _UseCases: UseCaseList) {}
+
+    create(use_case_name: UseCaseName) : UseCaseView{
+        return new this._UseCases[use_case_name].view(use_case_name);
     }
+}
+
+export function create_view_factory(_UseCases: UseCaseList) {
+    return new ViewFactory(_UseCases);
 }

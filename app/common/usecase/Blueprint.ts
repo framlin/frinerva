@@ -6,10 +6,10 @@ import {UseCaseInteractorConstructor} from "./UseCaseInteractorConstructor";
 import {UseCasePresenterConstructor} from "./UseCasePresenterConstructor";
 
 export interface Blueprint {
-    controller: typeof UseCaseController,
-    helper: typeof UseCaseHelper,
+    controller?: typeof UseCaseController,
+    helper?: typeof UseCaseHelper,
     interactor:  UseCaseInteractorConstructor,
     presenter: UseCasePresenterConstructor,
-    usecase: typeof UseCase,
+    usecase?: typeof UseCase,
     view: typeof UseCaseView
 }

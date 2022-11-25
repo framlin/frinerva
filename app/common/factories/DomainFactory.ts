@@ -1,32 +1,21 @@
-import {Accounting} from "../../accounting/entites/Accounting";
-import {UseCases as AccountingUseCases} from "../../accounting/usecases";
-import {Balancing} from "../../balancing/entities/Balancing";
-import {UseCases as BalancingUseCases} from "../../balancing/usecases";
+import {AccountingDomain} from "../../accounting";
+import {BalancingDomain} from "../../balancing";
+import {InvoicingDomain} from "../../invoicing";
+import {MainWindow} from "../../main/MainWindow";
+import {ManagementDomain} from "../../management";
 import {Domain} from '../domain/Domain';
 import {DomainEntity} from "../domain/DomainEntity";
 import {DomainHelper} from "../domain/DomainHelper";
-import {create_use_case_factory} from "./UseCaseFactory";
 import {Observatory} from "../observation/Observatory";
-import {AccountingHelper} from "../persistence/helper/AccountingHelper";
-import {BalancingHelper} from "../persistence/helper/BalancingHelper";
-import {UseCaseList} from "../usecase/UseCaseList";
-import {MainWindow} from "../../main/MainWindow";
+import {create_use_case_factory} from "./UseCaseFactory";
 
 type DomainEntityConstructor = { new(domain_helper: typeof DomainHelper): DomainEntity } & typeof DomainEntity;
 
-const use_cases: Record<string, UseCaseList> = {
-    accounting: AccountingUseCases,
-    balancing: BalancingUseCases,
-};
-
-const domain_entities: Record<string, DomainEntityConstructor> = {
-    accounting: Accounting,
-    balancing: Balancing
-}
-
-const domain_helper: Record<string, typeof DomainHelper> = {
-    accounting: AccountingHelper,
-    balancing: BalancingHelper
+const blueprints = {
+    accounting: AccountingDomain,
+    balancing: BalancingDomain,
+    invoicing: InvoicingDomain,
+    management: ManagementDomain,
 }
 
 function create_domain_entity(
@@ -37,14 +26,28 @@ function create_domain_entity(
 }
 
 function create_domain(domain_name: string, main_window: MainWindow) {
-    console.log(`Creating domain ${domain_name}`);
-
     const observatory = new Observatory();
-    const helper = domain_helper[domain_name]
-    const domain_entity = create_domain_entity(domain_entities[domain_name], helper);
-    domain_entity.provide_at(observatory);
 
-    const use_case_factory = create_use_case_factory(domain_entity, use_cases[domain_name], main_window.webContents, observatory);
+    // @ts-ignore
+    const helper = blueprints[domain_name].helper;
+
+    // @ts-ignore
+    const usecases = blueprints[domain_name].usecases;
+
+    // @ts-ignore
+    const domain_entity = create_domain_entity(blueprints[domain_name].entity, helper);
+    if (domain_entity.provide_at) {
+        domain_entity.provide_at(observatory);
+    }
+
+
+    const use_case_factory = create_use_case_factory(
+        domain_name,
+        domain_entity,
+        usecases,
+        main_window.webContents,
+        observatory
+    );
 
     return new Domain(domain_name, use_case_factory, domain_entity);
 }
@@ -58,7 +61,7 @@ export class DomainFactory {
 
     static get_domains() {
         const domains = [];
-        for (const domain in use_cases) {
+        for (const domain in blueprints) {
             domains.push(domain);
         }
         return domains;

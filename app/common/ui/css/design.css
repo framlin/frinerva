@@ -5,7 +5,7 @@
     --main-header-color: var(--color-light-beige);
     --main-footer-bg-color: var(--color-gray);
     --main-footer-text-color: var(--color-light-beige);
-    --main-workspace-color: var(--color-leight-yellow);
+    --main-workspace-color: var(--color-light-yellow);
 
     --main-tool-bar-border-color: var(--color-dark-gray);
 
@@ -18,16 +18,11 @@
     --dialog-header-color: var(--color-light-beige);
     --dialog-footer-color: var(--color-light-beige);
 
-    --select-accounting-color: var(--color-dark-blue);
-    --select-accounting-hover-color: var(--color-darker-blue);
-    --select-accounting-font-color: var(--color-white-blue);
 
     --splitter-bg-color: var(--color-gray);
 
     --selectable-hover-color: var(--color-lighter-gray);
 
-    --account-table-bg-color: var(--color-white-blue);
-    --account-table-hilight-bg-color: white;
 }
 
 html, body {

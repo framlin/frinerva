@@ -14,7 +14,6 @@ export class Domain {
     }
 
     create_use_case(use_case_name: UseCaseName) {
-        console.log(`Creating ${this._domain_name}:${use_case_name} use case`);
         return this._use_case_factory.create(use_case_name);
     }
 

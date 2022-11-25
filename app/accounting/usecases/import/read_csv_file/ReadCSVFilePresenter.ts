@@ -14,5 +14,6 @@ export class ReadCSVFilePresenter extends UseCasePresenter implements ReadCSVFil
     }
 
     show(...data: unknown[]): void {
+        //intentionally left blank
     }
 }

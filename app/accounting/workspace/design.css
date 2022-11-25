@@ -1,3 +1,12 @@
+:root {
+    --select-accounting-color: var(--color-dark-blue);
+    --select-accounting-hover-color: var(--color-darker-blue);
+    --select-accounting-font-color: var(--color-lightest-blue);
+
+    --account-table-bg-color: var(--color-lightest-blue);
+    --account-table-hilight-bg-color: white;
+}
+
 .accounting {
     background-color: var(--color-blue);
 }
@@ -11,7 +20,7 @@
     background-color: var(--color-lighter-blue);
 }
 
-#accounting-switch{
+#accounting-switch.active{
     cursor: default;
     background-color: var(--select-accounting-color);
     color: var(--select-accounting-font-color);
@@ -24,12 +33,12 @@
 
 .sideboard-entry-list-header, .account-list-header {
     background-color: var(--color-dark-blue);
-    color: var(--color-white-blue);
+    color: var(--color-lightest-blue);
 }
 
 
 .sideboard-entry-list-entry, .account-entry {
-    background-color: var(--color-white-blue);
+    background-color: var(--color-lightest-blue);
 }
 
 .dialog-header{
@@ -39,3 +48,4 @@
 .dialog-footer{
     background-color: var(--dialog-footer-color);
 }
+

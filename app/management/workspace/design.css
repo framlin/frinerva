@@ -1,0 +1,20 @@
+:root {
+    --select-management-color: var(--color-dark-yellow);
+    --select-management-hover-color: var(--color-darker-yellow);
+    --select-management-font-color: var(--color-lightest-yellow);
+}
+
+.management {
+    background-color: var(--color-yellow);
+}
+
+#management-switch.active{
+    cursor: default;
+    background-color: var(--select-management-color);
+    color: var(--select-management-font-color);
+}
+
+#management-switch:hover {
+    background-color: var(--select-management-hover-color);
+    color: var(--select-management-font-color);
+}
